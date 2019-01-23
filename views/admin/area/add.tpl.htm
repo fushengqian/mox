@@ -1,0 +1,57 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+             <ul class="nav nav-tabs">
+                <li><a href="/admin/area/index/">地区列表</a></li>
+                <li class="active"><a href="javascript:;">新增地区</a></li>
+            </ul>
+        </div>
+        <div class="tab-content mod-content">
+            <form action="/admin/area/save/" id="form" method="post" onsubmit="return false">
+                <table class="table table-striped">
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <span class="col-sm-4 col-xs-3 control-label">*名称：</span>
+                                <div class="col-sm-5 col-xs-8">
+                                    <input class="form-control" type="text" name="name" value="" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <span class="col-sm-4 col-xs-3 control-label">*城市：</span>
+                                <div class="col-sm-5 col-xs-8">
+                                    <input class="form-control" type="text" name="city_name" value=""/>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <span class="col-sm-4 col-xs-3 control-label">*<?php _e('上级'); ?>:</span>
+                                <div class="col-sm-5 col-xs-8">
+                                     <input class="form-control" type="text" name="parent" value=""/>
+                                     <span class="tips">如：崇明</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <input type="button" value="<?php _e('保存设置'); ?>" class="btn btn-primary center-block" onclick="AWS.ajax_post($('#form'));" />
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

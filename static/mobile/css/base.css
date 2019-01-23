@@ -1,0 +1,328 @@
+@charset "utf-8";
+body{ font-size:1.6rem; background:#f2f4f2;}
+body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, h5, h6,a{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color:#666;
+    overflow:auto;
+    overflow-x:hidden;
+}
+.common-header, .header-holder {
+    width: 100%;
+    height: 35.2px;
+    height: 2.2rem;
+}
+.common-header {
+    position: fixed;
+    z-index: 90;
+    background-color: #fff;
+    border-bottom: 1px solid #dad8d9;
+    width: 100%;
+    height: 35.2px;
+    height: 4.2rem;
+    font-size:1.6rem;
+    padding-top:1.0rem;
+    text-align: center;
+}
+.common-header .title {
+    display: block;
+    margin: 0 auto;
+    width: 60%;
+    line-height: 35.2px;
+    line-height: 2.2rem;
+    text-align: center;
+}
+.common-header .back {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    padding: 0 8px;
+    padding: 0 .5rem;
+    width: auto;
+    height: auto;
+    font-size: 5rem;
+    line-height: 35.2px;
+    line-height: 2.2rem;
+    background-color: transparent;
+    border: none;
+    color: #555;
+}
+.icon-back {
+    background-position: 0 0;
+}
+.common-header .back .icon-back {
+    vertical-align: top;
+}
+.icon-back, .icon-next {
+    width: 2rem;
+    height: 2rem;
+}
+.icon-back, .icon-go{
+    width: 2rem;
+    height: 2rem;
+    float:right;
+    margin-top:1.4rem;
+    margin-right: 1rem;
+    background-position:25px 0px;
+    cursor: pointer;
+}
+.sprite {
+    display: inline-block;
+    overflow: hidden;
+    background-image: url(/static/images/sp.png);
+    background-size: 4.0rem;
+}
+.app-tab{
+    display:flex;
+    z-index:99999;
+    position: fixed;
+    bottom: 0;width: 100%;
+    background: white;
+    height: 55px;
+    padding-top: 12px;
+    box-sizing: border-box;
+    color: grey;
+    border-top:1px solid #e6e6e6;
+    font-size:1.4rem;
+    margin:0;
+    max-width:100%;
+}
+.app-tab .app-item{
+    display:inline-block;
+    width:20%;
+    border: none;
+    flex: 1;
+    text-align: center;
+    cursor: pointer;
+}
+.app-item .t-icon{
+    text-align: center;
+    height:22px;
+    width:22px;
+    display: block;
+    clear: both;
+    margin:0 auto;
+}
+
+.feed-list{
+    padding:5px;
+    clear: both;
+    margin-bottom:50px;
+}
+.feed-item{
+    clear: both;
+    margin-bottom: 10px;
+    background: #fff;
+    padding:10px;
+    border-radius:3px;
+    position: relative;
+}
+.feed-item .user-info{
+    text-align: left;
+}
+.feed-item .user-info .avatar{
+    width:45px;
+    height:45px;
+    border-radius:5px;
+    float:left;
+    border: solid 1px #ccc;
+}
+.feed-item .user-info .nick{
+    font-weight: bold;
+    font-size:1.8rem;
+    margin-left:5px;
+}
+.feed-item .user-info .time{
+    font-size: 1.3rem;
+    margin-left:50px;
+    display: block;
+}
+.feed-item .feed-content{
+    margin-top: 0px;
+    margin-left: 50px;
+    text-align: left;
+    margin-bottom:30px;
+}
+.feed-item .pics img{
+    width: 70px;
+    height: 70px;
+    margin-bottom:5px;
+    border: solid 1px #CCCCCC;
+    cursor: pointer;
+}
+.feed-item .user-attr{
+    text-align: center;
+    height: 20px;
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+    margin: 0 auto;
+}
+.feed-item .user-attr span{
+    font-size: 1.4rem;
+    float:left;
+    margin-left:50px;
+}
+.feed-detail{
+    background: #fff;
+    margin-top:2.0rem;
+}
+.feed-detail .user-info{
+    font-size: 1.4rem;
+    margin:10px 10px 0px 10px;
+}
+.feed-detail .user-info .avatar{
+    width: 45px;
+    height: 45px;
+    float:left;
+    margin-right:5px;
+    border-radius: 5px;
+}
+.feed-detail .user-info .nick{
+    font-size: 1.8rem;
+    float:left;
+    font-weight: bold;
+}
+.feed-detail .user-info .time{
+    display: block;
+    clear: right;
+    float:left;
+    color:#999;
+}
+.feed-detail .user-info .follow {
+    margin-top: 3px;
+    text-align: right;
+    float: right;
+    margin-right: 2px;
+    padding: 2px 12px;
+    color: #fff;
+    font-weight: bold;
+    float:right;
+}
+.feed-detail-content{
+    padding-bottom: 10px;
+    font-size: 1.6rem;
+    padding-left:5px;
+    padding-right: 5px;
+}
+.feed-detail-content .pics img{
+    width:100%;
+    border: solid 1px #ccc;
+    margin-bottom:2px;
+}
+.feed-detail .comments{
+    padding:5px 0px 5px 0px;
+}
+.feed-detail .comments .title{
+    padding:5px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #f6f6f6;
+    padding-top:10px;
+}
+.feed-detail .comments .num{
+    font-size:1.3rem;
+}
+.feed-detail .comment-item{
+    border-bottom:dashed 1px #f6f6f6;
+}
+.feed-detail .comment-item:last-child{
+    border-bottom:none;
+}
+.comment-item .user-info .avatar{
+    width:40px;
+    height:40px;
+    float:left;
+}
+.comment-item .user-info .nick{
+    font-weight: bold;
+    display: block;
+    clear: both;
+    font-size: 1.4rem;
+}
+.comment-item .comment-desc{
+    display: block;
+    clear: both;
+}
+.comment-item .time-dd{
+    float:right;
+    font-size: 1.3rem;
+    color:#999;
+    margin-right:5px;
+}
+.feed-detail .user-op{
+    height: 45px;
+    position: fixed;
+    bottom:0px;
+    width: 100%;
+    padding:10px;
+    background: #f6f6f6;
+    border-top: solid 1px #ccc;
+}
+.feed-detail .user-op .op{
+    width: 50%;
+    float:left;
+    text-align: center;
+    cursor: pointer;
+}
+.my-info{
+    background: #fff;
+    margin-top:5px;
+    height:9.0rem;
+    padding-left:2.0rem;
+    padding-top:2.0rem;
+}
+.my-info .avatar{
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    float:left;
+}
+.my-info .nick{
+    font-weight: bold;
+    font-size:1.8rem;
+    margin-left:10px;
+    float: left;
+}
+.my-info .info{
+    float:left;
+}
+.my-info .honor{
+    font-size: 1.4rem;
+    display: block;
+    clear: left;
+    float: left;
+    margin-left:10px;
+}
+.my-list{
+    height: 6.0rem;
+    background: #fff;
+    font-size: 1.6rem;
+    text-align: left;
+    padding-left:2.0rem;
+    border-top: solid 1px #f6f6f6;
+    padding-top:1.9rem;
+    margin-top:0.5rem;
+    cursor: pointer;
+}
+.my-list em{
+    margin-right: 10px;
+}
+.my-list .icon-go{
+    margin-top:0.2rem;
+}
+.my-friends{
+    padding-left:0rem;
+}
+.my-friends span{
+    width: 50%;
+    text-align: center;
+    display: block;
+    float:left;
+    font-size:1.4rem;
+}

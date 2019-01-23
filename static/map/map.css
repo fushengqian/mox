@@ -1,0 +1,27 @@
+.building-parent .building-infoWindow h2 > p.building_name, .building-parent .building-infoWindow h2 > p.building_dayBeginning { display: inline-block; width: auto; height: auto; padding: 0; margin: 0; line-height: inherit; }
+.cont .inner .top ul li { cursor: pointer; }
+.cont .inner .top ul li.on { cursor: default; }
+.range-overlay { position: absolute; background-color: #FF5E1B; color: #FFF; padding: 2px 2px; line-height: 18px; white-space: nowrap; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold; width: 70px; height: 70px; border-radius: 50%; }
+.range-overlay span { color: #FFF; text-align: center; }
+.range-overlay:hover { background-color: #80b028 !important; }
+.range-overlay:hover span { color: #fff; }
+.building-parent { position: absolute; line-height: 18px; white-space: nowrap; MozUserSelect: none; cursor: pointer; display: flex; justify-content: center; align-items: center; }
+.building-parent span { font-size: 14px; }
+.building-parent .building-infoWindow { position: absolute; border:1px solid #bfcfc5;bottom: 50px; left: -200px; width: 430px !important; height: auto !important; background-color: #FFF; border-radius: 5px; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1); }
+.building-parent .building-infoWindow h2 { height: 50px; line-height: 55px; margin: 0; padding: 0 15px; font-size: 20px; font-weight: 400; color: #555; cursor: default; }
+.building-parent .building-infoWindow h2 span.closeme { position: absolute; float: right; line-height: 14px; cursor: pointer; top: -45px; right: 0px; background-color: #FFF; width: 40px; height: 40px; background-color: rgba(42, 42, 42, 0.5); display: flex; justify-content: center; align-items: center; border-radius: 50%; }
+.building-parent .building-infoWindow h2 > p.building_name { position: absolute; max-width: 260px !important; overflow: hidden; }
+.building-parent .building-infoWindow h2 > p.building_dayBeginning { position: absolute; right: 15px; font-size: 14px; color: #FF5E1B; }
+.building-parent .building-infoWindow h2 > p.building_dayBeginning b { font-size: 24px; }
+.building-parent .building-infoWindow p { padding: 0 15px; margin: 0; }
+.building-parent .building-infoWindow p a { display: block; height: 160px; }
+.building-parent .building-infoWindow p a img { width: 400px; height: 160px; }
+.building-parent .building-infoWindow .farminfo{margin-top:10px;margin-bottom:15px;font-size:14px;color: #555;}
+.building-parent .building-infoWindow .building_ContentBox{ display: block; width: 400x !important; height: auto !important; background-color: #FFF; padding: 5px 15px 5px 15px; }
+.building-parent .building-infoWindow:before { position: absolute; content: ''; left: 195px; bottom: -24px; width: 0; height: 0; border: transparent 12px solid; border-top: 12px solid #FFF; }
+.building-parent .building-overlay { position: relative; }
+.building-parent .building-overlay .arrow { position: absolute; top: 25px; background: url(/static/map/label.png) no-repeat; font-size: 18px; overflow: hidden; background-position: 0 0; width: 11px; height: 10px; }
+.building-parent .building-overlay span { position: relative; background-color: #FF5E1B; color: #FFF; padding: 5px 7px; line-height: 18px; white-space: nowrap; cursor: pointer; display: flex; justify-content: center; align-items: center; top: 0; left: -33px; min-width: 70px; font-size: 14px; border-radius: 5px; }
+.building-parent .building-overlay:hover span { background-color: #fff; color: #FF5E1B; }
+.building-parent .building-overlay:hover .arrow { background-position: 0px -20px; }
+.BMap_shadow, .BMap_pop { visibility: hidden; }

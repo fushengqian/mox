@@ -1,0 +1,99 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <h3>
+                <ul class="nav nav-tabs">
+                    <li><a href="/admin/model/edit/id-<?php echo $this->id;?>/">编辑<?php echo $this -> info['name']; ?></a></li>
+                    <li class="active"><a href="javascript:;"><?php echo $this -> info['name']; ?>图片管理</a></li>
+                    <li><a target="_blank" href="<?php echo G_DEMAIN;?>/model/<?php echo $this -> info['id'];?>.html"><?php echo $this -> info['name'].'详情'; ?></a></li>
+                </ul>
+            </h3>
+        </div>
+        <div class="tab-content mod-content">
+            <form action="/admin/ajax/model/images_save/" id="form" method="post" onsubmit="return false">
+                 <input type="hidden" name="id" value="<?php echo $this->id; ?>" />
+                    <div class="upload-content">
+                        <ul id="upload-list" class="upload-list">
+                        <?php foreach ($this -> images_list AS $info) { ?>
+                               <li>
+                                  <div>
+                                       <img class="img" src="<?php echo $info['url']?>"/>
+                                       <p class="desc"><input id="<?php echo $info['url'];?>" name="brief" class="form-control" value="<?php echo $info['brief']?>"/></p>
+                                       <p class="meta clearfix">
+                                          <a attr="file_delete" class="btn btn-primary" href="javascript:;">删除</a>
+                                          <a attr="file_preview" class="btn btn-primary <?php if($info['url'] == $this->info['preview']){ echo 'red';}?>" href="javascript:;">封面</a>
+                                          <input type="hidden" class="hidden-input" name="image_id[]" value="<?php echo $info['url'];?>">
+                                      </p>
+                                  </div>
+                              </li>
+                        <?php } ?>
+                        </ul>
+                    </div>
+                    <div class="mod-file">
+                        <div>
+                            <a class="btn btn-default aw-upload-box">上传图片</a>
+                            <a attr="file_brief" class="btn btn-primary" href="javascript:;">保存注释</a>
+                            <div class="upload-container"></div>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+<form method="post" action="/admin/model/image_delete/" onsubmit="return false;" id="delete_form">
+      <input id="url" name="url" type="hidden" value="">
+      <input id="model_id" name="model_id" type="hidden" value="<?php echo $this->id; ?>">
+</form>
+<form method="post" action="/admin/model/image_preview/" onsubmit="return false;" id="preview_form">
+      <input id="image" name="url" type="hidden" value="">
+      <input name="model_id" type="hidden" value="<?php echo $this->id; ?>">
+</form>
+<form method="post" action="/admin/model/image_brief/" onsubmit="return false;" id="brief_form">
+      <input id="para" name="para" type="hidden" value="">
+      <input name="model_id" type="hidden" value="<?php echo $this->id; ?>">
+</form>
+<script type="text/javascript">
+$(function() {
+    var attach_key = hex_md5(new Date().getTime() + ' ' + Math.random());
+    
+    var fileupload = new FileUpload('file', '.aw-upload-box', $("#upload-list"), '/admin/images/upload/?attach_access_key=' + attach_key + '&model_id=<?php echo $this->id; ?>');
+    
+    $("[attr='file_delete']").bind('click', function() {
+        var _this = this;
+        AWS.dialog('confirm',{'message': '<?php _e('确定要删除吗？'); ?>'}, function(){
+            $("#url").val($(_this).parents('p').find("input").val());
+            AWS.ajax_post($('#delete_form'),  AWS.ajax_processer, 'error_message');
+        });
+    });
+    
+    $("[attr='file_preview']").bind('click', function() {
+        var _this = this;
+        AWS.dialog('confirm',{'message': '<?php _e('确定要设置为封面吗？'); ?>'}, function(){
+            $("#image").val($(_this).parents('p').find("input").val());
+            AWS.ajax_post($('#preview_form'),  AWS.ajax_processer, 'error_message');
+        });
+    });
+    
+    $("[attr='file_brief']").bind('click', function() {
+        var briefs = '';
+        
+        $("input[name='brief']").each(function(){
+            if (briefs.length > 1)
+            {
+                briefs += ','+this.value+'_'+this.id;
+            }
+            else
+            {
+                briefs += this.value+'_'+this.id;
+            }
+        });
+        
+        $("#para").val(briefs);
+        
+        AWS.ajax_post($('#brief_form'),  AWS.ajax_processer, 'error_message');
+    });
+});
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>
