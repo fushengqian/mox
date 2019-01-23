@@ -19,3 +19,6 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 3）话题管理</br>
 4）评论管理</br>
 5）系统管理</br>
+
+# 系统演示
+模型圈 http://www.moxquan.com </br>
