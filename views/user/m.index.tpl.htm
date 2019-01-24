@@ -1,9 +1,9 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
 
 <div class="my-info">
-    <img class="avatar" src="<?php echo G_DEMAIN.$this->user_info['avatar'];?>"/>
+    <img class="avatar" src="<?php echo G_DEMAIN.$this->user['avatar'];?>"/>
     <div class="info">
-         <span class="nick"><?php echo $this->user_info['user_name'];?></span>
+         <span class="nick"><?php echo $this->user['user_name'];?></span>
          <span class="honor"><?php echo $this->honor;?></span>
     </div>
     <em class="sprite icon-go"></em>
@@ -14,19 +14,7 @@
     <span>积分 <b>1249</b></span>
 </div>
 <div class="my-list my-feed">
-    <a href="/"><em class="icon-mytopic"></em>我的动态</a>
-    <em class="sprite icon-go"></em>
-</div>
-<div class="my-list my-feed">
-    <a href="/message/index/"><em class="icon-comment"></em>我的消息</a>
-    <em class="sprite icon-go"></em>
-</div>
-<div class="my-list my-feed">
-    <a href=""><em class="icon-score"></em>积分明细</a>
-    <em class="sprite icon-go"></em>
-</div>
-<div class="my-list my-feed">
-    <a href=""><em class="icon-about"></em>关于我们</a>
+    <a href="/"><em class="icon-mytopic"></em>Ta的动态</a>
     <em class="sprite icon-go"></em>
 </div>
 <div class="app-tab">

@@ -3,8 +3,8 @@
      <?php foreach($this -> feed_list as $feed):?>
      <div class="feed-item clearfix">
          <div class="user-info">
-              <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
-              <a class="nick" href=""><?php echo $feed['user_info']['user_name'];?></a>
+              <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
+              <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
               <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
          </div>
          <div class="feed-content clearfix">

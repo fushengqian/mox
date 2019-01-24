@@ -25,7 +25,7 @@ class main extends FARM_CONTROLLER
 
         $seo = array('title' => array(summary($feed['content'], 40)),
                      'keywords' => array('模型动态'),
-                     'description' => array(strip_tags($feed['content'])));
+                     'description' => array(summary(strip_tags($feed['content'], 100))));
         TPL::assign('seo', get_seo('feed-detail', $seo));
 
         TPL::import_css('css/base.css');
