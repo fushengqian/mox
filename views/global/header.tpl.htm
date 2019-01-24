@@ -6,6 +6,11 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="keywords" content="<?php echo $this->seo['keywords'];?>"/>
     <meta name="description" content="<?php echo $this->seo['description'];?>"/>
+    <link rel="alternate" media="only screen and (max-width:640px)" href="<?php echo $this -> m_url;?>">
+    <meta name="applicable-device" content="pc">
+    <meta name="mobile-agent" content="format=xhtml; url=<?php echo $this -> m_url;?>">
+    <meta name="mobile-agent" content="format=html5; url=<?php echo $this -> m_url;?>">
+    <meta name="mobile-agent" content="format=wml; url=<?php echo $this -> m_url;?>">
     <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/css/bootstrap.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/css/icon.css"/>
     <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/css/default/newCommon.css?v<?php echo G_VERSION_BUILD;?>">
