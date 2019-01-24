@@ -19,17 +19,10 @@
                             <input name="password" type="password" class="form-control rounded-0" placeholder="密码">
                         </div>
                         <div class="form-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" name="cktime" value="31536000"> 记住我
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group">
                             <button id="do_login" type="button" class="btn btn-fat btn-success btn-lg btn-block br0" onclick="FNC.ajax_post($('#login_form'), FNC.ajax_processer, 'error_message');">登录</button>
                         </div>
                     </form>
-                    <p><a href="<?php echo G_DEMAIN;?>/user/register/">还没有注册？</a></p>
+                    <p><a href="<?php echo G_DEMAIN;?>/user/register/">注册？</a></p>
                 </div>
             </div>
         </div>

@@ -327,3 +327,28 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     float:left;
     font-size:1.6rem;
 }
+.login-form{
+    margin-top:5.0rem;
+    padding:1.0rem;
+    font-size:1.6rem;
+}
+.login-form input{
+    font-size:1.6rem;
+    height:4.5rem;
+    float:left;
+}
+.login-form i{
+    float:left;
+}
+.login-form .be-new{
+    font-size:1.4rem;
+    color:#ff9d00;
+}
+.login-form .vcode{
+    width:40%;
+}
+.login-form #captcha{
+    height: 4.5rem;
+    border: 1px solid #ccc;
+    margin-left: 5px;
+}
