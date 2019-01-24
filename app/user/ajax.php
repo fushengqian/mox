@@ -105,6 +105,11 @@ class ajax extends FARM_CONTROLLER
             }
         }
 
+        $user_id = $this->model('user')->get_us(intval($user_info['id']));
+        if ($user_id != $user_info['id']) {
+            $user_info = $this->model('user')->get_user_info_by_id($user_id);
+        }
+
         if ($user_info) {
             if ($_POST['net_auto_login']) {
                 $expire = 60 * 60 * 24 * 360;
