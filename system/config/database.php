@@ -6,7 +6,7 @@ $config['master'] = array (
   'charset' => 'utf8',
   'host' => 'localhost',
   'username' => 'root',
-  'password' => 'root',
-  'dbname' => 'mox',
+  'password' => '',
+  'dbname' => 'moxquan-db',
 );
 $config['slave'] = false;

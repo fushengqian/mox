@@ -1,5 +1,5 @@
 @charset "utf-8";
-body{ font-size:1.6rem; background:#f2f4f2;}
+body{ font-size:1.8rem; background:#f2f4f2;}
 body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, h5, h6,a{
     margin: 0;
     padding: 0;
@@ -22,7 +22,7 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     width: 100%;
     height: 35.2px;
     height: 4.2rem;
-    font-size:1.6rem;
+    font-size:1.8rem;
     padding-top:1.0rem;
     text-align: center;
 }
@@ -61,7 +61,7 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     width: 2rem;
     height: 2rem;
 }
-.icon-back, .icon-go{
+.icon-go{
     width: 2rem;
     height: 2rem;
     float:right;
@@ -205,9 +205,10 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
 }
 .feed-detail-content{
     padding-bottom: 10px;
-    font-size: 1.6rem;
+    font-size: 1.8rem;
     padding-left:5px;
     padding-right: 5px;
+    line-height: 3.0rem;
 }
 .feed-detail-content .pics img{
     width:100%;
@@ -320,9 +321,9 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     padding-left:0rem;
 }
 .my-friends span{
-    width: 50%;
+    width: 33.333333%;
     text-align: center;
     display: block;
     float:left;
-    font-size:1.4rem;
+    font-size:1.6rem;
 }
