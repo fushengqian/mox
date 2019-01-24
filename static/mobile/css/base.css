@@ -363,3 +363,38 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     border: solid 1px #ff9d00;
     margin:0px auto;
 }
+.topic-detail{
+    margin-top:2.2rem;
+    font-size:1.6rem;
+}
+.topic-detail .topic-header{
+    margin:5px;
+    background:#fff;
+    padding:5px;
+    border-radius:5px;
+}
+.topic-detail .topic-header .pic{
+    width:60px;
+    height:60px;
+    float:left;
+    border: solid 1px #ccc;
+}
+.topic-detail .topic-header .topic{
+    font-size:1.8rem;
+    margin-left:0.2rem;
+    height: 2.2rem;
+    margin-top:1.0rem;
+    font-weight: bold;
+}
+.topic-detail .topic-header .show-detail{
+    padding-left:0.8rem;
+}
+.topic-header .show-detail .topic-num{
+    font-size:1.4rem;
+    margin-top:1.0rem;
+}
+.topic-header .words{
+    font-size:1.6rem;
+    margin-top:0.8rem;
+    color:#888;
+}
