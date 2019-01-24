@@ -352,3 +352,16 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     border: 1px solid #ccc;
     margin-left: 5px;
 }
+.icon-publish{
+    width:40px;
+    height:40px;
+    text-align: center;
+    border-radius: 20px;
+    padding:10px 0px 10px 0px;
+    background: #ff8a00;
+    font-size: 1.8rem;
+    color: #fff;
+    display: block;
+    border: solid 1px #ff9d00;
+    margin:0px auto;
+}
