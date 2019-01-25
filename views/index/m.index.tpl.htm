@@ -1,5 +1,28 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
+<div class="topic-list">
+    <div class="header">热门话题</div>
+    <div class="topics">
+         <?php foreach($this->hot_topic_list as $hot_topic):?>
+         <div class="topic-item">
+              <a href="<?php echo G_DEMAIN;?>/topic/<?php echo $hot_topic['id'];?>.html"><img class="preview" src="<?php echo G_DEMAIN.$hot_topic['preview'];?>"/></a>
+              <div class="text">
+                   <a href="<?php echo G_DEMAIN;?>/topic/<?php echo $hot_topic['id'];?>.html">
+                      <span class="title"><i>#</i><?php echo summary($hot_topic['title'], 22);?></span>
+                   </a>
+                   <p class="intro"><a href="<?php echo G_DEMAIN;?>/topic/<?php echo $hot_topic['id'];?>.html"><?php echo summary($hot_topic['words'], 60);?></a></p>
+              </div>
+              <div class="info">
+                   <span class="time"><?php echo date_friendly($hot_topic['create_time']);?></span>
+                   <span class="like icon-good">16赞</span>
+                   <span class="comment icon-comment">9评论</span>
+              </div>
+        </div>
+        <?php endforeach;?>
+    </div>
+</div>
+
 <div class="feed-list">
+     <div class="header">圈友最新动态</div>
      <?php foreach($this -> feed_list as $feed):?>
      <div class="feed-item clearfix">
          <div class="user-info">

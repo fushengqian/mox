@@ -8,6 +8,11 @@ class main extends FARM_CONTROLLER
     {
         $user_id = FARM_APP::session()->info['uid'];
 
+        if (empty($user_id)) {
+            HTTP::redirect(G_DEMAIN . '/user/login/');
+            exit;
+        }
+
         $honor = $this->model('points')->getHonor($this->user_info['point']);
         TPL::assign('honor', $honor);
 

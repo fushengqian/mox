@@ -397,3 +397,66 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     font-size:1.6rem;
     margin-top:0.8rem;
 }
+.topic-list{
+    padding:5px;
+}
+.topic-list .header,.feed-list .header{
+    height: 4.0rem;
+    border: solid 1px #ccc;
+    padding:0.6rem 0.5rem 0rem 1rem;
+    background: #f6f6f6;
+    font-weight: bold;
+}
+.topics .topic-item{
+    margin-top:1px;
+    height:12.0rem;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 1.0rem;
+    background: #fff;
+}
+.topics .preview{
+    float:left;
+    width: 10.0rem;
+    height: 8.0rem;
+}
+.topics .text{
+    float:left;
+    font-size:1.5rem;
+    width: 30.0rem;
+    padding-left:0.5rem;
+}
+.topics .text .title{
+    float:left;
+    font-weight: bold;
+}
+.topics .text .title i{
+    color:#ff9d00;
+    margin-right: 0.3rem;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+.topics .text .intro{
+    float:left;
+    font-size: 1.4rem;
+}
+.topics .info{
+    height: 2.5rem;
+    width: 100%;
+    clear: both;
+    position: absolute;
+    bottom: 0px;
+    font-size: 1.4rem;
+    text-align: center;
+    padding-top:0.2rem;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+}
+.topics .info span{
+    margin-left:3.0rem;
+}
+.topics .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+}
