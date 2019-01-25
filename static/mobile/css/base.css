@@ -394,7 +394,7 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     margin-top:1.0rem;
 }
 .topic-header .words{
-    font-size:1.6rem;
+    font-size:1.8rem;
     margin-top:0.8rem;
 }
 .topic-list{
@@ -412,8 +412,12 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
     height:12.0rem;
     overflow: hidden;
     position: relative;
-    margin-bottom: 1.0rem;
     background: #fff;
+    margin-top:0.5rem;
+    padding:2px;
+}
+.topics .topic-item:first-child{
+    margin-top:0.0rem;
 }
 .topics .preview{
     float:left;
@@ -422,7 +426,7 @@ body, html div, form, img, ul, ol, li, dl, dt, dd, p, fieldset, h1, h2, h3, h4, 
 }
 .topics .text{
     float:left;
-    font-size:1.5rem;
+    font-size:1.8rem;
     width: 30.0rem;
     padding-left:0.5rem;
 }
