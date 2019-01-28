@@ -4,9 +4,9 @@ class FARM_CONTROLLER
     public $user_id;
     public $user_info;
 
-    public function jsonReturn($result = array(), $code = 1, $message = '查询成功')
+    public function jsonReturn($result = array(), $code = 1, $message = 'SUCCESS', $notice = '', $time = '')
     {
-        $ret = array('code' => $code, 'message' => $message, 'result' => $result);
+        $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
 
         echo json_encode($ret);
         exit;
