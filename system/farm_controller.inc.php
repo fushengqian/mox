@@ -3,6 +3,14 @@ class FARM_CONTROLLER
 {
     public $user_id;
     public $user_info;
+
+    public function jsonReturn($result = array(), $code = 1, $message = '查询成功')
+    {
+        $ret = array('code' => $code, 'message' => $message, 'result' => $result);
+
+        echo json_encode($ret);
+        exit;
+    }
     
     public function __construct($process_setup = true)
     {
