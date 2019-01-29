@@ -11,11 +11,11 @@ class api extends FARM_CONTROLLER
         $time = date("Y-m-d H:i:s", time());
 
         $notice = array('like' => 0,
-                                  'review' => 0,
-                                  'letter' => 0,
-                                  'newsCount' => 0,
-                                  'mention' => 0,
-                                  'fans' => 0);
+                         'review' => 0,
+                         'letter' => 0,
+                         'newsCount' => 0,
+                         'mention' => 0,
+                         'fans' => 0);
 
         $arr = array(
             array('appClient' => 1,

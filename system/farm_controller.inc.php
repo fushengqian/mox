@@ -4,7 +4,7 @@ class FARM_CONTROLLER
     public $user_id;
     public $user_info;
 
-    public function jsonReturn($result = array(), $code = 1, $message = 'SUCCESS', $notice = '', $time = '')
+    public function jsonReturn($result = array(), $code = 1, $message = 'SUCCESS', $notice = null, $time = '')
     {
         $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
 
