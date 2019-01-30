@@ -103,6 +103,7 @@ class sms_class extends FARM_MODEL
             $request->setTemplateCode("SMS_129758678");
             $request->setTemplateParam(json_encode($param, JSON_UNESCAPED_UNICODE));
             $content = '您的验证码为：'.$param['code'].'，该验证码5分钟内有效，请勿泄露给他人。';
+            echo $content;
         }
         else if($type == 2)
         {

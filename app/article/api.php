@@ -30,12 +30,12 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 10,
-                         'review' => 3,
-                         'letter' => 2,
-                         'newsCount' => 1,
-                         'mention' => 10,
-                         'fans' => 12);
+        $notice = array('like' => 0,
+                         'review' => 0,
+                         'letter' => 0,
+                         'newsCount' => 0,
+                         'mention' => 0,
+                         'fans' => 0);
 
         $result['items'] = $arr;
         $result['nextPageToken'] = "D398D98FDF2FE7E64AD6659CDD5740BA";
@@ -84,12 +84,12 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 10,
-            'review' => 3,
-            'letter' => 2,
-            'newsCount' => 1,
-            'mention' => 10,
-            'fans' => 12);
+        $notice = array('like' => 0,
+            'review' => 0,
+            'letter' => 0,
+            'newsCount' => 0,
+            'mention' => 0,
+            'fans' => 0);
 
         $result['items'] = $arr;
         $result['nextPageToken'] = "D398D98FDF2FE7E64AD6659CDD5740BA";

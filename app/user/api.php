@@ -6,7 +6,18 @@ class api extends FARM_CONTROLLER
      */
     public function register_action()
     {
-        // empty
+        // 设置一个cookie
+        HTTP::set_cookie('user_id', md5('zach1000'), null, '/', null, false, true);
+
+        // 返回用户信息
+        $result = array('id' => rand(1000, 9999),
+            'name' => 'zach'.time(),
+            'portrait' => 'http://www.moxquan.com/static/avatar/'.rand(1, 9).'.gif',
+            'gender' => 1,
+            'relation' => 4,
+            'identity' => array('officialMember' => true, 'softwareAuthor' => true));
+
+        $this -> jsonReturn($result);
     }
 
     /**

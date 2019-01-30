@@ -1,4 +1,5 @@
 <?php
+
 class sms extends FARM_CONTROLLER
 {
     static $acsClient = null;
@@ -8,27 +9,23 @@ class sms extends FARM_CONTROLLER
         set_time_limit(0);
 
         $mobile = $_REQUEST['mobile'];
-        $time   = $_REQUEST['time'];
+        $time = $_REQUEST['time'];
 
-        if (strlen(trim($mobile)) !== 11 || empty($time))
-        {
+        if (strlen(trim($mobile)) !== 11 || empty($time)) {
             echo json_encode(array('code' => 201, 'msg' => '出错了'));
             exit();
         }
 
         //允许跨域
         header('Content-Type: text/plain; charset=utf-8');
-        header('Access-Control-Allow-Origin: http://vip'.G_BASE_DEMAIN);
+        header('Access-Control-Allow-Origin: http://vip' . G_BASE_DEMAIN);
         header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With');
 
         $result = FARM_APP::model('sms')->send($mobile, array('code' => rand(1000, 9999)), 1);
 
-        if ($result)
-        {
+        if ($result) {
             echo json_encode(array('code' => 200, 'data' => array()));
-        }
-        else
-        {
+        } else {
             echo json_encode(array('code' => 201, 'data' => array()));
         }
         exit();
