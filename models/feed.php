@@ -33,7 +33,22 @@ class feed_class extends FARM_MODEL
 
         $user_ids = array(0);
         foreach($list as $k => $v) {
-            $list[$k]['pics'] = json_decode($v['pics'], true);
+            $image_arr = json_decode($v['pics'], true);
+            $list[$k]['pics'] = $image_arr;
+
+            // 给移动端用的图片格式
+            $images = array();
+            foreach ($image_arr as $img) {
+                $images[] =  array('h' => 0,
+                                   'w' => 0,
+                                   'href' => $img,
+                                   'name' => '',
+                                   'thumb' => $img,
+                                   'type' => 'jpg');
+
+            }
+            $list[$k]['images'] = $images;
+
             $user_ids[] = $v['user_id'];
             $feed_ids[] = $v['id'];
 

@@ -2,7 +2,9 @@
 
 class upload extends FARM_CONTROLLER
 {
-    // 上传文件
+    /**
+     * 上传文件
+     */
     public function do_action()
     {
         $user_id = FARM_APP::session()->info['uid'];

@@ -39,7 +39,7 @@ class FARM_CONTROLLER
             exit();
         }
 
-        if (($base_url[0] == 'm' || $base_url[0] == 'www') && G_ONLINE)
+        if (0)
         {
             $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https' : 'http';
             if ($http_type == 'http') {
