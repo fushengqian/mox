@@ -17,6 +17,19 @@ class feed_class extends FARM_MODEL
         $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($feed['id']), 'feed');
         $feed['comment_list'] = $comment_list[$feed['id']];
 
+        // 给移动端用的图片格式
+        $images = array();
+        foreach ($feed['pics'] as $img) {
+            $images[] =  array('h' => 0,
+                                'w' => 0,
+                                'href' => $img,
+                                'name' => '',
+                                'thumb' => $img,
+                                'type' => 'jpg');
+
+        }
+        $feed['images'] = $images;
+
         return $feed;
     }
 

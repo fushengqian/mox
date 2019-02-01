@@ -10,11 +10,17 @@ class api extends FARM_CONTROLLER
 
         // 当前页
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
-        $user_id = $_POST['authorId'] ? $_POST['authorId'] : 0;
+        $user_id = $_POST['userId'] ? $_POST['userId'] : 0;
+        $tab = $_POST['tab'] ? $_POST['tab'] : 0;
 
-        $where = '';
+        $where = array();
         if ($user_id) {
-            $where = array('user_id' => $user_id);
+            $where[] = 'user_id = "'.$user_id.'"';
+        }
+
+        // 热门动态
+        if ($tab == '2') {
+            $where[] = "is_home = 1";
         }
 
         $feed_list = $this->model('feed')-> get_data_list($where, $page, $page_size);
@@ -87,6 +93,60 @@ class api extends FARM_CONTROLLER
         $this->model('feed')->create($content, $pics, $user_id, $topic_id);
 
         $result = array('user_id' => $user_id);
+
+        $this->jsonReturn($result);
+    }
+
+    /**
+     * 动态详情
+     * */
+    public function detail_action()
+    {
+        $user_id = FARM_APP::session()->info['uid'];
+
+        $feed_id = trim($_POST['id']);
+
+        if (empty($feed_id)) {
+            $this -> jsonReturn([], -1, '系统参数有误！');
+        }
+
+        $feed = $this->model('feed')->get_detail($feed_id);
+
+        $author = array('id' => $feed['user_info']['id'],
+                        'name' => $feed['user_info']['user_name'],
+                        'portrait' => G_DEMAIN.$feed['user_info']['avatar'],
+                        'relation' => 4,
+                        'gender' => $feed['user_info']['sex'],
+                        'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
+
+        $statistics = array('comment' => $feed['comment_num'], 'favCount' => 0, 'like' => $feed['like_num'], 'transmit' => 0, 'view' => rand(1000, 9999));
+
+        $about = array(
+                 'id' => 1001,
+                 'title' => '大爱野猫',
+                 'content' => '莫名其妙地开始喜欢肥猫。老田的老板件，配了牛魔王座舱蚀刻片，一天完成的练习作。旧化还可以更狠一些 建议喷后置 掉漆也狠一些 比如机翼上部的飞行员踩踏部位。',
+                 'type' => 1,
+                 'href' => 'http://www.moxquan.com',
+                 'viewCount' => 100232,
+                 'commentCount' => 1023,
+                 'transmitCount' => 1923,
+                 'images' => $feed['images']
+        );
+
+        $result = array('id' => intval($feed['id']),
+                        'content' => $feed['content'],
+                        'appClient' => 1,
+                        'commentCount' => intval($feed['comment_num']),
+                        'likeCount' => intval($feed['like_num']),
+                        'liked' => false,
+                         'pubDate' => date_friendly($feed['create_time']),
+                         'author' => $author,
+                         'code' => array('brush' => $feed['id'], 'content' => $feed['id']),
+                         'href' => G_DEMAIN.'/feed/'.$feed['id'].'.html',
+                         'audio' => array(),
+                         'images' => $feed['images'],
+                         'statistics' => $statistics,
+                         'about' => null);
 
         $this->jsonReturn($result);
     }
