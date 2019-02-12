@@ -1,32 +1,36 @@
 <?php TPL::output('global/header.tpl.htm');?>
-<div class="content clearfix">
+<div class="container clearfix">
     <h4>标题</h4>
     <form id="form" method="post" onsubmit="return false" action="/article/ajax/publish/">
         <input id="is_preview" name="is_preview" type="hidden" value="0"/>
-    <p class="title">
-       <input type="text" name="title" value="<?php echo $this -> info['title'];?>" placeholder="标题50字以内"/>
-       <input type="hidden" name="id" value="<?php echo intval($this -> info['id']);?>"/>
-    </p>
+    <div class="title">
+        <input type="text" name="title" value="<?php echo $this -> info['title'];?>" placeholder="标题50字以内"/>
+        <input type="hidden" name="id" value="<?php echo intval($this -> info['id']);?>"/>
+    </div>
     <div class="attr">
         <span class="keyword">
            <input type="text" name="keywords" value="<?php echo $this -> info['keywords'];?>" placeholder="关键字，英文逗号相隔"/>
         </span>
         <span class="from">
-           <input type="text" name="from" value="<?php echo $this -> info['from'] ? $this -> info['from'] : '';?>" placeholder="用户"/>
+           <input type="text" name="from" value="<?php echo $this -> info['from'] ? $this -> info['from'] : '';?>" placeholder="来源"/>
         </span>
         <span class="from">
-           <input type="hidden" name="status" value="<?php echo $this -> info['status'] ? $this -> info['status'] : '1';?>"/>
+            <select class="article-cate" name="cate">
+                <option value="focus">头条</option>
+                <option value="new">新品</option>
+                <option value="teach">教程</option>
+                <option value="work">作品</option>
+                <option value="activity">新品</option>
+            </select>
         </span>
     </div>
-    <p class="summary">
-       <input type="text" name="summary" value="<?php echo $this -> info['summary'];?>" placeholder="描述250字以内"/>
-    </p>
+    <div class="summary">
+         <input type="text" name="summary" value="<?php echo $this -> info['summary'];?>" placeholder="描述250字以内"/>
+    </div>
     <h4>内容</h4>
     <div class="editor left-content">
-         <textarea  id="editor" name="content" type="text/plain"><?php echo $this -> info['content'];?></textarea>
+         <textarea id="editor" name="content" type="text/plain"><?php echo $this -> info['content'];?></textarea>
     </div>
-    <input type="hidden" name="farm_id" value="<?php echo $this -> farm['id'] ? decode($this -> farm['id']) : 0;?>"/>
-    <input type="hidden" name="city_id" value="<?php echo $this -> farm['city_id'];?>"/>
     <div class="bottom-mod">
          <input type="button" class="btn btn-primary" value="立即发表" onclick="FNC.ajax_post($('#form'), FNC.ajax_processer, 'error_message');"/>
          <input type="button" class="btn" value="预览一下" onclick="preview();"/>
@@ -42,7 +46,7 @@
          wordCount:false,
          elementPathEnabled:false,
          iframeCssUrl: '/static/ueditor/themes/iframe.css?v=20181106',
-         initialFrameHeight:650
+         initialFrameHeight:450
      });
      // 预览一下
      function preview() {

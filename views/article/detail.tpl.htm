@@ -1,21 +1,11 @@
-<?php TPL::output('global/header_nav.tpl.htm');?>
-<div class="article">
-    <div>
+<?php TPL::output('global/header.tpl.htm');?>
+<div class="container article">
+    <div class="article-nav">
         <a href="<?php echo G_DEMAIN;?>">模型圈</a> &gt; 正文
     </div>
     <div class="article-content clearfix">
          <div class="left-side">
              <div class="article-title">
-                 <?php if(G_ONLINE):?>
-                 <div class="clearfix income">
-                 <script>
-                    var mediav_ad_pub = '8cmwYE_2253466';
-                    var mediav_ad_width = '950';
-                    var mediav_ad_height = '90';
-                 </script>
-                 <script type="text/javascript" language="javascript" charset="utf-8"  src="//static.mediav.com/js/mvf_g2.js"></script>
-                 </div>
-                 <?php endif; ?>
                  <h1><?php echo $this->info['title'];?></h1>
                  <div class="info">
                      <span>来源：<?php echo $this->info['from'];?></span>
@@ -25,15 +15,6 @@
                      <span><a href="<?php echo G_DEMAIN;?>/article/publish/id-<?php echo $this->info['id'];?>/">编辑</a></span>
                      <span><a href="<?php echo G_DEMAIN;?>/article/delete/id-<?php echo $this->info['id'];?>/">删除</a></span>
                      <?php } ?>
-                 </div>
-                 <div class="socialShare clearfix">
-                     <div class="social-title">一键分享：</div>
-                     <div class="social-group">
-                         <a target="_blank" href="<?php echo $this->share['weixin'];?>" title="分享到微信" class="msb_network_button weixin"></a>
-                         <a target="_blank" href="<?php echo $this->share['weibo'];?>" title="分享到微博" class="msb_network_button sina"></a>
-                         <a target="_blank" href="<?php echo $this->share['qq'];?>" title="分享到QQ空间" class="msb_network_button qZone"></a>
-                         <a target="_blank" href="<?php echo $this->share['douban'];?>" title="分享到豆瓣网" class="msb_network_button douban"></a>
-                     </div>
                  </div>
              </div>
              <div class="content-main">
@@ -87,38 +68,6 @@
              </div>
          </div>
          <div class="right-side clearfix">
-            <?php if(G_ONLINE):?>
-            <div class="income">
-                <script>
-                var mediav_ad_pub = 'c99SyU_2255727';
-                var mediav_ad_width = '282';
-                var mediav_ad_height = '600';
-                </script>
-                <script type="text/javascript" language="javascript" charset="utf-8"  src="//static.mediav.com/js/mvf_g2.js"></script>
-            </div>
-            <?php endif; ?>
-            <?php if($this -> recommend_list):?>
-            <div class="recommend-list">
-                <div class="a-title">好玩推荐</div>
-                <?php foreach($this -> recommend_list as $newk => $new):?>
-                <div class="jd-item <?php if($newk == 4){echo 'noborder';}?>">
-                     <a target="_blank" href="<?php echo $new['url'];?>">
-                        <img alt="<?php echo $new['name'];?>" src="<?php echo $new['preview'];?>"/>
-                        <div class="item-info">
-                             <span><?php echo summary($new['name'], 15);?></span>
-                             <p class="tags">
-                             <?php foreach($new['tags'] as $k => $tag):?>
-                                <?php if($k < 3):?>
-                                <span class="kk<?php echo $k;?>"><?php echo $tag;?></span>
-                                <?php endif;?>
-                                <?php endforeach;?>
-                             </p>
-                        </div>
-                     </a>
-                </div>
-                <?php endforeach;?>
-            </div>
-            <?php endif; ?>
             <div class="article-list">
                  <div class="a-title">相关资讯</div>
                  <?php foreach($this -> article_list as $article):?>

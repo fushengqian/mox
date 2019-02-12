@@ -28,11 +28,6 @@ class main extends FARM_CONTROLLER
         //更新浏览数
         $this -> model('article') -> update_view(intval($_GET['id']), $info['read'], $info['create_time']);
 
-        if ($info['farm_id']) {
-            $farm = $this->model('farm')->get_one(encode($info['farm_id']));
-            TPL::assign('farm', $farm);
-        }
-
         $share_pic = '';
         if (preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $info['content'], $matches)) {
             foreach ($matches[2] as $s) {
@@ -49,10 +44,6 @@ class main extends FARM_CONTROLLER
             $city_info = get_city_detail($info['city_id']);
             TPL::assign('city', $city_info);
         }
-
-        //好玩推荐
-        $recommend_list = $this->model('farm')->get_recommend_list(0, 8);
-        TPL::assign('recommend_list', $recommend_list);
 
         //获取回复
         $comment_list = FARM_APP::model('comment')->fetch_all('comment', "target_id = " . intval($info['id']) . " AND `type` = 2");
@@ -108,26 +99,13 @@ class main extends FARM_CONTROLLER
      * */
     public function publish_action()
     {
-        $farm_id = $_GET['farm_id'] ? $_GET['farm_id'] : 0;
-        $city_id = $_GET['city'] ? $_GET['city'] : 0;
-
         $article_id = $_GET['id'] ? $_GET['id'] : 0;
 
         if ($article_id) {
             $info = $this->model('article')->get_article_by_id($article_id);
-            $farm_id = $info['farm_id'];
-            $city_id = $info['city_id'];
-
             TPL::assign('info', $info);
         }
 
-        $farm = array('id' => $farm_id, 'city_id' => $city_id);
-
-        if ($farm_id && !$city_id) {
-            $farm = $this->model('farm')->get_one($farm_id);
-        }
-
-        TPL::assign('farm', $farm);
         TPL::assign('seo', get_seo('publish'));
 
         TPL::import_js('ueditor/ueditor.config.js');
@@ -136,7 +114,6 @@ class main extends FARM_CONTROLLER
         TPL::import_js('js/jquery.form.js');
         TPL::import_js('js/template.js');
         TPL::import_js('js/fnc.js');
-        TPL::import_css('css/publish.css');
 
         TPL::output('article/publish');
     }

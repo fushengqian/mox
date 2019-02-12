@@ -31,7 +31,7 @@ class upload extends FARM_CONTROLLER
             $this -> jsonReturn(null, -1, '不能上传大于10m的图片');
         }
 
-        $upload_path = APP_PATH . 'static/test_upload/' . date("Ymd", time());
+        $upload_path = APP_PATH . 'static/upload/' . date("Ymd", time());
         $partList = explode('/', $upload_path);
 
         $path = '';
@@ -50,7 +50,7 @@ class upload extends FARM_CONTROLLER
         $upload_path .= '/' . $file_name . '.' . $path_info['extension'];
 
         if (move_uploaded_file($_FILES['resource']['tmp_name'], $upload_path)) {
-            $url = '/static/test_upload/' . date("Ymd") . '/' . $file_name . '.' . $path_info['extension'];
+            $url = '/static/upload/' . date("Ymd") . '/' . $file_name . '.' . $path_info['extension'];
 
             $result = array(
                       'token' => $token,

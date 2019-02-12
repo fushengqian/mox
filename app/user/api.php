@@ -12,7 +12,7 @@ class api extends FARM_CONTROLLER
         $phone    = trim($_POST['phone']);
 
         if (empty($username) || empty($password) || empty($phone)) {
-            $this -> jsonReturn(null, -1, '用户名和密码不能为空！');
+            $this -> jsonReturn(null, -1, '用户名、手机、密码不能为空！');
         }
 
         if (strlen($_POST['password']) < 6 OR strlen($_POST['password']) > 16) {

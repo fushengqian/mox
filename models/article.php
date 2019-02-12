@@ -41,7 +41,7 @@ class article_class extends FARM_MODEL
         return $data;
     }
     
-    public function publish($id, $farm_id, $city_id, $title, $content, $keywords, $from = 'shuoly', $summary = '', $status = 1, $user_id = 0)
+    public function publish($id, $cate, $title, $content, $keywords, $from = 'shuoly', $summary = '', $status = 1, $user_id = 0)
     {
         if (!$title || !$content) {
             return false;
@@ -61,16 +61,15 @@ class article_class extends FARM_MODEL
         
         if (empty($id)) {
             $article_id = $this -> insert('article', array(
-                    'farm_id'    => $farm_id,
-                    'city_id'     => $city_id,
                     'title'       => $title,
+                    'cate'        => $cate,
                     'content'     => $content,
                     'summary'     => $summary,
                     'keywords'    => $keywords,
                     'user_id'     => $user_id,
-                    'url'         => G_DEMAIN.'/article/',
                     'preview'     => $preview,
                     'create_time' => time(),
+                    'update_time' => time(),
                     'from'        => $from,
                     'read'        => 1,
                     'sort'        => 1,
@@ -78,29 +77,22 @@ class article_class extends FARM_MODEL
             ));
         } else {
            $this -> update('article', array(
-                    'farm_id'    => $farm_id,
-                    'city_id'     => $city_id,
                     'title'       => $title,
+                    'cate'        => $cate,
                     'content'     => $content,
                     'summary'     => $summary,
                     'keywords'    => $keywords,
-                    'url'         => G_DEMAIN.'/article/',
                     'preview'     => $preview,
                     'from'        => $from,
+                    'update_time' => time(),
                     'sort'        => 1,
                     'status'      => intval($status)
             ), 'id = '.intval($id));
            
            $article_id = intval($id);
         }
-        
-        $url = '';
-        if ($article_id) {
-            $url = G_DEMAIN.'/article/'.$article_id.'.html';
-            $this -> update('article', array('url' => $url), 'id = '.$article_id);
-        }
-        
-        return $url;
+
+        return $article_id;
     }
     
     public function get_city_article($city_id, $order_by = 'sort asc,city_id desc', $page = 1, $per_page = 20)

@@ -1,0 +1,488 @@
+/*发布页面*/
+.container{
+    width:992px;
+    padding:50px;
+    padding-top:20px;
+    min-height: 700px;
+    background: #fff;
+}
+.ask-content{
+    padding-top:66px;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.famous{
+    margin-bottom:30px;
+    text-align:center;
+    font-size:18px;
+}
+.content-area{
+   margin-top:10px;
+   display:block;
+   margin-bottom:20px;
+}
+.ask-tag{
+   font-size:14px;
+   background:#f6f6f6 none repeat scroll 0 0;
+   padding:10px;
+   clear:both;
+   display:block;
+   margin-top:25px;
+   margin-bottom:5px;
+}
+.tag-item{
+    -moz-box-orient: vertical;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 12px;
+    margin-right: 8px;
+    padding: 0 7px;
+    text-decoration: none;
+    vertical-align: middle;
+    background-color: #eefaf0;
+    border: 1px solid #80b028;
+    color: #5b9c4a;
+}
+.btn-danger{
+    background-color:#ff9d00;
+    color:#fff;
+}
+.content-area textarea{
+    border: 1px solid #ccc;
+    height: 40px;
+    width:100%;
+    font-size:14px;
+    padding:10px;
+}
+.mdd{
+    border: 1px solid #ccc;
+    height: 40px;
+    width:100%;
+    font-size:14px;
+    padding:10px;
+    margin-top:10px;
+    margin-bottom: 15px;
+}
+h4 .m-icon{
+    background: url("/static/images/wenda.png") no-repeat;
+    background-position-x: 0%;
+    background-position-y: 0%;
+    background-size: auto auto;
+    background-size: 28px;
+    display: block;
+    float: left;
+    width: 28px;
+    height: 28px;
+    margin: 0 5px 0 0;
+    cursor: pointer;
+    text-decoration: none;
+}
+ask-detail .editor{
+    display:none;
+}
+.ask-detail{
+    display:none;
+}
+.ask-detail textarea{
+   height:88px;
+}
+.container h4{
+    font-weight:bold;
+    font-size:18px;
+    height: 30px;
+    padding-top:5px;
+    line-height:30px;
+    text-align: left;
+    margin-bottom:5px;
+}
+.container .title{
+    height: 40px;
+    line-height: 36px;
+    width: 100%;
+    text-align: left;
+}
+.container .summary{
+    height: 40px;
+    line-height: 36px;
+    width: 100%;
+}
+.summary input{
+    font-size:15px;
+    width:100%;
+}
+.title input{
+    font-size:15px;
+    width:100%;
+}
+.container .keyword input{
+    border: 1px solid #e8e8e8;
+    height: 40px;
+    line-height: 36px;
+    width: 40%;
+    margin-top:10px;
+    padding-left:10px;
+    padding-top:4px;
+    font-size:15px;
+}
+.container .from input{
+    border: 1px solid #e8e8e8;
+    height: 40px;
+    line-height: 36px;
+    width: 15%;
+    margin-top:10px;
+    padding-left:10px;
+    padding-top:4px;
+    font-size:15px;
+}
+.container .blank{
+    height:10px;
+}
+.container .editor{
+    margin-top:10px;
+}
+.container #editor{
+    min-height:400px;
+}
+.container .bottom-mod{
+    margin:10px;
+    text-align:right;
+    clear: both;
+    margin-top:50px;
+    position: fixed;
+    bottom: 10px;
+    z-index: 99999999;
+    width: 940px;
+}
+.container .attr{
+    margin-bottom: 20px;
+    text-align: left;
+}
+.container .bottom-mod input{
+    float:right;
+    padding:5px;
+    width:100px;
+    height:40px;
+    font-weight:bold;
+    float:right;
+    margin-right:10px;
+}
+.ask-bottom-mod{
+   width:100%;
+   padding-right:1px;
+}
+.ask-publish{
+   float:right;
+   padding:10px 0px 5px 0px;
+   width:100px;
+   font-weight:bold;
+   font-size:15px;
+}
+/*文章详情*/
+.article{
+    min-height:680px;
+    padding-top:20px;
+    padding-bottom:20px;
+    border:none;
+    margin-left:auto;
+    margin-right:auto;
+}
+.article h1{
+    font-weight:bold;
+    font-size:22px;
+    text-align:center;
+}
+.article h2{
+    font-size:18px;
+    font-weight:bold;
+}
+.article .article-title{
+    border-bottom:3px solid #ff9d00;
+    margin-bottom:20px;
+}
+.article-title .info{
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:3px;
+    font-size:12px;
+}
+.article-title .info span{
+   margin-left:20px;
+}
+.article .container{
+    margin-top:10px;
+    font-size:14px;
+    line-height:35px;
+    margin-bottom:5px;
+    padding:20px;
+    background:#fff none repeat scroll 0 0;
+    border:1px solid #bfcfc5;
+}
+.article .content-main img{
+    max-width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding:1px;
+}
+.article .article-content .left-side{
+    width:70%;
+    float:left;
+    padding-right:10px;
+    padding-left:10px;
+    padding-top:10px;
+}
+.article .article-content .right-side{
+    text-align:center;
+    margin-top:65px;
+    width:30%;
+    float:left;
+    padding:10px;
+    border:1px solid #bfcfc5;
+}
+.article-content .right-side .place p{
+    font-size:12px;
+    text-align:left;
+    line-height:25px;
+}
+.right-side .place a{
+    color:#0066cc;
+}
+.right-side .article-list{
+    font-size:14px;
+    margin-top:0px;
+}
+.right-side .a-title{
+    text-align:left;
+    background: #f5f8fa none repeat scroll 0 0;
+    font-size: 16px;
+    height: 35px;
+    padding-left: 10px;
+    padding-top: 7px;
+}
+.right-side .article-list a{
+    clear:both;
+    width:100%;
+    text-align:left;
+    float:right;
+    line-height: 33px;
+}
+.article-list a i{
+    border-left:3px solid #ff9d00;
+    margin-right:3px;
+}
+.right-side .jd-item {
+    border-bottom: 1px dashed #666;
+    clear: both;
+    height: 65px;
+    margin-top: 5px;
+    padding-bottom: 2px;
+    text-align:left;
+}
+.right-side .jd-item span{
+    margin-left:3px;
+}
+.right-side .jd-item img {
+    border: 1px solid #ff9d00;
+    border-radius: 5px;
+    float: left;
+    height: 60px;
+    width: 90px;
+}
+.right-side .noborder{
+    border-bottom: medium none;
+}
+.content .left-content{
+    width: 100%;
+    font-size: 15px;
+    color: #444;
+    line-height: 28px;
+    position: relative;
+    float: left;
+    position: relative;
+    min-height: 350px;
+}
+.add-comment {
+    margin-top:10px;
+    min-height:160px;
+}
+.add-comment{padding-bottom:10px;min-height:160px;}
+.comment-list{
+    margin: 0px;
+    padding:0px;
+}
+.add-comment .title,.comment-list .title{
+    font-size:15px;
+    font-weight:bold;
+    height:35px;
+    padding-left:5px;
+    padding-top:1px;
+    background:#f5f8fa none repeat scroll 0 0;
+}
+.add-comment textarea{
+    padding:0;
+    margin-top:0px;
+    border:1px solid #bfcfc5;
+    background-color: #ffffff;
+    font-size: 12px;
+    height: 100px;
+    line-height: 20px;
+    margin-bottom: 0px;
+    overflow: auto;
+    padding: 8px;
+    width: 100%;
+    font-size:14px;
+}
+.add-comment .publish-action{
+    text-align: right;
+    margin-top:10px;
+}
+.dp-list{display:block;margin-top:10px;margin-bottom:10px;}
+.dp-list .dp-item{clear:both;min-height:80px;border-bottom:1px dashed #bfcfc5;padding-top:5px;padding-bottom:5px;overflow:hidden;}
+.dp-list .avatar{float:left;margin-top:8px;}
+.dp-list .avatar img{height:50px;width:50px;border-radius:25px;}
+.dp-list .infod{float:left;margin-left:10px;width:700px;}
+.dp-list .infod .date{float:right;margin-right:10px;}
+.dp-list .infod .name{color:#0066cc;}
+.dp-list .infod .comments{padding-left:0px;}
+.dp-list .nodata{margin-left:10px;}
+.comment-list .nodata {text-align:left;padding-left:5px;margin-top:10px;font-size:14px;}
+.to-preview a{color:#ffffff;font-size: 16px;font-weight: bold;}
+.base h1{
+    font-size:16px;
+    font-weight:bold;
+    color:#0066cc;
+}
+.f-brief{
+    margin-top:25px;
+}
+.f-brief h1,.review-item h1{
+    font-size:16px;
+    font-weight:bold;
+    color:#0066cc;
+}
+.f-brief .farm-brief{
+    padding:10px 70px 10px 70px;
+    max-width:908px;
+}
+.base .control-label{
+    font-size:15px;
+    float:left;
+    display:block;
+    margin-top:6px;
+    text-align:right;
+    width:100px;
+    font-weight:bold;
+}
+.form-group{
+    padding:10px;
+    height:40px;
+}
+.form-group-t{
+    height:16px;
+}
+.form-group .text{
+    float:left;
+    width:450px;
+    margin-left:38px;
+}
+.base .control-label b{
+    color:#ff9d00;
+    font-size:16px;
+    margin-right:5px;
+    padding-top:10px;
+}
+.checkbox-inline{
+    margin-top:5px;
+    font-size:15px;
+    padding-left:20px;
+    width:100px;
+}
+.form-group .more{
+    margin-top:7px;
+}
+.mgl10{
+    margin-left:20px;
+}
+.mgl20{
+    margin-left:38px;
+}
+.avg-price{
+    width:100px;
+    margin-left:38px;
+    float:left;
+}
+.farm-publish{
+    margin-left:70px;
+    margin-top:25px;
+    text-align:left;
+}
+.review-content{
+    padding:0px;
+}
+.farm-brief textarea{
+    padding:15px;
+}
+.farm-map{
+    height:350px;
+}
+.set-map{
+    height:350px;
+    width:480px;
+    margin-left:138px;
+    border:1px solid #ccc;
+    border-radius: 4px;
+}
+.set-map .search-map{
+    padding:3px 10px;
+}
+.set-map input{
+    margin:5px;
+    width:316px;
+    height:30px;
+    float:left;
+}
+.set-map button{
+    margin:5px;
+}
+.set-map #container{
+    height:304px;
+    width:470px;
+    margin-left:4px;
+}
+.set-map #container_m{
+    height:304px;
+    width:470px;
+}
+#container_front{
+    width: 470px;
+    height:304px;
+    border: 1px solid #ff9d00;
+    position: absolute;
+    top: 400px;
+    background-color: #fff;
+    overflow: hidden;
+    z-index:999;
+    margin-left:4px;
+    display:none;
+}
+.set-map #cancel_btn{
+    float:right;
+    margin-right:10px;
+    color:#f00;
+}
+label{
+    max-width:none;
+}
+.article-cate{
+    border: 1px solid #e8e8e8;
+    height: 40px;
+    line-height: 36px;
+    width: 15%;
+    margin-top: 10px;
+    padding-left: 10px;
+    padding-top: 4px;
+    font-size: 15px;
+}
+.article-nav{
+    text-align: left;
+}
