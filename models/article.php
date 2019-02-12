@@ -1,11 +1,15 @@
 <?php
 class article_class extends FARM_MODEL
 {
-    public function get_new_article($size = 20)
+    public function get_article_list($cate = 'focus', $page = 1, $size = 20)
     {
-        $where = array('status = 1', 'is_business = 0');
+        $where = array('status = 1');
+
+        if ($cate) {
+            $where[] = 'cate = "'.trim($cate).'"';
+        }
         
-        $list =  $this->fetch_page('article', implode(' AND ', $where), 'id DESC', 1, $size);
+        $list =  $this->fetch_page('article', implode(' AND ', $where), 'id DESC', $page, $size);
 
         empty($list) && $list = array();
 
@@ -15,11 +19,11 @@ class article_class extends FARM_MODEL
             }
         }
 
-        // 每天发布5条
+        // 每天发布2篇
         $time = date("Y-m-d", time()).' 00:00:00';
-        $count =  $this->fetch_page('article', '`status` = 1 AND `create_time` > '.strtotime($time), 'id DESC', 1, 5);
-        if (count($count) < 5 && date('H') > 8) {
-            $update_list =  $this->fetch_page('article', '`status` = 2', 'id DESC', 1, 5);
+        $count =  $this->fetch_page('article', '`status` = 1 AND `create_time` > '.strtotime($time), 'id DESC', 1, 2);
+        if (count($count) < 2 && date('H') > 8) {
+            $update_list =  $this->fetch_page('article', '`status` = 2', 'id DESC', 1, 2);
             empty($update_list) && $update_list = array();
             foreach($update_list as $update) {
                 $this -> update('article', array(
@@ -93,49 +97,6 @@ class article_class extends FARM_MODEL
         }
 
         return $article_id;
-    }
-    
-    public function get_city_article($city_id, $order_by = 'sort asc,city_id desc', $page = 1, $per_page = 20)
-    {
-        $where = array();
-        
-        if ($city_id)
-        {
-            $where[] = 'city_id = ' . intval($city_id) . ' OR city_id = 0';
-        }
-        
-        $data = $this->fetch_page('article', implode(' AND ', $where), $order_by, $page, $per_page);
-        
-        foreach($data as $k => $v)
-        {
-            $data[$k]['url'] = G_DEMAIN.'/article/'.$v['id'].'.html';
-        }
-        
-        return $data;
-    }
-    
-    public function get_related_article($farm_id = 0, $city_id = 0, $order_by = 'id desc', $page = 1, $per_page = 20)
-    {
-        $where = array('status = 1');
-        
-        if ($farm_id)
-        {
-            $where[] = 'farm_id = ' . intval($farm_id);
-        }
-        
-        if ($city_id)
-        {
-            $where[] = 'city_id = ' . intval($city_id);
-        }
-
-        $data = $this->fetch_page('article', implode(' AND ', $where), $order_by, $page, $per_page);
-
-        foreach($data as $k => $v)
-        {
-            $data[$k]['url'] = G_DEMAIN.'/article/'.$v['id'].'.html';
-        }
-        
-        return $data;
     }
 
     /**
