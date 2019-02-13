@@ -2,6 +2,43 @@
 class api extends FARM_CONTROLLER
 {
     /**
+     * 获取用户信息
+     */
+    public function info_action()
+    {
+        $uid = trim($_POST['id']);
+        if (!$uid) {
+            $this -> jsonReturn(null, -1, '系统无法获取该用户信息！');
+        }
+
+        $user_info = $this->model('user')->get_user_info_by_id($uid);
+
+        $feed_count = $this->model('feed')->count('feed', 'user_id = "'.$uid.'"');
+        $article_count = $this->model('article')->count('article', 'user_id = "'.$uid.'"');
+
+        $info = array('id' => $user_info['id'],
+                      'name' => $user_info['user_name'],
+                      'portrait' => G_DEMAIN.$user_info['avatar'],
+                      'gender' => $user_info['sex'],
+                      'desc' => $user_info['intro'],
+                      'relation' => 4,
+                      'identity' => array('officialMember' => false, 'softwareAuthor' => false),
+                      'statistics' => array('honorScore' => $user_info['login_num'],
+                                            'activeScore' => $user_info['point'],
+                                            'score' => $user_info['point'],
+                                            'tweet' => $feed_count,
+                                            'collect' => 0,
+                                            'fans' => 108,
+                                            'follow' => 59,
+                                            'blog' => $article_count,
+                                            'answer' => 0,
+                                            'discuss' => 0));
+
+        $this -> jsonReturn($info);
+
+    }
+
+    /**
      * 注册接口
      */
     public function register_action()
@@ -33,9 +70,6 @@ class api extends FARM_CONTROLLER
 
         $uid = $this->model('user')->user_register($username, $password, '', intval($gender), $phone);
 
-        $this->model('user')->setcookie_logout();
-        $this->model('user')->setsession_logout();
-
         if ($uid) {
             $user_info = $this->model('user')->get_user_info_by_id($uid);
 
@@ -56,6 +90,7 @@ class api extends FARM_CONTROLLER
                         'name' => !empty($user_info['user_name']) ? $user_info['user_name'] : $user_info['phone'],
                         'portrait' => G_DEMAIN.$user_info['avatar'],
                         'gender' => $user_info['sex'],
+                        'desc' => $user_info['intro'],
                         'relation' => 4,
                         'identity' => array('officialMember' => false, 'softwareAuthor' => false));
 
@@ -96,6 +131,7 @@ class api extends FARM_CONTROLLER
                         'name' => !empty($user_info['user_name']) ? $user_info['user_name'] : $user_info['phone'],
                         'portrait' => G_DEMAIN.$user_info['avatar'],
                         'gender' => $user_info['sex'],
+                        'desc' => $user_info['intro'],
                         'relation' => 4,
                         'identity' => array('officialMember' => false, 'softwareAuthor' => false));
 

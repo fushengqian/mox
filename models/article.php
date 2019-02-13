@@ -1,12 +1,16 @@
 <?php
 class article_class extends FARM_MODEL
 {
-    public function get_article_list($cate = 'focus', $page = 1, $size = 20)
+    public function get_article_list($cate = 'focus', $page = 1, $size = 20, $article_id = 0)
     {
         $where = array('status = 1');
 
         if ($cate) {
             $where[] = 'cate = "'.trim($cate).'"';
+        }
+
+        if ($article_id) {
+            $where[] = 'id <> "'.trim($article_id).'"';
         }
         
         $list =  $this->fetch_page('article', implode(' AND ', $where), 'id DESC', $page, $size);
@@ -41,6 +45,33 @@ class article_class extends FARM_MODEL
         $data = $this -> fetch_row('article', "id = '".intval($id)."'");
 
         $data['url'] = G_DEMAIN.'/article/'.$data['id'].'.html';
+
+        $images = array();
+        if (preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $data['content'], $matches)) {
+            foreach ($matches[2] as $s) {
+                if (!stripos($s, 'ttp:/')) {
+                    $images[] = G_DEMAIN . $s;
+                    $fix = G_DEMAIN . $s;
+                } else {
+                    $images[] = $s;
+                    $fix = $s;
+                }
+                $data['content'] = str_replace($s, $fix, $data['content']);
+            }
+        }
+
+        $image_arr = array();
+        foreach ($images as $img) {
+            $image_arr[] =  array('h' => 200,
+                                  'w' => 200,
+                                  'href' => $img,
+                                  'name' => '',
+                                  'thumb' => $img,
+                                  'type' => 'jpg');
+
+        }
+
+        $data['images'] = $image_arr;
         
         return $data;
     }

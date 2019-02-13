@@ -38,12 +38,7 @@ class main extends FARM_CONTROLLER
             }
         }
 
-        $article_list = $this->model('article')->get_related_article($info['farm_id'], $info['city_id']);
-
-        if ($info['city_id']) {
-            $city_info = get_city_detail($info['city_id']);
-            TPL::assign('city', $city_info);
-        }
+        $article_list = $this->model('article')->get_article_list('', 1, 20);
 
         //获取回复
         $comment_list = FARM_APP::model('comment')->fetch_all('comment', "target_id = " . intval($info['id']) . " AND `type` = 2");

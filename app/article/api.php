@@ -14,17 +14,8 @@ class api extends FARM_CONTROLLER
                   'img' => 'http://www.moxquan.com/static/upload/01/14-1.png',
                   'href' => 'http://www.moxquan.com',
                   'pubDate' => '2019-01-29 11:00:09',
-                  'type' => 1,
-                  'id' => 1001);
-
-        $arr[] = array(
-                    'name' => '2018年年终总结帖，楼下请排队',
-                    'detail' => '2018年年终总结帖，楼下请排队',
-                    'img' => 'http://www.moxquan.com/static/upload/01/16-1.png',
-                    'href' => 'http://www.moxquan.com',
-                    'pubDate' => '2019-01-29 11:00:09',
-                    'type' => 1,
-                    'id' => 1001);
+                  'type' => 6,
+                  'id' => 1);
 
         $result = array();
 
@@ -41,7 +32,7 @@ class api extends FARM_CONTROLLER
         $result['nextPageToken'] = "1";
         $result['prevPageToken'] = "1";
         $result['requestCount'] = 5;
-        $result['responseCount'] = 5;
+        $result['responseCount'] = 1;
         $result['totalResults'] = 5;
 
         $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
@@ -55,10 +46,18 @@ class api extends FARM_CONTROLLER
         $cate = $_POST['cate'] ? trim($_POST['cate']) : 'focus';
         $page_size = 10;
         $page = !empty($_POST['page']) ? intval($_POST['page']) : 1;
+        $key = $_POST['key'] ? trim($_POST['key']) : '';
 
         $arr = array();
 
-        $list = $this->model('article')->get_article_list($cate, $page);
+        if ($key) {
+            $para = explode('_', $key);
+            $article_id = intval($para[2]);
+            $list = $this->model('article')->get_article_list('', $page, $page_size, $article_id);
+        } else {
+            $list = $this->model('article')->get_article_list($cate, $page, $page_size);
+        }
+
         foreach ($list as $key => $value) {
 
            $images = array();
@@ -72,10 +71,12 @@ class api extends FARM_CONTROLLER
                }
            }
 
+           $user_info = $this->model('user')->get_user_info_by_id($value['user_id']);
+
            $arr[] = array(
                            'type' => 1,
-                           'authorName' => '编辑君',
-                           'authorId' => '101',
+                           'authorName' => $user_info['user_name'],
+                           'authorId' => $user_info['id'],
                            'key' => $value['id'],
                            'title' => $value['title'],
                            'desc' => $value['summary'],
@@ -86,13 +87,13 @@ class api extends FARM_CONTROLLER
                            'softwareLogo' => '',
                            'imgs' => $images,
                            'iTags' => array(array('oscId' => 1, 'name' => '模型', 'tagId' => '1')),
-                           'commentCount' => 0,
+                           'commentCount' => rand(100, 999),
                            'favorite' => false,
                            'wordCount' => mb_strlen($value['content']),
-                           'subType' => 1,
+                           'sub_type' => 1,
                            'readTime' => $value['read'],
                            'titleTranslated' => '',
-                           'oscId' => $value['id'],
+                           'osc_id' => intval($value['id']),
                            'view_count' => $value['read']);
         }
 
@@ -115,5 +116,44 @@ class api extends FARM_CONTROLLER
         $result['totalResults'] = 1000;
 
         $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+    }
+
+    /**
+     * 文章详情
+     */
+    public function detail_action() {
+        $article_id = trim($_POST['id']);
+
+        $info = $this->model('article')->get_article_by_id($article_id);
+
+        $user_info = $this->model('user')->get_user_info_by_id($info['user_id']);
+        $author = array('id' => $user_info['id'],
+                        'name' => $user_info['user_name'],
+                        'portrait' => G_DEMAIN.$user_info['avatar'],
+                        'relation' => 4,
+                        'gender' => $user_info['sex'],
+                        'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
+
+        $statistics = array('comment' => 0, 'favCount' => 0, 'like' => 0, 'transmit' => 0, 'view' => rand(1000, 9999));
+
+        $result = array('id' => intval($info['id']),
+                        'title' => $info['title'],
+                        'body' => $info['content'],
+                        'pubDate' => date_friendly($info['create_time']),
+                        'href' => G_DEMAIN.'/article/'.$info['id'].'.html',
+                        'type' => 1,
+                        'favorite' => false,
+                        'summary' => $info['summary'],
+                        'author' => $author,
+                        'images' => $info['images'],
+                        'extra' => null,
+                        'statistics' => $statistics,
+                        'software' => null,
+                        'newsId' => intval($info['id']),
+                        'iTags' => null,
+                        'tags' => null,
+                        'about' => null);
+
+        $this->jsonReturn($result);
     }
 }

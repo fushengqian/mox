@@ -6,6 +6,10 @@ class FARM_CONTROLLER
 
     public function jsonReturn($result = array(), $code = 1, $message = 'SUCCESS', $notice = null, $time = '')
     {
+        if (!empty($this->user_info)) {
+            $notice = FARM_APP::model("notice")->get_notice($this->user_info['uid']);
+        }
+
         $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
 
         echo json_encode($ret);
