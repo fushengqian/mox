@@ -12,4 +12,34 @@ class model_class extends FARM_MODEL
 
         return $this->fetch_page('model', $where, $order_by, $page, $per_page);
     }
+
+    public function get_model_by_id($id)
+    {
+        $data = $this -> fetch_row('model', "id = '".trim($id)."'");
+
+        $brand_list = $this->model('brand')->fetch_all('brand');
+        foreach ($brand_list as $k => $v) {
+            if ($v['id'] == $data['brand_id']) {
+                $data['brand_name'] = $v['name'];
+            }
+        }
+
+        $data['url'] = G_DEMAIN.'/model/'.$data['id'].'.html';
+
+        $images = array();
+        if (preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $data['intro'], $matches)) {
+            foreach ($matches[2] as $s) {
+                if (!stripos($s, 'ttp:/')) {
+                    $images[] = G_DEMAIN . $s;
+                    $fix = G_DEMAIN . $s;
+                } else {
+                    $images[] = $s;
+                    $fix = $s;
+                }
+                $data['content'] = str_replace($s, $fix, $data['content']);
+            }
+        }
+
+        return $data;
+    }
 }

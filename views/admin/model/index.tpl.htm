@@ -6,7 +6,7 @@
             <h3>
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="/admin/model/index/"><?php _e('模型列表'); ?></a></li>
-                    <li><a href="/admin/model/edit/"><?php _e('编辑模型'); ?></a></li>
+                    <li><a href="/admin/model/edit/"><?php _e('新增模型'); ?></a></li>
                 </ul>
             </h3>
         </div>
@@ -30,17 +30,21 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>品牌</th>
                                 <th>名称</th>
-                                <th>英文名</th>
+                                <th>比例</th>
+                                <th>货号</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($this->list AS $key => $val) { ?>
                             <tr>
-                                <td><?php echo $val['id']; ?></td>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/model/<?php echo $val['id'];?>.html"><?php echo $val['id']; ?></a></td>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/brand/<?php echo $val['brand_id'];?>.html"><?php echo $val['brand_name']; ?></a></td>
                                 <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/model/<?php echo $val['id'];?>.html"><?php echo summary($val['name'], 45); ?></a></td>
-                                <td><?php echo $val['ename']; ?></td>
+                                <td><?php echo $val['scale']; ?></td>
+                                <td><?php echo $val['code']; ?></td>
                                 <td>
                                     <a href="<?php echo G_DEMAIN;?>/admin/model/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
                                     <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/admin/model/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>

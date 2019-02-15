@@ -19,6 +19,15 @@ class model extends FARM_ADMIN_CONTROLLER
         }
 
         $list = $this->model('model')->get_data_list($where, $_GET['aid'], 20);
+        $brand_list = $this->model('brand')->fetch_all('brand');
+
+        foreach ($list as $key => $val) {
+            foreach ($brand_list as $k => $v) {
+                if ($v['id'] == $val['brand_id']) {
+                    $list[$key]['brand_name'] = $v['name'];
+                }
+            }
+        }
 
         TPL::assign('list', $list);
 
@@ -51,6 +60,7 @@ class model extends FARM_ADMIN_CONTROLLER
      */
     public function edit_action()
     {
+        $model_id = $_GET['id'] ? trim($_GET['id']) : 0;
         $this->crumb(FARM_APP::lang()->_t('编辑模型'), "admin/model/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
@@ -62,8 +72,8 @@ class model extends FARM_ADMIN_CONTROLLER
         $brand_list = $this->model('brand')->fetch_all('brand');
         TPL::assign('brand_list', $brand_list);
 
-        if ($_GET['id']) {
-            $info = $this->model('model')->fetch_row('model', 'id = ' . intval($_GET['id']));
+        if ($model_id) {
+            $info = $this->model('model')->fetch_row('model', 'id = ' . ($model_id));
             TPL::assign('info', $info);
         }
 
@@ -76,19 +86,19 @@ class model extends FARM_ADMIN_CONTROLLER
     public function save_action()
     {
         $arr = array('name' => trim($_POST['name']),
-            'ename' => trim($_POST['ename']),
-            'area' => trim($_POST['area']),
-            'intro' => trim($_POST['intro']),
-            'code' => trim($_POST['code']),
-            'brand_id' => trim($_POST['brand_id']),
-            'scale' => trim($_POST['scale']),
-            'publish' => trim($_POST['publish']),
-            'update_time' => time(),
-            'website' => trim($_POST['website']));
+                     'ename' => trim($_POST['ename']),
+                     'area' => trim($_POST['area']),
+                     'intro' => trim($_POST['intro']),
+                     'code' => trim($_POST['code']),
+                     'brand_id' => trim($_POST['brand_id']),
+                     'scale' => trim($_POST['scale']),
+                     'publish' => trim($_POST['publish']),
+                     'update_time' => time(),
+                     'website' => trim($_POST['website']));
 
         if ($_POST['id']) {
-            $id = intval($_POST['id']);
-            $this->model('model')->update('model', $arr, 'id = ' . $id);
+            $id = trim($_POST['id']);
+            $this->model('model')->update('model', $arr, 'id = "'.$id.'"');
         } else {
             $arr['id'] = setId();
             $arr['create_time'] = time();
@@ -107,7 +117,7 @@ class model extends FARM_ADMIN_CONTROLLER
     {
         empty($images_list) && $images_list = array();
 
-        $info = $this->model('model')->fetch_row('model', 'id = ' . intval($_GET['id']));
+        $info = $this->model('model')->fetch_row('model', 'id = ' . trim($_GET['id']));
         TPL::assign('info', $info);
 
         $images_list = json_decode($info['pics'], $info['pics']);

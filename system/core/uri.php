@@ -26,6 +26,8 @@ class core_uri
     var $menu = array(
                       'admin',
                       'article',
+                      'model',
+                      'brand',
                       'message',
                       'search',
                       'feed',
