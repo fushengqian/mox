@@ -10,6 +10,12 @@ class FARM_CONTROLLER
             $notice = FARM_APP::model("notice")->get_notice($this->user_info['uid']);
         }
 
+        $logs = '客户端操作：（'.get_client().','.fetch_ip().'）';
+        FARM_APP::model('logs')->insert('logs', array(
+                                                    'content' => $logs,
+                                                    'level' => 'info',
+                                                    'create_time' => time()));
+
         $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
 
         echo json_encode($ret);

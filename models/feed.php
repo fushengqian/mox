@@ -20,12 +20,12 @@ class feed_class extends FARM_MODEL
         // 给移动端用的图片格式
         $images = array();
         foreach ($feed['pics'] as $img) {
-            $images[] =  array('h' => 0,
-                                'w' => 0,
+            $images[] =  array('h' => 100,
+                                'w' => 200,
                                 'href' => $img,
-                                'name' => '',
+                                'name' => md5($img),
                                 'thumb' => $img,
-                                'type' => 'jpg');
+                                'type' => 1);
 
         }
         $feed['images'] = $images;
@@ -52,13 +52,12 @@ class feed_class extends FARM_MODEL
             // 给移动端用的图片格式
             $images = array();
             foreach ($image_arr as $img) {
-                $images[] =  array('h' => 0,
-                                   'w' => 0,
+                $images[] =  array('h' => 200,
+                                   'w' => 200,
                                    'href' => $img,
-                                   'name' => '',
+                                   'name' => md5($img),
                                    'thumb' => $img,
-                                   'type' => 'jpg');
-
+                                   'type' => 1);
             }
             $list[$k]['images'] = $images;
 
