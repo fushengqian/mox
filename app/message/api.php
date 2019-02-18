@@ -69,7 +69,7 @@ class api extends FARM_CONTROLLER
         $arr = array();
         foreach ($list as $k => $v) {
             $user_info = $this->model('user')->get_user_info_by_id($v['from_user_id']);
-            $author = array('id' => $user_info['id'],
+            $sender = array('id' => $user_info['id'],
                             'name' => $user_info['user_name'],
                             'portrait' => G_DEMAIN.$user_info['avatar'],
                             'relation' => 4,
@@ -78,7 +78,7 @@ class api extends FARM_CONTROLLER
 
             $feed = $this->model('feed')->fetch_row('feed', "id = '".$v['target_id']."'");
             $origin = array('id' => $feed['id'],
-                            'desc' => summary(strip_tags($feed['content']), 35),
+                            'desc' => summary(strip_tags($feed['content']), 45),
                             'href' => '',
                             'type' => 100);
 
@@ -87,7 +87,7 @@ class api extends FARM_CONTROLLER
                             'pubDate' => date_friendly($v['create_time']),
                             'appClient' => 1,
                             'origin' => $origin,
-                            'author' => $author);
+                            'sender' => $sender);
         }
 
         $result['items'] = $arr;
