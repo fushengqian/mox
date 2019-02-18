@@ -28,7 +28,6 @@ class notice_class extends FARM_MODEL
                 break;
                 case 'comment':
                     $notice['review']++;
-                    echo '1';
                 break;
                 case 'letter':
                     $notice['letter']++;
@@ -36,7 +35,7 @@ class notice_class extends FARM_MODEL
                 case 'newsCount':
                     $notice['newsCount']++;
                 break;
-                case 'mention':
+                case 'like':
                     $notice['mention']++;
                 break;
                 case 'fans':

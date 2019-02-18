@@ -49,8 +49,9 @@ class api extends FARM_CONTROLLER
         $target_id = trim($_POST['targetId']);
         $type      = trim($_POST['type']);
         $page      = trim($_POST['page']);
+        $user_id = intval(FARM_APP::session()->info['uid']);
 
-        $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($target_id), $type);
+        $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($target_id), $type, $user_id);
 
         $comments = array();
         foreach ($comment_list[$target_id] as $k => $v) {

@@ -25,15 +25,19 @@ class comment_class extends FARM_MODEL
         return $this->fetch_page('comment', $where, $order_by, $page, $per_page);
     }
 
-    public function get_comment_by_targetids($target_ids, $type)
+    public function get_comment_by_targetids($target_ids, $type, $user_id = 0)
     {
         $target_ids = array_unique($target_ids);
 
-        if (empty($target_ids)) {
+        if (empty($target_ids) && empty($user_id)) {
             return array();
         }
 
-        $comment_info = $this->fetch_all('comment', "target_id IN(" . implode(',', $target_ids) . ") AND `type` = '".$type."'", 'create_time asc');
+        if ($user_id) {
+            $comment_info = $this->fetch_all('comment', "`user_id` = '".$user_id."'", 'create_time asc');
+        } else {
+            $comment_info = $this->fetch_all('comment', "target_id IN(" . implode(',', $target_ids) . ") AND `type` = '".$type."'", 'create_time asc');
+        }
 
         // 批量获取用户
         $user_ids = array(0);

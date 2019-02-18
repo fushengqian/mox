@@ -12,7 +12,7 @@ class FARM_CONTROLLER
 
         $logs = '客户端操作：（'.get_client().','.fetch_ip().'）';
         FARM_APP::model('logs')->insert('logs', array(
-                                                    'content' => $logs,
+                                                    'content' => $logs.json_encode($notice),
                                                     'level' => 'info',
                                                     'create_time' => time()));
 
