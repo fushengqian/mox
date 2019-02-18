@@ -1622,14 +1622,11 @@ function curl_contents($url, $timeout = 15, $spider = true, $header = false)
     if ($header)
     {
         $header = array(
-            'Host:zh.zizaike.com',
-            'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64; rv:60.0) Gecko/20100101 Firefox/60.0',
-            'Accept:text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+            'Cache-Control: max-age=0',
+            'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
             'Accept-Language:zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
-            'Referer: https://zh.zizaike.com',
-            'Cookie:zzk_guid=6D6DAD9C-BCC9-07AE-3DBD-78F995E66AF1; zzkcamp=null; gr_user_id=a1dcd81b-82b3-4dd7-814f-e75fa6d1b6cd; Hm_lvt_2fa176e08279afc52ea6d53d771efa9b=1538188859,1538199702,1538200673; Hm_lpvt_2fa176e08279afc52ea6d53d771efa9b=1538202968; apptuiguang=true; gr_session_id_9ab0ff5db9d74358989b725953712228=42263ee3-4d24-4c7d-8efc-f1c5cdee75ef; gr_session_id_9ab0ff5db9d74358989b725953712228_42263ee3-4d24-4c7d-8efc-f1c5cdee75ef=true',
-            'Connection:keep-alive',
-            'Upgrade-Insecure-Requests:1');
+            'User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.106 Safari/537.36',
+            'Cookie:Cookie: cna=3WgpE1r6/UMCAT26Gp3L4fNy; thw=cn; tracknick=fsq_better; tg=0; t=098c126eae1fed7c76dac118add8526d; cookie2=119a8821f2493e9eb5c874f9b92b364f; v=0; _tb_token_=ee36beeb63343; unb=408917021; sg=r18; _l_g_=Ug%3D%3D; skt=d0828b200c887569; cookie1=V33C2VTPQix26AXhlEX9yBYskrP08%2FYvyCTS5AsmFJ8%3D; csg=7fa004dc; uc3=vt3=F8dByE0FjeySWR41Zqs%3D&id2=VyyZFgUgKyBr&nk2=BcNhx0oVRD%2Feog%3D%3D&lg2=WqG3DMC9VAQiUQ%3D%3D; existShop=MTU1MDIyMTU0NA%3D%3D; lgc=fsq_better; _cc_=VFC%2FuZ9ajQ%3D%3D; dnk=fsq_better; _nk_=fsq_better; cookie17=VyyZFgUgKyBr; enc=bMwZLGGFnJvGIo0DohTgWUmJIyGGre5FKf6LWhrDuWY69VRpCNaiTAYonfpFbOnjNFHZYl41%2Fv8S%2BoakVst%2FlA%3D%3D; JSESSIONID=EF08B04D95371E3382FF5912575BBF37; hng=CN%7Czh-CN%7CCNY%7C156; uc1=cookie16=UIHiLt3xCS3yM2h4eKHS9lpEOw%3D%3D&cookie21=W5iHLLyFeYTE&cookie15=VFC%2FuZ9ayeYq2g%3D%3D&existShop=false&pas=0&cookie14=UoTZ5OK3wP4NUw%3D%3D&tag=8&lng=zh_CN; mt=ci=73_1; swfstore=169532; l=bBrO16hnvFB-LhqDBOCgqZNbORQTQIRAguWjciRHi_5dK1T1Bq7Olu-z-e96Vj5R_o8B4qzKRqp9-etks; isg=BFtbapyrg4TZhv_wvSk5L6Z56r_PLPBzJgop-U2YLdpxLHsO1QVlg6-mwswHDMcq; x=e%3D1%26p%3D*%26s%3D0%26c%3D0%26f%3D0%26g%3D0%26t%3D0%26__ll%3D-1%26_ato%3D0; whl=-1%260%260%261550221566550');
         curl_setopt($curl,CURLOPT_HTTPHEADER, $header);
     }
 

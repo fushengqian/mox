@@ -34,7 +34,7 @@ class main extends FARM_CONTROLLER
         //发送消息
         $feed = $this->model('like')->fetch_row('feed', "id = '".$target_id."'");
         $url = G_DEMAIN.'/feed/'.$target_id.'.html';
-        $this->model('message')->send($feed['user_id'], 0, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url);
+        $this->model('message')->send($feed['user_id'], 0, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url, 'comment');
 
         $this->model('points')->send($user_id, 'comment');
 

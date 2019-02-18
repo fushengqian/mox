@@ -12,12 +12,38 @@ class notice_class extends FARM_MODEL
             return null;
         }
 
-        $notice = array('like' => 10,
-                        'review' => 5,
-                        'letter' => 6,
+        $list = $this->fetch_page('message', 'user_id = "'.$user_id.'" AND is_read = 0', 'id desc', 1, 999);
+
+        $notice = array('like' => 0,
+                        'review' => 0,
+                        'letter' => 0,
                         'newsCount' => 0,
-                        'mention' => 12,
-                        'fans' => 2);
+                        'mention' => 0,
+                        'fans' => 0);
+
+        foreach ($list as $k => $v) {
+            switch ($v['type']) {
+                case 'like':
+                    $notice['like']++;
+                break;
+                case 'comment':
+                    $notice['review']++;
+                    echo '1';
+                break;
+                case 'letter':
+                    $notice['letter']++;
+                break;
+                case 'newsCount':
+                    $notice['newsCount']++;
+                break;
+                case 'mention':
+                    $notice['mention']++;
+                break;
+                case 'fans':
+                    $notice['fans']++;
+                break;
+            }
+        }
 
         return $notice;
     }

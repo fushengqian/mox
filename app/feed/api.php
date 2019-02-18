@@ -46,13 +46,6 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 0,
-                         'review' => 0,
-                         'letter' => 0,
-                         'newsCount' => 0,
-                         'mention' => 0,
-                         'fans' => 0);
-
         $result['items'] = $feed_arr;
         $result['nextPageToken'] = ($page+1);
         $result['prevPageToken'] = ($page-1) > 0 ? ($page-1) : 1;
@@ -60,7 +53,7 @@ class api extends FARM_CONTROLLER
         $result['responseCount'] = count($feed_arr);
         $result['totalResults'] = 1000;
 
-        $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+        $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 
     /**

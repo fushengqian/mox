@@ -40,7 +40,7 @@ class main extends FARM_CONTROLLER
         if (!empty($uid) && ($uid != $user_id)) {
             $user = $this->model('user')->get_user_info_by_id($uid);
             $url = G_DEMAIN . '/user/' . $uid . '/';
-            $this->model('message')->send($user_id, 0, '圈友 <b>' . $user['user_name'] . '</b> 拜访了您的个人主页，去看看？', $url);
+            $this->model('message')->send($user_id, 0, '圈友 <b>' . $user['user_name'] . '</b> 拜访了您的个人主页，去看看？', $url, 'visit');
         }
 
         $seo = array('title' => array($user_info['user_name']),
