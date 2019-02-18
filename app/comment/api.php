@@ -32,7 +32,7 @@ class api extends FARM_CONTROLLER
         $arr = array('user_info' => $user_info, 'comment' => $content);
 
         //发送消息
-        $feed = $this->model('like')->fetch_row('feed', "id = '".$target_id."'");
+        $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
         $url = G_DEMAIN.'/feed/'.$target_id.'.html';
         $this->model('message')->send($feed['user_id'], 0, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url, 'comment');
 
@@ -46,49 +46,67 @@ class api extends FARM_CONTROLLER
      */
     public function list_action()
     {
-        $target_id = trim($_POST['targetId']);
-        $type      = trim($_POST['type']);
-        $page      = trim($_POST['page']);
+        $target_id = $_POST['targetId'] ? trim($_POST['targetId']) : 0;
+        $type      = $_POST['type'] ? trim($_POST['type']) : '';
+        $page      = $_POST['page'] ? trim($_POST['page']) : 0;
         $user_id = intval(FARM_APP::session()->info['uid']);
 
         $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($target_id), $type, $user_id);
 
         $comments = array();
-        foreach ($comment_list[$target_id] as $k => $v) {
-            $author = array('id' => $v['user_info']['id'],
-                            'name' => $v['user_info']['user_name'],
-                            'portrait' => G_DEMAIN.$v['user_info']['avatar'],
-                            'relation' => 4,
-                            'gender' => $v['user_info']['sex'],
-                            'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
 
-            $comments[] = array('id' => $v['id'],
-                                 'content' => strip_tags($v['content']),
-                                 'pubDate' => date_friendly($v['create_time']),
-                                 'appClient' => 1,
-                                 'author' => $author);
+        if (empty($target_id)) {
+            foreach ($comment_list as $k => $v) {
+                $author = array('id' => $v[0]['user_info']['id'],
+                                'name' => $v[0]['user_info']['user_name'],
+                                'portrait' => G_DEMAIN.$v[0]['user_info']['avatar'],
+                                'relation' => 4,
+                                'gender' => $v[0]['user_info']['sex'],
+                                'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
+
+                $feed = $this->model('feed')->fetch_row('feed', "id = '".$v[0]['target_id']."'");
+                $origin = array('id' => $v[0]['target_id'],
+                                'desc' => summary(strip_tags($feed['content']), 35),
+                                'href' => '',
+                                'type' => 100);
+
+                $comments[] = array('id' => $v[0]['id'],
+                                    'content' => strip_tags($v[0]['content']),
+                                    'pubDate' => date_friendly($v[0]['create_time']),
+                                    'appClient' => 1,
+                                    'origin' => $origin,
+                                    'author' => $author);
+            }
+        } else {
+            foreach ($comment_list[$target_id] as $k => $v) {
+                $author = array('id' => $v['user_info']['id'],
+                                'name' => $v['user_info']['user_name'],
+                                'portrait' => G_DEMAIN.$v['user_info']['avatar'],
+                                'relation' => 4,
+                                'gender' => $v['user_info']['sex'],
+                                'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
+
+                $comments[] = array('id' => $v['id'],
+                                    'content' => strip_tags($v['content']),
+                                    'pubDate' => date_friendly($v['create_time']),
+                                    'appClient' => 1,
+                                    'author' => $author);
+            }
         }
 
-        if ($page > 0) {
+        if ($page > 1) {
             $comments = array();
         }
 
         $result['items'] = $comments;
         $result['nextPageToken'] = 2;
-        $result['prevPageToken'] = 2;
+        $result['prevPageToken'] = 0;
         $result['requestCount'] = 200;
         $result['responseCount'] = count($comments);
         $result['totalResults'] = count($comments);
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 0,
-                        'review' => 0,
-                        'letter' => 0,
-                        'newsCount' => 0,
-                        'mention' => 0,
-                        'fans' => 0);
-
-        $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+        $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 }

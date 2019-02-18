@@ -25,10 +25,10 @@ class api extends FARM_CONTROLLER
         }
 
         //发送消息
-        $feed = $this->model('like')->fetch_row('feed', "id = '".$target_id."'");
+        $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
         $user_info = $this->model('user')-> get_user_info_by_id($user_id);
         $url = G_DEMAIN.'/feed/'.$target_id.'.html';
-        $this->model('message')->send($feed['user_id'], 0, '圈友 <b>'.$user_info['user_name'].'</b> 赞了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($feed['content']), 30).'”</span>，快去看看吧！', $url, 'like');
+        $this->model('message')->send($feed['user_id'], $user_id, '圈友 <b>'.$user_info['user_name'].'</b> 赞了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($feed['content']), 30).'”</span>，快去看看吧！', $url, 'like', $target_id);
 
         $this->model('points')->send($user_id, 'like');
 

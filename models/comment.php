@@ -3,9 +3,16 @@ class comment_class extends FARM_MODEL
 {
     public function comment($target_id, $parent_id, $type, $user_id, $content)
     {
+        $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
+        $to_user_id = 0;
+        if (!empty($feed['user_id'])) {
+            $to_user_id = $feed['user_id'];
+        }
+
         $arr = array(
               'target_id' => $target_id,
               'parent_id' => $parent_id,
+              'to_user_id' => $to_user_id,
               'content' => $content,
               'type' => $type,
               'user_id' => $user_id,
@@ -33,8 +40,11 @@ class comment_class extends FARM_MODEL
             return array();
         }
 
-        if ($user_id) {
-            $comment_info = $this->fetch_all('comment', "`user_id` = '".$user_id."'", 'create_time asc');
+        if ($user_id && empty($target_ids[0])) {
+            $comment_info = $this->fetch_all('comment', "`to_user_id` = '".$user_id."'", 'create_time asc');
+            foreach ($comment_info as $k => $v) {
+                $target_ids[] = $v['target_id'];
+            }
         } else {
             $comment_info = $this->fetch_all('comment', "target_id IN(" . implode(',', $target_ids) . ") AND `type` = '".$type."'", 'create_time asc');
         }

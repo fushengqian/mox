@@ -8,12 +8,14 @@ class message_class extends FARM_MODEL
      * @param string $content
      * @param string $url
      * @param string $type
+     * @param string $target_id
      * @return int
      */
-    public function send($user_id, $from_user_id, $content, $url = '', $type = 'system')
+    public function send($user_id, $from_user_id, $content, $url = '', $type = 'system', $target_id = 0)
     {
         $msg_id = $this -> insert('message', array(
             'content'     => $content,
+            'target_id' => $target_id,
             'user_id'     => $user_id,
             'from_user_id' => $from_user_id,
             'is_read'     => 0,
