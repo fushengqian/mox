@@ -49,4 +49,5 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 作者微信：fsq_better</br>
 QQ群：491368389
 演示网址：http://www.moxquan.com
+安卓客户端下载试用:http://app.mi.com/details?id=net.moxquan.app
 
