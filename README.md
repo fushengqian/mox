@@ -23,7 +23,7 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 
 # 系统演示
 模型圈PC端 http://www.moxquan.com </br>
-模型圈移动端 http://m.moxquan.com </br>
+模型圈移动端 http://m.moxquan.com （PS：安卓客户端下载试用：http://app.mi.com/details?id=net.moxquan.app）
 
 <strong>移动端截图：</strong></br>
 <img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/mobile_2.jpg"/>
