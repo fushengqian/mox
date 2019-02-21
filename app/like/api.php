@@ -24,6 +24,9 @@ class api extends FARM_CONTROLLER
             $this -> jsonReturn([], -1, '抱歉，点赞失败！');
         }
 
+        // 跟踪用户行为
+        $this->model('action')->add($user_id, 0, '点赞：'.$target_id, get_client(), fetch_ip());
+
         //发送消息
         $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
         $user_info = $this->model('user')-> get_user_info_by_id($user_id);
@@ -80,13 +83,6 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 0,
-                        'review' => 0,
-                        'letter' => 0,
-                        'newsCount' => 0,
-                        'mention' => 0,
-                        'fans' => 0);
-
-        $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+        $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 }

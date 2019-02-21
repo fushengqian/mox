@@ -16,6 +16,8 @@ class api extends FARM_CONTROLLER
         $parent_id = !empty($_POST['parent_id']) ? trim($_POST['parent_id']) : 0;
         $content   = trim($_POST['content']);
 
+        $this->model('action')->add($user_id, 0, '评论了'.$target_id.'：'.$content, get_client(), fetch_ip());
+
         if (empty($target_id) || empty($content)) {
             $this -> jsonReturn([], -1, '抱歉，系统出错！');
         }

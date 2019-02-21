@@ -66,6 +66,8 @@ class api extends FARM_CONTROLLER
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
 
+        $this->model('action')->add($user_id, 0, '发布动态', get_client(), fetch_ip());
+
         $content  = trim($_POST['content']);
         $topic_id = trim($_POST['topic_id']);
         $token    = trim($_POST['images']);
@@ -96,8 +98,9 @@ class api extends FARM_CONTROLLER
     public function detail_action()
     {
         $user_id = FARM_APP::session()->info['uid'];
-
         $feed_id = trim($_POST['id']);
+
+        $this->model('action')->add($user_id, 0, '查看动态'.$feed_id, get_client(), fetch_ip());
 
         if (empty($feed_id)) {
             $this -> jsonReturn([], -1, '系统参数有误！');

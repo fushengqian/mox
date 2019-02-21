@@ -55,6 +55,11 @@ $config[] = array(
     'cname'    => 'edit',
     'children' => array(
         array(
+            'id' => 901,
+            'title' => FARM_APP::lang()->_t('用户行为'),
+            'url' => '/admin/action/index/'
+        ),
+        array(
             'id' => 902,
             'title' => FARM_APP::lang()->_t('日志监控'),
             'url' => '/admin/logs/index/'

@@ -48,6 +48,9 @@ class api extends FARM_CONTROLLER
         $page = !empty($_POST['page']) ? intval($_POST['page']) : 1;
         $key = $_POST['key'] ? trim($_POST['key']) : '';
 
+        $user_id = intval(FARM_APP::session()->info['uid']);
+        $this->model('action')->add($user_id, 0, '查看文章列表：'.$cate, get_client(), fetch_ip());
+
         $arr = array();
 
         if ($key) {
@@ -123,6 +126,10 @@ class api extends FARM_CONTROLLER
      */
     public function detail_action() {
         $article_id = trim($_POST['id']);
+
+        // 跟踪用户行为
+        $user_id = intval(FARM_APP::session()->info['uid']);
+        $this->model('action')->add($user_id, 0, '阅读文章：'.$article_id, get_client(), fetch_ip());
 
         $info = $this->model('article')->get_article_by_id($article_id);
 

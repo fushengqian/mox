@@ -11,11 +11,20 @@ class api extends FARM_CONTROLLER
         $appid = $_POST['appId'] ? intval($_POST['appId']) : 2;
         $uuid = $_POST['uuid'] ? intval($_POST['uuid']) : 0;
 
+        $user_id = intval(FARM_APP::session()->info['uid']);
+        if (!empty($user_id)) {
+            // 更新登录时间
+            $this->model('user')->update_user_last_login($user_id);
+        }
+
+        // 跟踪用户行为
+        $this->model('action')->add($user_id, $uuid, '客户端版本比对', get_client(), fetch_ip());
+
         $ret = array();
 
         // android
         if ($appid == '1') {
-            $arr = array('code' => 419,
+            $arr = array('code' => 418,
                 'name' => '版本更新',
                 'release' => '修复线上的bug',
                 'message' => '哈，我们有新版本发布啦！',
