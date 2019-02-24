@@ -16,7 +16,7 @@ class api extends FARM_CONTROLLER
         $parent_id = !empty($_POST['parent_id']) ? trim($_POST['parent_id']) : 0;
         $content   = trim($_POST['content']);
 
-        $this->model('action')->add($user_id, 0, '评论了'.$target_id.'：'.$content, get_client(), fetch_ip());
+        $this->model('action')->add($user_id, 0, '评论了'.$target_id, get_client(), fetch_ip());
 
         if (empty($target_id) || empty($content)) {
             $this -> jsonReturn([], -1, '抱歉，系统出错！');
@@ -36,7 +36,7 @@ class api extends FARM_CONTROLLER
         //发送消息
         $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
         $url = G_DEMAIN.'/feed/'.$target_id.'.html';
-        $this->model('message')->send($feed['user_id'], 0, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url, 'comment', $target_id);
+        $this->model('message')->send($feed['user_id'], $user_id, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url, 'comment', $target_id);
 
         $this->model('points')->send($user_id, 'comment');
 

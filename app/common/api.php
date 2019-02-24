@@ -9,7 +9,7 @@ class api extends FARM_CONTROLLER
     public function version_action()
     {
         $appid = $_POST['appId'] ? intval($_POST['appId']) : 2;
-        $uuid = $_POST['uuid'] ? intval($_POST['uuid']) : 0;
+        $uuid = $_POST['uuid'] ? trim($_POST['uuid']) : 0;
 
         $user_id = intval(FARM_APP::session()->info['uid']);
         if (!empty($user_id)) {
