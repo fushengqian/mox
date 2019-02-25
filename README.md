@@ -26,7 +26,7 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 模型圈移动端 http://m.moxquan.com （PS：安卓客户端下载试用:<a target="_blank" href="http://app.mi.com/details?id=net.moxquan.app">http://app.mi.com/details?id=net.moxquan.app</a>）
 
 <strong>移动端截图：</strong></br>
-<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/mobile_2.jpg"/>
+<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/1.png"/>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -34,7 +34,23 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 &nbsp;
 &nbsp;
 &nbsp;
-<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/mobile_1.jpg"/>
+<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/2.png"/>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/3.png"/>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<img width="350" height="560" src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/4.png"/>
 
 <strong>PC端截图：</strong></br>
 <img src="https://raw.githubusercontent.com/fushengqian/mox/master/doc/screenshots/pc_2.png"/></br></br>
@@ -50,4 +66,3 @@ mox是基于PHP+MYSQL的免费使用社区，支持PC和移动端。主要功能
 QQ群：491368389
 演示网址：http://www.moxquan.com</br>
 安卓客户端下载试用：http://app.mi.com/details?id=net.moxquan.app
-
