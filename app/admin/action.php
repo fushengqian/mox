@@ -11,7 +11,7 @@ class action extends FARM_ADMIN_CONTROLLER
     {
         $this->crumb(FARM_APP::lang()->_t('用户行为'), "admin/action/list/");
 
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(901));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(701));
 
         $where = '1 = 1';
         $title = $_GET['content'] ? trim($_GET['content']) : '';

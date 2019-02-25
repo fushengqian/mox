@@ -51,23 +51,6 @@ $config[] = array(
 );
 
 $config[] = array(
-    'title'    => FARM_APP::lang()->_t('运营管理'),
-    'cname'    => 'edit',
-    'children' => array(
-        array(
-            'id' => 901,
-            'title' => FARM_APP::lang()->_t('用户行为'),
-            'url' => '/admin/action/index/'
-        ),
-        array(
-            'id' => 902,
-            'title' => FARM_APP::lang()->_t('日志监控'),
-            'url' => '/admin/logs/index/'
-        ),
-    )
-);
-
-$config[] = array(
     'title'    => FARM_APP::lang()->_t('用户管理'),
     'cname'    => 'user',
     'children' => array(
@@ -75,6 +58,23 @@ $config[] = array(
             'id' => 700,
             'title' => FARM_APP::lang()->_t('用户列表'),
             'url' => '/admin/user/list/'
+        ),
+        array(
+            'id' => 701,
+            'title' => FARM_APP::lang()->_t('用户行为'),
+            'url' => '/admin/action/index/'
+        ),
+    )
+);
+
+$config[] = array(
+    'title'    => FARM_APP::lang()->_t('运营管理'),
+    'cname'    => 'edit',
+    'children' => array(
+        array(
+            'id' => 902,
+            'title' => FARM_APP::lang()->_t('日志监控'),
+            'url' => '/admin/logs/index/'
         ),
     )
 );
