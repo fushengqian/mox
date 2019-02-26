@@ -33,7 +33,6 @@
     </div>
     <div class="bottom-mod">
          <input type="button" class="btn btn-primary" value="立即发表" onclick="FNC.ajax_post($('#form'), FNC.ajax_processer, 'error_message');"/>
-         <input type="button" class="btn" value="预览一下" onclick="preview();"/>
     </div>
     </form>
 </div>
@@ -46,7 +45,8 @@
          wordCount:false,
          elementPathEnabled:false,
          iframeCssUrl: '/static/ueditor/themes/iframe.css?v=20181106',
-         initialFrameHeight:450
+         initialFrameHeight:480,
+         autoHeightEnabled: false
      });
      // 预览一下
      function preview() {

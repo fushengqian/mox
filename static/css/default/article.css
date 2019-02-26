@@ -145,14 +145,12 @@ ask-detail .editor{
     min-height:400px;
 }
 .container .bottom-mod{
-    margin:10px;
     text-align:right;
     clear: both;
-    margin-top:50px;
     position: fixed;
     bottom: 10px;
     z-index: 99999999;
-    width: 940px;
+    width: 860px;
 }
 .container .attr{
     margin-bottom: 20px;
@@ -223,6 +221,13 @@ ask-detail .editor{
     margin-left:auto;
     margin-right:auto;
     padding:1px;
+}
+.article-content{
+    text-align: left;
+    line-height: 32px;
+    margin-bottom: 10px;
+    border: solid 1px #ccc;
+    padding:5px;
 }
 .article .article-content .left-side{
     width:70%;
