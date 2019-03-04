@@ -29,11 +29,6 @@ class article extends FARM_ADMIN_CONTROLLER
         {
             foreach ($_POST as $key => $val)
             {
-                if ($key == 'start_date' OR $key == 'end_date')
-                {
-                    $val = base64_encode($val);
-                }
-                
                 if ($key == 'keyword' OR $key == 'user_name')
                 {
                     $val = rawurlencode($val);
@@ -58,15 +53,9 @@ class article extends FARM_ADMIN_CONTROLLER
         {
             $where[] = "(`status` = '".intval($_GET['status'])."')";
         }
-        
-        if ($_GET['start_date'])
+        if ($_GET['cate'])
         {
-            $where[] = 'create_time >= ' . strtotime(base64_decode($_GET['start_date']));
-        }
-        
-        if ($_GET['end_date'])
-        {
-            $where[] = 'create_time <= ' . strtotime('+1 day', strtotime(base64_decode($_GET['end_date'])));
+            $where[] = "(`cate` = '".trim($_GET['status'])."')";
         }
         
         if ($articles_list = $this->model('article')->fetch_page('article', implode(' AND ', $where), 'id DESC', $_GET['aid'], $this->per_page))

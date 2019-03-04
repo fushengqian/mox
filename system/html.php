@@ -122,7 +122,7 @@ class simple_html_dom_node
     // The "info" array - see HDOM_INFO_... for what each element contains.
     public $_ = array();
     public $tag_start = 0;
-    private $dom = null;
+    public $dom = null;
 
     function __construct($dom)
     {
@@ -982,7 +982,7 @@ class simple_html_dom
     protected $char;
     protected $cursor;
     protected $parent;
-    protected $noise = array();
+    public $noise = array();
     protected $token_blank = " \t\r\n";
     protected $token_equal = ' =/>';
     protected $token_slash = " />\r\n\t";

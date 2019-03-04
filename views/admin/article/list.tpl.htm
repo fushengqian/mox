@@ -28,6 +28,16 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-xs-2">
+                            <select name="cate" class="form-control">
+                                <option value="">类别</option>
+                                <option value="focus" <?php if($this -> cate == 'focus'){echo 'selected="selected"';}?>>头条</option>
+                                <option value="product" <?php if($this -> cate == 'product'){echo 'selected="selected"';}?>>测评</option>
+                                <option value="teach" <?php if($this -> cate == 'teach'){echo 'selected="selected"';}?>>教程</option>
+                                <option value="work" <?php if($this -> cate == 'work'){echo 'selected="selected"';}?>>新品</option>
+                                <option value="activity" <?php if($this -> cate == 'activity'){echo 'selected="selected"';}?>>活动</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
                             <button type="button" onclick="AWS.ajax_post($('#search_form'));" class="btn btn-primary"><?php _e('搜索'); ?></button>
                         </div>
                     </div>
@@ -40,7 +50,8 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th><?php _e('文章标题'); ?></th>
+                                <th><?php _e('标题'); ?></th>
+                                <th><?php _e('类别'); ?></th>
                                 <th><?php _e('浏览'); ?></th>
                                 <th><?php _e('用户'); ?></th>
                                 <th><?php _e('发布时间'); ?></th>
@@ -52,6 +63,7 @@
                             <?php foreach ($this->list AS $key => $val) { ?>
                             <tr>
                                 <td><a href="/article/<?php echo $val['id']; ?>.html" target="_blank"><?php echo $val['title']; ?></a></td>
+                                <td><?php echo $val['cate']; ?></td>
                                 <td><?php echo $val['read']; ?></td>
                                 <td><?php echo $val['user_info']['user_name']; ?></td>
                                 <td><?php echo date_friendly($val['create_time']); ?></td>
