@@ -38,7 +38,7 @@ class api extends FARM_CONTROLLER
                             'likeCount' => $v['like_num'],
                             'liked' => false,
                             'pubDate' => date_friendly($v['create_time']),
-                            'statistics' => array('comment' => $v['comment_num'], 'favCount' => 0, 'like' => $v['like_num'], 'transmit' => 0, 'view' => rand(1000, 9999)));
+                            'statistics' => array('comment' => $v['comment_num'], 'favCount' => 0, 'like' => $v['like_num'], 'transmit' => rand(10, 20), 'view' => rand(1000, 9999)));
             $feed_arr[] = $arr;
         }
 
