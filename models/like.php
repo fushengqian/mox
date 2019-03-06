@@ -36,6 +36,9 @@ class like_class extends FARM_MODEL
             return false;
         }
 
+        // 更新时间
+        $this->update('feed', array('update_time' => time()), 'id = "' . trim($target_id).'"');
+
         $like_id = $this -> insert('like', array(
             'target_id' => $target_id,
             'user_id'   => $user_id,

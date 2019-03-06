@@ -9,6 +9,9 @@ class comment_class extends FARM_MODEL
             $to_user_id = $feed['user_id'];
         }
 
+        // 更新时间
+        $this->update('feed', array('update_time' => time()), 'id = "' . trim($target_id).'"');
+
         $arr = array(
               'target_id' => $target_id,
               'parent_id' => $parent_id,

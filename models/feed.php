@@ -36,7 +36,7 @@ class feed_class extends FARM_MODEL
     /**
      * 获取列表
      */
-    public function get_data_list($where, $page = 1, $per_page = 10, $order_by = 'create_time desc')
+    public function get_data_list($where, $page = 1, $per_page = 10, $order_by = 'update_time desc')
     {
         if (is_array($where)) {
             $where = implode(' AND ', $where);
