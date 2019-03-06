@@ -90,7 +90,7 @@ class api extends FARM_CONTROLLER
                            'softwareLogo' => '',
                            'imgs' => $images,
                            'iTags' => array(array('oscId' => 1, 'name' => '模型', 'tagId' => '1')),
-                           'commentCount' => rand(100, 999),
+                           'commentCount' => intval($value['comment_num']),
                            'favorite' => false,
                            'wordCount' => mb_strlen($value['content']),
                            'sub_type' => 1,
@@ -141,7 +141,8 @@ class api extends FARM_CONTROLLER
                         'gender' => $user_info['sex'],
                         'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
 
-        $statistics = array('comment' => 0, 'favCount' => 0, 'like' => 0, 'transmit' => 0, 'view' => rand(1000, 9999));
+        $comment_count = FARM_APP::model('comment')->count('comment', 'target_id = "'.$article_id.'" and `type`="article"');
+        $statistics = array('comment' => $comment_count, 'favCount' => 0, 'like' => 0, 'transmit' => 0, 'view' => intval($info['read']));
 
         $result = array('id' => intval($info['id']),
                         'title' => $info['title'],

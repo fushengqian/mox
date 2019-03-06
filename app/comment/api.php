@@ -15,16 +15,31 @@ class api extends FARM_CONTROLLER
         $target_id = trim($_POST['targetId']);
         $parent_id = !empty($_POST['parent_id']) ? trim($_POST['parent_id']) : 0;
         $content   = trim($_POST['content']);
-
-        $this->model('action')->add($user_id, 0, '评论了'.$target_id, get_client(), fetch_ip());
+        $type   = intval($_POST['type']);
+        $toUserId = trim($_POST['toUserId']);
 
         if (empty($target_id) || empty($content)) {
             $this -> jsonReturn([], -1, '抱歉，系统出错！');
         }
 
+        if (!empty($toUserId)) {
+            $uinfo = $this->model('user')->get_user_info_by_id($toUserId);
+            $content = '@'.$uinfo['user_name']."：".$content;
+            // 发送一条私信
+            $this->model('message')->send($toUserId, $user_id, '我回复了你：'.$content, '', 'letter', 0, '');
+        }
+
+        if ($type == 1) {
+            $type = 'article';
+        } else {
+            $type = 'feed';
+        }
+
+        $this->model('action')->add($user_id, 0, '评论了'.$target_id, get_client(), fetch_ip());
+
         $user_id = $this->model('user')->get_us($user_id);
 
-        $result = $this->model('comment')->comment($target_id, $parent_id, 'feed', $user_id, $content);
+        $result = $this->model('comment')->comment($target_id, $parent_id, $type, $user_id, $content);
         if (!$result) {
             $this -> jsonReturn([], -1, '评论失败！');
         }
@@ -34,9 +49,11 @@ class api extends FARM_CONTROLLER
         $arr = array('user_info' => $user_info, 'comment' => $content);
 
         //发送消息
-        $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
-        $url = G_DEMAIN.'/feed/'.$target_id.'.html';
-        $this->model('message')->send($feed['user_id'], $user_id, '圈友 <b>'.$user_info['user_name'].'</b> 评论了您的动态 <span style="color:#2d64b3;">“'.summary(strip_tags($content), 30).'”</span>，快去看看吧！', $url, 'comment', $target_id);
+        if ($type == 'feed') {
+            $feed = $this->model('feed')->fetch_row('feed', "id = '" . $target_id . "'");
+            $url = G_DEMAIN . '/feed/' . $target_id . '.html';
+            $this->model('message')->send($feed['user_id'], $user_id, '圈友 <b>' . $user_info['user_name'] . '</b> 评论了您的动态 <span style="color:#2d64b3;">“' . summary(strip_tags($content), 30) . '”</span>，快去看看吧！', $url, 'comment', $target_id);
+        }
 
         $this->model('points')->send($user_id, 'comment');
 
@@ -49,9 +66,15 @@ class api extends FARM_CONTROLLER
     public function list_action()
     {
         $target_id = $_POST['targetId'] ? trim($_POST['targetId']) : 0;
-        $type      = $_POST['type'] ? trim($_POST['type']) : '';
+        $type      = $_POST['type'] ? intval($_POST['type']) : '0';
         $page      = $_POST['page'] ? trim($_POST['page']) : 0;
         $user_id = intval(FARM_APP::session()->info['uid']);
+
+        if ($type == 1) {
+            $type = 'article';
+        } else {
+            $type = 'feed';
+        }
 
         $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($target_id), $type, $user_id);
 

@@ -135,14 +135,14 @@ class api extends FARM_CONTROLLER
                         'commentCount' => intval($feed['comment_num']),
                         'likeCount' => intval($feed['like_num']),
                         'liked' => false,
-                         'pubDate' => date_friendly($feed['create_time']),
-                         'author' => $author,
-                         'code' => array('brush' => $feed['id'], 'content' => $feed['id']),
-                         'href' => G_DEMAIN.'/feed/'.$feed['id'].'.html',
-                         'audio' => array(),
-                         'images' => $feed['images'],
-                         'statistics' => $statistics,
-                         'about' => null);
+                        'pubDate' => date_friendly($feed['create_time']),
+                        'author' => $author,
+                        'code' => array('brush' => $feed['id'], 'content' => $feed['id']),
+                        'href' => G_DEMAIN.'/feed/'.$feed['id'].'.html',
+                        'audio' => array(),
+                        'images' => $feed['images'],
+                        'statistics' => $statistics,
+                        'about' => null);
 
         $this->jsonReturn($result);
     }

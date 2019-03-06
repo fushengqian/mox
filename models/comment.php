@@ -3,10 +3,20 @@ class comment_class extends FARM_MODEL
 {
     public function comment($target_id, $parent_id, $type, $user_id, $content)
     {
-        $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");
-        $to_user_id = 0;
-        if (!empty($feed['user_id'])) {
-            $to_user_id = $feed['user_id'];
+        if ($type == 'feed') {
+            $feed = $this->model('feed')->fetch_row('feed', "id = '" . $target_id . "'");
+            $to_user_id = 0;
+            if (!empty($feed['user_id'])) {
+                $to_user_id = $feed['user_id'];
+            }
+        } else if ($type == 'article') {
+            $article = $this->model('article')->fetch_row('article', "id = '" . $target_id . "'");
+            $to_user_id = 0;
+            if (!empty($article['user_id'])) {
+                $to_user_id = $article['user_id'];
+            }
+        } else {
+            $to_user_id = 0;
         }
 
         // 更新时间

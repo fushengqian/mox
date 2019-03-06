@@ -21,6 +21,7 @@ class article_class extends FARM_MODEL
             if (empty($v['url'])) {
                 $list[$k]['url'] = G_DEMAIN.'/article/'.$v['id'].'.html';
             }
+            $list[$k]['comment_num'] = FARM_APP::model('comment')->count('comment', 'target_id = "'.$v['id'].'" and `type`="article"');
         }
 
         // 每天发布2篇
