@@ -2,6 +2,55 @@
 class api extends FARM_CONTROLLER
 {
     /**
+     * 上传头像
+     */
+    public function avatar_action()
+    {
+        $user_id = FARM_APP::session()->info['uid'];
+        if (empty($user_id)) {
+            $this -> jsonReturn([], -1, '您的登录信息已过期！');
+        }
+
+        if (!$file = $_FILES['file']) {
+            $this -> jsonReturn([], -1, '没有图片上传！');
+        }
+
+        if ($_FILES['file']['size'] > 1024 * 1024 * 10 || $_FILES['file']['size'] == 0) {
+            $this -> jsonReturn([], -1, '图片大小不符合！');
+        }
+
+        $upload_path = APP_PATH . 'static/upload/' . date("Ymd", time());
+        $partList = explode('/', $upload_path);
+
+        $path = '';
+        foreach ($partList as $part) {
+            $path .= $part . '/';
+            if (is_dir($path)) {
+                continue;
+            }
+            if (!mkdir($path)) {
+                chmod($path, 0755);
+            }
+        }
+
+        $file_name = date('Ymd') . substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+        $path_info = pathinfo('/' . $file_name . $file['name']);
+        $upload_path .= '/' . $file_name . '.' . $path_info['extension'];
+
+        if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_path)) {
+            $url = '/static/upload/' . date("Ymd") . '/' . $file_name . '.' . $path_info['extension'];
+
+            $this->model('user')->update_user_fields(array('avatar' => $url, 'last_login' => time()), $user_id);
+
+            FARM_APP::model('points')->send($user_id, 'upload_avatar');
+        }
+
+        $info = $this -> _getUserInfo($user_id, 0);
+
+        $this -> jsonReturn($info);
+    }
+
+    /**
      * 获取用户信息
      */
     public function info_action()
@@ -10,32 +59,10 @@ class api extends FARM_CONTROLLER
         if (!$uid) {
             $this -> jsonReturn(null, -1, '系统无法获取该用户信息！');
         }
-
-        $user_info = $this->model('user')->get_user_info_by_id($uid);
-
-        $feed_count = $this->model('feed')->count('feed', 'user_id = "'.$uid.'"');
-        $article_count = $this->model('article')->count('article', 'user_id = "'.$uid.'"');
-
-        $info = array('id' => $user_info['id'],
-                      'name' => $user_info['user_name'],
-                      'portrait' => G_DEMAIN.$user_info['avatar'],
-                      'gender' => $user_info['sex'],
-                      'desc' => $user_info['intro'],
-                      'relation' => 4,
-                      'identity' => array('officialMember' => false, 'softwareAuthor' => false),
-                      'statistics' => array('honorScore' => $user_info['login_num'],
-                                            'activeScore' => $user_info['point'],
-                                            'score' => $user_info['point'],
-                                            'tweet' => $feed_count,
-                                            'collect' => 0,
-                                            'fans' => 108,
-                                            'follow' => 59,
-                                            'blog' => $article_count,
-                                            'answer' => 0,
-                                            'discuss' => 0));
+        $user_id = FARM_APP::session()->info['uid'];
+        $info = $this -> _getUserInfo($uid, $user_id);
 
         $this -> jsonReturn($info);
-
     }
 
     /**
@@ -136,5 +163,54 @@ class api extends FARM_CONTROLLER
                         'identity' => array('officialMember' => false, 'softwareAuthor' => false));
 
         $this -> jsonReturn($result);
+    }
+
+    /**
+     * 获取用户信息
+     * @param int $uid
+     * @param int $my_user_id
+     * @return array
+     */
+    private function _getUserInfo($uid, $my_user_id = 0) {
+        $user_info = $this->model('user')->get_user_info_by_id($uid);
+
+        $feed_count = $this->model('feed')->count('feed', 'user_id = "'.$uid.'"');
+        $article_count = $this->model('article')->count('article', 'user_id = "'.$uid.'"');
+
+        //1：彼此关注 2：我关注ta 3：ta关注我 4：都没有关注
+        $relation = 4;
+        $data1 = $this -> model('system')->fetch_row('follow', "user_id = '".$my_user_id."' and follow_user_id = '".$uid."'");
+        $data2 = $this -> model('system')->fetch_row('follow', "user_id = '".$uid."' and follow_user_id = '".$my_user_id."'");
+        if ($data1 && $data2) {
+            $relation = 1;
+        } else if($data1) {
+            $relation = 2;
+        } else if ($data2){
+            $relation = 3;
+        }
+
+        // 粉丝数、关注数
+        $fan_count = $this->model('system')->count('follow', 'follow_user_id = "'.$uid.'"');
+        $follow_count = $this->model('system')->count('follow', 'user_id = "'.$uid.'"');
+
+        $info = array('id' => $user_info['id'],
+                     'name' => $user_info['user_name'],
+                     'portrait' => G_DEMAIN.$user_info['avatar'],
+                     'gender' => $user_info['sex'],
+                     'desc' => $user_info['intro'],
+                     'relation' => $relation,
+                     'identity' => array('officialMember' => false, 'softwareAuthor' => false),
+                     'statistics' => array('honorScore' => $user_info['login_num'],
+                                            'activeScore' => $user_info['point'],
+                                            'score' => $user_info['point'],
+                                            'tweet' => $feed_count,
+                                            'collect' => 0,
+                                            'fans' => $fan_count,
+                                            'follow' => $follow_count,
+                                            'blog' => $article_count,
+                                            'answer' => 0,
+                                            'discuss' => 0));
+
+        return $info;
     }
 }

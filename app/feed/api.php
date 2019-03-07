@@ -8,13 +8,32 @@ class api extends FARM_CONTROLLER
     {
         $page_size = 15;
 
+        $my_user_id = FARM_APP::session()->info['uid'];
+        if (!$my_user_id) {
+            $my_user_id = 0;
+        }
+
         // 当前页
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
-        $user_id = $_POST['userId'] ? $_POST['userId'] : 0;
-        $tab = $_POST['tab'] ? $_POST['tab'] : 0;
+        $user_id = $_POST['userId'] ? trim($_POST['userId']) : 0;
+        $tab = $_POST['tab'] ? $_POST['tab'] : 0;//0：最新; 1：关注; 2：热门
 
         $where = array();
-        if ($user_id) {
+
+        // 我的关注
+        if ($my_user_id && $user_id) {
+            $my_follower_list =  $this -> model('system')->fetch_all('follow', "user_id = '".$my_user_id."'");
+            $my_follower = array($my_user_id);
+            if ($my_follower_list) {
+                foreach ($my_follower_list as $f){
+                    $my_follower[] = $f['follow_user_id'];
+                }
+            }
+            $where[] = 'user_id in ('.implode(',', array_unique($my_follower)).')';
+        }
+
+        // 某个人的动态
+        if($user_id && ($my_user_id != $user_id)) {
             $where[] = 'user_id = "'.$user_id.'"';
         }
 
@@ -29,7 +48,7 @@ class api extends FARM_CONTROLLER
         foreach ($feed_list as $k => $v) {
             $arr =  array('appClient' => 1,
                             'author' => array('id' => $v['user_info']['id'], 'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false),
-                            'name' => $v['user_info']['user_name'], 'portrait' => G_DEMAIN.$v['user_info']['avatar'], 'relation' => '4'),
+                            'name' => $v['user_info']['user_name'], 'portrait' => G_DEMAIN.$v['user_info']['avatar'], 'relation' => 4),
                             'commentCount' => $v['comment_num'],
                             'content' => strip_tags($v['content']),
                             'href' => G_DEMAIN.'/feed/'.$v['id'].'.html',
@@ -37,8 +56,8 @@ class api extends FARM_CONTROLLER
                             'images' => $v['images'],
                             'likeCount' => $v['like_num'],
                             'liked' => false,
-                            'pubDate' => date_friendly($v['create_time']),
-                            'statistics' => array('comment' => $v['comment_num'], 'favCount' => 0, 'like' => $v['like_num'], 'transmit' => rand(10, 20), 'view' => rand(1000, 9999)));
+                            'pubDate' => date_friendly($v['update_time']).'更新',
+                            'statistics' => array('comment' => $v['comment_num'], 'favCount' => 0, 'like' => $v['like_num'], 'transmit' => rand(100, 1000), 'view' => rand(1000, 9999)));
             $feed_arr[] = $arr;
         }
 

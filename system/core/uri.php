@@ -32,6 +32,7 @@ class core_uri
                       'search',
                       'feed',
                       'home',
+                      'follow',
                       'topic');
     
     //二级菜单
