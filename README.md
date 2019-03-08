@@ -26,7 +26,7 @@ mox是基于PHP+MYSQL的交流社区，支持PC和移动端。主要功能模块
 模型圈移动端 http://m.moxquan.com （PS：安卓客户端下载试用:<a target="_blank" href="http://app.mi.com/details?id=net.moxquan.app">http://app.mi.com/details?id=net.moxquan.app</a>）
 
 <strong>移动端截图：</strong></br>
-<img width="350" height="560" src="http://www.moxquan.com/doc/screenshots/1.png"/>
+<img width="350" height="560" src="http://www.moxquan.com/doc/screenshots/11.png"/>
 &nbsp;
 &nbsp;
 &nbsp;
@@ -34,7 +34,7 @@ mox是基于PHP+MYSQL的交流社区，支持PC和移动端。主要功能模块
 &nbsp;
 &nbsp;
 &nbsp;
-<img width="350" height="560" src="http://www.moxquan.com/doc/screenshots/3.png"/>
+<img width="350" height="560" src="http://www.moxquan.com/doc/screenshots/33.png"/>
 
 <strong>PC端截图：</strong></br>
 <img src="http://www.moxquan.com/doc/screenshots/pc_2.png"/></br></br>
