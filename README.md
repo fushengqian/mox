@@ -38,8 +38,6 @@ mox是基于PHP+MYSQL的交流社区，支持PC和移动端。主要功能模块
 
 <strong>PC端截图：</strong></br>
 <img src="http://www.moxquan.com/doc/screenshots/pc_2.png"/></br></br>
-<img src="http://www.moxquan.com/doc/screenshots/pc_3.png"/>
-
 <strong>后台管理截图：</strong></br>
 <img src="http://www.moxquan.com/doc/screenshots/admin_2.png"/>
 
