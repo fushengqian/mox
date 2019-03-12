@@ -21,7 +21,7 @@ class api extends FARM_CONTROLLER
         $where = array();
 
         // 我的关注
-        if ($my_user_id && $user_id) {
+        if ($my_user_id && $user_id && ($my_user_id == $user_id)) {
             $my_follower_list =  $this -> model('system')->fetch_all('follow', "user_id = '".$my_user_id."'");
             $my_follower = array($my_user_id);
             if ($my_follower_list) {

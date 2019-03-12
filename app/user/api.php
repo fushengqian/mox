@@ -2,6 +2,56 @@
 class api extends FARM_CONTROLLER
 {
     /**
+     * 保存资料
+     */
+    public function saveinfo_action()
+    {
+        $user_name = trim($_POST['user_name']);
+        $intro     = trim($_POST['intro']);
+        $skill     = trim($_POST['skill']);
+        $field     = trim($_POST['field']);
+        $city      = trim($_POST['city']);
+        $province  = trim($_POST['province']);
+
+        $user_id = FARM_APP::session()->info['uid'];
+        if (empty($user_id)) {
+            return;
+        }
+
+        $arr = array('last_login' => time());
+
+        if ($user_name) {
+            $arr['user_name'] =  $user_name;
+        }
+
+        if ($intro) {
+            $arr['intro'] = $intro;
+        }
+
+        if ($skill) {
+            $arr['skill'] = $skill;
+        }
+
+        if ($field) {
+            $arr['field'] = $field;
+        }
+
+        if ($city) {
+            $arr['city'] = $city;
+        }
+
+        if ($province) {
+            $arr['province'] = $province;
+        }
+
+        $this->model('user')->update_user_fields($arr, $user_id);
+
+        $info = $this -> _getUserInfo($user_id, $user_id);
+
+        $this -> jsonReturn($info);
+    }
+
+        /**
      * 上传头像
      */
     public function avatar_action()
@@ -56,10 +106,18 @@ class api extends FARM_CONTROLLER
     public function info_action()
     {
         $uid = trim($_POST['id']);
+
+        // 当前登录用户信息
+        if (empty($uid)) {
+            $uid = FARM_APP::session()->info['uid'];
+        }
+
         if (!$uid) {
             $this -> jsonReturn(null, -1, '系统无法获取该用户信息！');
         }
+
         $user_id = FARM_APP::session()->info['uid'];
+
         $info = $this -> _getUserInfo($uid, $user_id);
 
         $this -> jsonReturn($info);
@@ -113,15 +171,9 @@ class api extends FARM_CONTROLLER
         }
 
         // 返回用户信息
-        $result = array('id' => $user_info['id'],
-                        'name' => !empty($user_info['user_name']) ? $user_info['user_name'] : $user_info['phone'],
-                        'portrait' => G_DEMAIN.$user_info['avatar'],
-                        'gender' => $user_info['sex'],
-                        'desc' => $user_info['intro'],
-                        'relation' => 4,
-                        'identity' => array('officialMember' => false, 'softwareAuthor' => false));
+        $user_info = $this -> _getUserInfo($user_info['id'], $user_info['id']);
 
-        $this -> jsonReturn($result);
+        $this -> jsonReturn($user_info);
     }
 
     /**
@@ -154,15 +206,9 @@ class api extends FARM_CONTROLLER
         FARM_APP::model('points')->send($user_info['id'], 'login');
 
         // 返回用户信息
-        $result = array('id' => $user_info['id'],
-                        'name' => !empty($user_info['user_name']) ? $user_info['user_name'] : $user_info['phone'],
-                        'portrait' => G_DEMAIN.$user_info['avatar'],
-                        'gender' => $user_info['sex'],
-                        'desc' => $user_info['intro'],
-                        'relation' => 4,
-                        'identity' => array('officialMember' => false, 'softwareAuthor' => false));
+        $user_info = $this -> _getUserInfo($user_info['id'], $user_info['id']);
 
-        $this -> jsonReturn($result);
+        $this -> jsonReturn($user_info);
     }
 
     /**
@@ -209,7 +255,14 @@ class api extends FARM_CONTROLLER
                                             'follow' => $follow_count,
                                             'blog' => $article_count,
                                             'answer' => 0,
-                                            'discuss' => 0));
+                                            'discuss' => 0),
+                     'more' => array('joinDate' => date("Y-m-d", $user_info['reg_time']),
+                                     'city' => $user_info['city'],
+                                     'province' => $user_info['province'],
+                                     'expertise' => $user_info['skill'],
+                                     'platform' => $user_info['field'],
+                                     'company' => '未填写',
+                                     'position' => '未填写'));
 
         return $info;
     }

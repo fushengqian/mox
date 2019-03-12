@@ -21,11 +21,11 @@ class feed_class extends FARM_MODEL
         $images = array();
         foreach ($feed['pics'] as $img) {
             $images[] =  array('h' => 100,
-                                'w' => 200,
-                                'href' => $img,
-                                'name' => md5($img),
-                                'thumb' => $img,
-                                'type' => 1);
+                               'w' => 200,
+                               'href' => $img,
+                               'name' => md5($img),
+                               'thumb' => $img,
+                               'type' => 1);
 
         }
         $feed['images'] = $images;
