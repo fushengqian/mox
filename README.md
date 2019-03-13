@@ -36,13 +36,6 @@ mox是基于PHP+MYSQL的交流社区，支持PC和移动端。主要功能模块
 &nbsp;
 <img width="350" height="560" src="http://www.moxquan.com/doc/screenshots/33.png"/>
 
-<strong>PC端截图：</strong></br>
-<img src="http://www.moxquan.com/doc/screenshots/pc_2.png"/></br></br>
-<img src="http://www.moxquan.com/doc/screenshots/pc_3.png"/>
-
-<strong>后台管理截图：</strong></br>
-<img src="http://www.moxquan.com/doc/screenshots/admin_2.png"/>
-
 # 支持与帮助
 作者QQ：540335306</br>
 作者邮箱：fushengqian@qq.com</br>
