@@ -4,20 +4,6 @@ class user extends FARM_ADMIN_CONTROLLER
 {
     public function list_action()
     {
-        if ($_POST['action'] == 'search') {
-            foreach ($_POST as $key => $val) {
-                if (in_array($key, array('user_name', 'mobile'))) {
-                    $val = rawurlencode($val);
-                }
-
-                $param[] = $key . '-' . $val;
-            }
-
-            H::ajax_json_output(FARM_APP::RSM(array(
-                'url' => get_js_url('/admin/user/list/' . implode('__', $param))
-            ), 1, null));
-        }
-
         $where = array();
 
         if ($_GET['ip'] AND preg_match('/(\d{1,3}\.){3}(\d{1,3}|\*)/', $_GET['ip'])) {
@@ -48,22 +34,29 @@ class user extends FARM_ADMIN_CONTROLLER
             $where[] = 'email = "' . $_GET['email'] . '"';
         }
 
+        $is_us = $_GET['is_us'] ? intval($_GET['is_us']) : 0;
+        if ($is_us == 1) {
+            $where[] = 'is_us = 0';
+        } else if ($is_us == 2) {
+            $where[] = 'is_us = 1';
+        }
+
         $order = !empty($_GET['order']) ? trim($_GET['order']) : 'id';
 
-        $user_list = $this->model('user')->fetch_page('user', implode(' AND ', $where), $order . ' DESC', $_GET['page'], $this->per_page);
+        $user_list = $this->model('user')->fetch_page('user', implode(' AND ', $where), $order . ' DESC', $_GET['aid'], $this->per_page);
 
         $total_rows = $this->model('user')->found_rows();
 
         $url_param = array();
 
         foreach ($_GET as $key => $val) {
-            if (!in_array($key, array('app', 'c', 'act', 'page'))) {
+            if (!in_array($key, array('app', 'c', 'act', 'aid'))) {
                 $url_param[] = $key . '-' . $val;
             }
         }
 
         TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/user/list/') . implode('__', $url_param),
+            'base_url' => get_js_url('/admin/user/list/') . implode('__', $url_param).'__aid',
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
@@ -74,6 +67,7 @@ class user extends FARM_ADMIN_CONTROLLER
         TPL::assign('list', $user_list);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(700));
         TPL::assign('orderby', $order);
+        TPL::assign('is_us', $is_us);
 
         TPL::output('admin/user/list');
     }
@@ -86,6 +80,24 @@ class user extends FARM_ADMIN_CONTROLLER
         $user_id = $_GET['id'] ? $_GET['id'] : 0;
 
         $result = $this->model('user')->delete('user', 'id = ' . intval($user_id));
+
+        if ($result) {
+            echo 'succeed...';
+        } else {
+            echo 'fail...';
+        }
+
+        exit;
+    }
+
+    /**
+     * 设置为自己
+     */
+    public function isus_action()
+    {
+        $user_id = $_GET['id'] ? $_GET['id'] : 0;
+
+        $result = $this->model('user')->update('user', array('is_us' => 1),'id = "'.intval($user_id).'"');
 
         if ($result) {
             echo 'succeed...';

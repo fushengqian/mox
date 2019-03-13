@@ -56,8 +56,9 @@ class api extends FARM_CONTROLLER
     {
         $target_id = trim($_POST['targetId']);
         $type      = trim($_POST['type']);
+        $page      = $_POST['page'] ? intval($_POST['page']) : 1;
 
-        $like_list = FARM_APP::model('like')->get_data_list(array('target_id = "'.$target_id.'"', 'type = "'.$type.'"'), 1, 200);
+        $like_list = FARM_APP::model('like')->get_data_list(array('target_id = "'.$target_id.'"', 'type = "'.$type.'"'), $page, 20);
 
         $likes = array();
         foreach ($like_list as $k => $v) {
@@ -75,11 +76,11 @@ class api extends FARM_CONTROLLER
         }
 
         $result['items'] = $likes;
-        $result['nextPageToken'] = 0;
-        $result['prevPageToken'] = 0;
-        $result['requestCount'] = 200;
+        $result['nextPageToken'] = ($page+1);
+        $result['prevPageToken'] = ($page-1) > 0 ? ($page-1) : 1;
+        $result['requestCount'] = 20;
         $result['responseCount'] = count($likes);
-        $result['totalResults'] = count($likes);
+        $result['totalResults'] = 1000;
 
         $time = date("Y-m-d H:i:s", time());
 
