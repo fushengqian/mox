@@ -19,6 +19,11 @@ class action extends FARM_ADMIN_CONTROLLER
             $where .= " AND content like '%" . $title . "%'";
         }
 
+        $user_id = $_GET['user_id'] ? trim($_GET['user_id']) : '';
+        if ($user_id) {
+            $where .= " AND user_id = '" . $user_id . "'";
+        }
+
         $list = $this->model('action')->get_data_list($where, $_GET['aid'], 20, 'id desc', true);
 
         TPL::assign('list', $list);
@@ -29,7 +34,7 @@ class action extends FARM_ADMIN_CONTROLLER
             'per_page' => 20
         ))->create_links());
 
-        TPL::assign('total_rows', $this->model('logs')->found_rows());
+        TPL::assign('total_rows', $this->model('action')->found_rows());
 
         TPL::output('admin/action/index');
     }

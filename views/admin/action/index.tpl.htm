@@ -8,8 +8,11 @@
         <div class="tab-pane">
              <form method="get" action="/admin/action/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
-                        <div class="col-sm-4 col-xs-4">
-                            <input class="form-control" placeholder="关键字" type="text" value="<?php echo trim($_GET['keyword']); ?>" name="content"/>
+                       <div class="col-sm-2 col-xs-2">
+                           <input class="form-control" placeholder="用户ID" type="text" value="<?php echo trim($_GET['user_id']); ?>" name="user_id"/>
+                       </div>
+                        <div class="col-sm-3 col-xs-3">
+                            <input class="form-control" placeholder="内容" type="text" value="<?php echo trim($_GET['keyword']); ?>" name="content"/>
                         </div>
                         <div class="col-sm-4 col-xs-4">
                             <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
@@ -25,6 +28,7 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>用户</th>
                                 <th>uuid</th>
                                 <th>内容</th>
                                 <th>IP</th>
@@ -37,6 +41,7 @@
                             <?php foreach ($this->list AS $key => $val) { ?>
                             <tr>
                                 <td><?php echo $val['id']; ?></td>
+                                <td><?php echo $val['user_info']['user_name'] ? $val['user_info']['user_name'] : '匿名'; ?></td>
                                 <td><?php echo $val['uuid']; ?></td>
                                 <td><?php echo $val['content']; ?></td>
                                 <td><?php echo $val['ip']; ?></td>

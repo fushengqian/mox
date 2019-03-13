@@ -31,6 +31,15 @@ class action_class extends FARM_MODEL
         }
         
         $list = $this->fetch_page('action', $where, $order_by, $page, $per_page);
+        $user_ids = array(0);
+        foreach($list as $k => $v) {
+            $user_ids[] = $v['user_id'];
+        }
+
+        $user_arr = FARM_APP::model('user')->get_user_by_ids($user_ids);
+        foreach($list as $key => $value) {
+            $list[$key]['user_info'] = $user_arr[$value['user_id']];
+        }
 
         return $list;
     }

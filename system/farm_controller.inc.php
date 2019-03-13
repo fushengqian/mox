@@ -12,11 +12,12 @@ class FARM_CONTROLLER
 
         $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
 
+        /*
         $logs = '客户端操作：（'.get_client().','.fetch_ip().'）';
         FARM_APP::model('logs')->insert('logs', array(
                                                                 'content' => $logs.json_encode($notice),
                                                                 'level' => 'info',
-                                                                'create_time' => time()));
+                                                                'create_time' => time()));*/
 
         echo json_encode($ret);
         exit;

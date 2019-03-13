@@ -42,6 +42,9 @@ class api extends FARM_CONTROLLER
             $where[] = "is_home = 1";
         }
 
+        // 跟踪用户行为
+        $this->model('action')->add($my_user_id, 0, '查看动态列表：'.implode(',', $where), get_client(), fetch_ip());
+
         $feed_list = $this->model('feed')-> get_data_list($where, $page, $page_size);
 
         $feed_arr = array();
