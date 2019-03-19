@@ -21,13 +21,6 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 0,
-                         'review' => 0,
-                         'letter' => 0,
-                         'newsCount' => 0,
-                         'mention' => 0,
-                         'fans' => 0);
-
         $result['items'] = $arr;
         $result['nextPageToken'] = "1";
         $result['prevPageToken'] = "1";
@@ -35,7 +28,7 @@ class api extends FARM_CONTROLLER
         $result['responseCount'] = 1;
         $result['totalResults'] = 5;
 
-        $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+        $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 
     /**
@@ -61,8 +54,14 @@ class api extends FARM_CONTROLLER
             $list = $this->model('article')->get_article_list($cate, $page, $page_size);
         }
 
-        foreach ($list as $key => $value) {
+        $userids = array(0);
+        foreach ($list as $user) {
+            $userids[] = $user['user_id'];
+        }
 
+        $user_arr = $this->model('user')->get_user_by_ids($userids);
+
+        foreach ($list as $key => $value) {
            $images = array();
            if (preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $value['content'], $matches)) {
                foreach ($matches[2] as $s) {
@@ -74,7 +73,7 @@ class api extends FARM_CONTROLLER
                }
            }
 
-           $user_info = $this->model('user')->get_user_info_by_id($value['user_id']);
+           $user_info = !empty($user_arr[$value['user_id']]) ? $user_arr[$value['user_id']] : array();
 
            $arr[] = array(
                            'type' => 1,
@@ -83,7 +82,7 @@ class api extends FARM_CONTROLLER
                            'key' => $value['id'],
                            'title' => $value['title'],
                            'desc' => $value['summary'],
-                           'content' => strip_tags($value['content']),
+                           'content' => summary(strip_tags($value['content']), 120),
                            'url' => $value['url'],
                            'pubDate' => date_friendly($value['create_time']),
                            'source' => '模型圈',
@@ -104,13 +103,6 @@ class api extends FARM_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $notice = array('like' => 0,
-                        'review' => 0,
-                        'letter' => 0,
-                        'newsCount' => 0,
-                        'mention' => 0,
-                        'fans' => 0);
-
         $result['items'] = $arr;
         $result['nextPageToken'] = ($page+1);
         $result['prevPageToken'] = ($page-1) > 0 ? ($page-1) : 1;
@@ -118,7 +110,7 @@ class api extends FARM_CONTROLLER
         $result['responseCount'] = count($arr);
         $result['totalResults'] = 1000;
 
-        $this -> jsonReturn($result, 1, 'SUCCESS', $notice, $time);
+        $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 
     /**

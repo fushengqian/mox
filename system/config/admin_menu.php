@@ -7,7 +7,7 @@ $config[] = array(
 );
 
 $config[] = array(
-    'title'    => FARM_APP::lang()->_t('社区管理'),
+    'title'    => FARM_APP::lang()->_t('内容管理'),
     'cname'    => 'activity',
     'children' => array(
         array(

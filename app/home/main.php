@@ -3,7 +3,7 @@
 class main extends FARM_CONTROLLER
 {
     /**
-     * 社区主页
+     * 动态主页
      * */
     public function index_action()
     {

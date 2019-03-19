@@ -91,7 +91,7 @@
                         <a  href="<?php echo G_DEMAIN;?>/user/<?php echo $point['user_info']['id'];?>/" target="_blank">
                             <img class="avatar" src="<?php echo G_DEMAIN.$point['user_info']['avatar'];?>" />
                         </a>
-                        <p><a href="<?php echo G_DEMAIN;?>/user/<?php echo $point['user_info']['id'];?>/" target="_blank"><?php echo $point['user_info']['user_name'];?></a></p>
+                        <p><a title="<?php echo $point['user_info']['user_name'];?>" href="<?php echo G_DEMAIN;?>/user/<?php echo $point['user_info']['id'];?>/" target="_blank"><?php echo summary($point['user_info']['user_name'], 6);?></a></p>
                     </div>
                     <div class="pc_ttwo_r">
                         <p>
