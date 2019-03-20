@@ -1,9 +1,47 @@
 <?php
 class article_class extends FARM_MODEL
 {
+    /**
+     * 获取banner
+     * @param int $size
+     * @return array
+     */
+    public function get_banner($size = 5)
+    {
+        $where = array('status = 1', 'is_banner = 1');
+        $list = $this->fetch_page('article', implode(' AND ', $where), 'update_time DESC', 1, $size);
+
+        foreach ($list as $key => $value) {
+            if (preg_match_all('/<\s*img\s+[^>]*?src\s*=\s*(\'|\")(.*?)\\1[^>]*?\/?\s*>/i', $value['content'], $matches)) {
+                foreach ($matches[2] as $s) {
+                    if (!stripos($s, 'ttp:/')) {
+                        $list[$key]['img'] = G_DEMAIN . $s;
+                    } else {
+                        $list[$key]['img'] = $s;
+                    }
+                    break;
+                }
+            }
+        }
+
+        $arr = array();
+        foreach ($list as $k => $v) {
+            $arr[] = array(
+                    'name' => $v['title'],
+                    'detail' => $v['summary'],
+                    'img' =>  $v['img'] ?  $v['img'] :'http://www.moxquan.com/static/upload/01/14-1.png',
+                    'href' => G_DEMAIN.'/article/'.$v['id'].'.html',
+                    'pubDate' => date("Y-m-d H:i:s", $v['create_time']),
+                    'type' => 6,
+                    'id' => $v['id']);
+        }
+
+        return $arr;
+    }
+
     public function get_article_list($cate = 'focus', $page = 1, $size = 20, $article_id = 0)
     {
-        $where = array('status = 1');
+        $where = array('status = 1', 'is_banner = 0');
 
         if ($cate) {
             $where[] = 'cate = "'.trim($cate).'"';
@@ -21,21 +59,7 @@ class article_class extends FARM_MODEL
             if (empty($v['url'])) {
                 $list[$k]['url'] = G_DEMAIN.'/article/'.$v['id'].'.html';
             }
-            $list[$k]['comment_num'] = FARM_APP::model('comment')->count('comment', 'target_id = "'.$v['id'].'" and `type`="article"');
-        }
-
-        // 每天发布2篇
-        $time = date("Y-m-d", time()).' 00:00:00';
-        $count =  $this->fetch_page('article', '`status` = 1 AND `create_time` > '.strtotime($time), 'id DESC', 1, 2);
-        if (count($count) < 2 && date('H') > 8) {
-            $update_list =  $this->fetch_page('article', '`status` = 2', 'id DESC', 1, 2);
-            empty($update_list) && $update_list = array();
-            foreach($update_list as $update) {
-                $this -> update('article', array(
-                    'create_time' => time(),
-                    'status' => 1
-                ), 'id = '.intval($update['id']));
-            }
+            $list[$k]['comment_num'] = rand(10, 30);
         }
 
         return $list;

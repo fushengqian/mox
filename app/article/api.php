@@ -6,27 +6,16 @@ class api extends FARM_CONTROLLER
      */
     public function banner_action()
     {
-        $arr = array();
-
-        $arr[] = array(
-                  'name' => '生活不止眼前的苟且，重新杀入模型界！',
-                  'detail' => '已经一年多没有碰模型了，现在闺女出生以后，更是没有了时间和精力。今天跟朋友聊天，聊到了自己的爱好，他知道我之前的爱好是做模型，我跟他聊起来模型入门有多难。然后他说了一句，你明明有这么好的爱好却放弃',
-                  'img' => 'http://www.moxquan.com/static/upload/01/14-1.png',
-                  'href' => 'http://www.moxquan.com',
-                  'pubDate' => '2019-01-29 11:00:09',
-                  'type' => 6,
-                  'id' => 1);
+        $arr = $this->model('article')->get_banner(5);
 
         $result = array();
-
         $time = date("Y-m-d H:i:s", time());
-
         $result['items'] = $arr;
         $result['nextPageToken'] = "1";
         $result['prevPageToken'] = "1";
         $result['requestCount'] = 5;
-        $result['responseCount'] = 1;
-        $result['totalResults'] = 5;
+        $result['responseCount'] = count($arr);
+        $result['totalResults'] = count($arr);
 
         $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
