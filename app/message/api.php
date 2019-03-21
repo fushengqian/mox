@@ -6,21 +6,7 @@ class api extends FARM_CONTROLLER
      */
     public function notice_action()
     {
-        $notice = null;
-
-        // 更新登录时间
-        $user_id = intval(FARM_APP::session()->info['uid']);
-        if (!empty($user_id)) {
-            $this->model('user')->update_user_last_login($user_id);
-            $notice = FARM_APP::model("notice")->get_notice($user_id);
-
-            $notice['newsCount'] = 10;
-        }
-
-        $ret = array('code' => 1, 'message' => 'SUCCESS', 'result' => null, 'notice' => $notice, 'time' => time());
-
-        echo json_encode($ret);
-        exit();
+        $this -> jsonReturn(null, 1, 'SUCCESS');
     }
 
     /**

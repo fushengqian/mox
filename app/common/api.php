@@ -25,11 +25,11 @@ class api extends FARM_CONTROLLER
         // android
         if ($appid == '1') {
             $arr = array('code' => 418,
-                'name' => '版本更新',
-                'release' => '修复线上的bug',
-                'message' => '哈，我们有新版本发布啦！',
-                'downloadUrl' => 'http://www.moxquan.com/download/moxquan-latest.apk',
-                'publishDate' => '2019-02-14');
+                         'name' => '版本更新',
+                         'release' => '修复线上的bug',
+                         'message' => '哈，我们有新版本发布啦！',
+                         'downloadUrl' => 'http://www.moxquan.com/download/moxquan-latest.apk',
+                         'publishDate' => '2019-02-14');
             $ret[] = $arr;
         }
 

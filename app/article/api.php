@@ -103,6 +103,9 @@ class api extends FARM_CONTROLLER
         $result['responseCount'] = count($arr);
         $result['totalResults'] = 1000;
 
+        // 更新最后一次刷新时间
+        $this->model('user')->update_user_last_article_time($user_id);
+
         $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
 

@@ -366,6 +366,8 @@ class user_class extends FARM_MODEL
             'phone' => htmlspecialchars($phone),
             'reg_time' => time(),
             'last_login' => time(),
+            'last_feed_time' => strtotime("-7 days ago"),
+            'last_article_time' => strtotime("-7 days ago"),
             'last_ip' => ip2long(fetch_ip()),
             'reg_ip' => ip2long(fetch_ip())
         ));
@@ -446,6 +448,37 @@ class user_class extends FARM_MODEL
     }
 
     /**
+     * 更新用户最后刷新文章时间
+     *
+     * @param  int
+     * @param boolean
+     */
+    public function update_user_last_article_time($id)
+    {
+        if (!$id) {
+            return false;
+        }
+        return $this->shutdown_update('user', array(
+            'last_article_time' => time()
+        ), 'id = ' . intval($id));
+    }
+
+    /**
+     * 更新用户最后刷新动态时间
+     *
+     * @param  int
+     */
+    public function update_user_last_feed_time($id)
+    {
+        if (!$id) {
+            return false;
+        }
+        return $this->shutdown_update('user', array(
+            'last_feed_time' => time()
+        ), 'id = ' . intval($id));
+    }
+
+    /**
      * 更新用户最后登录时间
      *
      * @param  int
@@ -460,9 +493,9 @@ class user_class extends FARM_MODEL
         $login_num = !empty($user_info['login_num']) ? intval($user_info['login_num']) : 1;
 
         return $this->shutdown_update('user', array(
-            'last_login' => time(),
-            'login_num' => ($login_num + 1),
-            'last_ip' => ip2long(fetch_ip())
+                'last_login' => time(),
+                'login_num' => ($login_num + 1),
+                'last_ip' => ip2long(fetch_ip())
         ), 'id = ' . intval($id));
     }
 
