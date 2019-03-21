@@ -239,6 +239,11 @@ class api extends FARM_CONTROLLER
         $fan_count = $this->model('system')->count('follow', 'follow_user_id = "'.$uid.'"');
         $follow_count = $this->model('system')->count('follow', 'user_id = "'.$uid.'"');
 
+        $company = '未填写';
+        if ($user_info['is_us']) {
+            $company = '模型圈';
+        }
+
         $info = array('id' => $user_info['id'],
                      'name' => $user_info['user_name'],
                      'portrait' => G_DEMAIN.$user_info['avatar'],
@@ -261,7 +266,7 @@ class api extends FARM_CONTROLLER
                                      'province' => $user_info['province'],
                                      'expertise' => $user_info['skill'],
                                      'platform' => $user_info['field'],
-                                     'company' => '未填写',
+                                     'company' => $company,
                                      'position' => '未填写'));
 
         return $info;

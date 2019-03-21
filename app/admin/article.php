@@ -88,11 +88,17 @@ class article extends FARM_ADMIN_CONTROLLER
     {
         $id = intval($_POST['id']);
 
+        $type = intval($_POST['type']);
+
         if (empty($id)) {
             H::ajax_json_output(FARM_APP::RSM(null, -1, '系统错误~'));
         }
 
-        $result = $this->model('article')-> update('article', array('is_banner' => 1, 'update_time' => time()), 'id = '.$id);
+        if ($type == '1') {
+            $result = $this->model('article')-> update('article', array('status' => 1, 'update_time' => time()), 'id = '.$id);
+        } else {
+            $result = $this->model('article')-> update('article', array('is_banner' => 1, 'update_time' => time()), 'id = '.$id);
+        }
 
         if ($result) {
             H::ajax_json_output(FARM_APP::RSM(null, 1, '后台更新文章成功'));

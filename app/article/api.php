@@ -30,6 +30,10 @@ class api extends FARM_CONTROLLER
         $page = !empty($_POST['page']) ? intval($_POST['page']) : 1;
         $key = $_POST['key'] ? trim($_POST['key']) : '';
 
+        if ($cate == 'focus') {
+            $cate = '';
+        }
+
         $user_id = intval(FARM_APP::session()->info['uid']);
         $this->model('action')->add($user_id, 0, '查看文章列表：'.$cate, get_client(), fetch_ip());
 
@@ -144,5 +148,35 @@ class api extends FARM_CONTROLLER
                         'about' => null);
 
         $this->jsonReturn($result);
+    }
+
+    public function publish_action()
+    {
+        $user_id = intval(FARM_APP::session()->info['uid']);
+
+        if (empty($user_id)) {
+            $this -> jsonReturn(null, -1, '登录信息已过期！');
+        }
+
+        if (!$_POST['title']) {
+            $this -> jsonReturn(null, -1, '标题不能为空！');
+        }
+
+        if (!$_POST['content']) {
+            $this -> jsonReturn(null, -1, '内容不能为空！');
+        }
+
+        $id       = intval($_POST['id']);
+        $title    = $_POST['title'];
+        $content  = $_POST['content'];
+        $keywords = implode(',', analysis_keyword($title));
+        $summary  = summary(strip_tags($_POST['content']), 200);
+        $from     = $_POST['from'] ? $_POST['from'] : '模型圈';
+        $status   = 2;
+        $cate     = $_POST['cate'] ? $_POST['cate'] : 'focus';
+
+        $artcle_id = $this -> model('article') -> publish($id, $cate, $title, $content, $keywords, $from, $summary, $status, $user_id);
+
+        $this->jsonReturn(array('id' => $artcle_id));
     }
 }
