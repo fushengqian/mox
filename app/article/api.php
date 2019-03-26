@@ -2,7 +2,7 @@
 class api extends FARM_CONTROLLER
 {
     /**
-     * 头条资讯
+     * 头条文章
      */
     public function banner_action()
     {

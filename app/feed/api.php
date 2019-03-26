@@ -76,7 +76,7 @@ class api extends FARM_CONTROLLER
         $result['totalResults'] = 1000;
 
         // 更新最后一次刷新时间
-        $this->model('user')->update_user_last_feed_time($user_id);
+        $this->model('user')->update_user_last_feed_time($my_user_id);
 
         $this -> jsonReturn($result, 1, 'SUCCESS', null, $time);
     }
