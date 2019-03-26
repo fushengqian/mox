@@ -13,7 +13,7 @@ class api extends FARM_CONTROLLER
         }
 
         $target_id = trim($_POST['targetId']);
-        $parent_id = !empty($_POST['parent_id']) ? trim($_POST['parent_id']) : 0;
+        $parent_id = !empty($_POST['parentId']) ? trim($_POST['parentId']) : 0;
         $content   = trim($_POST['content']);
         $type   = intval($_POST['type']);
         $toUserId = trim($_POST['toUserId']);
@@ -22,11 +22,23 @@ class api extends FARM_CONTROLLER
             $this -> jsonReturn([], -1, '抱歉，系统出错！');
         }
 
+        // 回复某人
+        if (strstr($content, '@')) {
+            $arr = explode('@', $content);
+            if (!empty($arr[1])) {
+                $arr = explode(':', $arr[1]);
+                if (!empty($arr[0])) {
+                    $toUser = $this->model('user')->get_user_info_by_username(trim($arr[0]));
+                    $toUserId = !empty($toUser['id']) ? $toUser['id'] : 0;
+                }
+            }
+        }
+
         if (!empty($toUserId)) {
-            $uinfo = $this->model('user')->get_user_info_by_id($toUserId);
-            $content = '@'.$uinfo['user_name']."：".$content;
-            // 发送一条私信
-            $this->model('message')->send($toUserId, $user_id, '我回复了你：'.$content, '', 'letter', 0, '');
+            // 发送一条消息
+            $url = G_DEMAIN.'/feed/'.$target_id.'.html';
+            $msg = str_replace('回复: @'.$toUser['user_name'].' : ', '', $content);
+            $this->model('message')->send($toUserId, $user_id, '回复了你的评论：'.$msg, $url, 'comment', $target_id);
         }
 
         if ($type == 1) {
