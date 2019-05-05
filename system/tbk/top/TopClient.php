@@ -1,13 +1,13 @@
 <?php
 class TopClient
 {
-	public $appkey;
+	public $appkey = '26038854';
 
-	public $secretKey;
+	public $secretKey = 'bfa1d2eed0424bfad81a3f366ae43aec';
 
 	public $gatewayUrl = "http://gw.api.taobao.com/router/rest";
 
-	public $format = "xml";
+	public $format = "json";
 
 	public $connectTimeout;
 
@@ -28,8 +28,10 @@ class TopClient
 	}
 
 	public function __construct($appkey = "",$secretKey = ""){
-		$this->appkey = $appkey;
-		$this->secretKey = $secretKey ;
+	    if ($appkey && $secretKey) {
+            $this->appkey = $appkey;
+            $this->secretKey = $secretKey ;
+        }
 	}
 
 	protected function generateSign($params)

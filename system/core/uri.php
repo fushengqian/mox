@@ -33,6 +33,7 @@ class core_uri
                       'feed',
                       'home',
                       'follow',
+                      'mall',
                       'topic');
     
     //二级菜单
