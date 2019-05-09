@@ -1,10 +1,4 @@
 <?php
-/**
- * 生成唯一ID
- */
-function setId() {
-    return date('ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
-}
 
 /**
  * 生成二维码
@@ -16,87 +10,6 @@ function qrCode($url) {
     $errorCorrectionLevel = 'L';
     $matrixPointSize = 5;
     return \QRcode::png($url, false, $errorCorrectionLevel, $matrixPointSize, 2);
-}
-
-function get_keyword($url, $kw_start) {
-    $start=stripos($url,$kw_start);
-    $url=substr($url,$start+strlen($kw_start));
-    $start=stripos($url,'&');
-    if ($start>0) {
-        $start=stripos($url,'&');
-        $s_s_keyword=substr($url,0,$start);
-    } else {
-        $s_s_keyword=substr($url,0);
-    }
-    return $s_s_keyword;
-}
-
-/**
- * 获取搜索引擎的关键字
- */
-function getSpiderWord($user_info)
-{
-    // 搜索引擎关键字映射
-    static $host_keyword_map = array(
-        'www.baidu.com' => 'wd',
-        'm.baidu.com' => 'word',
-        'm.sm.cn' => 'wd',
-        'v.baidu.com' => 'word',
-        'image.baidu.com' => 'word',
-        'news.baidu.com' => 'word',
-        'www.so.com' => 'q',
-        'video.so.com' => 'q',
-        'image.so.com' => 'q',
-        'news.so.com' => 'q',
-        'www.sogou.com' => 'query',
-        'pic.sogou.com' => 'query',
-        'v.sogou.com' => 'query',
-    );
-
-    // 检查来源是否搜索引擎
-    if (!isset($_SERVER['HTTP_REFERER'])) {
-        return '';
-    }
-
-    $urls = parse_url($_SERVER['HTTP_REFERER']);
-
-    if (!array_key_exists($urls['host'], $host_keyword_map)) {
-        return '';
-    }
-
-    $key = $host_keyword_map[$urls['host']];
-
-    // 检查关键字参数是否存在
-    if (!isset($urls['query'])) {
-        return '';
-    }
-
-    $params = array();
-    parse_str($urls['query'], $params);
-    if (!isset($params[$key])) {
-        return '';
-    }
-
-    $keywords = $params[$key];
-
-    // 检查编码
-    $encoding = mb_detect_encoding($keywords, 'utf-8,gbk');
-    if ($encoding != 'utf-8') {
-        $keywords = iconv($encoding, 'utf-8', $keywords);
-    }
-
-    $keywords = trim($keywords);
-
-    if (empty($keywords)) {
-        return '';
-    }
-
-    // 是否含有中文
-    if (!preg_match('/[\x{4e00}-\x{9fa5}]/u', $keywords) > 0) {
-        return '';
-    }
-
-    return $keywords;
 }
 
 /**
@@ -586,18 +499,6 @@ function is_ios()
     }
     
     return false;
-}
-
-//转成手机用的图片
-function mobile_size($url)
-{
-	return $url;
-
-    $path = pathinfo($url);
-    
-    $new_url = str_replace('/static/', '/shuoly_cdn/', $path['dirname']).'/'.$path['filename'].'_small.'.$path['extension'];
-    
-    return $new_url;
 }
 
 //从字符串中提取参数，如shanghai235，提取出shanghai，235
@@ -1563,9 +1464,6 @@ function get_setting($varname = null, $permission_check = true)
     }
 }
 
-// ------------------------------------------------------------------------
-
-
 /**
  * 判断文件或目录是否可写
  *
@@ -1580,8 +1478,6 @@ function is_really_writable($file)
         return is_writable($file);
     }
 
-    // For windows servers and safe_mode "on" installations we'll actually
-    // write a file then read it.  Bah...
     if (is_dir($file))
     {
         $file = rtrim($file, '/') . '/is_really_writable_' . md5(rand(1, 100));
@@ -1613,6 +1509,7 @@ function is_really_writable($file)
  */
 function fetch_salt($length = 4)
 {
+    $salt = "";
     for ($i = 0; $i < $length; $i++)
     {
         $salt .= chr(rand(97, 122));
@@ -2398,7 +2295,8 @@ function en_word($string)
     }
     
     $string = convert_encoding($string, 'UTF-8', 'UTF-16');
-    
+
+    $output = "";
     for ($i = 0; $i < strlen($string); $i++, $i++)
     {
         $code = ord($string{$i}) * 256 + ord($string{$i + 1});
@@ -2463,126 +2361,6 @@ function analysis_keyword($string, $return_str = false)
     }
     
     return $result;
-}
-
-/**
- * @desc   重设图片大小
- * @param  string $image  如：http://www.aiqoo.cn/images/123.jpg
- * @param  string $thumbname 如：D:/wamp/www/mox/upload/image/123.jpg
- * @return boolean
- * */
-function resize_image($image, $thumbname, $type = '', $maxWidth = 300, $maxHeight = 200, $interlace = true)
-{
-    $path = path_info($thumbname);
-    
-    if (!is_dir($path['dirname']))
-    {
-        mkdir($path['dirname'], 0777, true);
-    }
-    
-    $imageInfo = getimagesize($image);
-    
-    if ($imageInfo !== false)
-    {
-        $imageType = strtolower(substr(image_type_to_extension($imageInfo[2]), 1));
-        
-        $info = array(
-                "width" => $imageInfo[0],
-                "height" => $imageInfo[1],
-                "type" => $imageType,
-                "mime" => $imageInfo['mime']
-        );
-    }
-    
-    if ($info !== false)
-    {
-        $srcWidth = $info['width'];
-        $srcHeight = $info['height'];
-        $type = empty($type) ? $info['type'] : $type;
-        $type = strtolower($type);
-        $interlace = $interlace ? 1 : 0;
-        unset($info);
-        
-        //计算缩放比例
-        $scale = max($maxWidth / $srcWidth, $maxHeight / $srcHeight);
-        
-        //判断原图和缩略图比例 如原图宽于缩略图则裁掉两边 反之..
-        
-        if($maxWidth / $srcWidth > $maxHeight / $srcHeight)
-        {
-            //高于
-            $srcX = 0;
-            $srcY = ($srcHeight - $maxHeight / $scale) / 2 ;
-            $cutWidth = $srcWidth;
-            $cutHeight = $maxHeight / $scale;
-        }
-        else
-        {
-            //宽于
-            $srcX = ($srcWidth - $maxWidth / $scale) / 2;
-            $srcY = 0;
-            $cutWidth = $maxWidth / $scale;
-            $cutHeight = $srcHeight;
-        }
-        
-        if (empty($type))
-        {
-            $type = 'jpg';
-        }
-        
-        // 载入原图
-        $createFun = 'ImageCreateFrom' . ($type == 'jpg' ? 'jpeg' : $type);
-        
-        if ($createFun == 'ImageCreateFrombmp')
-        {
-            return false;
-        }
-        
-        $srcImg = $createFun($image);
-        
-        // 创建缩略图
-        if ($type != 'gif' && function_exists('imagecreatetruecolor'))
-        {
-            $thumbImg = imagecreatetruecolor($maxWidth, $maxHeight);
-        }
-        else
-        {
-            $thumbImg = imagecreate($maxWidth, $maxHeight);
-        }
-        
-        // 复制图片
-        if (function_exists("ImageCopyResampled"))
-        {
-            imagecopyresampled($thumbImg, $srcImg, 0, 0, $srcX, $srcY, $maxWidth, $maxHeight, $cutWidth, $cutHeight);
-        }
-        else
-        {
-            imagecopyresized($thumbImg, $srcImg, 0, 0, $srcX, $srcY, $maxWidth, $maxHeight, $cutWidth, $cutHeight);
-        }
-        
-        if ('gif' == $type || 'png' == $type)
-        {
-            $background_color = imagecolorallocate($thumbImg, 0, 255, 0);
-            imagecolortransparent($thumbImg, $background_color);
-        }
-        
-        // 对jpeg图形设置隔行扫描
-        if ('jpg' == $type || 'jpeg' == $type)
-        {
-            imageinterlace($thumbImg, $interlace);
-        }
-        
-        // 生成图片
-        $imageFun = 'image' . ($type == 'jpg' ? 'jpeg' : $type);
-        
-        $imageFun($thumbImg, $thumbname);
-        imagedestroy($thumbImg);
-        imagedestroy($srcImg);
-        
-        return true;
-    }
-    
-    return false;
 }
 
 function check_stop_keyword($keyword)
