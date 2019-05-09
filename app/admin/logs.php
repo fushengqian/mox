@@ -1,6 +1,6 @@
 <?php
 
-class logs extends FARM_ADMIN_CONTROLLER
+class logs extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -10,7 +10,7 @@ class logs extends FARM_ADMIN_CONTROLLER
     // 日志列表
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('日志列表'), "admin/logs/list/");
+        $this->crumb(MOX_APP::lang()->_t('日志列表'), "admin/logs/list/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(902));
 
@@ -24,7 +24,7 @@ class logs extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('list', $list);
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/logs/index/'),
             'total_rows' => $this->model('logs')->found_rows(),
             'per_page' => 20
@@ -45,6 +45,6 @@ class logs extends FARM_ADMIN_CONTROLLER
 
         $this->model('system')->delete('logs', 'id IN (' . ($id) . ')');
 
-        H::ajax_json_output(FARM_APP::RSM(array(), 1, '删除日志'));
+        H::ajax_json_output(MOX_APP::RSM(array(), 1, '删除日志'));
     }
 }

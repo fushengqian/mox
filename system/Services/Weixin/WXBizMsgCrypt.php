@@ -6,7 +6,7 @@
  * @copyright Copyright (c) 1998-2014 Tencent Inc.
  */
 
-if (!defined('IN_FARMNC'))
+if (!defined('IN_MOX'))
 {
 	exit();
 }

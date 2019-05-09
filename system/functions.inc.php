@@ -1,4 +1,432 @@
 <?php
+/**
+ * 生成唯一ID
+ */
+function setId() {
+    return date('ymd').substr(implode(NULL, array_map('ord', str_split(substr(uniqid(), 7, 13), 1))), 0, 8);
+}
+
+/**
+ * 生成二维码
+ * @param string $url
+ * @return void
+ */
+function qrCode($url) {
+    require_once dirname(__FILE__) . './phpqrcode/phpqrcode.php';
+    $errorCorrectionLevel = 'L';
+    $matrixPointSize = 5;
+    return \QRcode::png($url, false, $errorCorrectionLevel, $matrixPointSize, 2);
+}
+
+function get_keyword($url, $kw_start) {
+    $start=stripos($url,$kw_start);
+    $url=substr($url,$start+strlen($kw_start));
+    $start=stripos($url,'&');
+    if ($start>0) {
+        $start=stripos($url,'&');
+        $s_s_keyword=substr($url,0,$start);
+    } else {
+        $s_s_keyword=substr($url,0);
+    }
+    return $s_s_keyword;
+}
+
+/**
+ * 获取搜索引擎的关键字
+ */
+function getSpiderWord($user_info)
+{
+    // 搜索引擎关键字映射
+    static $host_keyword_map = array(
+        'www.baidu.com' => 'wd',
+        'm.baidu.com' => 'word',
+        'm.sm.cn' => 'wd',
+        'v.baidu.com' => 'word',
+        'image.baidu.com' => 'word',
+        'news.baidu.com' => 'word',
+        'www.so.com' => 'q',
+        'video.so.com' => 'q',
+        'image.so.com' => 'q',
+        'news.so.com' => 'q',
+        'www.sogou.com' => 'query',
+        'pic.sogou.com' => 'query',
+        'v.sogou.com' => 'query',
+    );
+
+    // 检查来源是否搜索引擎
+    if (!isset($_SERVER['HTTP_REFERER'])) {
+        return '';
+    }
+
+    $urls = parse_url($_SERVER['HTTP_REFERER']);
+
+    if (!array_key_exists($urls['host'], $host_keyword_map)) {
+        return '';
+    }
+
+    $key = $host_keyword_map[$urls['host']];
+
+    // 检查关键字参数是否存在
+    if (!isset($urls['query'])) {
+        return '';
+    }
+
+    $params = array();
+    parse_str($urls['query'], $params);
+    if (!isset($params[$key])) {
+        return '';
+    }
+
+    $keywords = $params[$key];
+
+    // 检查编码
+    $encoding = mb_detect_encoding($keywords, 'utf-8,gbk');
+    if ($encoding != 'utf-8') {
+        $keywords = iconv($encoding, 'utf-8', $keywords);
+    }
+
+    $keywords = trim($keywords);
+
+    if (empty($keywords)) {
+        return '';
+    }
+
+    // 是否含有中文
+    if (!preg_match('/[\x{4e00}-\x{9fa5}]/u', $keywords) > 0) {
+        return '';
+    }
+
+    return $keywords;
+}
+
+/**
+ * @desc   自动适应pc和移动屏幕
+ * @return void
+ */
+function fix_client()
+{
+    $url = 'http://'.$_SERVER['SERVER_NAME'].$_SERVER["REQUEST_URI"];
+
+    if (is_mobile())
+    {
+        $to = str_replace('//www.', '//m.', $url);
+    }
+    else
+    {
+        $to = str_replace('//m.', '//www.', $url);
+    }
+
+    if ($url != $to)
+    {
+        header('HTTP/1.1 302 Moved Temporarily');
+        HTTP::redirect($to);
+        exit();
+    }
+
+    return;
+}
+
+/**
+ * @desc   存入缓存
+ * @param  string $code
+ * @param  mix    $data
+ * @param  int    $life_time
+ * @return boolean
+ */
+function save_cache_data($code, $data, $life_time = 86400)
+{
+    MOX_APP::model('system') -> delete('cache', 'code = "'.$code.'"');
+    return MOX_APP::model('system') -> insert('cache', array('code' => $code, 'data' => serialize($data), 'life_time' => (time()+$life_time)));
+}
+
+/**
+ * @desc   读取缓存
+ * @param  string $code
+ * @param  mix    $data
+ * @param  int    $life_time
+ * @return boolean
+ */
+function get_cache_data($code)
+{
+    $data = MOX_APP::model('system') -> fetch_row('cache', 'code = "'.trim($code).'"');
+
+    // 过期
+    if (($data['life_time'] - time() < 0))
+    {
+        return false;
+    }
+
+    return $data['data'] ? unserialize($data['data']) : '';
+}
+
+/**
+ * @desc   获取 IP 地理位置
+ * @param  string $ip
+ * @return array
+ */
+function get_city_by_ip($ip = '')
+{
+    if ($ip == '')
+    {
+        $url = "http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json";
+        $ip=json_decode(file_get_contents($url),true);
+        $data = $ip;
+    }
+    else
+    {
+        $url="http://ip.taobao.com/service/getIpInfo.php?ip=".$ip;
+        $ip=json_decode(file_get_contents($url));
+        if((string)$ip->code=='1')
+        {
+            return false;
+        }
+        $data = (array)$ip->data;
+    }
+
+    return $data;
+}
+
+/**
+ * @desc   获取经纬度
+ * @param  string  $address  地址
+ * @return array
+ * */
+function get_point($address)
+{
+    $url = 'https://api.map.baidu.com/geocoder/v2/';
+
+    $para = array(
+        'address' => $address,
+        'output' => 'json',
+        'ak' => '4VIFegum36qwpjzjF3MdNAjua4p24EEq'
+    );
+
+    $data = request($url, $para);
+
+    $data = json_decode($data, true);
+
+    if (!empty($data['result']['location']))
+    {
+        return $data['result']['location'];
+    }
+
+    return array();
+}
+
+/**
+ * 根据经纬度获取地址
+ * @param string $lat
+ * @param string $lng
+ * @return address
+ */
+function get_address($lat, $lng)
+{
+    $url = 'https://api.map.baidu.com/geocoder/v2/';
+
+    $para = array(
+        'location' => $lat.','.$lng,
+        'output' => 'json',
+        'pois' => 1,
+        'ak' => '4VIFegum36qwpjzjF3MdNAjua4p24EEq'
+    );
+
+    $data = request($url, $para);
+
+    $data = json_decode($data, true);
+
+    if (!empty($data['result']['formatted_address']))
+    {
+        return $data['result']['formatted_address'];
+    }
+
+    return '';
+}
+
+/**
+ * 获取头像地址
+ *
+ * 举个例子：$uid=12345，那么头像路径很可能(根据您部署的上传文件夹而定)会被存储为/uploads/000/01/23/45_avatar_min.jpg
+ *
+ * @param  int
+ * @param  string
+ * @return string
+ */
+function get_avatar_url($uid, $size = 'min')
+{
+    $uid = intval($uid);
+
+    if (!$uid)
+    {
+        return G_STATIC_URL . '/common/avatar-' . $size . '-img.png';
+    }
+
+    foreach (MOX_APP::config()->get('image')->avatar_thumbnail as $key => $val)
+    {
+        $all_size[] = $key;
+    }
+
+    $size = in_array($size, $all_size) ? $size : $all_size[0];
+
+    $uid = sprintf("%09d", $uid);
+    $dir1 = substr($uid, 0, 3);
+    $dir2 = substr($uid, 3, 2);
+    $dir3 = substr($uid, 5, 2);
+
+    if (file_exists(get_setting('upload_dir') . '/avatar/' . $dir1 . '/' . $dir2 . '/' . $dir3 . '/' . substr($uid, - 2) . '_avatar_' . $size . '.jpg'))
+    {
+        return get_setting('upload_url') . '/avatar/' . $dir1 . '/' . $dir2 . '/' . $dir3 . '/' . substr($uid, - 2) . '_avatar_' . $size . '.jpg';
+    }
+    else
+    {
+        return G_STATIC_URL . '/common/avatar-' . $size . '-img.png';
+    }
+}
+/**
+ * 分享
+ * @param string $url
+ * @param string $title
+ * @param string $pic
+ * @param string $content
+ * @return array
+ */
+function get_share($url, $title, $pic, $content)
+{
+    $qq = 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='.$url.'&title='.$title.'&pics='.$pic.'&summary='.$content;
+    $sina = 'http://service.weibo.com/share/share.php?url='.$url.'&title='.summary($title.$content, 110).'&pic='.$pic.'&searchPic=false';
+    $douban = 'http://www.douban.com/share/service?href='.$url.'&name='.$title.'&text='.$content.'&image='.$pic;
+    $weixin = G_DEMAIN.'/common/weixinshare/?url='.base64_encode($url).'/';
+    return array('qq' => $qq, 'weibo' => $sina, 'douban' => $douban, 'weixin' => $weixin);
+}
+
+/**
+ * 根据关键字生成seo
+ * @param  string $keyword
+ * @return array
+ * */
+function get_seo_by_keyword($keyword)
+{
+    $result = array('keyword' => $keyword);
+
+    $result['title'] = $keyword.' - 模型圈';
+
+    $result['description'] = '模型圈欢迎您到梨木台来旅游，我们可以为您提供蓟县梨木台农家院_天津梨木台_梨木台塞北农家院等信息。';
+
+    return $result;
+}
+
+/**
+ * 获取SEO配置
+ * @param  string $page
+ * @param  array  $data 参数
+ * @param  string $config
+ * @return array
+ * */
+function get_seo($page = 'default', $data = array())
+{
+    //保证页面的SEO不改变
+    $url = $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $code = md5($url);
+    $result = MOX_APP::model('system') -> get_seo($code);
+    if ($result && G_ONLINE)
+    {
+        return $result;
+    }
+
+    $list = MOX_APP::model('system')->fetch_all('seo');
+    foreach($list as $key => $value)
+    {
+        $list[$value['key']] = array('title' => $value['title'],
+            'keywords' => $value['keywords'],
+            'description' => $value['description']);
+        unset($list[$key]);
+    }
+
+    $result = $list[$page];
+
+    if ($result && $data)
+    {
+        foreach($data['title'] as $k1 => $v1)
+        {
+            $result['title'] = str_replace("{".($k1+1)."}", $v1, $result['title']);
+        }
+
+        foreach($data['keywords'] as $k2 => $v2)
+        {
+            $result['keywords'] = str_replace("{".($k2+1)."}", $v2, $result['keywords']);
+        }
+
+        //去重
+        $keyword_arr = array_unique(explode(',', $result['keywords']));
+        $result['keywords'] = implode(',', $keyword_arr);
+
+        foreach($data['description'] as $k3 => $v3)
+        {
+            $result['description'] = str_replace("{".($k3+1)."}", $v3, $result['description']);
+        }
+    }
+
+    //保证页面的SEO不改变
+    if (!empty($result['title']) && $page !== 'search' && G_ONLINE)
+    {
+        //MOX_APP::model('system') -> insert('page', array_merge(array('url' => $url, 'code' => $code), $result));
+    }
+
+    return $result;
+}
+
+function base64_url_encode($parm)
+{
+    if (!is_array($parm))
+    {
+        return false;
+    }
+
+    return strtr(base64_encode(json_encode($parm)), '+/=', '-_,');
+}
+
+function base64_url_decode($parm)
+{
+    return json_decode(base64_decode(strtr($parm, '-_,', '+/=')), true);
+}
+
+function request($url, $para, $encode = true)
+{
+    if($para)
+    {
+        $url .= '?';
+        foreach($para as $key=>$value)
+        {
+            if ($encode)
+            {
+                $url .= $key.'='.rawurlencode($value).'&';
+            }
+            else
+            {
+                $url .= $key.'='.$value.'&';
+            }
+        }
+    }
+
+    $ch = curl_init();
+    curl_setopt ($ch, CURLOPT_HEADER, 0);
+    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt ($ch, CURLOPT_TIMEOUT, 4);
+    curl_setopt ($ch, CURLOPT_FRESH_CONNECT, 0);
+    curl_setopt ($ch, CURLOPT_FORBID_REUSE, 0);
+    curl_setopt ($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_0 );
+
+    curl_setopt ($ch, CURLOPT_URL, $url);
+
+    $data = curl_exec($ch);
+
+    if (empty($data))
+    {
+        return false;
+    }
+
+    return $data;
+}
+
 function get_url()
 {
     $arg = !empty($_SERVER['QUERY_STRING']) ? '?'.$_SERVER['QUERY_STRING'] : '';
@@ -224,7 +652,7 @@ function is_utf8( $string )
     }
 }
 
-function get_farm_url($city_id = 0, $id, $cate = 0)
+function get_mox_url($city_id = 0, $id, $cate = 0)
 {
     if ($cate >= 13)
     {
@@ -232,11 +660,11 @@ function get_farm_url($city_id = 0, $id, $cate = 0)
     }
     if (!is_mobile())
     {
-        return G_DEMAIN.'/farm/'.encode($id).'.html';
+        return G_DEMAIN.'/mox/'.encode($id).'.html';
     }
     else
     {
-        return 'https://m'.G_BASE_DEMAIN.'/farm/'.encode($id).'.html';
+        return 'https://m'.G_BASE_DEMAIN.'/mox/'.encode($id).'.html';
     }
 }
 
@@ -265,12 +693,12 @@ function decode($str, $key = 99)
 }
 
 /**
- * FarmNc 系统函数类
+ * Mox 系统函数类
  *
- * @package     FarmNc
+ * @package     Mox
  * @subpackage  System
  * @category    Libraries
- * @author      FarmNc Dev Team
+ * @author      Mox Dev Team
  */
 
 function get_city_detail($city_id = '', $name = '')
@@ -295,7 +723,7 @@ function get_city_detail($city_id = '', $name = '')
 
 function get_area_detail($uname)
 {
-    $data = FARM_APP::model('system') -> get_area_detail('', $uname, '', false, true);
+    $data = MOX_APP::model('system') -> get_area_detail('', $uname, '', false, true);
     
     return $data;
 }
@@ -305,7 +733,7 @@ function get_area_detail($uname)
  * */
 function get_city_list($effect = false)
 {
-    $data = FARM_APP::model('system') -> get_city_list($effect, false);
+    $data = MOX_APP::model('system') -> get_city_list($effect, false);
     
     return $data;
 }
@@ -445,7 +873,7 @@ function deal_image($src, $width = null, $height = null, $filename = null)
  *         失败 -- -1:原文件不存在, -2:水印图片不存在, -3:原文件图像对象建立失败
  *         -4:水印文件图像对象建立失败 -5:加水印后的新图片保存失败
  */
-function img_water_mark($srcImg, $waterImg = 'http://www.moxquan.com/static/images/water.jpg', $savepath = 'D:\wamp\www\farm\static\deal_images', $savename = null, $positon = 5, $alpha = 100)
+function img_water_mark($srcImg, $waterImg = 'http://www.moxquan.com/static/images/water.jpg', $savepath = 'D:\wamp\www\mox\static\deal_images', $savename = null, $positon = 5, $alpha = 100)
 {
     $temp = pathinfo($srcImg);
     
@@ -938,7 +1366,7 @@ function date_friendly($timestamp, $time_limit = 604800, $out_format = 'Y-m-d H:
 
     if ($formats == null)
     {
-        $formats = array('YEAR' => FARM_APP::lang()->_t('%s 年前'), 'MONTH' => FARM_APP::lang()->_t('%s 月前'), 'DAY' => FARM_APP::lang()->_t('%s 天前'), 'HOUR' => FARM_APP::lang()->_t('%s 小时前'), 'MINUTE' => FARM_APP::lang()->_t('%s 分钟前'), 'SECOND' => FARM_APP::lang()->_t('%s 秒前'));
+        $formats = array('YEAR' => MOX_APP::lang()->_t('%s 年前'), 'MONTH' => MOX_APP::lang()->_t('%s 月前'), 'DAY' => MOX_APP::lang()->_t('%s 天前'), 'HOUR' => MOX_APP::lang()->_t('%s 小时前'), 'MINUTE' => MOX_APP::lang()->_t('%s 分钟前'), 'SECOND' => MOX_APP::lang()->_t('%s 秒前'));
     }
 
     $time_now = $time_now == null ? time() : $time_now;
@@ -1036,7 +1464,7 @@ function &load_class($class)
 
     if (class_exists($class) === FALSE)
     {
-        $file = FARM_PATH . preg_replace('#_+#', '/', $class) . '.php';
+        $file = MOX_PATH . preg_replace('#_+#', '/', $class) . '.php';
         
         if (! file_exists($file))
         {
@@ -1075,9 +1503,9 @@ function show_error($exception_message, $error_message = '')
 {
     @ob_end_clean();
 
-    if (get_setting('report_diagnostics') == 'Y' AND class_exists('FARM_APP', false))
+    if (get_setting('report_diagnostics') == 'Y' AND class_exists('MOX_APP', false))
     {
-        FARM_APP::mail()->send('wecenter_report@outlook.com', '[' . G_VERSION . '][' . G_VERSION_BUILD . '][' . base_url() . ']' . $error_message, nl2br($exception_message), get_setting('site_name'), 'WeCenter');
+        MOX_APP::mail()->send('wecenter_report@outlook.com', '[' . G_VERSION . '][' . G_VERSION_BUILD . '][' . base_url() . ']' . $error_message, nl2br($exception_message), get_setting('site_name'), 'WeCenter');
     }
 
     echo _show_error($exception_message);
@@ -1092,7 +1520,7 @@ function show_error($exception_message, $error_message = '')
  */
 function get_table($name)
 {
-    return FARM_APP::config()->get('database')->prefix . $name;
+    return MOX_APP::config()->get('database')->prefix . $name;
 }
 
 /**
@@ -1105,19 +1533,19 @@ function get_table($name)
  */
 function get_setting($varname = null, $permission_check = true)
 {
-    if (! class_exists('FARM_APP', false))
+    if (! class_exists('MOX_APP', false))
     {
         return false;
     }
 
-    if ($settings = FARM_APP::$settings)
+    if ($settings = MOX_APP::$settings)
     {
-        // FARM_APP::session()->permission 是指当前用户所在用户组的权限许可项，在 users_group 表中，你可以看到 permission 字段
+        // MOX_APP::session()->permission 是指当前用户所在用户组的权限许可项，在 users_group 表中，你可以看到 permission 字段
         if ($permission_check AND $settings['upload_enable'] == 'Y')
         {
-            if (FARM_APP::session())
+            if (MOX_APP::session())
             {
-                if (!FARM_APP::session()->permission['upload_attach'])
+                if (!MOX_APP::session()->permission['upload_attach'])
                 {
                     $settings['upload_enable'] = 'N';
                 }
@@ -1313,7 +1741,7 @@ function get_login_cookie_hash($user_name, $password, $salt, $uid, $hash_passwor
  */
 function valid_post_hash($hash)
 {
-    return FARM_APP::form()->valid_post_hash($hash);
+    return MOX_APP::form()->valid_post_hash($hash);
 }
 
 /**
@@ -1323,12 +1751,12 @@ function valid_post_hash($hash)
  */
 function new_post_hash()
 {
-    if (! FARM_APP::session()->client_info)
+    if (! MOX_APP::session()->client_info)
     {
         return false;
     }
 
-    return FARM_APP::form()->new_post_hash();
+    return MOX_APP::form()->new_post_hash();
 }
 
 /**
@@ -1490,13 +1918,13 @@ function get_time_zone()
  */
 function _e($string, $replace = null)
 {
-    if (!class_exists('FARM_APP', false))
+    if (!class_exists('MOX_APP', false))
     {
         echo load_class('core_lang')->translate($string, $replace, TRUE);
     }
     else
     {
-        echo FARM_APP::lang()->translate($string, $replace, TRUE);
+        echo MOX_APP::lang()->translate($string, $replace, TRUE);
     }
 }
 
@@ -1765,16 +2193,13 @@ function remove_invisible_characters(&$str, $url_encoded = TRUE)
 {
     $non_displayables = array();
 
-    // every control character except newline (dec 10)
-    // carriage return (dec 13), and horizontal tab (dec 09)
-
     if ($url_encoded)
     {
-        $non_displayables[] = '/%0[0-8bcef]/';    // url encoded 00-08, 11, 12, 14, 15
-        $non_displayables[] = '/%1[0-9a-f]/';    // url encoded 16-31
+        $non_displayables[] = '/%0[0-8bcef]/';
+        $non_displayables[] = '/%1[0-9a-f]/';
     }
 
-    $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';    // 00-08, 11, 12, 14-31, 127
+    $non_displayables[] = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
 
     do
     {
@@ -2043,7 +2468,7 @@ function analysis_keyword($string, $return_str = false)
 /**
  * @desc   重设图片大小
  * @param  string $image  如：http://www.aiqoo.cn/images/123.jpg
- * @param  string $thumbname 如：D:/wamp/www/farm/upload/image/123.jpg
+ * @param  string $thumbname 如：D:/wamp/www/mox/upload/image/123.jpg
  * @return boolean
  * */
 function resize_image($image, $thumbname, $type = '', $maxWidth = 300, $maxHeight = 200, $interlace = true)

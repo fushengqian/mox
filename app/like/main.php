@@ -1,27 +1,27 @@
 <?php
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 点赞
      **/
     public function like_action()
     {
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if (empty($user_id)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '请先登录哦~'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '请先登录哦~'));
         }
 
         $target_id = trim($_POST['target_id']);
         if (empty($target_id)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '系统出错了~'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '系统出错了~'));
         }
 
         $user_id = $this->model('user')->get_us($user_id);
 
         $result = $this->model('like')->dolike($target_id, 'feed', $user_id);
         if (!$result) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '点赞失败！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '点赞失败！'));
         }
 
         //发送消息
@@ -32,7 +32,7 @@ class main extends FARM_CONTROLLER
 
         $this->model('points')->send($user_id, 'like');
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
         ), 1, '操作成功！'));
     }
 }

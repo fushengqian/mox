@@ -1,23 +1,23 @@
 <?php
-class ajax extends FARM_CONTROLLER
+class ajax extends MOX_CONTROLLER
 {
     public function publish_action()
     {
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
 
         if (empty($user_info['uid']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, - 1, '请先登录哦~'));
+            H::ajax_json_output(MOX_APP::RSM(null, - 1, '请先登录哦~'));
         }
 
         if (!$_POST['title'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, - 1, '请输入文章标题！'));
+            H::ajax_json_output(MOX_APP::RSM(null, - 1, '请输入文章标题！'));
         }
 
         if (!$_POST['content'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, - 1, '请输入文章内容！'));
+            H::ajax_json_output(MOX_APP::RSM(null, - 1, '请输入文章内容！'));
         }
 
         if ($_POST['is_preview']) {
@@ -33,12 +33,12 @@ class ajax extends FARM_CONTROLLER
         $summary  = $_POST['summary'];
         $from     = $_POST['from'] ? $_POST['from'] : '模型圈';
         $status   = intval($_POST['status']);
-        $user_id  = intval(FARM_APP::session()->info['uid']);
+        $user_id  = intval(MOX_APP::session()->info['uid']);
         $cate  = $_POST['cate'];
         
         $artcle_id = $this -> model('article') -> publish($id, $cate, $title, $content, $keywords, $from, $summary, $status, $user_id);
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
                 'url' => G_DEMAIN.'/article/'.$artcle_id.'.html'
         ), 1, '发布文章成功！'));
     }

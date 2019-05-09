@@ -1,7 +1,7 @@
 <?php
 define('IN_AJAX', TRUE);
 
-class ajax extends FARM_ADMIN_CONTROLLER
+class ajax extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -10,9 +10,9 @@ class ajax extends FARM_ADMIN_CONTROLLER
     
     public function login_process_action()
     {
-        if (get_setting('admin_login_seccode') == 'Y' AND !FARM_APP::captcha()->is_validate($_POST['seccode_verify']))
+        if (get_setting('admin_login_seccode') == 'Y' AND !MOX_APP::captcha()->is_validate($_POST['seccode_verify']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请填写正确的验证码')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请填写正确的验证码')));
         }
         
         if (get_setting('ucenter_enabled') == 'Y')
@@ -30,13 +30,13 @@ class ajax extends FARM_ADMIN_CONTROLLER
         if ($user_info['id'])
         {
             $this->model('admin')->set_admin_login($user_info['id']);
-            H::ajax_json_output(FARM_APP::RSM(array(
+            H::ajax_json_output(MOX_APP::RSM(array(
                 'url' => $_POST['url'] ? base64_decode($_POST['url']) : get_js_url('/admin/')
             ), 1, null));
         }
         else
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('后台登录帐号或密码错误')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('后台登录帐号或密码错误')));
         }
     }
     
@@ -44,7 +44,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if ($_POST['upload_dir'])
@@ -79,12 +79,12 @@ class ajax extends FARM_ADMIN_CONTROLLER
                     
                     if (substr($n, 0, 1) != '/' OR substr($m, 0, 1) != '/')
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('URL 自定义路由规则 URL 必须以 / 开头')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('URL 自定义路由规则 URL 必须以 / 开头')));
                     }
                     
                     if (strstr($m, '/admin') OR strstr($n, '/admin'))
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('URL 自定义路由规则不允许设置 /admin 路由')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('URL 自定义路由规则不允许设置 /admin 路由')));
                     }
                 }
             }
@@ -103,7 +103,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             {
                 if ($_POST[$key] == 'Y' AND !function_exists('curl_init'))
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('微博登录、QQ 登录等功能须服务器支持 CURL')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('微博登录、QQ 登录等功能须服务器支持 CURL')));
                 }
             }
         }
@@ -118,7 +118,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             $_POST['weixin_encoding_aes_key'] = trim($_POST['weixin_encoding_aes_key']);
             if (strlen($_POST['weixin_encoding_aes_key']) != 43)
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('微信公众平台接口 EncodingAESKey 应为 43 位')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('微信公众平台接口 EncodingAESKey 应为 43 位')));
             }
         }
         
@@ -154,14 +154,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         $this->model('setting')->set_vars($_POST);
         
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('保存设置成功')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('保存设置成功')));
     }
     
     public function approval_manage_action()
     {
         if (!in_array($_POST['batch_type'], array('approval', 'decline')))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('错误的请求')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('错误的请求')));
         }
         
         if ($_POST['approval_id'])
@@ -171,7 +171,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         if (!$_POST['approval_ids'] OR !is_array($_POST['approval_ids']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择条目进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择条目进行操作')));
         }
         
         switch ($_POST['type'])
@@ -179,7 +179,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             case 'weibo_msg':
                 if (get_setting('weibo_msg_enabled') != 'question')
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('导入微博消息至问题未启用')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('导入微博消息至问题未启用')));
                 }
                 
                 switch ($_POST['batch_type'])
@@ -189,7 +189,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                         
                         if (!$published_user['id'])
                         {
-                            H::ajax_json_output(FARM_APP::RSM(FARM_APP::lang()->_t('微博发布用户不存在')));
+                            H::ajax_json_output(MOX_APP::RSM(MOX_APP::lang()->_t('微博发布用户不存在')));
                         }
                         
                         foreach ($_POST['approval_ids'] AS $approval_id)
@@ -215,7 +215,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 
                 if ($receiving_email_global_config['enabled'] != 'question')
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('导入邮件至问题未启用')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('导入邮件至问题未启用')));
                 }
                 
                 switch ($_POST['batch_type'])
@@ -225,7 +225,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                         
                         if (!$receiving_email_global_config['publish_user']['id'])
                         {
-                            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('邮件发布用户不存在')));
+                            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('邮件发布用户不存在')));
                         }
                         
                         foreach ($_POST['approval_ids'] AS $approval_id)
@@ -251,14 +251,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 }
                 break;
         }
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function article_manage_action()
     {
         if (!$_POST['article_ids'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择文章进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择文章进行操作')));
         }
 
         switch ($_POST['action'])
@@ -269,7 +269,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                     $this->model('article')->remove_article($article_id);
                 }
 
-                H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+                H::ajax_json_output(MOX_APP::RSM(null, 1, null));
             break;
         }
     }
@@ -278,7 +278,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         if (is_array($_POST['category']))
@@ -289,41 +289,41 @@ class ajax extends FARM_ADMIN_CONTROLLER
             }
         }
 
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('分类排序已自动保存')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('分类排序已自动保存')));
     }
 
     public function save_category_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         if ($_POST['category_id'] AND $_POST['parent_id'] AND $category_list = $this->model('system')->fetch_category('question', $_POST['category_id']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('系统允许最多二级分类, 当前分类下有子分类, 不能移动到其它分类')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('系统允许最多二级分类, 当前分类下有子分类, 不能移动到其它分类')));
         }
 
         if (trim($_POST['title']) == '')
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入分类名称')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入分类名称')));
         }
 
         if ($_POST['url_token'])
         {
             if (!preg_match("/^(?!__)[a-zA-Z0-9_]+$/i", $_POST['url_token']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('分类别名只允许输入英文或数字')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('分类别名只允许输入英文或数字')));
             }
 
             if (preg_match("/^[\d]+$/i", $_POST['url_token']) AND ($_POST['category_id'] != $_POST['url_token']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('分类别名不可以全为数字')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('分类别名不可以全为数字')));
             }
 
             if ($this->model('category')->check_url_token($_POST['url_token'], $_POST['category_id']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('分类别名已经被占用请更换一个')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('分类别名已经被占用请更换一个')));
             }
         }
 
@@ -340,12 +340,12 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
         if ($category['id'] == $_POST['parent_id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('不能设置当前分类为父级分类')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('不能设置当前分类为父级分类')));
         }
 
         $this->model('category')->update_category_info($category_id, $_POST['title'], $_POST['parent_id'], $_POST['url_token']);
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/category/list/')
         ), 1, null));
     }
@@ -354,51 +354,51 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         if (intval($_POST['category_id']) == 1)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('默认分类不可删除')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('默认分类不可删除')));
         }
 
         if ($this->model('category')->contents_exists($_POST['category_id']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('分类下存在内容, 请先批量移动问题到其它分类, 再删除当前分类')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('分类下存在内容, 请先批量移动问题到其它分类, 再删除当前分类')));
         }
 
         $this->model('category')->delete_category($_POST['category_id']);
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
 
     public function move_category_contents_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         if (!$_POST['from_id'] OR !$_POST['target_id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请先选择指定分类和目标分类')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请先选择指定分类和目标分类')));
         }
 
         if ($_POST['target_id'] == $_POST['from_id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('指定分类不能与目标分类相同')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('指定分类不能与目标分类相同')));
         }
 
         $this->model('category')->move_contents($_POST['from_id'], $_POST['target_id']);
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function save_nav_menu_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if ($_POST['nav_sort'])
@@ -427,14 +427,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         $this->model('setting')->set_vars($settings_var);
         
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('导航菜单保存成功')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('导航菜单保存成功')));
     }
     
     public function add_nav_menu_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         $title = trim($_POST['title']);
@@ -443,34 +443,34 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         if (!$title)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入导航标题')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入导航标题')));
         }
         
         $this->model('menu')->add_nav_menu($title, $parent_id, $link);
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function remove_nav_menu_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         $this->model('menu')->remove_nav_menu($_POST['id']);
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function nav_menu_upload_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
-        FARM_APP::upload()->initialize(array(
+        MOX_APP::upload()->initialize(array(
             'allowed_types' => 'jpg,jpeg,png,gif',
             'upload_path' => get_setting('upload_dir') . '/nav_menu',
             'is_image' => TRUE,
@@ -478,28 +478,28 @@ class ajax extends FARM_ADMIN_CONTROLLER
             'encrypt_name' => FALSE
         ))->do_upload('aws_upload_file');
         
-        if (FARM_APP::upload()->get_error())
+        if (MOX_APP::upload()->get_error())
         {
-            switch (FARM_APP::upload()->get_error())
+            switch (MOX_APP::upload()->get_error())
             {
                 default:
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('错误代码') . ': ' . FARM_APP::upload()->get_error()));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('错误代码') . ': ' . MOX_APP::upload()->get_error()));
                 break;
                 
                 case 'upload_invalid_filetype':
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('文件类型无效')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('文件类型无效')));
                 break;
             }
         }
         
-        if (! $upload_data = FARM_APP::upload()->data())
+        if (! $upload_data = MOX_APP::upload()->data())
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('上传失败, 请与管理员联系')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('上传失败, 请与管理员联系')));
         }
         
         if ($upload_data['is_image'] == 1)
         {
-            FARM_APP::image()->initialize(array(
+            MOX_APP::image()->initialize(array(
                 'quality' => 90,
                 'source_image' => $upload_data['full_path'],
                 'new_image' => $upload_data['full_path'],
@@ -520,27 +520,27 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if (!$_POST['url_token'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入页面 URL')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入页面 URL')));
         }
         
         if (!preg_match("/^(?!__)[a-zA-Z0-9_]+$/i", $_POST['url_token']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('页面 URL 只允许输入英文或数字')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('页面 URL 只允许输入英文或数字')));
         }
         
         if ($this->model('page')->get_page_by_url_token($_POST['url_token']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('已经存在相同的页面 URL')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('已经存在相同的页面 URL')));
         }
         
         $this->model('page')->add_page($_POST['title'], $_POST['keywords'], $_POST['description'], $_POST['contents'], $_POST['url_token']);
         
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/page/')
         ), 1, null));
     }
@@ -549,47 +549,47 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         $this->model('page')->remove_page($_POST['id']);
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function edit_page_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if (!$page_info = $this->model('page')->get_page_by_url_id($_POST['page_id']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('页面不存在')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('页面不存在')));
         }
         
         if (!$_POST['url_token'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入页面 URL')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入页面 URL')));
         }
         
         if (!preg_match("/^(?!__)[a-zA-Z0-9_]+$/i", $_POST['url_token']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('页面 URL 只允许输入英文或数字')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('页面 URL 只允许输入英文或数字')));
         }
         
         if ($_page_info = $this->model('page')->get_page_by_url_token($_POST['url_token']))
         {
             if ($_page_info['id'] != $_page_info['id'])
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('已经存在相同的页面 URL')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('已经存在相同的页面 URL')));
             }
         }
         
         $this->model('page')->update_page($_POST['page_id'], $_POST['title'], $_POST['keywords'], $_POST['description'], $_POST['contents'], $_POST['url_token']);
         
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/page/')
         ), 1, null));
     }
@@ -598,7 +598,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if ($_POST['page_ids'])
@@ -609,19 +609,19 @@ class ajax extends FARM_ADMIN_CONTROLLER
             }
         }
         
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('启用状态已自动保存')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('启用状态已自动保存')));
     }
     
     public function report_manage_action()
     {
         if (! $_POST['report_ids'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择内容进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择内容进行操作')));
         }
         
         if (! $_POST['action_type'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择操作类型')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择操作类型')));
         }
         
         if ($_POST['action_type'] == 'delete')
@@ -641,14 +641,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
             }
         }
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function save_user_group_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
         
         if ($group_data = $_POST['group'])
@@ -657,19 +657,19 @@ class ajax extends FARM_ADMIN_CONTROLLER
             {
                 if (!$val['group_name'])
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入用户组名称')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入用户组名称')));
                 }
                 
                 if ($val['reputation_factor'])
                 {
                     if (!is_digits($val['reputation_factor']) || floatval($val['reputation_factor']) < 0)
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('威望系数必须为大于或等于 0')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('威望系数必须为大于或等于 0')));
                     }
                     
                     if (!is_digits($val['reputation_lower']) || floatval($val['reputation_lower']) < 0 || !is_digits($val['reputation_higer']) || floatval($val['reputation_higer']) < 0)
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('威望介于值必须为大于或等于 0')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('威望介于值必须为大于或等于 0')));
                     }
                     
                     $val['reputation_factor'] = floatval($val['reputation_factor']);
@@ -702,21 +702,21 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 }
                 else
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('系统用户组不可删除')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('系统用户组不可删除')));
                 }
             }
         }
         
-        FARM_APP::cache()->cleanGroup('users_group');
+        MOX_APP::cache()->cleanGroup('users_group');
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function save_custom_user_group_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         if ($group_data = $_POST['group'])
@@ -725,7 +725,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             {
                 if (!$val['group_name'])
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入用户组名称')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入用户组名称')));
                 }
 
                 $this->model('user')->update_user_group_data($key, $val);
@@ -755,12 +755,12 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 }
                 else
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('系统用户组不可删除')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('系统用户组不可删除')));
                 }
             }
         }
 
-        FARM_APP::cache()->cleanGroup('users_group');
+        MOX_APP::cache()->cleanGroup('users_group');
 
         if ($group_new OR $group_ids)
         {
@@ -769,14 +769,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
             );
         }
 
-        H::ajax_json_output(FARM_APP::RSM($rsm, 1, null));
+        H::ajax_json_output(MOX_APP::RSM($rsm, 1, null));
     }
 
     public function edit_user_group_permission_action()
     {
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有访问权限, 请重新登录')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有访问权限, 请重新登录')));
         }
 
         $permission_array = array(
@@ -837,9 +837,9 @@ class ajax extends FARM_ADMIN_CONTROLLER
             'permission' => serialize($group_setting)
         ));
 
-        FARM_APP::cache()->cleanGroup('users_group');
+        MOX_APP::cache()->cleanGroup('users_group');
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, FARM_APP::lang()->_t('用户组权限已更新')));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, MOX_APP::lang()->_t('用户组权限已更新')));
     }
 
     public function save_user_action()
@@ -848,32 +848,32 @@ class ajax extends FARM_ADMIN_CONTROLLER
         {
             if (!$user_info = $this->model('user')->get_user_info_by_id($_POST['id']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('用户不存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('用户不存在')));
             }
 
             if ($user_info['group_id'] == 1 AND !$this->user_info['permission']['is_administortar'])
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('你没有权限编辑管理员账号')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('你没有权限编辑管理员账号')));
             }
 
             if ($_POST['user_name'] != $user_info['user_name'] AND $this->model('user')->get_user_info_by_username($_POST['user_name']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('用户名已存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('用户名已存在')));
             }
 
             if ($_POST['email'] != $user_info['email'] AND $this->model('user')->get_user_info_by_username($_POST['email']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('E-mail 已存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('E-mail 已存在')));
             }
             
             if ($_POST['mobile'] != $user_info['mobile'] AND $this->model('user')->get_user_info_by_username($_POST['mobile']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('手机号已存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('手机号已存在')));
             }
 
             if ($_FILES['user_avatar']['name'])
             {
-                FARM_APP::upload()->initialize(array(
+                MOX_APP::upload()->initialize(array(
                     'allowed_types' => 'jpg,jpeg,png,gif',
                     'upload_path' => get_setting('upload_dir') . '/avatar/' . $this->model('user')->get_avatar($user_info['id'], '', 1),
                     'is_image' => TRUE,
@@ -882,36 +882,36 @@ class ajax extends FARM_ADMIN_CONTROLLER
                     'encrypt_name' => FALSE
                 ))->do_upload('user_avatar');
 
-                if (FARM_APP::upload()->get_error())
+                if (MOX_APP::upload()->get_error())
                 {
-                    switch (FARM_APP::upload()->get_error())
+                    switch (MOX_APP::upload()->get_error())
                     {
                         default:
-                            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('错误代码') . ': ' . FARM_APP::upload()->get_error()));
+                            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('错误代码') . ': ' . MOX_APP::upload()->get_error()));
                         break;
 
                         case 'upload_invalid_filetype':
-                            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('文件类型无效')));
+                            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('文件类型无效')));
                         break;
 
                         case 'upload_invalid_filesize':
-                            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('文件尺寸过大, 最大允许尺寸为 %s KB', get_setting('upload_size_limit'))));
+                            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('文件尺寸过大, 最大允许尺寸为 %s KB', get_setting('upload_size_limit'))));
                         break;
                     }
                 }
 
-                if (! $upload_data = FARM_APP::upload()->data())
+                if (! $upload_data = MOX_APP::upload()->data())
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('上传失败, 请与管理员联系')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('上传失败, 请与管理员联系')));
                 }
 
                 if ($upload_data['is_image'] == 1)
                 {
-                    foreach(FARM_APP::config()->get('image')->avatar_thumbnail AS $key => $val)
+                    foreach(MOX_APP::config()->get('image')->avatar_thumbnail AS $key => $val)
                     {
                         $thumb_file[$key] = $upload_data['file_path'] . $this->model('user')->get_avatar($user_info['id'], $key, 2);
 
-                        FARM_APP::image()->initialize(array(
+                        MOX_APP::image()->initialize(array(
                             'quality' => 90,
                             'source_image' => $upload_data['full_path'],
                             'new_image' => $thumb_file[$key],
@@ -962,7 +962,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 $this->model('user')->update_user_name($_POST['user_name'], $user_info['id']);
             }
 
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('用户资料更新成功')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('用户资料更新成功')));
         }
         else
         {
@@ -976,22 +976,22 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
             if (!$_POST['user_name'])
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入用户名')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入用户名')));
             }
 
             if ($this->model('user')->check_username($_POST['user_name']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('用户名已经存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('用户名已经存在')));
             }
 
             if ($this->model('user')->check_email($_POST['email']))
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('E-Mail 已经被使用, 或格式不正确')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('E-Mail 已经被使用, 或格式不正确')));
             }
 
             if (strlen($_POST['password']) < 6 or strlen($_POST['password']) > 16)
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('密码长度不符合规则')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('密码长度不符合规则')));
             }
 
             $id = $this->model('user')->user_register($_POST['user_name'], $_POST['password'], $_POST['email']);
@@ -1008,7 +1008,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 ), 'id = ' . $id);
             }
 
-            H::ajax_json_output(FARM_APP::RSM(array(
+            H::ajax_json_output(MOX_APP::RSM(array(
                 'url' => get_js_url('/admin/user/list/')
             ), 1, null));
         }
@@ -1018,7 +1018,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         $this->model('user')->forbidden_user_by_id($_POST['id'], $_POST['status'], $this->user_id);
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
 
     public function send_invites_action()
@@ -1040,29 +1040,29 @@ class ajax extends FARM_ADMIN_CONTROLLER
         }
         else
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入邮箱地址')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入邮箱地址')));
         }
         
         $this->model('invitation')->send_batch_invitations(array_unique($email_list), $this->user_id, $this->user_info['user_name']);
         
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('邀请已发送')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('邀请已发送')));
     }
     
     public function integral_process_action()
     {
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择用户进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择用户进行操作')));
         }
         
         if (!$_POST['note'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请填写理由')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请填写理由')));
         }
         
         $this->model('integral')->process($_POST['id'], 'AWARD', $_POST['integral'], $_POST['note']);
         
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/user/integral_log/id-' . $_POST['id'])
         ), 1, null));
     }
@@ -1071,7 +1071,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!is_array($_POST['approval_ids']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择条目进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择条目进行操作')));
         }
         
         switch ($_POST['batch_type'])
@@ -1104,7 +1104,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             break;
         }
         
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function save_verify_approval_action()
@@ -1117,7 +1117,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             ));
         }
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/user/verify_approval_list/')
         ), 1, null));
     }
@@ -1126,7 +1126,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!is_array($_POST['approval_ids']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择条目进行操作')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择条目进行操作')));
         }
 
         switch ($_POST['batch_type'])
@@ -1142,14 +1142,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
             break;
         }
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
 
     public function remove_user_action()
     {
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('错误的请求')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('错误的请求')));
         }
 
         @set_time_limit(0);
@@ -1158,19 +1158,19 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
         if (!$user_info)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('所选用户不存在')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('所选用户不存在')));
         }
         else
         {
             if ($user_info['group_id'] == 1)
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('不允许删除管理员用户组用户')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('不允许删除管理员用户组用户')));
             }
 
             $this->model('system')->remove_user_by_id($_POST['id'], $_POST['remove_user_data']);
         }
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/user/list/')
         ), 1, null));
     }
@@ -1179,7 +1179,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!is_array($_POST['ids']) OR !$_POST['ids'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择要删除的用户')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择要删除的用户')));
         }
 
         @set_time_limit(0);
@@ -1203,7 +1203,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
             }
         }
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
 
     public function topic_statistic_action()
@@ -1303,7 +1303,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$_POST['action'] OR !isset($_POST['id']))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('错误的请求')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('错误的请求')));
         }
 
         if (in_array($_POST['action'], array('add_service_user', 'del_service_user')))
@@ -1312,12 +1312,12 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
             if (!$user_info)
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('所选用户不存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('所选用户不存在')));
             }
 
             $service_info = $this->model('openid_weibo_oauth')->get_weibo_user_by_id($user_info['id']);
 
-            $tmp_service_account = FARM_APP::cache()->get('tmp_service_account');
+            $tmp_service_account = MOX_APP::cache()->get('tmp_service_account');
         }
 
         switch ($_POST['action'])
@@ -1327,7 +1327,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 {
                     if (isset($service_info['last_msg_id']))
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该用户已是回答用户')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该用户已是回答用户')));
                     }
 
                     $this->model('openid_weibo_weibo')->update_service_account($user_info['id'], 'add');
@@ -1338,7 +1338,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 {
                     if ($tmp_service_account[$user_info['id']])
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该用户已是回答用户')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该用户已是回答用户')));
                     }
 
                     $tmp_service_account[$user_info['id']] = array(
@@ -1349,7 +1349,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
                     natsort($tmp_service_account);
 
-                    FARM_APP::cache()->set('tmp_service_account', $tmp_service_account, 86400);
+                    MOX_APP::cache()->set('tmp_service_account', $tmp_service_account, 86400);
 
                     $rsm = array('staus' => 'unbound');
                 }
@@ -1361,7 +1361,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 {
                     if (!isset($service_info['last_msg_id']))
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该用户不是回答用户')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该用户不是回答用户')));
                     }
 
                     $this->model('openid_weibo_weibo')->update_service_account($user_info['id'], 'del');
@@ -1370,12 +1370,12 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 {
                     if (!$tmp_service_account[$user_info['id']])
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该用户不是回答用户')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该用户不是回答用户')));
                     }
 
                     unset($tmp_service_account[$user_info['id']]);
 
-                    FARM_APP::cache()->set('tmp_service_account', $tmp_service_account, 86400);
+                    MOX_APP::cache()->set('tmp_service_account', $tmp_service_account, 86400);
                 }
 
                 break;
@@ -1389,7 +1389,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
                     if (!$published_user_info)
                     {
-                        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('所选用户不存在')));
+                        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('所选用户不存在')));
                     }
 
                     $this->model('setting')->set_vars(array(
@@ -1413,19 +1413,19 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 break;
         }
 
-        H::ajax_json_output(FARM_APP::RSM($rsm, 1, null));
+        H::ajax_json_output(MOX_APP::RSM($rsm, 1, null));
     }
 
     public function save_approval_item_action()
     {
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择待审项')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择待审项')));
         }
 
         if (!$_POST['type'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('类型不能为空')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('类型不能为空')));
         }
 
         switch ($_POST['type'])
@@ -1435,7 +1435,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
                 if ($approval_item['question_id'])
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该消息已通过审核')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该消息已通过审核')));
                 }
 
                 $approval_item['type'] = 'weibo_msg';
@@ -1447,7 +1447,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
                 if ($approval_item['question_id'])
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该邮件已通过审核')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该邮件已通过审核')));
                 }
 
                 $approval_item['type'] = 'received_email';
@@ -1462,22 +1462,22 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
         if (!$approval_item)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('待审项不存在')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('待审项不存在')));
         }
 
         if ($_POST['type'] != $approval_item['type'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('类型不正确')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('类型不正确')));
         }
 
         if (!$_POST['title'] AND in_array($_POST['type'], array('question', 'article', 'received_email')))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入标题')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入标题')));
         }
 
         if (!$_POST['content'] AND in_array($_POST['type'], array('answer', 'article_comment')))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入内容')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入内容')));
         }
 
         switch ($approval_item['type'])
@@ -1556,7 +1556,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
                 break;
         }
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/approval/list/')
         ), 1, null));
     }
@@ -1567,7 +1567,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
         $this->model('setting')->set_vars(array('today_topics' => $today_topics));
 
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('设置已保存')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('设置已保存')));
     }
 
     public function save_receiving_email_config_action()
@@ -1578,7 +1578,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
             if (!$receiving_email_config)
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('该账号不存在')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('该账号不存在')));
             }
         }
 
@@ -1586,29 +1586,29 @@ class ajax extends FARM_ADMIN_CONTROLLER
 
         if (!$_POST['server'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入服务器地址')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入服务器地址')));
         }
 
         if (!$_POST['protocol'] OR !in_array($_POST['protocol'], array('pop3', 'imap')))
         {
-             H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择协议')));
+             H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择协议')));
         }
 
         if ($_POST['port'] AND (!is_digits($_POST['port']) OR $_POST['port'] < 0 OR $_POST['port'] > 65535))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请输入有效的端口号（0 ~ 65535）')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请输入有效的端口号（0 ~ 65535）')));
         }
 
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择此账号对应的用户')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择此账号对应的用户')));
         }
 
         $user_info = $this->model('user')->get_user_info_by_id($_POST['id']);
 
         if (!$user_info)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('所选用户不存在')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('所选用户不存在')));
         }
 
         $receiving_email_config = array(
@@ -1629,13 +1629,13 @@ class ajax extends FARM_ADMIN_CONTROLLER
         {
             $this->model('edm')->update_receiving_email_config($_POST['id'], 'update', $receiving_email_config);
 
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('保存设置成功')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('保存设置成功')));
         }
         else
         {
             $config_id = $this->model('edm')->update_receiving_email_config(null, 'add', $receiving_email_config);
 
-            H::ajax_json_output(FARM_APP::RSM(array(
+            H::ajax_json_output(MOX_APP::RSM(array(
                 'url' => get_js_url('/admin/edm/receiving/id-' . $config_id)
             ), 1, null));
         }
@@ -1645,14 +1645,14 @@ class ajax extends FARM_ADMIN_CONTROLLER
     {
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请设置邮件内容对应提问用户')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请设置邮件内容对应提问用户')));
         }
 
         $user_info = $this->model('user')->get_user_info_by_id($_POST['id']);
 
         if (!$user_info)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('所选用户不存在')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('所选用户不存在')));
         }
 
         $this->model('setting')->set_vars(array(
@@ -1665,26 +1665,26 @@ class ajax extends FARM_ADMIN_CONTROLLER
             )
         )));
 
-        H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('保存设置成功')));
+        H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('保存设置成功')));
     }
 
     public function remove_receiving_account_action()
     {
         if (!$_POST['id'])
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('请选择要删除的账号')));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('请选择要删除的账号')));
         }
 
         $this->model('edm')->delete('receiving_email_config', 'id = ' . intval($_POST['id']));
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
     
     public function attach_upload_action()
     {
         $item_type = $_GET['id'];
 
-        FARM_APP::upload()->initialize(array(
+        MOX_APP::upload()->initialize(array(
         'allowed_types' => get_setting('allowed_upload_types'),
         'upload_path' => get_setting('upload_dir') . '/' . $item_type . '/' . gmdate('Ymd'),
         'is_image' => FALSE,
@@ -1693,23 +1693,23 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         if (isset($_GET['aws_upload_file']))
         {
-            FARM_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
+            MOX_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
         }
         else if (isset($_FILES['aws_upload_file']))
         {
-            FARM_APP::upload()->do_upload('aws_upload_file');
+            MOX_APP::upload()->do_upload('aws_upload_file');
         }
         else
         {
             return false;
         }
         
-        if (FARM_APP::upload()->get_error())
+        if (MOX_APP::upload()->get_error())
         {
-            switch (FARM_APP::upload()->get_error())
+            switch (MOX_APP::upload()->get_error())
             {
                 default:
-                    die("{'error':'错误代码: " . FARM_APP::upload()->get_error() . "'}");
+                    die("{'error':'错误代码: " . MOX_APP::upload()->get_error() . "'}");
                     break;
                     
                 case 'upload_invalid_filetype':
@@ -1722,17 +1722,17 @@ class ajax extends FARM_ADMIN_CONTROLLER
             }
         }
         
-        if (! $upload_data = FARM_APP::upload()->data())
+        if (! $upload_data = MOX_APP::upload()->data())
         {
             die("{'error':'上传失败, 请与管理员联系'}");
         }
         
         if ($upload_data['is_image'] == 1)
         {
-           foreach (FARM_APP::config()->get('image')->attachment_thumbnail AS $key => $val)
+           foreach (MOX_APP::config()->get('image')->attachment_thumbnail AS $key => $val)
            {
                $thumb_file[$key] = $upload_data['file_path'] . $val['w'] . 'x' . $val['h'] . '_' . basename($upload_data['full_path']);
-               FARM_APP::image()->initialize(array(
+               MOX_APP::image()->initialize(array(
                'quality' => 120,
                'source_image' => $upload_data['full_path'],
                'new_image' => $thumb_file[$key],
@@ -1744,7 +1744,7 @@ class ajax extends FARM_ADMIN_CONTROLLER
         
         $size = 'admin';
         
-        $upload_data['thumb'] = get_setting('upload_url') . '/' . $item_type . '/' . gmdate('Ymd') . '/'.FARM_APP::config()->get('image')->attachment_thumbnail[$size]['w'] . 'x' . FARM_APP::config()->get('image')->attachment_thumbnail[$size]['h'] . '_' . $upload_data['file_name'];
+        $upload_data['thumb'] = get_setting('upload_url') . '/' . $item_type . '/' . gmdate('Ymd') . '/'.MOX_APP::config()->get('image')->attachment_thumbnail[$size]['w'] . 'x' . MOX_APP::config()->get('image')->attachment_thumbnail[$size]['h'] . '_' . $upload_data['file_name'];
         
         $upload_data['delete_url'] = 'admin/ajax/dinner/images_delete/?file_name='.$upload_data['file_name'];
         

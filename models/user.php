@@ -1,6 +1,6 @@
 <?php
 
-class user_class extends FARM_MODEL
+class user_class extends MOX_MODEL
 {
     /**
      * 获取列表
@@ -531,15 +531,15 @@ class user_class extends FARM_MODEL
 
     public function setsession_logout()
     {
-        if (isset(FARM_APP::session()->info)) {
-            unset(FARM_APP::session()->info);
+        if (isset(MOX_APP::session()->info)) {
+            unset(MOX_APP::session()->info);
         }
     }
 
     public function check_username_char($user_name)
     {
         if (strstr($user_name, '-') OR strstr($user_name, '.') OR strstr($user_name, '/') OR strstr($user_name, '%') OR strstr($user_name, '__')) {
-            return FARM_APP::lang()->_t('用户名不能包含 - / . % 与连续的下划线');
+            return MOX_APP::lang()->_t('用户名不能包含 - / . % 与连续的下划线');
         }
 
         $length = strlen(convert_encoding($user_name, 'UTF-8', 'GB2312'));
@@ -557,19 +557,19 @@ class user_class extends FARM_MODEL
 
             case 1:
                 if (!preg_match('/^[\x{4e00}-\x{9fa5}_a-zA-Z0-9]+$/u', $user_name) OR $flag) {
-                    return FARM_APP::lang()->_t('请输入大于 %s 字节的用户名, 允许汉字、字母与数字', ($length_min . ' - ' . $length_max));
+                    return MOX_APP::lang()->_t('请输入大于 %s 字节的用户名, 允许汉字、字母与数字', ($length_min . ' - ' . $length_max));
                 }
                 break;
 
             case 2:
                 if (!preg_match("/^[a-zA-Z0-9_]+$/i", $user_name) OR $flag) {
-                    return FARM_APP::lang()->_t('请输入 %s 个字母、数字或下划线', ($length_min . ' - ' . $length_max));
+                    return MOX_APP::lang()->_t('请输入 %s 个字母、数字或下划线', ($length_min . ' - ' . $length_max));
                 }
                 break;
 
             case 3:
                 if (!preg_match("/^[\x{4e00}-\x{9fa5}]+$/u", $user_name) OR $flag) {
-                    return FARM_APP::lang()->_t('请输入 %s 个汉字', (ceil($length_min / 2) . ' - ' . floor($length_max / 2)));
+                    return MOX_APP::lang()->_t('请输入 %s 个汉字', (ceil($length_min / 2) . ' - ' . floor($length_max / 2)));
                 }
                 break;
         }

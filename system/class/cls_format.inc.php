@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */

@@ -1,22 +1,22 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.farmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
 |   Support: 540335306@qq.com
 +---------------------------------------------------------------------------
 */
 
-if (!defined('IN_FARMNC'))
+if (!defined('IN_MOX'))
 {
     die;
 }
 
-class article extends FARM_ADMIN_CONTROLLER
+class article extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -37,7 +37,7 @@ class article extends FARM_ADMIN_CONTROLLER
                 $param[] = $key . '-' . $val;
             }
             
-            H::ajax_json_output(FARM_APP::RSM(array(
+            H::ajax_json_output(MOX_APP::RSM(array(
                 'url' => get_js_url('/admin/article/list/' . implode('__', $param))
             ), 1, null));
         }
@@ -71,13 +71,13 @@ class article extends FARM_ADMIN_CONTROLLER
             }
         }
         
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/article/list/'),
             'total_rows' => $search_articles_total,
             'per_page' => $this->per_page
         ))->create_links());
         
-        $this->crumb(FARM_APP::lang()->_t('文章管理'), 'admin/article/list/');
+        $this->crumb(MOX_APP::lang()->_t('文章管理'), 'admin/article/list/');
         TPL::assign('articles_count', $search_articles_total);
         TPL::assign('list', $articles_list);
         TPL::assign('status', intval($_GET['status']));
@@ -91,7 +91,7 @@ class article extends FARM_ADMIN_CONTROLLER
         $type = intval($_POST['type']);
 
         if (empty($id)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '系统错误~'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '系统错误~'));
         }
 
         if ($type == '1') {
@@ -101,9 +101,9 @@ class article extends FARM_ADMIN_CONTROLLER
         }
 
         if ($result) {
-            H::ajax_json_output(FARM_APP::RSM(null, 1, '后台更新文章成功'));
+            H::ajax_json_output(MOX_APP::RSM(null, 1, '后台更新文章成功'));
         } else {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '抱歉，更新失败！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '抱歉，更新失败！'));
         }
     }
 

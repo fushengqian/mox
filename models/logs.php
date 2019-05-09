@@ -1,5 +1,5 @@
 <?php
-class logs_class extends FARM_MODEL
+class logs_class extends MOX_MODEL
 {
     public function get_data_list($where, $page = 1, $per_page = 10, $order_by = 'id asc')
     {

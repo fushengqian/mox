@@ -1,9 +1,9 @@
 <?php
-class page extends FARM_ADMIN_CONTROLLER
+class page extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('页面管理'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('页面管理'), "admin/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(803));
         
@@ -19,7 +19,7 @@ class page extends FARM_ADMIN_CONTROLLER
         
         TPL::assign('list', $list);
         
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/page/index/'),
             'total_rows' => $this->model('page')->found_rows(),
             'per_page' => 20
@@ -34,7 +34,7 @@ class page extends FARM_ADMIN_CONTROLLER
     {
         $id = $_GET['id'];
         
-        $result = $this -> model('farm') -> delete('page', 'id = '.intval($id));
+        $result = $this -> model('mox') -> delete('page', 'id = '.intval($id));
         
         HTTP::redirect('/admin/page/index/');
         
@@ -57,7 +57,7 @@ class page extends FARM_ADMIN_CONTROLLER
                       'create_time' => time(),
                       'status'   => 1);
         
-        $data = $this -> model('farm') -> fetch_row('recommend', "`position` = '".$position."' AND url = '".$url."'");
+        $data = $this -> model('mox') -> fetch_row('recommend', "`position` = '".$position."' AND url = '".$url."'");
         
         if (!$data)
         {
@@ -66,11 +66,11 @@ class page extends FARM_ADMIN_CONTROLLER
         
         if ($result)
         {
-            H::ajax_json_output(FARM_APP::RSM(array(), 1, '后台推送页面成功'));
+            H::ajax_json_output(MOX_APP::RSM(array(), 1, '后台推送页面成功'));
         }
         else
         {
-            H::ajax_json_output(FARM_APP::RSM(array(), -1, '后台推送页面失败'));
+            H::ajax_json_output(MOX_APP::RSM(array(), -1, '后台推送页面失败'));
         }
     }
 }

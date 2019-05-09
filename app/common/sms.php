@@ -1,6 +1,6 @@
 <?php
 
-class sms extends FARM_CONTROLLER
+class sms extends MOX_CONTROLLER
 {
     static $acsClient = null;
 
@@ -21,7 +21,7 @@ class sms extends FARM_CONTROLLER
         header('Access-Control-Allow-Origin: http://vip' . G_BASE_DEMAIN);
         header('Access-Control-Allow-Headers: X-Requested-With,X_Requested_With');
 
-        $result = FARM_APP::model('sms')->send($mobile, array('code' => rand(1000, 9999)), 1);
+        $result = MOX_APP::model('sms')->send($mobile, array('code' => rand(1000, 9999)), 1);
 
         if ($result) {
             echo json_encode(array('code' => 200, 'data' => array()));

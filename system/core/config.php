@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */
@@ -56,12 +56,12 @@ class core_config
 
     function load_config($config_id)
     {
-        if (substr($config_id, -10) == '.extension' OR !file_exists(FARM_PATH . 'config/' . $config_id . '.php'))
+        if (substr($config_id, -10) == '.extension' OR !file_exists(MOX_PATH . 'config/' . $config_id . '.php'))
         {
             throw new Zend_Exception('The configuration file config/' . $config_id . '.php does not exist.');
         }
         
-        include_once(FARM_PATH . 'config/' . $config_id . '.php');
+        include_once(MOX_PATH . 'config/' . $config_id . '.php');
 
         if (!is_array($config))
         {
@@ -100,7 +100,7 @@ class core_config
             $content .= "\r\n";
         }
 
-        $config_path = FARM_PATH . 'config/' . $config_id . '.php';
+        $config_path = MOX_PATH . 'config/' . $config_id . '.php';
 
         $fp = @fopen($config_path, "w");
 

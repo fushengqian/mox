@@ -1,5 +1,5 @@
 <?php
-class comment extends FARM_ADMIN_CONTROLLER
+class comment extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -8,7 +8,7 @@ class comment extends FARM_ADMIN_CONTROLLER
     
     public function list_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('点评列表'), "admin/comment/list/");
+        $this->crumb(MOX_APP::lang()->_t('点评列表'), "admin/comment/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(300));
         
@@ -32,14 +32,14 @@ class comment extends FARM_ADMIN_CONTROLLER
         {
             if ($v['type'] == '1')
             {
-                $list[$k]['farm'] = $this->model('farm')->get_one(encode($v['target_id']));
+                $list[$k]['mox'] = $this->model('mox')->get_one(encode($v['target_id']));
             }
         }
         
         TPL::assign('list', $list);
         TPL::assign('is_default', $is_default);
         
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/comment/list/'),
             'total_rows' => $this->model('comment')->found_rows(),
             'per_page' => 20

@@ -1,6 +1,6 @@
 /*!
  * FileUpload v1.0
- * Copyright 2015-2016 farmNc, Inc.
+ * Copyright 2015-2016 Mox, Inc.
  * Date: 2015-11-24
  */
 function FileUpload (type, element, container, url, options, callback)

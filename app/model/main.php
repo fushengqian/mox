@@ -1,6 +1,6 @@
 <?php
 
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     public function setup()
     {
@@ -25,7 +25,7 @@ class main extends FARM_CONTROLLER
         $article_list = $this->model('article')->get_article_list('', 1, 20);
 
         //获取回复
-        $comment_list = FARM_APP::model('comment')->fetch_all('comment', "target_id = " . intval($info['id']) . " AND `type` = 3");
+        $comment_list = MOX_APP::model('comment')->fetch_all('comment', "target_id = " . intval($info['id']) . " AND `type` = 3");
         $user_ids = array();
         foreach ($comment_list as $comment) {
             $user_ids[] = $comment['user_id'];

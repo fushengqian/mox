@@ -1,6 +1,6 @@
 <?php
 
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 搜索结果页
@@ -26,7 +26,7 @@ class main extends FARM_CONTROLLER
             }
         }
 
-        $list = $this->model('farm')->search($qq, $where, 'farm', 1, 100);
+        $list = $this->model('mox')->search($qq, $where, 'mox', 1, 100);
 
         if ($list) {
             $city_list = $this->model('system')->get_city_list(false, false);
@@ -53,11 +53,11 @@ class main extends FARM_CONTROLLER
         TPL::assign('list', $list);
 
         //最新加入
-        $new_list = $this->model('farm')->get_recommend_list($city_info['id'], 10);
+        $new_list = $this->model('mox')->get_recommend_list($city_info['id'], 10);
         TPL::assign('new_list', $new_list);
 
         //热门推荐
-        $recommend_list = $this->model('farm')->get_data_list('city_id = ' . intval($city_info['id']), 1, 10, 'avg_point desc');
+        $recommend_list = $this->model('mox')->get_data_list('city_id = ' . intval($city_info['id']), 1, 10, 'avg_point desc');
         TPL::assign('recommend_list', $recommend_list);
 
         $seo = array('title' => array($q),

@@ -1,10 +1,10 @@
 <?php
 
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     public function captcha_action()
     {
-        FARM_APP::captcha()->generate();
+        MOX_APP::captcha()->generate();
     }
 
     /**
@@ -36,7 +36,7 @@ class main extends FARM_CONTROLLER
         TPL::assign('hot_feed', $hot_feed);
 
         //发送消息
-        $uid = intval(FARM_APP::session()->info['uid']);
+        $uid = intval(MOX_APP::session()->info['uid']);
         if (!empty($uid) && ($uid != $user_id)) {
             $user = $this->model('user')->get_user_info_by_id($uid);
             $url = G_DEMAIN . '/user/' . $uid . '/';
@@ -62,7 +62,7 @@ class main extends FARM_CONTROLLER
 
         TPL::assign('seo', get_seo('usercenter'));
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         if (empty($user_id)) {
             HTTP::redirect(G_DEMAIN . '/user/login/');
@@ -86,7 +86,7 @@ class main extends FARM_CONTROLLER
     public function register_action()
     {
         $url = base64_decode($_GET['url']);
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
         if ($user_info) {
             if ($url) {
                 header('Location: ' . $url);
@@ -118,7 +118,7 @@ class main extends FARM_CONTROLLER
     public function login_action()
     {
         $url = base64_decode($_GET['url']);
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
         if ($user_info) {
             if ($url) {
                 header('Location: ' . $url);

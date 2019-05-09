@@ -1,13 +1,13 @@
 <?php
 
-class upload extends FARM_CONTROLLER
+class upload extends MOX_CONTROLLER
 {
     /**
      * 上传文件
      */
     public function do_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
@@ -59,7 +59,7 @@ class upload extends FARM_CONTROLLER
                                                   'href' => G_DEMAIN.$url,
                                                   'type' => $path_info['extension'])));
 
-                FARM_APP::model('system')->insert('upload_token', array('token' => $token,
+                MOX_APP::model('system')->insert('upload_token', array('token' => $token,
                                                                                      'user_id' => $user_id,
                                                                                      'url' => G_DEMAIN.$url));
 

@@ -23,9 +23,9 @@ class HTTP
      */
     public static function get_cookie($name)
     {
-        if (!empty(FARM_APP::session()->city_info['city_id']) && $name == 'city_id')
+        if (!empty(MOX_APP::session()->city_info['city_id']) && $name == 'city_id')
         {
-            return FARM_APP::session()->city_info['city_id'];
+            return MOX_APP::session()->city_info['city_id'];
         }
         
         if (isset($_COOKIE[G_COOKIE_PREFIX . $name]))
@@ -73,7 +73,7 @@ class HTTP
     {
         if ($_POST['_post_type'] == 'ajax')
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, 'HTTP/1.1 404 Not Found'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, 'HTTP/1.1 404 Not Found'));
         }
         else
         {

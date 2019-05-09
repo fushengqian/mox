@@ -1,5 +1,5 @@
 <?php
-class system_class extends FARM_MODEL
+class system_class extends MOX_MODEL
 {
     /**
      * 根据url获取SEO

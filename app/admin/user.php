@@ -1,6 +1,6 @@
 <?php
 
-class user extends FARM_ADMIN_CONTROLLER
+class user extends MOX_ADMIN_CONTROLLER
 {
     public function list_action()
     {
@@ -55,13 +55,13 @@ class user extends FARM_ADMIN_CONTROLLER
             }
         }
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/user/list/') . implode('__', $url_param).'__aid',
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(FARM_APP::lang()->_t('用户列表'), "admin/user/list/");
+        $this->crumb(MOX_APP::lang()->_t('用户列表'), "admin/user/list/");
 
         TPL::assign('total_rows', $total_rows);
         TPL::assign('list', $user_list);
@@ -110,10 +110,10 @@ class user extends FARM_ADMIN_CONTROLLER
 
     public function group_list_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('用户组管理'), "admin/user/group_list/");
+        $this->crumb(MOX_APP::lang()->_t('用户组管理'), "admin/user/group_list/");
 
         if (!$this->user_info['permission']['is_administortar']) {
-            H::redirect_msg(FARM_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
 
         TPL::assign('mem_group', $this->model('account')->get_user_group_list(1));
@@ -125,14 +125,14 @@ class user extends FARM_ADMIN_CONTROLLER
 
     public function group_edit_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('修改用户组'), "admin/user/group_list/");
+        $this->crumb(MOX_APP::lang()->_t('修改用户组'), "admin/user/group_list/");
 
         if (!$this->user_info['permission']['is_administortar']) {
-            H::redirect_msg(FARM_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
 
         if (!$group = $this->model('account')->get_user_group_by_id($_GET['group_id'])) {
-            H::redirect_msg(FARM_APP::lang()->_t('用户组不存在'), '/admin/user/group_list/');
+            H::redirect_msg(MOX_APP::lang()->_t('用户组不存在'), '/admin/user/group_list/');
         }
 
         TPL::assign('group', $group);
@@ -143,14 +143,14 @@ class user extends FARM_ADMIN_CONTROLLER
 
     public function edit_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('编辑用户资料'), 'admin/user/edit/');
+        $this->crumb(MOX_APP::lang()->_t('编辑用户资料'), 'admin/user/edit/');
 
         if (!$user = $this->model('account')->get_user_info_by_uid($_GET['uid'], TRUE)) {
-            H::redirect_msg(FARM_APP::lang()->_t('用户不存在'), '/admin/user/list/');
+            H::redirect_msg(MOX_APP::lang()->_t('用户不存在'), '/admin/user/list/');
         }
 
         if ($user['group_id'] == 1 AND !$this->user_info['permission']['is_administortar']) {
-            H::redirect_msg(FARM_APP::lang()->_t('你没有权限编辑管理员账号'), '/admin/user/list/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有权限编辑管理员账号'), '/admin/user/list/');
         }
 
         TPL::assign('mem_group', $this->model('account')->get_user_group_by_id($user['reputation_group']));
@@ -163,7 +163,7 @@ class user extends FARM_ADMIN_CONTROLLER
 
     public function user_add_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('添加用户'), "admin/user/list/user_add/");
+        $this->crumb(MOX_APP::lang()->_t('添加用户'), "admin/user/list/user_add/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(500));
 
@@ -174,7 +174,7 @@ class user extends FARM_ADMIN_CONTROLLER
 
     public function invites_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('批量邀请'), "admin/user/invites/");
+        $this->crumb(MOX_APP::lang()->_t('批量邀请'), "admin/user/invites/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(502));
         TPL::output('admin/user/invites');
@@ -192,13 +192,13 @@ class user extends FARM_ADMIN_CONTROLLER
             }
         }
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/user/verify_approval_list/status-' . $_GET['status']),
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(FARM_APP::lang()->_t('认证审核'), 'admin/user/verify_approval_list/');
+        $this->crumb(MOX_APP::lang()->_t('认证审核'), 'admin/user/verify_approval_list/');
 
         TPL::assign('users_info', $this->model('account')->get_user_info_by_uids($uids));
         TPL::assign('approval_list', $approval_list);
@@ -210,20 +210,20 @@ class user extends FARM_ADMIN_CONTROLLER
     public function register_approval_list_action()
     {
         if (get_setting('register_valid_type') != 'approval') {
-            H::redirect_msg(FARM_APP::lang()->_t('未启用新用户注册审核'), '/admin/');
+            H::redirect_msg(MOX_APP::lang()->_t('未启用新用户注册审核'), '/admin/');
         }
 
         $user_list = $this->model('account')->fetch_page('users', 'group_id = 3', 'uid ASC', $_GET['page'], $this->per_page);
 
         $total_rows = $this->model('account')->found_rows();
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/user/register_approval_list/'),
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(FARM_APP::lang()->_t('注册审核'), 'admin/user/register_approval_list/');
+        $this->crumb(MOX_APP::lang()->_t('注册审核'), 'admin/user/register_approval_list/');
 
         TPL::assign('list', $user_list);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(601));
@@ -234,20 +234,20 @@ class user extends FARM_ADMIN_CONTROLLER
     public function verify_approval_edit_action()
     {
         if (!$verify_apply = $this->model('verify')->fetch_apply($_GET['id'])) {
-            H::redirect_msg(FARM_APP::lang()->_t('审核认证不存在'), '/admin/user/register_approval_list/');
+            H::redirect_msg(MOX_APP::lang()->_t('审核认证不存在'), '/admin/user/register_approval_list/');
         }
 
         TPL::assign('verify_apply', $verify_apply);
         TPL::assign('user', $this->model('account')->get_user_info_by_uid($_GET['id']));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(601));
-        $this->crumb(FARM_APP::lang()->_t('编辑认证审核资料'), 'admin/user/verify_approval_list/');
+        $this->crumb(MOX_APP::lang()->_t('编辑认证审核资料'), 'admin/user/verify_approval_list/');
         TPL::output('admin/user/verify_approval_edit');
     }
 
     public function integral_log_action()
     {
         if ($log = $this->model('integral')->fetch_page('integral_log', 'uid = ' . intval($_GET['uid']), 'time DESC', $_GET['page'], 50)) {
-            TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+            TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
                 'base_url' => get_js_url('/admin/user/integral_log/uid-' . intval($_GET['uid'])),
                 'total_rows' => $this->model('integral')->found_rows(),
                 'per_page' => 50
@@ -266,7 +266,7 @@ class user extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('user', $this->model('account')->get_user_info_by_uid($_GET['uid']));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(502));
-        $this->crumb(FARM_APP::lang()->_t('积分日志'), '/admin/user/integral_log/uid-' . $_GET['uid']);
+        $this->crumb(MOX_APP::lang()->_t('积分日志'), '/admin/user/integral_log/uid-' . $_GET['uid']);
         TPL::output('admin/user/integral_log');
     }
 }

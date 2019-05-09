@@ -1,5 +1,5 @@
 <?php
-class ajax extends FARM_CONTROLLER
+class ajax extends MOX_CONTROLLER
 {
     /**
      * 日志
@@ -9,12 +9,12 @@ class ajax extends FARM_CONTROLLER
         $type = intval($_POST['type']);
         $logs = '未知操作';
         if ($type == 1) {
-            $farm_id = trim($_POST['farm_id']);
+            $mox_id = trim($_POST['mox_id']);
             $tel     = trim($_POST['tel']);
-            $url= '/farm/'.$farm_id.'.html';
+            $url= '/mox/'.$mox_id.'.html';
             $logs = '执行操作：给<a target="_blank" href="'.$url.'"> 商家 </a>拨打电话'.$tel.'（' . get_client() . ',' . fetch_ip() . '）';
         }
-        FARM_APP::model('logs')->insert('logs', array(
+        MOX_APP::model('logs')->insert('logs', array(
                 'content' => $logs,
                 'level' => 'info',
                 'create_time' => time()));
@@ -55,26 +55,26 @@ class ajax extends FARM_CONTROLLER
     public function do_message_action()
     {
         $content = trim($_POST['content']);
-        $farm_id = decode($_POST['farm_id']);
+        $mox_id = decode($_POST['mox_id']);
         $mobile  = trim($_POST['mobile']);
         $name    = trim($_POST['name']);
 
-        if (empty($content) || empty($farm_id) || empty($name) || empty($mobile))
+        if (empty($content) || empty($mox_id) || empty($name) || empty($mobile))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '额...您的信息填写不完整！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '额...您的信息填写不完整！'));
             return false;
         }
 
         if (strlen($mobile) != 11)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '额...您的手机号有误！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '额...您的手机号有误！'));
             return false;
         }
 
-        $data =  $this->model('system')->fetch_row('message', "farm_id = '".trim($farm_id)."' AND mobile = '".trim($mobile)."' AND content = '".trim($content)."'");
+        $data =  $this->model('system')->fetch_row('message', "mox_id = '".trim($mox_id)."' AND mobile = '".trim($mobile)."' AND content = '".trim($content)."'");
         if (!empty($data))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '留言已成功！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '留言已成功！'));
             return false;
         }
 
@@ -84,36 +84,36 @@ class ajax extends FARM_CONTROLLER
         $data =  $this->model('system')->fetch_all('message', "mobile = '".trim($mobile)."' AND create_time <= '".($end_time)."' AND create_time >= '".($start_time)."'");
         if (count($data) > 10)
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '留言已成功，请勿重复留言！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '留言已成功，请勿重复留言！'));
             return false;
         }
 
-        $farm_info = $this -> model('farm') -> get_one(encode($farm_id));
+        $mox_info = $this -> model('mox') -> get_one(encode($mox_id));
 
-        $this->model('system')->insert('message', array('farm_id' => $farm_id,
+        $this->model('system')->insert('message', array('mox_id' => $mox_id,
              'content' => $content,
              'mobile' => $mobile,
              'create_time' => time(),
              'ip' => fetch_ip(),
              'client' => get_client(),
-             'is_user' => !empty($farm_info['user_id']) ? 1 : 0,
+             'is_user' => !empty($mox_info['user_id']) ? 1 : 0,
              'name' => $name));
 
         // 给庄主发送短信
-        $farm_mobile = trim($farm_info['mobile']);
-        $sms_param = array('name' => $farm_info['contact'],
+        $mox_mobile = trim($mox_info['mobile']);
+        $sms_param = array('name' => $mox_info['contact'],
                            'visitor' => $name,
-                           'product' => $farm_info['name'],
-                           'code' => $farm_info['id']);
+                           'product' => $mox_info['name'],
+                           'code' => $mox_info['id']);
 
-        preg_match_all('/1[34578][0-9]{8,10}/', $farm_mobile, $mobile_arr);
+        preg_match_all('/1[34578][0-9]{8,10}/', $mox_mobile, $mobile_arr);
         if (!empty($mobile_arr[0])) {
             foreach($mobile_arr[0] as $phone) {
-                FARM_APP::model('sms')->send($phone, $sms_param, 2);
+                MOX_APP::model('sms')->send($phone, $sms_param, 2);
             }
         }
 
-        H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+        H::ajax_json_output(MOX_APP::RSM(null, 1, null));
     }
 
     /**
@@ -122,28 +122,28 @@ class ajax extends FARM_CONTROLLER
     public function do_comment_action()
     {
         $content   = $_POST['content'];
-        $farm_id   = $_POST['farm_id'];
+        $mox_id   = $_POST['mox_id'];
         $type      = $_POST['type'] ? intval($_POST['type']) : 1;
         $point     = str_replace('star', '', $_POST['point']);
         
-        if (FARM_APP::session()->info['user_name'] !== '18976679980')
+        if (MOX_APP::session()->info['user_name'] !== '18976679980')
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '请先登录'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '请先登录'));
         }
         
-        if (empty($content) || empty($farm_id))
+        if (empty($content) || empty($mox_id))
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '评论内容不能为空！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '评论内容不能为空！'));
         }
         
         //评论时间随机
         $time = time();
 
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         $arr = array(
             'type'   => $type,
-            'target_id' => decode($farm_id),
+            'target_id' => decode($mox_id),
             'content'   => $content,
             'avg_price' => 0,
             'point'     => intval($point),
@@ -160,8 +160,8 @@ class ajax extends FARM_CONTROLLER
             {
                 foreach($_POST['image'] as $k => $v)
                 {
-                    $this -> model('images') -> insert('farm_images', 
-                                                       array('farm_id' => decode($farm_id),
+                    $this -> model('images') -> insert('mox_images',
+                                                       array('mox_id' => decode($mox_id),
                                                             'from' => 2,
                                                             'comment_id' => intval($result),
                                                             'url'  => str_replace('/static/', '/', $v),
@@ -172,11 +172,11 @@ class ajax extends FARM_CONTROLLER
                 }
             }
             
-            H::ajax_json_output(FARM_APP::RSM(null, 1, null));
+            H::ajax_json_output(MOX_APP::RSM(null, 1, null));
         }
         else
         {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '评论失败！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '评论失败！'));
         }
     }
     
@@ -185,25 +185,25 @@ class ajax extends FARM_CONTROLLER
      * */
     public function upload_comment_action()
     {
-        if (empty(FARM_APP::session()->info['uid']))
+        if (empty(MOX_APP::session()->info['uid']))
         {
-            H :: ajax_json_output(FARM_APP::RSM(null, -1, '请先登录'));
+            H :: ajax_json_output(MOX_APP::RSM(null, -1, '请先登录'));
             exit;
         }
         
         if (!$file = $_FILES['file'])
         {
-            H :: ajax_json_output(FARM_APP::RSM(null, -1, '没有文件上传'));
+            H :: ajax_json_output(MOX_APP::RSM(null, -1, '没有文件上传'));
         }
         
         if(!stripos($_FILES['file']['name'], 'jpeg') && !stripos($_FILES['file']['name'], 'jpg') && !stripos($_FILES['file']['name'], 'png') && !stripos($_FILES['file']['name'], 'gif'))
         {
-            H :: ajax_json_output(FARM_APP::RSM(null, -1, '只能上传jpg/png/gif类型的图片'));
+            H :: ajax_json_output(MOX_APP::RSM(null, -1, '只能上传jpg/png/gif类型的图片'));
         }
         
         if ($_FILES['file']['size'] > 1024*1024*3 || $_FILES['file']['size'] == 0)
         {
-            H :: ajax_json_output(FARM_APP::RSM(null, -1, '不能上传大于3m的图片'));
+            H :: ajax_json_output(MOX_APP::RSM(null, -1, '不能上传大于3m的图片'));
         }
         
         $upload_path = APP_PATH.'static/static_2/'.date("Ymd", time());
@@ -229,11 +229,11 @@ class ajax extends FARM_CONTROLLER
         if (move_uploaded_file($_FILES['file']['tmp_name'], $upload_path))
         {
             $url = '/static/static_2/'.date("Ymd").'/'.$file_name.'.'.$path_info['extension'];
-            H :: ajax_json_output(FARM_APP::RSM(md5($url), 0, $url));
+            H :: ajax_json_output(MOX_APP::RSM(md5($url), 0, $url));
         }
         else
         {
-            H :: ajax_json_output(FARM_APP::RSM(null, -1, '抱歉，图片上传失败'));
+            H :: ajax_json_output(MOX_APP::RSM(null, -1, '抱歉，图片上传失败'));
         }
     }
 }

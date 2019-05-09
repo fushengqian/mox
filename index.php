@@ -7,4 +7,4 @@ if (! defined('APP_PATH'))
     define('APP_PATH', dirname(__FILE__) . '/');
 }
 
-FARM_APP :: run();
+MOX_APP :: run();

@@ -1,12 +1,12 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 关注
      */
     public function do_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
@@ -53,7 +53,7 @@ class api extends FARM_CONTROLLER
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
         $page_size = 15;
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
@@ -100,7 +100,7 @@ class api extends FARM_CONTROLLER
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
         $page_size = 15;
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         $user_id = !empty($_POST['id']) ? $_POST['id'] : $user_id;
 
         if (empty($user_id)) {

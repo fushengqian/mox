@@ -1,7 +1,7 @@
 <?php
-require_once FARM_PATH.'tbk/TopSdk.php';
+require_once MOX_PATH.'tbk/TopSdk.php';
 
-class tbk_class extends FARM_MODEL
+class tbk_class extends MOX_MODEL
 {
     /**
      * @desc 获取商品列表
@@ -30,7 +30,7 @@ class tbk_class extends FARM_MODEL
         $req->setPageSize($page_size);
         $response = $c->execute($req);
 
-        $result = array("list" => $response->results, 'total' => $response -> total_results);
+        $result = array("list" => $response->results->n_tbk_item, 'total' => $response -> total_results);
 
         return $result;
     }
@@ -60,8 +60,39 @@ class tbk_class extends FARM_MODEL
      * @desc 获取选品库列表
      * @param int $page_no
      */
-    public function get_favorites_list($page_no = 1, $page_size = 20, $type = -1)
+    public function get_favorites_list($page_no = 1, $page_size = 100, $type = -1)
     {
-        return array();
+        $c = new TopClient;
+        $req = new TbkUatmFavoritesGetRequest();
+        $req->setPageNo($page_no);
+        $req->setPageSize($page_size);
+        $req->setFields("favorites_title,favorites_id,type");
+        $req->setType($type);
+        $response = $c->execute($req);
+
+        return $response->results->tbk_favorites ? $response->results->tbk_favorites : array();
+    }
+
+    /**
+     * @desc 获取选品库商品列表
+     * @param $platform 1:pc， 2:无线
+     * @param int $page_no
+     */
+    public function get_favorites_goods_list($platform = 2, $page_no = 1, $page_size = 100, $adzone_id = 108693250117, $favorites_id = 19405526)
+    {
+        $c = new TopClient;
+
+        $req = new TbkUatmFavoritesItemGetRequest;
+        $req->setPlatform($platform);
+        $req->setPageSize($page_size);
+        $req->setAdzoneId($adzone_id);
+        $req->setUnid("100");
+        $req->setFavoritesId($favorites_id);
+        $req->setPageNo($page_no);
+        $req->setFields("num_iid,title,pict_url,small_images,reserve_price,zk_final_price,user_type,provcity,item_url,click_url,seller_id,volume,nick,shop_title,zk_final_price_wap,event_start_time,event_end_time,tk_rate,status,type");
+
+        $response = $c->execute($req);
+
+        return array('list' => $response->results->uatm_tbk_item, 'total' => $response->total_results);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 分享到微信

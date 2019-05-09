@@ -1,5 +1,5 @@
 <?php
-class feed extends FARM_CONTROLLER
+class feed extends MOX_CONTROLLER
 {
     /**
      * 我的feed列表
@@ -10,7 +10,7 @@ class feed extends FARM_CONTROLLER
         
         TPL::assign('seo', get_seo('user_feed'));
         
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         
         if (empty($user_id))
         {
@@ -19,7 +19,7 @@ class feed extends FARM_CONTROLLER
         }
 
         $user_info = $this->model('user') -> get_user_info_by_id($user_id);
-        $list = $this->model('feed') -> get_data_list('farm_id = '.intval($user_info['farm_id']), 1, 100, 'id desc');
+        $list = $this->model('feed') -> get_data_list('mox_id = '.intval($user_info['mox_id']), 1, 100, 'id desc');
         
         TPL::assign('list', $list);
         

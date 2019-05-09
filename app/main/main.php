@@ -3,7 +3,7 @@
  * 五个主要菜单：
  * 农家乐、农庄、度假村、山庄、采摘园
  * */
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     public function index_action()
     {
@@ -31,11 +31,11 @@ class main extends FARM_CONTROLLER
         
         if (!empty($area_info))
         {
-            $list = $this -> model('farm') -> get_data_list('area_id = '.intval($area_info['id']).' AND `name` like "%'.$name.'%"', 1, 20, 'avg_point desc');
+            $list = $this -> model('mox') -> get_data_list('area_id = '.intval($area_info['id']).' AND `name` like "%'.$name.'%"', 1, 20, 'avg_point desc');
         }
         else
         {
-            $list = $this -> model('farm') -> get_data_list('city_id = '.intval($city_info['id']).' AND `name` like "%'.$name.'%"', 1, 20, 'avg_point desc');
+            $list = $this -> model('mox') -> get_data_list('city_id = '.intval($city_info['id']).' AND `name` like "%'.$name.'%"', 1, 20, 'avg_point desc');
         }
         
         //数据不能为空
@@ -43,13 +43,13 @@ class main extends FARM_CONTROLLER
         {
             $name = str_replace('园', '', $name);
             $name = str_replace('村', '', $name);
-            $list = $this -> model('farm') -> get_data_list('city_id = '.intval($city_info['id']).' AND `brief` like "%'.$name.'%"', 1, 20, 'avg_point desc');
+            $list = $this -> model('mox') -> get_data_list('city_id = '.intval($city_info['id']).' AND `brief` like "%'.$name.'%"', 1, 20, 'avg_point desc');
         }
         
         TPL::assign('list', $list);
         
         //最新加入
-        $new_list = $this -> model('farm') -> get_recommend_list($city_info['id'], 15);
+        $new_list = $this -> model('mox') -> get_recommend_list($city_info['id'], 15);
         TPL::assign('new_list', $new_list);
         
         //设置seo

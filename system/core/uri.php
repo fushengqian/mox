@@ -224,7 +224,7 @@ class core_uri
                 $base_url = explode('.', $_SERVER['SERVER_NAME']);
                 if (stripos($this->request_main, '.html'))
                 {
-                    $__app_dir = 'farm';
+                    $__app_dir = 'mox';
                 }
             break;
             
@@ -235,7 +235,7 @@ class core_uri
                 {
                     if ($uri['first']['args'][0])
                     {
-                       $__app_dir = 'farm';
+                       $__app_dir = 'mox';
                        $args_var_str = $uri['first']['args'][0];
                        
                        if ($uri['first']['args'][1])
@@ -251,7 +251,7 @@ class core_uri
                 }
                 else if(stripos($this->request_main, '.html'))
                 {
-                    $__app_dir = 'farm';
+                    $__app_dir = 'mox';
                     $args_var_str = $uri['first']['args'][1];
                 }
                 else
@@ -261,7 +261,7 @@ class core_uri
                     //地点三级域名
                     if (preg_match('/^p\d/', $this -> server_name))
                     {
-                        $__app_dir = 'farm';
+                        $__app_dir = 'mox';
                         $this -> action = 'detail';
                         $_GET['id'] = str_replace('p', '', $this -> server_name);
                     }
@@ -284,7 +284,7 @@ class core_uri
                         if ($city_id !== $city_info['id'])
                         {
                             HTTP::set_cookie('city_id', $city_info['id']);
-                            FARM_APP::session()->city_info = array('city_id' => $city_info['id'], 'uname' => $city_info['uname']);
+                            MOX_APP::session()->city_info = array('city_id' => $city_info['id'], 'uname' => $city_info['uname']);
                         }
                         
                         if (in_array($uri['first']['args'][0], $this -> menu))

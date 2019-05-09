@@ -1,9 +1,9 @@
 <?php
-class main extends FARM_ADMIN_CONTROLLER
+class main extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('概述'), 'admin/main/');
+        $this->crumb(MOX_APP::lang()->_t('概述'), 'admin/main/');
         
         TPL::assign('users_count', $this->model('system')->count('user'));
 
@@ -15,7 +15,7 @@ class main extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('comment_count', $this->model('system')->count('comment'));
         
-        $admin_menu = (array)FARM_APP::config()->get('admin_menu');
+        $admin_menu = (array)MOX_APP::config()->get('admin_menu');
         
         $admin_menu[0]['select'] = true;
         
@@ -26,7 +26,7 @@ class main extends FARM_ADMIN_CONTROLLER
     
     public function login_action()
     {
-        if (FARM_APP::session()->admin_login)
+        if (MOX_APP::session()->admin_login)
         {
             HTTP::redirect('/admin/');
         }
@@ -45,11 +45,11 @@ class main extends FARM_ADMIN_CONTROLLER
     
     public function settings_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('系统设置'), 'admin/settings/');
+        $this->crumb(MOX_APP::lang()->_t('系统设置'), 'admin/settings/');
         
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::redirect_msg(FARM_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
         
         if (!$_GET['category'])
@@ -73,11 +73,11 @@ class main extends FARM_ADMIN_CONTROLLER
     
     public function nav_menu_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('导航设置'), 'admin/nav_menu/');
+        $this->crumb(MOX_APP::lang()->_t('导航设置'), 'admin/nav_menu/');
         
         if (!$this->user_info['permission']['is_administortar'])
         {
-            H::redirect_msg(FARM_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
         
         TPL::assign('nav_menu_list', $this->model('menu')->get_nav_menu_list());

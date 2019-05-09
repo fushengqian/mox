@@ -1,5 +1,5 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 头条文章
@@ -34,7 +34,7 @@ class api extends FARM_CONTROLLER
             $cate = '';
         }
 
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
         $this->model('action')->add($user_id, 0, '查看文章列表：'.$cate, get_client(), fetch_ip());
 
         $arr = array();
@@ -116,7 +116,7 @@ class api extends FARM_CONTROLLER
         $article_id = trim($_POST['id']);
 
         // 跟踪用户行为
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
         $this->model('action')->add($user_id, 0, '阅读文章：'.$article_id, get_client(), fetch_ip());
 
         $info = $this->model('article')->get_article_by_id($article_id);
@@ -129,7 +129,7 @@ class api extends FARM_CONTROLLER
                         'gender' => $user_info['sex'],
                         'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));
 
-        $comment_count = FARM_APP::model('comment')->count('comment', 'target_id = "'.$article_id.'" and `type`="article"');
+        $comment_count = MOX_APP::model('comment')->count('comment', 'target_id = "'.$article_id.'" and `type`="article"');
         $statistics = array('comment' => $comment_count, 'favCount' => 0, 'like' => 0, 'transmit' => 0, 'view' => intval($info['read']));
 
         $result = array('id' => intval($info['id']),
@@ -155,7 +155,7 @@ class api extends FARM_CONTROLLER
 
     public function publish_action()
     {
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if (empty($user_id)) {
             $this -> jsonReturn(null, -1, '登录信息已过期！');

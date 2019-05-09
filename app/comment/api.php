@@ -1,12 +1,12 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 提交评论
      **/
     public function comment_action()
     {
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
@@ -80,7 +80,7 @@ class api extends FARM_CONTROLLER
         $target_id = $_POST['targetId'] ? trim($_POST['targetId']) : 0;
         $type      = $_POST['type'] ? intval($_POST['type']) : '0';
         $page      = $_POST['page'] ? trim($_POST['page']) : 0;
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if ($type == 1) {
             $type = 'article';
@@ -88,7 +88,7 @@ class api extends FARM_CONTROLLER
             $type = 'feed';
         }
 
-        $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($target_id), $type, $user_id);
+        $comment_list = MOX_APP::model('comment')->get_comment_by_targetids(array($target_id), $type, $user_id);
 
         $comments = array();
 

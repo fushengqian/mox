@@ -1,16 +1,16 @@
 <?php
 
-class upload extends FARM_CONTROLLER
+class upload extends MOX_CONTROLLER
 {
     /**
      * 上传文件
      */
     public function do_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         if (empty($user_id)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '请先登录'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '请先登录'));
             exit;
         }
 
@@ -56,16 +56,16 @@ class upload extends FARM_CONTROLLER
                     $imageTool->addWatermark($water, 30, true);
                     @unlink($upload_path.'/'.md5($time.$user_id).'.'.$type);
 
-                    H::ajax_json_output(FARM_APP::RSM(array('url' => $url, 'preview' => $preview_url), 1, '上传成功！'));
+                    H::ajax_json_output(MOX_APP::RSM(array('url' => $url, 'preview' => $preview_url), 1, '上传成功！'));
                 } else {
-                    H:: ajax_json_output(FARM_APP::RSM(null, -1, '抱歉，图片上传失败！'));
+                    H:: ajax_json_output(MOX_APP::RSM(null, -1, '抱歉，图片上传失败！'));
                 }
             } else {
                 //文件类型错误
-                H:: ajax_json_output(FARM_APP::RSM(null, -1, '只能上传jpg/png/gif类型的图片'));
+                H:: ajax_json_output(MOX_APP::RSM(null, -1, '只能上传jpg/png/gif类型的图片'));
             }
         } else {
-                H:: ajax_json_output(FARM_APP::RSM(null, -1, '没有文件上传'));
+                H:: ajax_json_output(MOX_APP::RSM(null, -1, '没有文件上传'));
         }
 
         return false;

@@ -1,12 +1,12 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 点赞
      **/
     public function do_action()
     {
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
@@ -58,7 +58,7 @@ class api extends FARM_CONTROLLER
         $type      = trim($_POST['type']);
         $page      = $_POST['page'] ? intval($_POST['page']) : 1;
 
-        $like_list = FARM_APP::model('like')->get_data_list(array('target_id = "'.$target_id.'"', 'type = "'.$type.'"'), $page, 20);
+        $like_list = MOX_APP::model('like')->get_data_list(array('target_id = "'.$target_id.'"', 'type = "'.$type.'"'), $page, 20);
 
         $likes = array();
         foreach ($like_list as $k => $v) {

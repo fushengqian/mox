@@ -1,10 +1,10 @@
 <?php
 
-class feed extends FARM_ADMIN_CONTROLLER
+class feed extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('动态管理'), "admin/feed/list/");
+        $this->crumb(MOX_APP::lang()->_t('动态管理'), "admin/feed/list/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(803));
 
@@ -19,7 +19,7 @@ class feed extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('list', $list);
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/feed/index/'),
             'total_rows' => $this->model('feed')->found_rows(),
             'per_page' => 20

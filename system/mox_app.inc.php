@@ -1,15 +1,15 @@
 <?php
 /**
- * FarmNc 系统初始化文件
+ * Mox 系统初始化文件
  *
  * 处理基本类库与请求
  *
- * @package     FarmNc
+ * @package     Mox
  * @subpackage  System
  * @category    Front-controller
- * @author      FarmNc Dev Team
+ * @author      Mox Dev Team
  */
-class FARM_APP
+class MOX_APP
 {
     private static $config;
     private static $db;
@@ -95,7 +95,7 @@ class FARM_APP
      */
     private static function init()
     {
-        set_exception_handler(array('FARM_APP', 'exception_handle'));
+        set_exception_handler(array('MOX_APP', 'exception_handle'));
         self::$config = load_class('core_config');
         
         self::$db = load_class('core_db');
@@ -216,11 +216,11 @@ class FARM_APP
      */
     public static function login()
     {
-        if (! FARM_APP::user()->get_info('uid'))
+        if (! MOX_APP::user()->get_info('uid'))
         {
             if ($_POST['_post_type'] == 'ajax')
             {
-                H::ajax_json_output(self::RSM(null, -1, FARM_APP::lang()->_t('会话超时, 请重新登录')));
+                H::ajax_json_output(self::RSM(null, -1, MOX_APP::lang()->_t('会话超时, 请重新登录')));
             }
             else
             {
@@ -501,7 +501,7 @@ class FARM_APP
     {
         if (!$model_class)
         {
-            $model_class = 'FARM_MODEL';
+            $model_class = 'MOX_MODEL';
         }
         else if (! strstr($model_class, '_class'))
         {

@@ -1,5 +1,5 @@
 <?php
-class article_class extends FARM_MODEL
+class article_class extends MOX_MODEL
 {
     /**
      * 获取banner

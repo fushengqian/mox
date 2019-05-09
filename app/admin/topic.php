@@ -1,9 +1,9 @@
 <?php
-class topic extends FARM_ADMIN_CONTROLLER
+class topic extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('话题管理'), "admin/topic/index/");
+        $this->crumb(MOX_APP::lang()->_t('话题管理'), "admin/topic/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(804));
 
@@ -18,7 +18,7 @@ class topic extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('list', $list);
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/topic/index/'),
             'total_rows' => $this->model('topic')->found_rows(),
             'per_page' => 20

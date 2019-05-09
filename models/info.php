@@ -1,5 +1,5 @@
 <?php
-class info_class extends FARM_MODEL
+class info_class extends MOX_MODEL
 {
     public function get_new_info($size = 20)
     {
@@ -58,7 +58,7 @@ class info_class extends FARM_MODEL
         return $data;
     }
     
-    public function publish($id, $farm_id, $city_id, $title, $content, $keywords, $from = 'aiqoo', $summary = '', $status = 1)
+    public function publish($id, $mox_id, $city_id, $title, $content, $keywords, $from = 'aiqoo', $summary = '', $status = 1)
     {
         if (!$title || !$content)
         {
@@ -76,7 +76,7 @@ class info_class extends FARM_MODEL
         if (empty($id))
         {
             $info_id = $this -> insert('info', array(
-                    'farm_id'    => $farm_id,
+                    'mox_id'    => $mox_id,
                     'city_id'     => $city_id,
                     'title'       => $title,
                     'content'     => $content,
@@ -94,7 +94,7 @@ class info_class extends FARM_MODEL
         else
         {
            $this -> update('info', array(
-                    'farm_id'    => $farm_id,
+                    'mox_id'    => $mox_id,
                     'city_id'     => $city_id,
                     'title'       => $title,
                     'content'     => $content,
@@ -152,13 +152,13 @@ class info_class extends FARM_MODEL
         return $data;
     }
     
-    public function get_related_info($farm_id = 0, $city_id = 0, $order_by = 'id desc', $page = 1, $per_page = 20)
+    public function get_related_info($mox_id = 0, $city_id = 0, $order_by = 'id desc', $page = 1, $per_page = 20)
     {
         $where = array();
         
-        if ($farm_id)
+        if ($mox_id)
         {
-            $where[] = 'farm_id = ' . intval($farm_id);
+            $where[] = 'mox_id = ' . intval($mox_id);
         }
         
         if ($city_id)

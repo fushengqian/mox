@@ -1,5 +1,5 @@
 <?php
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 城市首页
@@ -27,7 +27,7 @@ class main extends FARM_CONTROLLER
         TPL::assign('tag_list1', array_chunk($tag_list1, 8));
         
         //地区数据
-        $area_list = $this -> model('farm') -> get_area_list($city_info['id'], 3);
+        $area_list = $this -> model('mox') -> get_area_list($city_info['id'], 3);
         TPL::assign('area_list', $area_list);
         
         //农家乐
@@ -43,11 +43,11 @@ class main extends FARM_CONTROLLER
         TPL::assign('dj_list', $dj_list);
         
         //banner
-        $banner_list = $this -> model('farm') -> get_data_list('city_id = '.$city_id, 1, 1, 'update_time desc');
+        $banner_list = $this -> model('mox') -> get_data_list('city_id = '.$city_id, 1, 1, 'update_time desc');
         TPL::assign('banner_list', $banner_list);
         
         //最新seo
-        $seo_list = $this -> model('farm') -> get_data_list('city_id = '.$city_id, 2, 35, 'id desc');
+        $seo_list = $this -> model('mox') -> get_data_list('city_id = '.$city_id, 2, 35, 'id desc');
         TPL::assign('seo_list', $seo_list);
         
         //农家乐左图
@@ -69,11 +69,11 @@ class main extends FARM_CONTROLLER
         TPL::assign('seo', get_seo('city_home', $seo));
         
         //开通的地区
-        $open_area_list = $this -> model('farm') -> get_open_area($city_info['id']);
+        $open_area_list = $this -> model('mox') -> get_open_area($city_info['id']);
         TPL::assign('open_area_list', $open_area_list);
         
         //同省份开通的城市
-        $open_city_list = $this -> model('farm') -> get_open_city($city_info['provid']);
+        $open_city_list = $this -> model('mox') -> get_open_city($city_info['provid']);
         TPL::assign('open_city_list', $open_city_list);
         
         if (is_mobile())
@@ -96,13 +96,13 @@ class main extends FARM_CONTROLLER
     //农家乐|农家院|渔家乐
     private function _getNjlTuijian($city_id)
     {
-        $data = $this -> model('farm') -> get_data_list('city_id = '.$city_id.' and cate in(1,6,9,10)', 1, 9, 'avg_point desc');
+        $data = $this -> model('mox') -> get_data_list('city_id = '.$city_id.' and cate in(1,6,9,10)', 1, 9, 'avg_point desc');
         
         if (count($data) < 9)
         {
             $num = 9-count($data);
             
-            $data1 = $this -> model('farm') -> get_data_list('city_id = '.$city_id, 1, $num, 'avg_point desc');
+            $data1 = $this -> model('mox') -> get_data_list('city_id = '.$city_id, 1, $num, 'avg_point desc');
             
             empty($data1) && $data1 = array();
             $data = array_merge($data, $data1);
@@ -114,12 +114,12 @@ class main extends FARM_CONTROLLER
     //生态农庄|生态园|采摘园
     private function _getNzTuijian($city_id)
     {
-        $data = $this -> model('farm') -> get_data_list('city_id = '.$city_id.' and cate in(0,3)', 1, 9, 'avg_point desc');
+        $data = $this -> model('mox') -> get_data_list('city_id = '.$city_id.' and cate in(0,3)', 1, 9, 'avg_point desc');
         
         if (count($data) < 9)
         {
             $num = 9-count($data);
-            $data1 = $this -> model('farm') -> get_data_list('city_id = '.$city_id, 2, $num, 'avg_point desc');
+            $data1 = $this -> model('mox') -> get_data_list('city_id = '.$city_id, 2, $num, 'avg_point desc');
             empty($data1) && $data1 = array();
             $data = array_merge($data, $data1);
         }
@@ -130,13 +130,13 @@ class main extends FARM_CONTROLLER
     //度假村|度假山庄|度假酒店
     private function _getDjTuijian($city_id)
     {
-        $data = $this -> model('farm') -> get_data_list('city_id = '.$city_id.' and cate in(4,7,8)', 1, 9, 'avg_point desc');
+        $data = $this -> model('mox') -> get_data_list('city_id = '.$city_id.' and cate in(4,7,8)', 1, 9, 'avg_point desc');
         
         if (count($data) < 9)
         {
             $num = 9-count($data);
             
-            $data1 = $this -> model('farm') -> get_data_list('city_id = '.$city_id, 3, $num, 'avg_point desc');
+            $data1 = $this -> model('mox') -> get_data_list('city_id = '.$city_id, 3, $num, 'avg_point desc');
             
             empty($data1) && $data1 = array();
             

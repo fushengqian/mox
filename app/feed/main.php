@@ -1,13 +1,13 @@
 <?php
 
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 动态详情
      * */
     public function detail_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         $feed_id = trim($_GET['id']);
         $feed = $this->model('feed')->get_detail($feed_id);

@@ -1,15 +1,15 @@
 <?php
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 提交评论
      **/
     public function comment_action()
     {
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
 
         if (empty($user_id)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '请先登录哦~'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '请先登录哦~'));
         }
 
         $target_id = trim($_POST['target_id']);
@@ -17,14 +17,14 @@ class main extends FARM_CONTROLLER
         $content   = trim($_POST['content']);
 
         if (empty($target_id) || empty($content)) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '系统出错，请稍后再试~'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '系统出错，请稍后再试~'));
         }
 
         $user_id = $this->model('user')->get_us($user_id);
 
         $result = $this->model('comment')->comment($target_id, $parent_id, 'feed', $user_id, $content);
         if (!$result) {
-            H::ajax_json_output(FARM_APP::RSM(null, -1, '评论成功失败！'));
+            H::ajax_json_output(MOX_APP::RSM(null, -1, '评论成功失败！'));
         }
 
         $user_info = $this->model('user')->get_user_info_by_id($user_id);
@@ -38,6 +38,6 @@ class main extends FARM_CONTROLLER
 
         $this->model('points')->send($user_id, 'comment');
 
-        H::ajax_json_output(FARM_APP::RSM($arr, 1, '评论成功！'));
+        H::ajax_json_output(MOX_APP::RSM($arr, 1, '评论成功！'));
     }
 }

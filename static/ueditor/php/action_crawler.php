@@ -33,7 +33,7 @@ foreach ($source as $imgUrl)
     $info = $item -> getFileInfo();
     
     /*$filePath = pathinfo($imgUrl);
-    $toUrl = 'D:/wamp/www/farm/upload/image/'.date("Ymd", time()).'/'.md5($imgUrl).'.jpg';
+    $toUrl = 'D:/wamp/www/mox/upload/image/'.date("Ymd", time()).'/'.md5($imgUrl).'.jpg';
     $info = resize_image($imgUrl, $toUrl);
     
     $info = array('state'   => 'SUCCESS',

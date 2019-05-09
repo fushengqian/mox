@@ -1,13 +1,13 @@
 <?php
 
-class model extends FARM_ADMIN_CONTROLLER
+class model extends MOX_ADMIN_CONTROLLER
 {
     /**
      * 模型列表
      */
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('模型管理'), "admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t('模型管理'), "admin/model/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -31,7 +31,7 @@ class model extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('list', $list);
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/model/index/'),
             'total_rows' => $this->model('model')->found_rows(),
             'per_page' => 20
@@ -61,7 +61,7 @@ class model extends FARM_ADMIN_CONTROLLER
     public function edit_action()
     {
         $model_id = $_GET['id'] ? trim($_GET['id']) : 0;
-        $this->crumb(FARM_APP::lang()->_t('编辑模型'), "admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t('编辑模型'), "admin/model/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -105,7 +105,7 @@ class model extends FARM_ADMIN_CONTROLLER
             $id = $this->model('model')->insert('model', $arr);
         }
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/model/edit/id-' . $id . '/')
         ), 1, null));
     }
@@ -131,7 +131,7 @@ class model extends FARM_ADMIN_CONTROLLER
         TPL::assign('info', $info);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
-        $this->crumb(FARM_APP::lang()->_t($info['name'] . '图片'), "/admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t($info['name'] . '图片'), "/admin/model/index/");
 
         TPL::output('admin/model/images_edit');
     }
@@ -159,7 +159,7 @@ class model extends FARM_ADMIN_CONTROLLER
 
         $this->model('model')->update('model', array('pics' => json_encode($arr)), 'id = "'.$model_id.'"');
 
-        H::ajax_json_output(FARM_APP::RSM(array(), 1, null));
+        H::ajax_json_output(MOX_APP::RSM(array(), 1, null));
     }
 
     /**
@@ -176,7 +176,7 @@ class model extends FARM_ADMIN_CONTROLLER
 
         $this->model('model')->update('model', array('preview' => $url, 'update_time' => time()), 'id = "'.$model_id.'"');
 
-        H::ajax_json_output(FARM_APP::RSM(array(), 1, null));
+        H::ajax_json_output(MOX_APP::RSM(array(), 1, null));
     }
 
     /**
@@ -212,6 +212,6 @@ class model extends FARM_ADMIN_CONTROLLER
 
         $this->model('model')->update('model', array('pics' => json_encode($pics), 'update_time' => time()), 'id = "'.$model_id.'"');
 
-        H::ajax_json_output(FARM_APP::RSM(array(), 1, null));
+        H::ajax_json_output(MOX_APP::RSM(array(), 1, null));
     }
 }

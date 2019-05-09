@@ -1,5 +1,5 @@
 <?php
-class topic_class extends FARM_MODEL
+class topic_class extends MOX_MODEL
 {
     /**
      * 获取列表

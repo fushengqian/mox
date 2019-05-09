@@ -1,11 +1,11 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc v1.0
+|   Mox v1.0
 |   ========================================
 |   by WeCenter Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
 |   Support: 540335306@qq.com
 |

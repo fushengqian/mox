@@ -1,22 +1,22 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.farmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
 |   Support: 540335306@qq.com
 +---------------------------------------------------------------------------
 */
 
-if (!defined('IN_FARMNC'))
+if (!defined('IN_MOX'))
 {
     die;
 }
 
-class find_password extends FARM_CONTROLLER
+class find_password extends MOX_CONTROLLER
 {
 
     public function get_access_rule()
@@ -28,7 +28,7 @@ class find_password extends FARM_CONTROLLER
     
     public function setup()
     {
-        $this->crumb(FARM_APP::lang()->_t('找回密码'), '/account/find_password/');
+        $this->crumb(MOX_APP::lang()->_t('找回密码'), '/account/find_password/');
         TPL::import_css('css/login-register.css');
     }
     
@@ -39,7 +39,7 @@ class find_password extends FARM_CONTROLLER
     
     public function process_success_action()
     {
-        TPL::assign('email', FARM_APP::session()->find_password);
+        TPL::assign('email', MOX_APP::session()->find_password);
         TPL::output('account/find_password/process_success');
     }
     
@@ -52,12 +52,12 @@ class find_password extends FARM_CONTROLLER
         
         if (!$active_code_row = $this->model('active')->get_active_code($_GET['key'], 'FIND_PASSWORD'))
         {
-            H::redirect_msg(FARM_APP::lang()->_t('链接已失效'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('链接已失效'), '/');
         }
         
         if ($active_code_row['active_time'] OR $active_code_row['active_ip'])
         {
-            H::redirect_msg(FARM_APP::lang()->_t('链接已失效'), '/');
+            H::redirect_msg(MOX_APP::lang()->_t('链接已失效'), '/');
         }
         
         TPL::output('account/find_password/modify');

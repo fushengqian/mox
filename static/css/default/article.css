@@ -365,7 +365,7 @@ ask-detail .editor{
     font-weight:bold;
     color:#0066cc;
 }
-.f-brief .farm-brief{
+.f-brief .mox-brief{
     padding:10px 70px 10px 70px;
     max-width:908px;
 }
@@ -416,7 +416,7 @@ ask-detail .editor{
     margin-left:38px;
     float:left;
 }
-.farm-publish{
+.mox-publish{
     margin-left:70px;
     margin-top:25px;
     text-align:left;
@@ -424,10 +424,10 @@ ask-detail .editor{
 .review-content{
     padding:0px;
 }
-.farm-brief textarea{
+.mox-brief textarea{
     padding:15px;
 }
-.farm-map{
+.mox-map{
     height:350px;
 }
 .set-map{

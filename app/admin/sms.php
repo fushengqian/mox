@@ -1,5 +1,5 @@
 <?php
-class sms extends FARM_ADMIN_CONTROLLER
+class sms extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -11,7 +11,7 @@ class sms extends FARM_ADMIN_CONTROLLER
     {
         $mobile = $_GET['mobile'] ? trim($_GET['mobile']) : '';
 
-        $this->crumb(FARM_APP::lang()->_t('已发短信'), "admin/sms/list/");
+        $this->crumb(MOX_APP::lang()->_t('已发短信'), "admin/sms/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(801));
         
@@ -26,7 +26,7 @@ class sms extends FARM_ADMIN_CONTROLLER
         
         TPL::assign('list', $list);
         
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/sms/list/'),
             'total_rows' => $this->model('sms')->found_rows(),
             'per_page' => 20

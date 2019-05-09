@@ -1,5 +1,5 @@
 <?php
-class brand_class extends FARM_MODEL
+class brand_class extends MOX_MODEL
 {
     /**
      * 获取列表

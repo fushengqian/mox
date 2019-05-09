@@ -329,7 +329,7 @@ class Zend_Validate_Hostname extends Zend_Validate_Abstract
         'expert',
         'exposed',
         'fail',
-        'farm',
+        'mox',
         'feedback',
         'fi',
         'finance',

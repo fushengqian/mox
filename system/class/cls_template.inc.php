@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 +---------------------------------------------------------------------------
 */
 
@@ -35,7 +35,7 @@ class TPL
                 )
             );
             
-            if (file_exists(FARM_PATH . 'config.inc.php') AND class_exists('FARM_APP', false))
+            if (file_exists(MOX_PATH . 'config.inc.php') AND class_exists('MOX_APP', false))
             {
                 self::$in_app = true;
             }
@@ -116,7 +116,7 @@ class TPL
         
         if (self::$in_app AND $display)
         {
-            if ($plugins = FARM_APP::plugins()->parse($_GET['app'], $_GET['c'], $_GET['act'], str_replace(self::$template_ext, '', $template_filename)))
+            if ($plugins = MOX_APP::plugins()->parse($_GET['app'], $_GET['c'], $_GET['act'], str_replace(self::$template_ext, '', $template_filename)))
             {
                 foreach ($plugins AS $plugin_file)
                 {
@@ -156,7 +156,7 @@ class TPL
             $output = preg_replace('/[a-zA-Z0-9]+_?[a-zA-Z0-9]*\-__/', '', $output);
             $output = preg_replace('/(__)?[a-zA-Z0-9]+_?[a-zA-Z0-9]*\-([\'|"])/', '\2', $output);
             
-            if (FARM_APP::config()->get('system')->debug)
+            if (MOX_APP::config()->get('system')->debug)
             {
                 $output .= "\r\n<!-- Template End: " . $display_template_filename . " -->\r\n";
             }

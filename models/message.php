@@ -1,5 +1,5 @@
 <?php
-class message_class extends FARM_MODEL
+class message_class extends MOX_MODEL
 {
     /**
      * 发送消息

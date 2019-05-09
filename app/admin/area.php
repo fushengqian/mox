@@ -1,6 +1,6 @@
 <?php
 require_once ('Services/Baidu.php');
-class area extends FARM_ADMIN_CONTROLLER
+class area extends MOX_ADMIN_CONTROLLER
 {
     //地区（包括市、区、县、镇、乡、村）列表
     public function index_action()
@@ -8,7 +8,7 @@ class area extends FARM_ADMIN_CONTROLLER
         $page = $_GET['aid'] ? $_GET['aid'] : 1;
         $order = $_GET['order'] ? $_GET['order'] : 'num desc';
         
-        $this->crumb(FARM_APP::lang()->_t('地区管理'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('地区管理'), "admin/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(401));
         
@@ -53,7 +53,7 @@ class area extends FARM_ADMIN_CONTROLLER
         
         TPL::assign('list', $list);
         
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/area/index/'),
             'total_rows' => $this->model('system')->found_rows(),
             'per_page' => 60
@@ -68,7 +68,7 @@ class area extends FARM_ADMIN_CONTROLLER
     //添加地区页面
     public function add_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('新增地区'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('新增地区'), "admin/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(401));
         
@@ -84,25 +84,12 @@ class area extends FARM_ADMIN_CONTROLLER
         $status = $_POST['status'];
         
         $arr = array('uname' => $uname, 'name' => $name, 'status' => $status);
-        
-        $info = $this -> model('system') -> get_area_detail($id);
-        $city_id = $info['city_id'];
-        $name = $info['name'];
-        
-        //数据统计
-        $arr['num']     = $this -> model('farm') -> get_count($city_id, $name);
-        $arr['njl_num'] = $this -> model('farm') -> get_count($city_id, $name, '农家乐');
-        $arr['nz_num'] = $this -> model('farm') -> get_count($city_id, $name, '农庄');
-        $arr['fishing_num'] = $this -> model('farm') -> get_count($city_id, $name, '钓');
-        $arr['holiday_num'] = $this -> model('farm') -> get_count($city_id, $name, '度假');
-        $arr['caizhai_num'] = $this -> model('farm') -> get_count($city_id, $name, '摘');
-        $arr['wenquan_num'] = $this -> model('farm') -> get_count($city_id, $name, '温泉');
-        
+
         $result = $this -> model('system') -> update('area', $arr, 'id = '.$id);
         
         if ($result)
         {
-            H::ajax_json_output(FARM_APP::RSM(array(), 1, null));
+            H::ajax_json_output(MOX_APP::RSM(array(), 1, null));
         }
         else
         {
@@ -173,19 +160,19 @@ class area extends FARM_ADMIN_CONTROLLER
         $arr['lat'] = $lng_lat['lat'];
         
         //数据统计
-        $arr['num']     = $this -> model('farm') -> get_count($city_id, $name);
-        $arr['njl_num'] = $this -> model('farm') -> get_count($city_id, $name, '农家乐');
-        $arr['nz_num'] = $this -> model('farm') -> get_count($city_id, $name, '农庄');
-        $arr['fishing_num'] = $this -> model('farm') -> get_count($city_id, $name, '钓');
-        $arr['holiday_num'] = $this -> model('farm') -> get_count($city_id, $name, '度假');
-        $arr['caizhai_num'] = $this -> model('farm') -> get_count($city_id, $name, '摘');
-        $arr['wenquan_num'] = $this -> model('farm') -> get_count($city_id, $name, '温泉');
+        $arr['num']     = $this -> model('mox') -> get_count($city_id, $name);
+        $arr['njl_num'] = $this -> model('mox') -> get_count($city_id, $name, '农家乐');
+        $arr['nz_num'] = $this -> model('mox') -> get_count($city_id, $name, '农庄');
+        $arr['fishing_num'] = $this -> model('mox') -> get_count($city_id, $name, '钓');
+        $arr['holiday_num'] = $this -> model('mox') -> get_count($city_id, $name, '度假');
+        $arr['caizhai_num'] = $this -> model('mox') -> get_count($city_id, $name, '摘');
+        $arr['wenquan_num'] = $this -> model('mox') -> get_count($city_id, $name, '温泉');
         
         $result = $this -> model('system') -> insert('area', $arr);
         
         if ($result)
         {
-            H::ajax_json_output(FARM_APP::RSM(array(), 1, null));
+            H::ajax_json_output(MOX_APP::RSM(array(), 1, null));
         }
         else
         {

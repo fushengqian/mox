@@ -2,7 +2,7 @@
 /**
  * 推荐位数据
  * */
-class recommend_class extends FARM_MODEL
+class recommend_class extends MOX_MODEL
 {
     /**
      * @desc   获取某个推荐位数据

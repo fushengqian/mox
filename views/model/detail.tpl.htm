@@ -49,7 +49,7 @@
                      <form id="comment" method="post" action="/common/ajax/do_comment/" onsubmit="return false;">
                          <div class="title">回复/留言</div>
                          <input type="hidden" name="type" value="2"/>
-                         <input type="hidden" name="farm_id" value="<?php echo encode($this->info['id']);?>"/>
+                         <input type="hidden" name="mox_id" value="<?php echo encode($this->info['id']);?>"/>
                          <div class="review-item item-comment">
                              <div class="review-content">
                                  <textarea data-maxlen="1000" placeholder="字数不少于5个，回复或留言，ta会第一时间回复您哦！" name="content"></textarea>

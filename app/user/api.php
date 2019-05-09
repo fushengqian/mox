@@ -1,5 +1,5 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 保存资料
@@ -13,7 +13,7 @@ class api extends FARM_CONTROLLER
         $city      = trim($_POST['city']);
         $province  = trim($_POST['province']);
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
             return;
         }
@@ -56,7 +56,7 @@ class api extends FARM_CONTROLLER
      */
     public function avatar_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
@@ -92,7 +92,7 @@ class api extends FARM_CONTROLLER
 
             $this->model('user')->update_user_fields(array('avatar' => $url, 'last_login' => time()), $user_id);
 
-            FARM_APP::model('points')->send($user_id, 'upload_avatar');
+            MOX_APP::model('points')->send($user_id, 'upload_avatar');
         }
 
         $info = $this -> _getUserInfo($user_id, 0);
@@ -109,14 +109,14 @@ class api extends FARM_CONTROLLER
 
         // 当前登录用户信息
         if (empty($uid)) {
-            $uid = FARM_APP::session()->info['uid'];
+            $uid = MOX_APP::session()->info['uid'];
         }
 
         if (!$uid) {
             $this -> jsonReturn(null, -1, '系统无法获取该用户信息！');
         }
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         $info = $this -> _getUserInfo($uid, $user_id);
 
@@ -164,7 +164,7 @@ class api extends FARM_CONTROLLER
 
             // 发送消息
             $this->model('message')->send($uid, 0, '亲爱的 '.trim($username).' ：欢迎您加入我们模型圈的大家族！在遵守本站的规定的同时，享受您的愉快之旅吧！');
-            FARM_APP::model('points')->send($uid, 'register');
+            MOX_APP::model('points')->send($uid, 'register');
 
         } else {
             $this -> jsonReturn(null, -1, '抱歉，注册失败！');
@@ -203,7 +203,7 @@ class api extends FARM_CONTROLLER
             $this -> jsonReturn(null, -1, '账号或密码有误！');
         }
 
-        FARM_APP::model('points')->send($user_info['id'], 'login');
+        MOX_APP::model('points')->send($user_info['id'], 'login');
 
         // 返回用户信息
         $user_info = $this -> _getUserInfo($user_info['id'], $user_info['id']);

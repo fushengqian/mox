@@ -1,7 +1,7 @@
 <?php
 ini_set("display_errors", "on");
 
-require_once FARM_PATH.'ali_sms/vendor/autoload.php';
+require_once MOX_PATH.'ali_sms/vendor/autoload.php';
 
 use Aliyun\Core\Config;
 use Aliyun\Core\Profile\DefaultProfile;
@@ -11,7 +11,7 @@ use Aliyun\Api\Sms\Request\V20170525\SendSmsRequest;
 // 加载区域结点配置
 Config::load();
 
-class sms_class extends FARM_MODEL
+class sms_class extends MOX_MODEL
 {
     static $acsClient = null;
     static $maxDay   = 100;//每日发送上限
@@ -67,7 +67,7 @@ class sms_class extends FARM_MODEL
             return false;
         }
 
-        $data = FARM_APP::model('sms')->fetch_row('sms', 'mobile = "'.$mobile.'"', 'id desc');
+        $data = MOX_APP::model('sms')->fetch_row('sms', 'mobile = "'.$mobile.'"', 'id desc');
         if (!empty($data))
         {
             //一分钟内只能发送一次
@@ -79,7 +79,7 @@ class sms_class extends FARM_MODEL
 
         $today_start = date("Y-m-d".'00:00:00', time());
         $today_end = date("Y-m-d".'23:59:59', time());
-        $count = FARM_APP::model('sms')->count('sms', 'create_time <=' .strtotime($today_end).' AND create_time > '.strtotime($today_start));
+        $count = MOX_APP::model('sms')->count('sms', 'create_time <=' .strtotime($today_end).' AND create_time > '.strtotime($today_start));
         if ($count > self::$maxDay)
         {
             return false;
@@ -125,7 +125,7 @@ class sms_class extends FARM_MODEL
         if ($acsResponse -> Code == 'OK')
         {
             //保存数据库
-            FARM_APP::model('sms')->insert('sms', array(
+            MOX_APP::model('sms')->insert('sms', array(
                 'mobile' => $mobile,
                 'vcode' => !empty($param['code']) ? $param['code'] : '',
                 'type' => $type,

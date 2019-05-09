@@ -1,5 +1,5 @@
 <?php
-class like_class extends FARM_MODEL
+class like_class extends MOX_MODEL
 {
     public function get_data_list($where, $page = 1, $per_page = 10, $order_by = 'create_time desc')
     {
@@ -14,7 +14,7 @@ class like_class extends FARM_MODEL
             $user_ids[] = $v['user_id'];
         }
 
-        $user_arr = FARM_APP::model('user')->get_user_by_ids($user_ids);
+        $user_arr = MOX_APP::model('user')->get_user_by_ids($user_ids);
         foreach($list as $key => $value) {
             $list[$key]['user_info'] = $user_arr[$value['user_id']];
         }

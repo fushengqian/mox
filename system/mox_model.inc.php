@@ -1,13 +1,13 @@
 <?php
 /**
- * FarmNc 数据库操作类
+ * Mox 数据库操作类
  *
- * @package     FarmNc
+ * @package     MOX
  * @subpackage  System
  * @category    Libraries
- * @author      FarmNc Dev Team
+ * @author      Mox Dev Team
  */
-class FARM_MODEL
+class MOX_MODEL
 {
     public $prefix;
     public $setting;
@@ -18,7 +18,7 @@ class FARM_MODEL
     
     public function __construct()
     {
-        $this->prefix = FARM_APP::config()->get('database')->prefix;
+        $this->prefix = MOX_APP::config()->get('database')->prefix;
         $this->setup();
     }
     
@@ -29,7 +29,7 @@ class FARM_MODEL
     
     public function model($model)
     {
-        return FARM_APP::model($model);
+        return MOX_APP::model($model);
     }
     
     /**
@@ -61,7 +61,7 @@ class FARM_MODEL
      */
     public function db()
     {
-        return FARM_APP::db($this->_current_db);
+        return MOX_APP::db($this->_current_db);
     }
     
     /**
@@ -78,16 +78,16 @@ class FARM_MODEL
             return $this;
         }
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
         
-        FARM_PATH::db('master');
+        MOX_PATH::db('master');
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
-            FARM_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Master DB Seleted');
+            MOX_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Master DB Seleted');
         }
         
         return $this;
@@ -100,21 +100,21 @@ class FARM_MODEL
      */
     public function slave()
     {
-        if (!FARM_APP::config()->get('database')->slave OR $this->_current_db == 'slave')
+        if (!MOX_APP::config()->get('database')->slave OR $this->_current_db == 'slave')
         {
             return $this;
         }
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
         
-        FARM_APP::db('slave');
+        MOX_APP::db('slave');
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
-            FARM_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Slave DB Seleted');
+            MOX_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Slave DB Seleted');
         }
         
         return $this;
@@ -169,7 +169,7 @@ class FARM_MODEL
         
         $sql = 'INSERT INTO `' . $this->get_table($table) . '` (' . implode(', ', array_keys($debug_data)) . ') VALUES (' . implode(', ', $debug_data) . ')';
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -214,7 +214,7 @@ class FARM_MODEL
         
         $sql = 'UPDATE `' . $this->get_table($table) . '` SET ' . implode(', ', $update_string) . ' WHERE ' . $where;
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -289,7 +289,7 @@ class FARM_MODEL
         
         $sql = 'DELETE FROM `' . $this->get_table($table) . '` WHERE ' . $where;
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -372,7 +372,7 @@ class FARM_MODEL
         
         $sql = $select->__toString();
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -441,7 +441,7 @@ class FARM_MODEL
             $sql .= ' OFFSET ' . $offset;
         }
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -478,7 +478,7 @@ class FARM_MODEL
             $sql .= ' WHERE ' . $where;
         }
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -533,7 +533,7 @@ class FARM_MODEL
             $sql .= ' OFFSET ' . $offset;
         }
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -724,7 +724,7 @@ class FARM_MODEL
         $select->limit(1, 0);
         $sql = $select->__toString();
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -761,7 +761,7 @@ class FARM_MODEL
         
         $sql = $select->__toString();
 
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -798,7 +798,7 @@ class FARM_MODEL
         }
         
         $sql = $select->__toString();
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -837,7 +837,7 @@ class FARM_MODEL
         $row = $this->db()->fetchRow($select);
         $sql = $select->__toString();
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }
@@ -874,7 +874,7 @@ class FARM_MODEL
         
         $sql = $select->__toString();
         
-        if (FARM_APP::config()->get('system')->debug)
+        if (MOX_APP::config()->get('system')->debug)
         {
             $start_time = microtime(TRUE);
         }

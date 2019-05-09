@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
 |   by WeCenter Software
 |   © 2015 - 2016 WeCenter. All Rights Reserved
-|   http://www.FarmNc.net
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */
@@ -45,9 +45,9 @@ class core_db
             throw new Zend_Exception('Can\'t connect master database: ' . $e->getMessage());
         }
 
-        if (load_class('core_config')->get('system')->debug AND class_exists('FARM_APP', false))
+        if (load_class('core_config')->get('system')->debug AND class_exists('MOX_APP', false))
         {
-            FARM_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Connect Master DB');
+            MOX_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Connect Master DB');
         }
 
         if (load_class('core_config')->get('database')->slave)
@@ -68,9 +68,9 @@ class core_db
                 throw new Zend_Exception('Can\'t connect slave database: ' . $e->getMessage());
             }
 
-            if (load_class('core_config')->get('system')->debug AND class_exists('FARM_APP', false))
+            if (load_class('core_config')->get('system')->debug AND class_exists('MOX_APP', false))
             {
-                FARM_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Connect Slave DB');
+                MOX_APP::debug_log('database', (microtime(TRUE) - $start_time), 'Connect Slave DB');
             }
         }
         else

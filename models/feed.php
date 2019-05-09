@@ -1,5 +1,5 @@
 <?php
-class feed_class extends FARM_MODEL
+class feed_class extends MOX_MODEL
 {
 
     /**
@@ -9,12 +9,12 @@ class feed_class extends FARM_MODEL
     {
         $feed = $this->model('feed')->fetch_row('feed', 'id = "'.$feed_id.'"');
 
-        $feed['user_info'] = FARM_APP::model('user')->get_user_info_by_id($feed['user_id']);
+        $feed['user_info'] = MOX_APP::model('user')->get_user_info_by_id($feed['user_id']);
         $feed['pics'] = json_decode($feed['pics'], true);
-        $feed['like_num'] = FARM_APP::model('like')->count('like', 'target_id = "'.$feed['id'].'" and `type`="feed"');
-        $feed['comment_num'] = FARM_APP::model('comment')->count('comment', 'target_id = "'.$feed['id'].'" and `type`="feed"');
+        $feed['like_num'] = MOX_APP::model('like')->count('like', 'target_id = "'.$feed['id'].'" and `type`="feed"');
+        $feed['comment_num'] = MOX_APP::model('comment')->count('comment', 'target_id = "'.$feed['id'].'" and `type`="feed"');
 
-        $comment_list = FARM_APP::model('comment')->get_comment_by_targetids(array($feed['id']), 'feed');
+        $comment_list = MOX_APP::model('comment')->get_comment_by_targetids(array($feed['id']), 'feed');
         $feed['comment_list'] = $comment_list[$feed['id']];
 
         // 给移动端用的图片格式
@@ -75,13 +75,13 @@ class feed_class extends FARM_MODEL
             }
         }
 
-        $comment_list = FARM_APP::model('comment')->get_comment_by_targetids($feed_ids, 'feed');
+        $comment_list = MOX_APP::model('comment')->get_comment_by_targetids($feed_ids, 'feed');
 
-        $user_arr = FARM_APP::model('user')->get_user_by_ids($user_ids);
+        $user_arr = MOX_APP::model('user')->get_user_by_ids($user_ids);
         foreach($list as $key => $value) {
             $list[$key]['user_info'] = $user_arr[$value['user_id']];
-            $list[$key]['like_num'] = FARM_APP::model('like')->count('like', 'target_id = "'.$value['id'].'" and `type`="feed"');
-            $list[$key]['comment_num'] = FARM_APP::model('comment')->count('comment', 'target_id = "'.$value['id'].'" and `type`="feed"');
+            $list[$key]['like_num'] = MOX_APP::model('like')->count('like', 'target_id = "'.$value['id'].'" and `type`="feed"');
+            $list[$key]['comment_num'] = MOX_APP::model('comment')->count('comment', 'target_id = "'.$value['id'].'" and `type`="feed"');
             $list[$key]['comment_list'] = $comment_list[$value['id']];
         }
 
@@ -146,7 +146,7 @@ class feed_class extends FARM_MODEL
                                                     'update_time' => time(),
                                                     'status' => 1));
 
-                FARM_APP::model('points')->send($user_id, 'create_topic');
+                MOX_APP::model('points')->send($user_id, 'create_topic');
             } else {
                 $topic_id = $topic['id'];
             }
@@ -164,7 +164,7 @@ class feed_class extends FARM_MODEL
             'status'      => 1
         ));
 
-        FARM_APP::model('points')->send($user_id, 'create_feed');
+        MOX_APP::model('points')->send($user_id, 'create_feed');
 
         return $feed_id;
     }

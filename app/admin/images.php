@@ -1,7 +1,7 @@
 ﻿<?php
 define('IN_AJAX', TRUE);
 
-class images extends FARM_ADMIN_CONTROLLER
+class images extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
@@ -23,20 +23,20 @@ class images extends FARM_ADMIN_CONTROLLER
             'max_size' => 100000
         );
 
-        FARM_APP::upload()->initialize($para);
+        MOX_APP::upload()->initialize($para);
 
         if (isset($_GET['aws_upload_file'])) {
-            FARM_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
+            MOX_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
         } else if (isset($_FILES['aws_upload_file'])) {
-            FARM_APP::upload()->do_upload('aws_upload_file');
+            MOX_APP::upload()->do_upload('aws_upload_file');
         } else {
             return false;
         }
 
-        if (FARM_APP::upload()->get_error()) {
-            switch (FARM_APP::upload()->get_error()) {
+        if (MOX_APP::upload()->get_error()) {
+            switch (MOX_APP::upload()->get_error()) {
                 default:
-                    die("{'error':'错误代码: " . FARM_APP::upload()->get_error() . "'}");
+                    die("{'error':'错误代码: " . MOX_APP::upload()->get_error() . "'}");
                     break;
 
                 case 'upload_invalid_filetype':
@@ -49,7 +49,7 @@ class images extends FARM_ADMIN_CONTROLLER
             }
         }
 
-        if (!$upload_data = FARM_APP::upload()->data()) {
+        if (!$upload_data = MOX_APP::upload()->data()) {
             die("{'error':'上传失败, 请与管理员联系'}");
         }
 

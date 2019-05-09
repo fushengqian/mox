@@ -1,5 +1,5 @@
 <?php
-class points_class extends FARM_MODEL
+class points_class extends MOX_MODEL
 {
     /**
      * 积分获取标准
@@ -41,7 +41,7 @@ class points_class extends FARM_MODEL
             $user_ids[] = $v['user_id'];
         }
 
-        $user_arr = FARM_APP::model('user')->get_user_by_ids($user_ids);
+        $user_arr = MOX_APP::model('user')->get_user_by_ids($user_ids);
         foreach($list as $key => $value) {
             $list[$key]['user_info'] = $user_arr[$value['user_id']];
         }

@@ -1,6 +1,6 @@
 <?php
 
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 话题详情
@@ -11,7 +11,7 @@ class main extends FARM_CONTROLLER
 
         TPL::assign('seo', get_seo('usercenter'));
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         $topic_id = trim($_GET['id']);
 

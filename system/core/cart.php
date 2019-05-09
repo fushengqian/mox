@@ -1,11 +1,11 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc v1.0
+|   Mox v1.0
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.farmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
 |   Support: 540335306@qq.com
 +---------------------------------------------------------------------------
@@ -14,19 +14,19 @@ class core_cart
 {
     public function get_info($type)
     {
-        return FARM_APP::session()->cart[$type];
+        return MOX_APP::session()->cart[$type];
     }
     
     public function clear_cart($type = 'goods')
     {
-        unset(FARM_APP::session()->cart[$type]);
+        unset(MOX_APP::session()->cart[$type]);
     }
     
     public function minus_cart($id, $minus = true, $type = 'goods')
     {
-        empty(FARM_APP::session()->cart[$type]) && FARM_APP::session()->cart[$type] = array();
+        empty(MOX_APP::session()->cart[$type]) && MOX_APP::session()->cart[$type] = array();
         
-        foreach(FARM_APP::session()->cart[$type] as $key => &$value)
+        foreach(MOX_APP::session()->cart[$type] as $key => &$value)
         {
             if(intval($value['id']) === intval($id))
             {
@@ -36,7 +36,7 @@ class core_cart
                 }
                 else
                 {
-                    unset(FARM_APP::session()->cart[$type][$key]);
+                    unset(MOX_APP::session()->cart[$type][$key]);
                 }
                 
                 return true;
@@ -49,10 +49,10 @@ class core_cart
     
     public function add_cart($id, $type = 'goods')
     {
-        empty(FARM_APP::session()->cart[$type]) && FARM_APP::session()->cart[$type] = array();
+        empty(MOX_APP::session()->cart[$type]) && MOX_APP::session()->cart[$type] = array();
         
         $is_exist = false;
-        foreach(FARM_APP::session()->cart[$type] as $key => &$value)
+        foreach(MOX_APP::session()->cart[$type] as $key => &$value)
         {
            if($value['id'] == $id)
            {
@@ -63,7 +63,7 @@ class core_cart
         
         if (!$is_exist)
         {
-            FARM_APP::session()->cart[$type][] = array('id' => $id, 'num' => 1);
+            MOX_APP::session()->cart[$type][] = array('id' => $id, 'num' => 1);
         }
         
         return true;

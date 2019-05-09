@@ -1,12 +1,12 @@
 <?php
-class main extends FARM_CONTROLLER
+class main extends MOX_CONTROLLER
 {
     /**
      * 消息列表
      * */
     public function index_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         if (empty($user_id)) {
             HTTP::redirect(G_DEMAIN . '/user/login/');

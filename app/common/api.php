@@ -1,5 +1,5 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     static $acsClient = null;
 
@@ -11,7 +11,7 @@ class api extends FARM_CONTROLLER
         $appid = $_POST['appId'] ? intval($_POST['appId']) : 2;
         $uuid = $_POST['uuid'] ? trim($_POST['uuid']) : 0;
 
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
         if (!empty($user_id)) {
             // 更新登录时间
             $this->model('user')->update_user_last_login($user_id);
@@ -52,7 +52,7 @@ class api extends FARM_CONTROLLER
             exit();
         }
 
-        $result = FARM_APP::model('sms')->send($mobile, array('code' => rand(1000, 9999)), 1);
+        $result = MOX_APP::model('sms')->send($mobile, array('code' => rand(1000, 9999)), 1);
 
         if ($result) {
             $this -> jsonReturn();

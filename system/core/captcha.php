@@ -45,7 +45,7 @@ class core_captcha
     
     public function get_font()
     {
-        return $captcha_fonts = FARM_PATH . 'core/fonts/elephant.ttf';
+        return $captcha_fonts = MOX_PATH . 'core/fonts/elephant.ttf';
     }
     
     public function generate()

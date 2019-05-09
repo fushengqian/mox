@@ -1,10 +1,10 @@
 <?php
-if (! defined('FARM_PATH'))
+if (! defined('MOX_PATH'))
 {
-    define('FARM_PATH', dirname(__FILE__) . '/');
+    define('MOX_PATH', dirname(__FILE__) . '/');
 }
 
-require_once (FARM_PATH . 'init.php');
+require_once (MOX_PATH . 'init.php');
 
 if (defined('G_GZIP_COMPRESS') AND G_GZIP_COMPRESS === TRUE)
 {
@@ -20,6 +20,6 @@ if (defined('G_GZIP_COMPRESS') AND G_GZIP_COMPRESS === TRUE)
     }
 }
 
-require_once (FARM_PATH . 'farm_app.inc.php');
-require_once (FARM_PATH . 'farm_controller.inc.php');
-require_once (FARM_PATH . 'farm_model.inc.php');
+require_once (MOX_PATH . 'MOX_APP.inc.php');
+require_once (MOX_PATH . 'MOX_CONTROLLER.inc.php');
+require_once (MOX_PATH . 'mox_model.inc.php');

@@ -1,6 +1,6 @@
 <?php
 
-if (!defined('IN_FARMNC'))
+if (!defined('IN_MOX'))
 {
     exit();
 }

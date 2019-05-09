@@ -124,7 +124,7 @@ buildingOverlay.prototype.initialize = function(map){
                 "<p><a href=\"" + buildingOverlayObj.url + "\" target=\"_blank\">" +
                     "<img src=\"" + buildingOverlayObj.picUrl + "\" alt=\"\">" +
                 "</a></p>" +
-                "<div class=\"farminfo\">" +
+                "<div class=\"moxinfo\">" +
                         "<div class=\"building_ContentBox\">" + "<strong>特色：</strong><span>" + buildingOverlayObj.tags + "</span>" + "</div>" +
                         "<div class=\"building_ContentBox\">" + "<strong>联系：</strong><span>"+ buildingOverlayObj.contact +" "+ buildingOverlayObj.tel +"</span>" +  "</div>" +
                 "</div>"
@@ -219,7 +219,7 @@ function doSearch(area, search = false)
     isSearch = search;
     
     $.ajax({
-        url:'/map/ajax/farmlist/?city_id='+city_id+'&area='+area+'&q='+q+'&mudi=聚会&ren=qinzi/',
+        url:'/map/ajax/moxlist/?city_id='+city_id+'&area='+area+'&q='+q+'&mudi=聚会&ren=qinzi/',
         type:'GET',
         async:false,
         timeout:5000,

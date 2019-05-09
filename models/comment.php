@@ -1,5 +1,5 @@
 <?php
-class comment_class extends FARM_MODEL
+class comment_class extends MOX_MODEL
 {
     public function comment($target_id, $parent_id, $type, $user_id, $content)
     {
@@ -67,7 +67,7 @@ class comment_class extends FARM_MODEL
         foreach ($comment_info as $k => $v) {
             $user_ids[] = $v['user_id'];
         }
-        $user_arr = FARM_APP::model('user')->get_user_by_ids($user_ids);
+        $user_arr = MOX_APP::model('user')->get_user_by_ids($user_ids);
         foreach ($comment_info as $key1 => $value1) {
             $comment_info[$key1]['user_info'] = $user_arr[$value1['user_id']];
         }

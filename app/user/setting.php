@@ -1,5 +1,5 @@
 <?php
-class setting extends FARM_CONTROLLER
+class setting extends MOX_CONTROLLER
 {
     public function setup()
     {
@@ -14,7 +14,7 @@ class setting extends FARM_CONTROLLER
      * */
     public function info_action()
     {
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
 
         $honor = $this->model('points')->getHonor($user_info['point']);
         TPL::assign('honor', $honor);
@@ -36,7 +36,7 @@ class setting extends FARM_CONTROLLER
      * */
     public function avatar_action()
     {
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
 
         $honor = $this->model('points')->getHonor($user_info['point']);
         TPL::assign('honor', $honor);
@@ -55,7 +55,7 @@ class setting extends FARM_CONTROLLER
      * */
     public function password_action()
     {
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
 
         $honor = $this->model('points')->getHonor($user_info['point']);
         TPL::assign('honor', $honor);

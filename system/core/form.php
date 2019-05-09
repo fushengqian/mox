@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
 |   by WeCenter Software
 |   © 2015 - 2016 WeCenter. All Rights Reserved
-|   http://www.FarmNc.net
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */
@@ -21,7 +21,7 @@ class core_form
     {
         $this->post_hash_cache_key = 'post_hash_' . md5(session_id());
 
-        if ($post_hash_lib = FARM_APP::cache()->get($this->post_hash_cache_key))
+        if ($post_hash_lib = MOX_APP::cache()->get($this->post_hash_cache_key))
         {
             $this->post_hash_lib = $post_hash_lib;
         }
@@ -29,7 +29,7 @@ class core_form
 
     public function save_post_hash_lib()
     {
-        FARM_APP::cache()->set($this->post_hash_cache_key, $this->post_hash_lib, 3600);
+        MOX_APP::cache()->set($this->post_hash_cache_key, $this->post_hash_lib, 3600);
     }
 
     public function new_post_hash()

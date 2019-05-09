@@ -1,5 +1,5 @@
 <?php
-class notice extends FARM_CONTROLLER
+class notice extends MOX_CONTROLLER
 {
     /**
      * 最新通知

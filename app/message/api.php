@@ -1,5 +1,5 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 获取消息数量
@@ -32,7 +32,7 @@ class api extends FARM_CONTROLLER
             }
         }
 
-        $from_user_id = FARM_APP::session()->info['uid'];
+        $from_user_id = MOX_APP::session()->info['uid'];
 
         $msg_id = $this->model('message')->send($user_id, $from_user_id, $content, '', 'letter', 0, $resource);
 
@@ -67,7 +67,7 @@ class api extends FARM_CONTROLLER
      */
     public function clear_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         // 全部消息置为已读
         $this->model('message')->set_readed($user_id);
@@ -80,7 +80,7 @@ class api extends FARM_CONTROLLER
      */
     public function system_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         $page_size = 15;
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
 
@@ -128,7 +128,7 @@ class api extends FARM_CONTROLLER
         $page_size = 15;
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
 
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         $list = $this->model('message')->get_data_list(array('user_id = '.intval($user_id), '(type = "comment" or type = "like")'), $page, $page_size);
 
@@ -178,7 +178,7 @@ class api extends FARM_CONTROLLER
     {
         $page_size = 15;
         $page = !empty($_POST['page']) ? $_POST['page'] : 1;
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
 
         // from_user_id为空就是获取所有发送给我的消息，否则就是获取我和对方之间的私信
         $from_user_id  = !empty($_POST['user_id']) ? $_POST['user_id'] : 0;

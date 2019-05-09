@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */
@@ -46,12 +46,12 @@ class H
 
         $logs = '执行操作：'.$array['err'].'（'.get_client().','.fetch_ip().'）';
         if ($array['errno'] == '-1') {
-            FARM_APP::model('logs')->insert('logs', array(
+            MOX_APP::model('logs')->insert('logs', array(
                 'content' => $logs,
                 'level' => 'error',
                 'create_time' => time()));
         } else {
-            FARM_APP::model('logs')->insert('logs', array(
+            MOX_APP::model('logs')->insert('logs', array(
                 'content' => $logs,
                 'level' => 'info',
                 'create_time' => time()));

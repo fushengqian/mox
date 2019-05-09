@@ -1,9 +1,9 @@
 <?php
-class admin_class extends FARM_MODEL
+class admin_class extends MOX_MODEL
 {
     public function fetch_menu_list($select_id)
     {
-        $admin_menu = (array)FARM_APP::config()->get('admin_menu');
+        $admin_menu = (array)MOX_APP::config()->get('admin_menu');
         
         if (!$admin_menu)
         {
@@ -30,7 +30,7 @@ class admin_class extends FARM_MODEL
     
     public function set_admin_login($uid)
     {
-        FARM_APP::session()->admin_login = H::encode_hash(array(
+        MOX_APP::session()->admin_login = H::encode_hash(array(
             'uid' => $uid,
             'UA' => $_SERVER['HTTP_USER_AGENT'],
             'ip' => fetch_ip()
@@ -39,9 +39,9 @@ class admin_class extends FARM_MODEL
     
     public function admin_logout()
     {
-        if (isset(FARM_APP::session()->admin_login))
+        if (isset(MOX_APP::session()->admin_login))
         {
-            unset(FARM_APP::session()->admin_login);
+            unset(MOX_APP::session()->admin_login);
         }
     }
     

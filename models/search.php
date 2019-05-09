@@ -1,5 +1,5 @@
 <?php
-class search_class extends FARM_MODEL
+class search_class extends MOX_MODEL
 {
     public $max_results = 200;
     
@@ -55,11 +55,11 @@ class search_class extends FARM_MODEL
         foreach($list as $key => &$val)
         {
             $list[$key]['content'] = $val['content'] ? $val['content'] : $val['title'];
-            $list[$key]['user_info'] =  FARM_APP::model('user') -> fetch_row('user', 'id ='.intval($val['id']));
-            $val['reply'] = FARM_APP::model('wenda')->get_reply($val['id']);
+            $list[$key]['user_info'] =  MOX_APP::model('user') -> fetch_row('user', 'id ='.intval($val['id']));
+            $val['reply'] = MOX_APP::model('wenda')->get_reply($val['id']);
             foreach($val['reply'] as &$reply)
             {
-                $reply['user_info'] = FARM_APP::model('user') -> fetch_row('user', 'id ='.intval($reply['user_id']));
+                $reply['user_info'] = MOX_APP::model('user') -> fetch_row('user', 'id ='.intval($reply['user_id']));
             }
         }
 
@@ -74,7 +74,7 @@ class search_class extends FARM_MODEL
      * @param int     $size  每页数
      * @param boolean $full  是否完全匹配
      * */
-    public function get($q, $where, $table = 'farm', $page = 1, $limit = 10, $full = false, $col = '', $max_results = 0)
+    public function get($q, $where, $table = 'mox', $page = 1, $limit = 10, $full = false, $col = '', $max_results = 0)
     {
         if ($table == 'goods' && empty($col))
         {
@@ -127,7 +127,7 @@ class search_class extends FARM_MODEL
             }
             else
             {
-                $result[$k]['url'] = get_farm_url($v['city_id'], $v['id']);
+                $result[$k]['url'] = get_mox_url($v['city_id'], $v['id']);
             }
             
             $tag_arr = array();
@@ -234,7 +234,7 @@ class search_class extends FARM_MODEL
             }
             $code = implode(' ', $arr);
         }
-        if ($table == 'farm')
+        if ($table == 'mox')
         {
             $abc = '`cate` < 13 AND';
         }

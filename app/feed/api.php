@@ -1,5 +1,5 @@
 <?php
-class api extends FARM_CONTROLLER
+class api extends MOX_CONTROLLER
 {
     /**
      * 动态列表
@@ -8,7 +8,7 @@ class api extends FARM_CONTROLLER
     {
         $page_size = 15;
 
-        $my_user_id = FARM_APP::session()->info['uid'];
+        $my_user_id = MOX_APP::session()->info['uid'];
         if (!$my_user_id) {
             $my_user_id = 0;
         }
@@ -86,7 +86,7 @@ class api extends FARM_CONTROLLER
      **/
     public function create_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
@@ -97,12 +97,12 @@ class api extends FARM_CONTROLLER
         $topic_id = trim($_POST['topic_id']);
         $token    = trim($_POST['images']);
 
-        $user_id = intval(FARM_APP::session()->info['uid']);
+        $user_id = intval(MOX_APP::session()->info['uid']);
         $user_id = $this->model('user')->get_us($user_id);
 
         // 图片
         if ($token) {
-            $pic_list = FARM_APP::model('system')->fetch_all('upload_token', 'token = "' . $token . '"');
+            $pic_list = MOX_APP::model('system')->fetch_all('upload_token', 'token = "' . $token . '"');
             $pics = array();
             empty($pic_list) && $pic_list = array();
             foreach ($pic_list as $k => $v) {
@@ -122,7 +122,7 @@ class api extends FARM_CONTROLLER
      * */
     public function detail_action()
     {
-        $user_id = FARM_APP::session()->info['uid'];
+        $user_id = MOX_APP::session()->info['uid'];
         $feed_id = trim($_POST['id']);
 
         $this->model('action')->add($user_id, 0, '查看动态'.$feed_id, get_client(), fetch_ip());

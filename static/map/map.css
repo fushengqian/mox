@@ -16,7 +16,7 @@
 .building-parent .building-infoWindow p { padding: 0 15px; margin: 0; }
 .building-parent .building-infoWindow p a { display: block; height: 160px; }
 .building-parent .building-infoWindow p a img { width: 400px; height: 160px; }
-.building-parent .building-infoWindow .farminfo{margin-top:10px;margin-bottom:15px;font-size:14px;color: #555;}
+.building-parent .building-infoWindow .moxinfo{margin-top:10px;margin-bottom:15px;font-size:14px;color: #555;}
 .building-parent .building-infoWindow .building_ContentBox{ display: block; width: 400x !important; height: auto !important; background-color: #FFF; padding: 5px 15px 5px 15px; }
 .building-parent .building-infoWindow:before { position: absolute; content: ''; left: 195px; bottom: -24px; width: 0; height: 0; border: transparent 12px solid; border-top: 12px solid #FFF; }
 .building-parent .building-overlay { position: relative; }

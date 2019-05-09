@@ -1,13 +1,13 @@
 <?php
 /*
 +--------------------------------------------------------------------------
-|   FarmNc 
+|   Mox
 |   ========================================
-|   by FarmNc Software
-|   © 2015 - 2016 FarmNc. All Rights Reserved
-|   http://www.FarmNc.net
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
 |   ========================================
-|   Support: FarmNc@qq.com
+|   Support: Mox@qq.com
 |
 +---------------------------------------------------------------------------
 */
@@ -27,11 +27,11 @@ class core_autoload
 
     public function __construct()
     {
-        set_include_path(FARM_PATH);
+        set_include_path(MOX_PATH);
 
         foreach (self::$aliases AS $key => $val)
         {
-            self::$aliases[$key] = FARM_PATH . $val;
+            self::$aliases[$key] = MOX_PATH . $val;
         }
 
         spl_autoload_register(array($this, 'loader'));
@@ -39,7 +39,7 @@ class core_autoload
 
     private static function loader($class_name)
     {
-        $require_file = FARM_PATH . preg_replace('#_+#', '/', $class_name) . '.php';
+        $require_file = MOX_PATH . preg_replace('#_+#', '/', $class_name) . '.php';
 
         if (file_exists($require_file))
         {
@@ -47,11 +47,11 @@ class core_autoload
         }
         else
         {
-            if (class_exists('FARM_APP', false))
+            if (class_exists('MOX_APP', false))
             {
-                if (FARM_APP::plugins()->model())
+                if (MOX_APP::plugins()->model())
                 {
-                    self::$aliases = array_merge(self::$aliases, FARM_APP::plugins()->model());
+                    self::$aliases = array_merge(self::$aliases, MOX_APP::plugins()->model());
                 }
             }
 
@@ -65,9 +65,9 @@ class core_autoload
                 $class_file_location = ROOT_PATH . 'models/' . str_replace(array('_class', '_'), array('', '/'), $class_name) . '.php';
             }
             // 查找 class
-            else if (file_exists(FARM_PATH . 'class/' . $class_name . '.inc.php'))
+            else if (file_exists(MOX_PATH . 'class/' . $class_name . '.inc.php'))
             {
-                $class_file_location = FARM_PATH . 'class/' . $class_name . '.inc.php';
+                $class_file_location = MOX_PATH . 'class/' . $class_name . '.inc.php';
             }
         }
 

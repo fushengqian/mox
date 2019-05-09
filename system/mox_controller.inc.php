@@ -1,5 +1,5 @@
 <?php
-class FARM_CONTROLLER
+class MOX_CONTROLLER
 {
     public $user_id;
     public $user_info;
@@ -7,7 +7,7 @@ class FARM_CONTROLLER
     public function jsonReturn($result = array(), $code = 1, $message = 'SUCCESS', $notice = null, $time = '')
     {
         if (!empty($this->user_info)) {
-            $notice = FARM_APP::model("notice")->get_notice($this->user_info['uid']);
+            $notice = MOX_APP::model("notice")->get_notice($this->user_info['uid']);
         }
 
         $ret = array('code' => $code, 'message' => $message, 'result' => $result, 'notice' => $notice, 'time' => $time);
@@ -54,14 +54,14 @@ class FARM_CONTROLLER
             }
         }
 
-        $user_info = FARM_APP::user()->get_info();
+        $user_info = MOX_APP::user()->get_info();
 
         $unread_msg_count = 0;
         if (!empty($user_info['uid']))
         {
-            $user_info = FARM_APP::model("user") -> get_user_info_by_id($user_info['uid']);
+            $user_info = MOX_APP::model("user") -> get_user_info_by_id($user_info['uid']);
             $user_info['uid'] = $user_info['id'];
-            $unread_msg_count = FARM_APP::model("message") -> count('message', 'user_id = '.intval($user_info['uid']).' AND is_read = 0');
+            $unread_msg_count = MOX_APP::model("message") -> count('message', 'user_id = '.intval($user_info['uid']).' AND is_read = 0');
         }
         TPL::assign('unread_msg', intval($unread_msg_count));
         TPL::assign('user_info', $user_info);
@@ -111,7 +111,7 @@ class FARM_CONTROLLER
      */
     public function model($model = null)
     {
-        return FARM_APP::model($model);
+        return MOX_APP::model($model);
     }
     
     /**
@@ -168,14 +168,14 @@ class FARM_CONTROLLER
 }
 
 /**
- * FarmNc 后台控制器
+ * Mox 后台控制器
  *
- * @package     FarmNc
+ * @package     Mox
  * @subpackage  System
  * @category    Libraries
- * @author      FarmNc Dev Team
+ * @author      Mox Dev Team
  */
-class FARM_ADMIN_CONTROLLER extends FARM_CONTROLLER
+class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
 {
     public $per_page = 20;
     
@@ -211,19 +211,19 @@ class FARM_ADMIN_CONTROLLER extends FARM_CONTROLLER
             return true;
         }
         
-        if ($admin_info = H::decode_hash(FARM_APP::session()->admin_login))
+        if ($admin_info = H::decode_hash(MOX_APP::session()->admin_login))
         {
             if (!$admin_info['uid'])
             {
-                unset(FARM_APP::session()->admin_login);
+                unset(MOX_APP::session()->admin_login);
                 
                 if ($_POST['_post_type'] == 'ajax')
                 {
-                    H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('会话超时, 请重新登录')));
+                    H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('会话超时, 请重新登录')));
                 }
                 else
                 {
-                    H::redirect_msg(FARM_APP::lang()->_t('会话超时, 请重新登录'), '/admin/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
+                    H::redirect_msg(MOX_APP::lang()->_t('会话超时, 请重新登录'), '/admin/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
                 }
             }
         }
@@ -231,7 +231,7 @@ class FARM_ADMIN_CONTROLLER extends FARM_CONTROLLER
         {
             if ($_POST['_post_type'] == 'ajax')
             {
-                H::ajax_json_output(FARM_APP::RSM(null, -1, FARM_APP::lang()->_t('会话超时, 请重新登录')));
+                H::ajax_json_output(MOX_APP::RSM(null, -1, MOX_APP::lang()->_t('会话超时, 请重新登录')));
             }
             else
             {

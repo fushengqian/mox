@@ -1,12 +1,12 @@
 <?php
-class brand extends FARM_ADMIN_CONTROLLER
+class brand extends MOX_ADMIN_CONTROLLER
 {
     /**
      * 品牌列表
      */
     public function index_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('品牌管理'), "admin/brand/index/");
+        $this->crumb(MOX_APP::lang()->_t('品牌管理'), "admin/brand/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(100));
 
@@ -21,7 +21,7 @@ class brand extends FARM_ADMIN_CONTROLLER
 
         TPL::assign('list', $list);
 
-        TPL::assign('pagination', FARM_APP::pagination()->initialize(array(
+        TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
             'base_url' => get_js_url('/admin/brand/index/'),
             'total_rows' => $this->model('brand')->found_rows(),
             'per_page' => 20
@@ -37,7 +37,7 @@ class brand extends FARM_ADMIN_CONTROLLER
      */
     public function edit_action()
     {
-        $this->crumb(FARM_APP::lang()->_t('编辑品牌'), "admin/brand/index/");
+        $this->crumb(MOX_APP::lang()->_t('编辑品牌'), "admin/brand/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -71,7 +71,7 @@ class brand extends FARM_ADMIN_CONTROLLER
             $id = $this -> model('brand') -> insert('brand', $arr);
         }
 
-        H::ajax_json_output(FARM_APP::RSM(array(
+        H::ajax_json_output(MOX_APP::RSM(array(
             'url' => get_js_url('/admin/brand/edit/id-'.$id.'/')
         ), 1, null));
     }
