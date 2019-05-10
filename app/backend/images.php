@@ -25,10 +25,10 @@ class images extends MOX_ADMIN_CONTROLLER
 
         MOX_APP::upload()->initialize($para);
 
-        if (isset($_GET['aws_upload_file'])) {
-            MOX_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
-        } else if (isset($_FILES['aws_upload_file'])) {
-            MOX_APP::upload()->do_upload('aws_upload_file');
+        if (isset($_GET['mox_upload_file'])) {
+            MOX_APP::upload()->do_upload($_GET['mox_upload_file'], file_get_contents('php://input'));
+        } else if (isset($_FILES['mox_upload_file'])) {
+            MOX_APP::upload()->do_upload('mox_upload_file');
         } else {
             return false;
         }

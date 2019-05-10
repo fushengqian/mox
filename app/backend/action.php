@@ -1,4 +1,16 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
+|   ========================================
+|   Support: 540335306@qq.com
++---------------------------------------------------------------------------
+ */
+
 class action extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
@@ -29,7 +41,7 @@ class action extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/action/index/'),
+            'base_url' => get_js_url('/backend/action/index/'),
             'total_rows' => $this->model('action')->found_rows(),
             'per_page' => 20
         ))->create_links());

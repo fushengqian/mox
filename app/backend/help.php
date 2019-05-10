@@ -45,7 +45,7 @@ class help extends MOX_ADMIN_CONTROLLER
 
             if (!$chapter_info)
             {
-                H::redirect_msg(MOX_APP::lang()->_t('指定章节不存在'), '/admin/help/list/');
+                H::redirect_msg(MOX_APP::lang()->_t('指定章节不存在'), '/backend/help/list/');
             }
             
             TPL::assign('chapter_info', $chapter_info);

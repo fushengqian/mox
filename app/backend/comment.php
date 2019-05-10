@@ -40,7 +40,7 @@ class comment extends MOX_ADMIN_CONTROLLER
         TPL::assign('is_default', $is_default);
         
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/comment/list/'),
+            'base_url' => get_js_url('/backend/comment/list/'),
             'total_rows' => $this->model('comment')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -58,7 +58,7 @@ class comment extends MOX_ADMIN_CONTROLLER
         
         $result = $this -> model('comment') -> delete('comment', 'id = '.intval($id));
         
-        HTTP::redirect('/admin/comment/list/');
+        HTTP::redirect('/backend/comment/list/');
     }
     
     //删除点评
@@ -68,6 +68,6 @@ class comment extends MOX_ADMIN_CONTROLLER
         
         $result = $this -> model('comment') -> update('comment', array('is_default' => 1), 'id = '.$id);;
         
-        HTTP::redirect('/admin/comment/list/');
+        HTTP::redirect('/backend/comment/list/');
     }
 }

@@ -14,7 +14,7 @@
         <div class="mod-body tab-content">
             <div class="tab-pane active">
                 <div class="tab-pane">
-                <form method="post" action="/admin/article/list/" onsubmit="return false;" id="search_form" class="form-horizontal" role="form">
+                <form method="post" action="/backend/article/list/" onsubmit="return false;" id="search_form" class="form-horizontal" role="form">
                     <input name="action" type="hidden" value="search" />
                     <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
@@ -38,7 +38,7 @@
                             </select>
                         </div>
                         <div class="col-sm-2 col-xs-2">
-                            <button type="button" onclick="AWS.ajax_post($('#search_form'));" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                            <button type="button" onclick="MOX.ajax_post($('#search_form'));" class="btn btn-primary"><?php _e('搜索'); ?></button>
                         </div>
                     </div>
                 </form>
@@ -78,7 +78,7 @@
                                     <a href="/article/publish/id-<?php echo $val['id']; ?>/" target="_blank" class="icon icon-edit md-tip" title="编辑"></a>
                                     <a href="javascript:;" lang="<?php echo $val['id']; ?>" class="icon icon-plus md-tip recommend" title="推到banner"></a>
                                     <a href="javascript:;" lang="<?php echo $val['id']; ?>" class="icon icon-inviteask md-tip very" title="审核"></a>
-                                    <a target="_blank" href="/admin/article/delete/?id=<?php echo $val['id']; ?>" lang="<?php echo $val['id']; ?>" class="icon icon-delete md-tip" title="删除"></a>
+                                    <a target="_blank" href="/backend/article/delete/?id=<?php echo $val['id']; ?>" lang="<?php echo $val['id']; ?>" class="icon icon-delete md-tip" title="删除"></a>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -99,7 +99,7 @@
         var id = $(this).attr("lang");
         $.ajax({
             type: 'POST',
-            url:  "<?php echo G_DEMAIN;?>/admin/article/update/",
+            url:  "<?php echo G_DEMAIN;?>/backend/article/update/",
             data: {id: id},
             dataType: 'json',
             success: function(data){
@@ -118,7 +118,7 @@
         var id = $(this).attr("lang");
         $.ajax({
             type: 'POST',
-            url:  "<?php echo G_DEMAIN;?>/admin/article/update/",
+            url:  "<?php echo G_DEMAIN;?>/backend/article/update/",
             data: {id: id, type: 1},
             dataType: 'json',
             success: function(data){

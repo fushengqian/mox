@@ -5,11 +5,11 @@
         <div class="mod-head">
             <ul class="nav nav-tabs">
                 <li class="active"><a href="JavaScript:;">地区列表</a></li>
-                <li><a href="/admin/area/add/">新增地区</a></li>
+                <li><a href="/backend/area/add/">新增地区</a></li>
             </ul>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/area/index/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/area/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
@@ -89,7 +89,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h4 class="modal-title" id="myModalLabel">修改数据</h4>
                </div>
-               <form method="post" action="/admin/area/update/" onsubmit="return false;" id="recommend_form" class="form-horizontal" role="form">
+               <form method="post" action="/backend/area/update/" onsubmit="return false;" id="recommend_form" class="form-horizontal" role="form">
                     <input name="id" id="id" type="hidden" value="">
                     <div class="form-group">
                         <label class="col-sm-2 col-xs-6 control-label">名称:</label>
@@ -128,7 +128,7 @@
        $('#myModal').modal();
    });
    $("#do-recommend").bind('click', function(){
-       AWS.ajax_post($('#recommend_form'),  AWS.ajax_processer, 'error_message');
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
    });
 </script>
 <?php TPL::output('admin/global/footer.tpl.htm'); ?>

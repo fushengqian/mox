@@ -6,7 +6,7 @@
             <span class="pull-left">已发短信</span>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/sms/list/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/sms/list/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="手机" type="text" value="<?php echo rawurldecode($_GET['mobile']); ?>" name="mobile"/>
@@ -37,7 +37,7 @@
                             <tr>
                                 <td><?php echo $val['id']; ?></td>
                                 <td><?php echo $val['type'] == 1 ? '登录验证' : '商家通知'; ?></td>
-                                <td><a href="/admin/sms/list/?mobile=<?php echo $val['mobile'];?>"><?php echo $val['mobile']; ?></a></td>
+                                <td><a href="/backend/sms/list/?mobile=<?php echo $val['mobile'];?>"><?php echo $val['mobile']; ?></a></td>
                                 <td><a title="<?php echo $val['content']; ?>" href="javascript:;"><?php echo summary($val['content'], 40); ?></a></td>
                                 <td><?php echo date("Y-m-d H:i:s", $val['create_time']);?></td>
                                 <td>阿里云</td>

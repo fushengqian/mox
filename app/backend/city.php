@@ -51,7 +51,7 @@ class city extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
         
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/city/index/'),
+            'base_url' => get_js_url('/backend/city/index/'),
             'total_rows' => $this->model('system')->found_rows(),
             'per_page' => 50
         ))->create_links());

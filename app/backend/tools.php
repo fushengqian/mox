@@ -39,24 +39,24 @@ class tools extends MOX_ADMIN_CONTROLLER
     
     public function init_action()
     {
-        H::redirect_msg(MOX_APP::lang()->_t('正在准备...'), '/admin/tools/' . $_POST['action'] . '/page-1__per_page-' . $_POST['per_page']);
+        H::redirect_msg(MOX_APP::lang()->_t('正在准备...'), '/backend/tools/' . $_POST['action'] . '/page-1__per_page-' . $_POST['per_page']);
     }
     
     public function cache_clean_action()
     {
         MOX_APP::cache()->clean();
-        H::redirect_msg(MOX_APP::lang()->_t('缓存清理完成'), '/admin/tools/');
+        H::redirect_msg(MOX_APP::lang()->_t('缓存清理完成'), '/backend/tools/');
     }
     
     public function update_users_reputation_action()
     {
         if ($this->model('reputation')->calculate((($_GET['page'] * $_GET['per_page']) - $_GET['per_page']), $_GET['per_page']))
         {
-            H::redirect_msg(MOX_APP::lang()->_t('正在更新用户经验') . ', ' . MOX_APP::lang()->_t('批次: %s', $_GET['page']), '/admin/tools/update_users_reputation/page-' . ($_GET['page'] + 1) . '__per_page-' . $_GET['per_page']);
+            H::redirect_msg(MOX_APP::lang()->_t('正在更新用户经验') . ', ' . MOX_APP::lang()->_t('批次: %s', $_GET['page']), '/backend/tools/update_users_reputation/page-' . ($_GET['page'] + 1) . '__per_page-' . $_GET['per_page']);
         }
         else
         {
-            H::redirect_msg(MOX_APP::lang()->_t('用户经验更新完成'), '/admin/tools/');
+            H::redirect_msg(MOX_APP::lang()->_t('用户经验更新完成'), '/backend/tools/');
         }
     }
 
@@ -93,6 +93,6 @@ class tools extends MOX_ADMIN_CONTROLLER
             $messages = '更新微信菜单完成';
         }
         
-        H::redirect_msg(MOX_APP::lang()->_t($messages), '/admin/weixin/mp_menu/');
+        H::redirect_msg(MOX_APP::lang()->_t($messages), '/backend/weixin/mp_menu/');
     }
 }

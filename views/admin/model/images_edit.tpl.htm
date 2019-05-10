@@ -5,14 +5,14 @@
         <div class="mod-head">
             <h3>
                 <ul class="nav nav-tabs">
-                    <li><a href="/admin/model/edit/id-<?php echo $this->id;?>/">编辑<?php echo $this -> info['name']; ?></a></li>
+                    <li><a href="/backend/model/edit/id-<?php echo $this->id;?>/">编辑<?php echo $this -> info['name']; ?></a></li>
                     <li class="active"><a href="javascript:;"><?php echo $this -> info['name']; ?>图片管理</a></li>
                     <li><a target="_blank" href="<?php echo G_DEMAIN;?>/model/<?php echo $this -> info['id'];?>.html"><?php echo $this -> info['name'].'详情'; ?></a></li>
                 </ul>
             </h3>
         </div>
         <div class="tab-content mod-content">
-            <form action="/admin/ajax/model/images_save/" id="form" method="post" onsubmit="return false">
+            <form action="/backend/ajax/model/images_save/" id="form" method="post" onsubmit="return false">
                  <input type="hidden" name="id" value="<?php echo $this->id; ?>" />
                     <div class="upload-content">
                         <ul id="upload-list" class="upload-list">
@@ -42,15 +42,15 @@
         </div>
     </div>
 </div>
-<form method="post" action="/admin/model/image_delete/" onsubmit="return false;" id="delete_form">
+<form method="post" action="/backend/model/image_delete/" onsubmit="return false;" id="delete_form">
       <input id="url" name="url" type="hidden" value="">
       <input id="model_id" name="model_id" type="hidden" value="<?php echo $this->id; ?>">
 </form>
-<form method="post" action="/admin/model/image_preview/" onsubmit="return false;" id="preview_form">
+<form method="post" action="/backend/model/image_preview/" onsubmit="return false;" id="preview_form">
       <input id="image" name="url" type="hidden" value="">
       <input name="model_id" type="hidden" value="<?php echo $this->id; ?>">
 </form>
-<form method="post" action="/admin/model/image_brief/" onsubmit="return false;" id="brief_form">
+<form method="post" action="/backend/model/image_brief/" onsubmit="return false;" id="brief_form">
       <input id="para" name="para" type="hidden" value="">
       <input name="model_id" type="hidden" value="<?php echo $this->id; ?>">
 </form>
@@ -58,21 +58,21 @@
 $(function() {
     var attach_key = hex_md5(new Date().getTime() + ' ' + Math.random());
     
-    var fileupload = new FileUpload('file', '.aw-upload-box', $("#upload-list"), '/admin/images/upload/?attach_access_key=' + attach_key + '&model_id=<?php echo $this->id; ?>');
+    var fileupload = new FileUpload('file', '.aw-upload-box', $("#upload-list"), '/backend/images/upload/?attach_access_key=' + attach_key + '&model_id=<?php echo $this->id; ?>');
     
     $("[attr='file_delete']").bind('click', function() {
         var _this = this;
-        AWS.dialog('confirm',{'message': '<?php _e('确定要删除吗？'); ?>'}, function(){
+        MOX.dialog('confirm',{'message': '<?php _e('确定要删除吗？'); ?>'}, function(){
             $("#url").val($(_this).parents('p').find("input").val());
-            AWS.ajax_post($('#delete_form'),  AWS.ajax_processer, 'error_message');
+            MOX.ajax_post($('#delete_form'),  MOX.ajax_processer, 'error_message');
         });
     });
     
     $("[attr='file_preview']").bind('click', function() {
         var _this = this;
-        AWS.dialog('confirm',{'message': '<?php _e('确定要设置为封面吗？'); ?>'}, function(){
+        MOX.dialog('confirm',{'message': '<?php _e('确定要设置为封面吗？'); ?>'}, function(){
             $("#image").val($(_this).parents('p').find("input").val());
-            AWS.ajax_post($('#preview_form'),  AWS.ajax_processer, 'error_message');
+            MOX.ajax_post($('#preview_form'),  MOX.ajax_processer, 'error_message');
         });
     });
     
@@ -92,7 +92,7 @@ $(function() {
         
         $("#para").val(briefs);
         
-        AWS.ajax_post($('#brief_form'),  AWS.ajax_processer, 'error_message');
+        MOX.ajax_post($('#brief_form'),  MOX.ajax_processer, 'error_message');
     });
 });
 </script>

@@ -47,8 +47,8 @@
                                 <td><a target="_blank" href="http://<?php echo $val['url']; ?>"><?php echo $val['point'];?></a></td>
                                 <td><?php echo $val['is_default'] ? '是' : '否';?></td>
                                 <td>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除该点评?'); ?>'}, function(){window.location = G_BASE_URL + '/admin/comment/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认设为默认点评?'); ?>'}, function(){window.location = G_BASE_URL + '/admin/comment/update/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-edit md-tip" title="<?php _e('默认'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该点评?'); ?>'}, function(){window.location = G_BASE_URL + '/backend/comment/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认设为默认点评?'); ?>'}, function(){window.location = G_BASE_URL + '/backend/comment/update/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-edit md-tip" title="<?php _e('默认'); ?>"></a>
                                 </td>
                             </tr>
                             <?php } ?>
@@ -103,7 +103,7 @@
        $('#myModal').modal();
    });
    $("#do-recommend").bind('click', function(){
-       AWS.ajax_post($('#recommend_form'),  AWS.ajax_processer, 'error_message');
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
    });
 </script>
 <?php TPL::output('admin/global/footer.tpl.htm'); ?>

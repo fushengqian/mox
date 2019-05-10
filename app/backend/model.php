@@ -32,7 +32,7 @@ class model extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/model/index/'),
+            'base_url' => get_js_url('/backend/model/index/'),
             'total_rows' => $this->model('model')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -51,7 +51,7 @@ class model extends MOX_ADMIN_CONTROLLER
 
         $this->model('topic')->delete('model', 'id = ' . trim($id));
 
-        HTTP::redirect('/admin/model/index/');
+        HTTP::redirect('/backend/model/index/');
         exit;
     }
 
@@ -106,7 +106,7 @@ class model extends MOX_ADMIN_CONTROLLER
         }
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/model/edit/id-' . $id . '/')
+            'url' => get_js_url('/backend/model/edit/id-' . $id . '/')
         ), 1, null));
     }
 
@@ -131,7 +131,7 @@ class model extends MOX_ADMIN_CONTROLLER
         TPL::assign('info', $info);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
-        $this->crumb(MOX_APP::lang()->_t($info['name'] . '图片'), "/admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t($info['name'] . '图片'), "/backend/model/index/");
 
         TPL::output('admin/model/images_edit');
     }

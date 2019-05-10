@@ -117,7 +117,7 @@
        $('#myModal').modal();
    });
    $("#do-recommend").bind('click', function(){
-       AWS.ajax_post($('#recommend_form'),  AWS.ajax_processer, 'error_message');
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
    });
 </script>
 <?php TPL::output('admin/global/footer.tpl.htm'); ?>

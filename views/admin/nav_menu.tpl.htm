@@ -9,7 +9,7 @@
                 <form action="admin/ajax/save_nav_menu/" method="post" id="nav_menu_list" onsubmit="return false">
                     <div class="mod aw-message-box ">
                     <div class="mod-set-head">
-                        <a class="btn btn-primary btn-xs pull-right" onclick="AWS.ajax_post($('#nav_menu_list'));"><?php _e('保存设置'); ?></a>
+                        <a class="btn btn-primary btn-xs pull-right" onclick="MOX.ajax_post($('#nav_menu_list'));"><?php _e('保存设置'); ?></a>
                         <h3>
                             <?php _e('导航菜单'); ?>
                             <span><?php _e('拖动菜单可调整导航菜单排序'); ?></span>
@@ -24,7 +24,7 @@
                         <?php if ($val['title']) { ?>
                         <li data-sort="<?php echo $val['id']; ?>" data-cursor="pointer">
                             <div class="mod-set-head">
-                                <span class="pull-right"><a href="javascript:;" onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除?'); ?>'}, function(){AWS.ajax_request(G_BASE_URL + '/admin/ajax/remove_nav_menu/', 'id=<?php echo $val['id']; ?>');}); return false;"><?php _e('删除'); ?></a></span>
+                                <span class="pull-right"><a href="javascript:;" onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除?'); ?>'}, function(){MOX.ajax_request(G_BASE_URL + '/backend/ajax/remove_nav_menu/', 'id=<?php echo $val['id']; ?>');}); return false;"><?php _e('删除'); ?></a></span>
                                 <h4><?php echo $val['title']; ?></h4>
                             </div>
                             <div class="mod-set-body clearfix">
@@ -47,7 +47,7 @@
                         <?php foreach($val['child'] as $k => $v) { ?>
                         <li data-sort="<?php echo $v['id']; ?>" data-cursor="pointer">
                             <div class="mod-set-head">
-                                <span class="pull-right"><a href="javascript:;" onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除?'); ?>'}, function(){AWS.ajax_request(G_BASE_URL + '/admin/ajax/remove_nav_menu/', 'id=<?php echo $v['id']; ?>');}); return false;"><?php _e('删除'); ?></a></span>
+                                <span class="pull-right"><a href="javascript:;" onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除?'); ?>'}, function(){MOX.ajax_request(G_BASE_URL + '/backend/ajax/remove_nav_menu/', 'id=<?php echo $v['id']; ?>');}); return false;"><?php _e('删除'); ?></a></span>
                                 <h4> -- <?php echo $v['title']; ?></h4>
                             </div>
                             <div class="mod-set-body clearfix">
@@ -100,7 +100,7 @@
                                         <?php } ?>
                                     <?php } ?>
                                 </select><br /></p>
-                            <a onclick="AWS.ajax_post($(this).parents('form'));" class="btn btn-primary"><?php _e('添加至导航菜单'); ?></a>
+                            <a onclick="MOX.ajax_post($(this).parents('form'));" class="btn btn-primary"><?php _e('添加至导航菜单'); ?></a>
                         </form>
                     </div>
                 </div>

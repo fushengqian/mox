@@ -1,5 +1,5 @@
 <?php
-/*
+/**
 +--------------------------------------------------------------------------
 |   Mox
 |   ========================================
@@ -38,7 +38,7 @@ class article extends MOX_ADMIN_CONTROLLER
             }
             
             H::ajax_json_output(MOX_APP::RSM(array(
-                'url' => get_js_url('/admin/article/list/' . implode('__', $param))
+                'url' => get_js_url('/backend/article/list/' . implode('__', $param))
             ), 1, null));
         }
         
@@ -72,7 +72,7 @@ class article extends MOX_ADMIN_CONTROLLER
         }
         
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/article/list/'),
+            'base_url' => get_js_url('/backend/article/list/'),
             'total_rows' => $search_articles_total,
             'per_page' => $this->per_page
         ))->create_links());
@@ -107,7 +107,9 @@ class article extends MOX_ADMIN_CONTROLLER
         }
     }
 
-    // 删除
+    /**
+     * 删除
+     */
     public function delete_action()
     {
         $id = intval($_REQUEST['id']);

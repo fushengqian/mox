@@ -12,7 +12,7 @@
 <title>模型圈管理平台</title>
 <link type="text/css" rel="stylesheet" href="<?php echo G_STATIC; ?>/css/bootstrap.css?v=<?php echo G_VERSION_BUILD; ?>" />
 <link type="text/css" rel="stylesheet" href="<?php echo G_STATIC; ?>/css/icon.css?v=<?php echo G_VERSION_BUILD; ?>" />
-<link type="text/css" rel="stylesheet" href="<?php echo G_STATIC; ?>/admin/css/login.css?v=<?php echo G_VERSION_BUILD; ?>" />
+<link type="text/css" rel="stylesheet" href="<?php echo G_STATIC; ?>/backend/css/login.css?v=<?php echo G_VERSION_BUILD; ?>" />
 <script type="text/javascript">
     var G_INDEX_SCRIPT = "<?php echo G_INDEX_SCRIPT; ?>";
     var G_BASE_URL = "<?php echo base_url(); ?>/<?php echo rtrim(G_INDEX_SCRIPT, '/'); ?>";
@@ -35,7 +35,7 @@
 <div class="aw-login">
     <div class="mod center-block">
         <h1 class="text-center shuoly-title">模型圈管理平台</h1>
-        <form role="form" id="login_form"  onsubmit="return false" action="/admin/ajax/login_process/" method="post">
+        <form role="form" id="login_form"  onsubmit="return false" action="/backend/ajax/login_process/" method="post">
             <?php if ($_GET['url']){ ?>
             <input type="hidden" name="url" value="<?php echo htmlspecialchars($_GET['url']); ?>">
             <?php } ?>
@@ -63,7 +63,7 @@
                 </div>
             </div>
             <?php } ?>
-            <button type="submit" class="btn btn-primary" id="login_submit" onclick="AWS.ajax_post($('#login_form'), AWS.ajax_processer, 'error_message');"><?php _e('登录'); ?></button>
+            <button type="submit" class="btn btn-primary" id="login_submit" onclick="MOX.ajax_post($('#login_form'), MOX.ajax_processer, 'error_message');"><?php _e('登录'); ?></button>
         </form>
         <h2 class="text-center" style="color:#fff;font-weight:bold;">模型圈 - 万千模型爱好者聚居地</h2>
     </div>

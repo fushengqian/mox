@@ -4,12 +4,12 @@
     <div class="mod">
         <div class="mod-head">
             <ul class="nav nav-tabs">
-                <li class="active"><a href="/admin/brand/index/"><?php _e('品牌列表'); ?></a></li>
-                <li><a href="/admin/brand/edit/"><?php _e('新增品牌'); ?></a></li>
+                <li class="active"><a href="/backend/brand/index/"><?php _e('品牌列表'); ?></a></li>
+                <li><a href="/backend/brand/edit/"><?php _e('新增品牌'); ?></a></li>
             </ul>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/brand/index/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/brand/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
@@ -42,7 +42,7 @@
                                 <td><?php echo($val['ename']);?></td>
                                 <td><?php echo($val['area']);?></td>
                                 <td>
-                                    <a href="<?php echo G_DEMAIN;?>/admin/brand/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
+                                    <a href="<?php echo G_DEMAIN;?>/backend/brand/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
                                 </td>
                             </tr>
                             <?php } ?>

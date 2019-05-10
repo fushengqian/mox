@@ -4,12 +4,12 @@
     <div class="mod">
         <div class="mod-head">
              <ul class="nav nav-tabs">
-                <li><a href="/admin/area/index/">地区列表</a></li>
+                <li><a href="/backend/area/index/">地区列表</a></li>
                 <li class="active"><a href="javascript:;">新增地区</a></li>
             </ul>
         </div>
         <div class="tab-content mod-content">
-            <form action="/admin/area/save/" id="form" method="post" onsubmit="return false">
+            <form action="/backend/area/save/" id="form" method="post" onsubmit="return false">
                 <table class="table table-striped">
                     <tr>
                         <td>
@@ -45,7 +45,7 @@
                     <tfoot>
                         <tr>
                             <td>
-                                <input type="button" value="<?php _e('保存设置'); ?>" class="btn btn-primary center-block" onclick="AWS.ajax_post($('#form'));" />
+                                <input type="button" value="<?php _e('保存设置'); ?>" class="btn btn-primary center-block" onclick="MOX.ajax_post($('#form'));" />
                             </td>
                         </tr>
                     </tfoot>

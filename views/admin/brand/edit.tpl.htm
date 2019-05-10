@@ -5,13 +5,13 @@
         <div class="mod-head">
             <h3>
                 <ul class="nav nav-tabs">
-                    <li><a href="/admin/brand/index/"><?php _e('品牌列表'); ?></a></li>
-                    <li class="active"><a href="/admin/brand/edit/"><?php _e('编辑品牌'); ?></a></li>
+                    <li><a href="/backend/brand/index/"><?php _e('品牌列表'); ?></a></li>
+                    <li class="active"><a href="/backend/brand/edit/"><?php _e('编辑品牌'); ?></a></li>
                 </ul>
             </h3>
         </div>
         <div class="tab-content mod-content">
-            <form action="/admin/brand/save/" id="form" method="post" onsubmit="return false">
+            <form action="/backend/brand/save/" id="form" method="post" onsubmit="return false">
                 <table class="table table-striped">
                     <?php if ($this->info) { ?>
                     <input type="hidden" name="id" value="<?php echo $this->info['id']; ?>" />
@@ -69,7 +69,7 @@
                     <tfoot>
                         <tr>
                             <td>
-                                <input type="button" value="<?php _e('保存数据'); ?>" class="btn btn-primary center-block" onclick="AWS.ajax_post($('#form'));" />
+                                <input type="button" value="<?php _e('保存数据'); ?>" class="btn btn-primary center-block" onclick="MOX.ajax_post($('#form'));" />
                             </td>
                         </tr>
                     </tfoot>

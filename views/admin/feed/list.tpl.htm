@@ -6,7 +6,7 @@
             <span class="pull-left">动态列表</span>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/feed/index/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/feed/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
@@ -45,8 +45,8 @@
                                 <?php endif;?>
                                 <td><?php echo date_friendly($val['create_time']);?></td>
                                 <td>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除该动态?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/admin/feed/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认推荐该动态?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/admin/feed/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该动态?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/feed/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认推荐该动态?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/feed/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
                                 </td>
                             </tr>
                             <?php } ?>

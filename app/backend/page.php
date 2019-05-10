@@ -20,7 +20,7 @@ class page extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
         
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/page/index/'),
+            'base_url' => get_js_url('/backend/page/index/'),
             'total_rows' => $this->model('page')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -36,7 +36,7 @@ class page extends MOX_ADMIN_CONTROLLER
         
         $result = $this -> model('mox') -> delete('page', 'id = '.intval($id));
         
-        HTTP::redirect('/admin/page/index/');
+        HTTP::redirect('/backend/page/index/');
         
         exit;
     }

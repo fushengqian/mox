@@ -1,4 +1,16 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
+|   ========================================
+|   Support: 540335306@qq.com
++---------------------------------------------------------------------------
+ */
+
 class main extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
@@ -28,7 +40,7 @@ class main extends MOX_ADMIN_CONTROLLER
     {
         if (MOX_APP::session()->admin_login)
         {
-            HTTP::redirect('/admin/');
+            HTTP::redirect('/backend/');
         }
         
         TPL::import_css('admin/css/login.css');

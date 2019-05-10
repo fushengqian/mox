@@ -22,7 +22,7 @@ class brand extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/brand/index/'),
+            'base_url' => get_js_url('/backend/brand/index/'),
             'total_rows' => $this->model('brand')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -72,7 +72,7 @@ class brand extends MOX_ADMIN_CONTROLLER
         }
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/brand/edit/id-'.$id.'/')
+            'url' => get_js_url('/backend/brand/edit/id-'.$id.'/')
         ), 1, null));
     }
 }

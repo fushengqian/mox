@@ -166,7 +166,7 @@ $(function () {
 
 function subjectData(type)
 {
-    AWS.loading('show');
+    MOX.loading('show');
 
     var tempTop = $('#sorttable').offset().top + $('#sorttable').height()/2 - 50;
 
@@ -174,7 +174,7 @@ function subjectData(type)
 
     $('#aw-loading').css({top:tempTop+'px',left:tempLeft+'px',position:'absolute'});
 
-    $.get(G_BASE_URL + '/admin/ajax/topic_statistic/tag-'+ type +'__limit-10', function (result)
+    $.get(G_BASE_URL + '/backend/ajax/topic_statistic/tag-'+ type +'__limit-10', function (result)
     {
         var tempLyout = '' ;
 
@@ -183,7 +183,7 @@ function subjectData(type)
         };
         $('#sorttbody').html(tempLyout);
 
-        AWS.loading('hide');
+        MOX.loading('hide');
 
         if(result == '')
         {
@@ -207,11 +207,11 @@ function subjectData(type)
 
 function weiboPost(obj)
 {
-    $.post(G_BASE_URL + '/admin/ajax/weibo_batch/', {'uid': obj.attr('data-id'), 'action':obj.attr('data-actions')}, function (result)
+    $.post(G_BASE_URL + '/backend/ajax/weibo_batch/', {'uid': obj.attr('data-id'), 'action':obj.attr('data-actions')}, function (result)
     {
         if (result.errno == -1)
         {
-            AWS.alert(result.err);
+            MOX.alert(result.err);
 
              $('.mod-weibo-reply li:last').detach();
         }

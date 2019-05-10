@@ -1,4 +1,16 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
+|   ========================================
+|   Support: 540335306@qq.com
++---------------------------------------------------------------------------
+ */
+
 class sms extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
@@ -27,7 +39,7 @@ class sms extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
         
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/sms/list/'),
+            'base_url' => get_js_url('/backend/sms/list/'),
             'total_rows' => $this->model('sms')->found_rows(),
             'per_page' => 20
         ))->create_links());

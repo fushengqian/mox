@@ -19,7 +19,7 @@ class topic extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/topic/index/'),
+            'base_url' => get_js_url('/backend/topic/index/'),
             'total_rows' => $this->model('topic')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -35,7 +35,7 @@ class topic extends MOX_ADMIN_CONTROLLER
 
         $this->model('topic')->delete('feed', 'id = ' . trim($id));
 
-        HTTP::redirect('/admin/topic/index/');
+        HTTP::redirect('/backend/topic/index/');
         exit;
     }
 
@@ -45,7 +45,7 @@ class topic extends MOX_ADMIN_CONTROLLER
 
         $this->model('topic')->update('topic', array('is_home' => 1), 'id = ' . trim($id));
 
-        HTTP::redirect('/admin/topic/index/');
+        HTTP::redirect('/backend/topic/index/');
         exit;
     }
 }

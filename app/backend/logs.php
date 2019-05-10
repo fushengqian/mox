@@ -25,7 +25,7 @@ class logs extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/logs/index/'),
+            'base_url' => get_js_url('/backend/logs/index/'),
             'total_rows' => $this->model('logs')->found_rows(),
             'per_page' => 20
         ))->create_links());

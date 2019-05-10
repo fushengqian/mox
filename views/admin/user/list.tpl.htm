@@ -6,12 +6,12 @@
         <div class="mod-head">
             <h3>
                 <ul class="nav nav-tabs">
-                    <li<?php if (!$_GET['type']) { ?> class="active"<?php } ?>><a href="<?php if ($_GET['type']) { ?>/admin/user/list/<?php } else { ?>#list<?php } ?>"<?php if (!$_GET['type']) { ?> data-toggle="tab"<?php } ?>><?php _e('用户列表'); ?></a></li>
+                    <li<?php if (!$_GET['type']) { ?> class="active"<?php } ?>><a href="<?php if ($_GET['type']) { ?>/backend/user/list/<?php } else { ?>#list<?php } ?>"<?php if (!$_GET['type']) { ?> data-toggle="tab"<?php } ?>><?php _e('用户列表'); ?></a></li>
                 </ul>
             </h3>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/user/list/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/user/list/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="手机号" type="text" value="<?php echo rawurldecode($_GET['mobile']); ?>" name="mobile"/>
@@ -77,8 +77,8 @@
                                 <td><?php echo $val['login_num']; ?></td>
                                 <td><?php echo ($val['is_us'] == '1') ? '否': '是'; ?></td>
                                 <td class="nowrap">
-                                    <a target="_blank" href="/admin/user/isus/?id=<?php echo $val['id'];?>" class="icon icon-edit md-tip" title="设置为自己"></a>
-                                    <a target="_blank" href="/admin/user/delete/?id=<?php echo $val['id'];?>" class="icon icon-delete md-tip" title="删除用户"></a>
+                                    <a target="_blank" href="/backend/user/isus/?id=<?php echo $val['id'];?>" class="icon icon-edit md-tip" title="设置为自己"></a>
+                                    <a target="_blank" href="/backend/user/delete/?id=<?php echo $val['id'];?>" class="icon icon-delete md-tip" title="删除用户"></a>
                                 </td>
                             </tr>
                             <?php } ?>

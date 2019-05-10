@@ -1,4 +1,15 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
+|   ========================================
+|   Support: 540335306@qq.com
++---------------------------------------------------------------------------
+ */
 
 class user extends MOX_ADMIN_CONTROLLER
 {
@@ -56,7 +67,7 @@ class user extends MOX_ADMIN_CONTROLLER
         }
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/user/list/') . implode('__', $url_param).'__aid',
+            'base_url' => get_js_url('/backend/user/list/') . implode('__', $url_param).'__aid',
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
@@ -132,7 +143,7 @@ class user extends MOX_ADMIN_CONTROLLER
         }
 
         if (!$group = $this->model('account')->get_user_group_by_id($_GET['group_id'])) {
-            H::redirect_msg(MOX_APP::lang()->_t('用户组不存在'), '/admin/user/group_list/');
+            H::redirect_msg(MOX_APP::lang()->_t('用户组不存在'), '/backend/user/group_list/');
         }
 
         TPL::assign('group', $group);
@@ -146,11 +157,11 @@ class user extends MOX_ADMIN_CONTROLLER
         $this->crumb(MOX_APP::lang()->_t('编辑用户资料'), 'admin/user/edit/');
 
         if (!$user = $this->model('account')->get_user_info_by_uid($_GET['uid'], TRUE)) {
-            H::redirect_msg(MOX_APP::lang()->_t('用户不存在'), '/admin/user/list/');
+            H::redirect_msg(MOX_APP::lang()->_t('用户不存在'), '/backend/user/list/');
         }
 
         if ($user['group_id'] == 1 AND !$this->user_info['permission']['is_administortar']) {
-            H::redirect_msg(MOX_APP::lang()->_t('你没有权限编辑管理员账号'), '/admin/user/list/');
+            H::redirect_msg(MOX_APP::lang()->_t('你没有权限编辑管理员账号'), '/backend/user/list/');
         }
 
         TPL::assign('mem_group', $this->model('account')->get_user_group_by_id($user['reputation_group']));
@@ -193,7 +204,7 @@ class user extends MOX_ADMIN_CONTROLLER
         }
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/user/verify_approval_list/status-' . $_GET['status']),
+            'base_url' => get_js_url('/backend/user/verify_approval_list/status-' . $_GET['status']),
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
@@ -210,7 +221,7 @@ class user extends MOX_ADMIN_CONTROLLER
     public function register_approval_list_action()
     {
         if (get_setting('register_valid_type') != 'approval') {
-            H::redirect_msg(MOX_APP::lang()->_t('未启用新用户注册审核'), '/admin/');
+            H::redirect_msg(MOX_APP::lang()->_t('未启用新用户注册审核'), '/backend/');
         }
 
         $user_list = $this->model('account')->fetch_page('users', 'group_id = 3', 'uid ASC', $_GET['page'], $this->per_page);
@@ -218,7 +229,7 @@ class user extends MOX_ADMIN_CONTROLLER
         $total_rows = $this->model('account')->found_rows();
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/user/register_approval_list/'),
+            'base_url' => get_js_url('/backend/user/register_approval_list/'),
             'total_rows' => $total_rows,
             'per_page' => $this->per_page
         ))->create_links());
@@ -234,7 +245,7 @@ class user extends MOX_ADMIN_CONTROLLER
     public function verify_approval_edit_action()
     {
         if (!$verify_apply = $this->model('verify')->fetch_apply($_GET['id'])) {
-            H::redirect_msg(MOX_APP::lang()->_t('审核认证不存在'), '/admin/user/register_approval_list/');
+            H::redirect_msg(MOX_APP::lang()->_t('审核认证不存在'), '/backend/user/register_approval_list/');
         }
 
         TPL::assign('verify_apply', $verify_apply);
@@ -248,7 +259,7 @@ class user extends MOX_ADMIN_CONTROLLER
     {
         if ($log = $this->model('integral')->fetch_page('integral_log', 'uid = ' . intval($_GET['uid']), 'time DESC', $_GET['page'], 50)) {
             TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-                'base_url' => get_js_url('/admin/user/integral_log/uid-' . intval($_GET['uid'])),
+                'base_url' => get_js_url('/backend/user/integral_log/uid-' . intval($_GET['uid'])),
                 'total_rows' => $this->model('integral')->found_rows(),
                 'per_page' => 50
             ))->create_links());
@@ -266,7 +277,7 @@ class user extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('user', $this->model('account')->get_user_info_by_uid($_GET['uid']));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(502));
-        $this->crumb(MOX_APP::lang()->_t('积分日志'), '/admin/user/integral_log/uid-' . $_GET['uid']);
+        $this->crumb(MOX_APP::lang()->_t('积分日志'), '/backend/user/integral_log/uid-' . $_GET['uid']);
         TPL::output('admin/user/integral_log');
     }
 }

@@ -75,7 +75,7 @@ FileUpload.prototype =
 
         $(input).attr({
             'class' : 'file-input',
-            'name' : 'aws_upload_file',
+            'name' : 'mox_upload_file',
             'multiple' : this.options.multiple ? 'multiple' : false
         });
         
@@ -168,7 +168,7 @@ FileUpload.prototype =
                 _this.oncomplete(xhr, li, file);
             };
 
-            var url = this.url + '&aws_upload_file=' + file.name + '&timestamp=' + new Date().getTime();
+            var url = this.url + '&mox_upload_file=' + file.name + '&timestamp=' + new Date().getTime();
 
             xhr.open("POST", url);
 
@@ -383,12 +383,12 @@ FileUpload.prototype =
            $(btn).click(function()
         {
             var _this = this;
-               AWS.dialog('confirm',{'message': '确定要删除吗？'}, function(){
+               MOX.dialog('confirm',{'message': '确定要删除吗？'}, function(){
                 $.get(url, function (result)
                 {
                     if (result.errno == "-1")
                     {
-                        AWS.alert(result.err);
+                        MOX.alert(result.err);
                     }
                     else
                     {

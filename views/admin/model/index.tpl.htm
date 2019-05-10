@@ -5,13 +5,13 @@
         <div class="mod-head">
             <h3>
                 <ul class="nav nav-tabs">
-                    <li class="active"><a href="/admin/model/index/"><?php _e('模型列表'); ?></a></li>
-                    <li><a href="/admin/model/edit/"><?php _e('新增模型'); ?></a></li>
+                    <li class="active"><a href="/backend/model/index/"><?php _e('模型列表'); ?></a></li>
+                    <li><a href="/backend/model/edit/"><?php _e('新增模型'); ?></a></li>
                 </ul>
             </h3>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/model/index/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/model/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
                             <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
@@ -46,9 +46,9 @@
                                 <td><?php echo $val['scale']; ?></td>
                                 <td><?php echo $val['code']; ?></td>
                                 <td>
-                                    <a href="<?php echo G_DEMAIN;?>/admin/model/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/admin/model/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认推荐该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/admin/model/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
+                                    <a href="<?php echo G_DEMAIN;?>/backend/model/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/model/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认推荐该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/model/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
                                 </td>
                             </tr>
                             <?php } ?>

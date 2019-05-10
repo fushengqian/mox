@@ -1,4 +1,17 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox 1.0.1
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.moxquan.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
+
 class setting extends MOX_CONTROLLER
 {
     public function setup()
@@ -68,9 +81,4 @@ class setting extends MOX_CONTROLLER
 
         TPL::output("user/setting/pwd");
     }
-
-    /**
-     * 上传头像
-     */
-
 }

@@ -1,4 +1,4 @@
-var AWS =
+var MOX =
 {
     //全局loading
     loading: function (type)
@@ -17,15 +17,15 @@ var AWS =
 
             $('#aw-loading').fadeIn();
 
-            AWS.G.loading_timer = setInterval(function ()
+            MOX.G.loading_timer = setInterval(function ()
             {
-                AWS.G.loading_bg_count -= 1;
+                MOX.G.loading_bg_count -= 1;
 
-                $('#aw-loading-box').css('background-position', '0px ' + AWS.G.loading_bg_count * 40 + 'px');
+                $('#aw-loading-box').css('background-position', '0px ' + MOX.G.loading_bg_count * 40 + 'px');
 
-                if (AWS.G.loading_bg_count == 1)
+                if (MOX.G.loading_bg_count == 1)
                 {
-                    AWS.G.loading_bg_count = 12;
+                    MOX.G.loading_bg_count = 12;
                 }
             }, 100);
         }
@@ -33,7 +33,7 @@ var AWS =
         {
             $('#aw-loading').fadeOut();
 
-            clearInterval(AWS.G.loading_timer);
+            clearInterval(MOX.G.loading_timer);
         }
     },
 
@@ -48,15 +48,15 @@ var AWS =
         {
             selector.find('#aw-loading-mini-box').fadeIn();
 
-            AWS.G.loading_timer = setInterval(function ()
+            MOX.G.loading_timer = setInterval(function ()
             {
-                AWS.G.loading_mini_bg_count -= 1;
+                MOX.G.loading_mini_bg_count -= 1;
 
-                $('#aw-loading-mini-box').css('background-position', '0px ' + AWS.G.loading_mini_bg_count * 16 + 'px');
+                $('#aw-loading-mini-box').css('background-position', '0px ' + MOX.G.loading_mini_bg_count * 16 + 'px');
 
-                if (AWS.G.loading_mini_bg_count == 1)
+                if (MOX.G.loading_mini_bg_count == 1)
                 {
-                    AWS.G.loading_mini_bg_count = 9;
+                    MOX.G.loading_mini_bg_count = 9;
                 }
             }, 100);
         }
@@ -64,13 +64,13 @@ var AWS =
         {
             selector.find('#aw-loading-mini-box').fadeOut();
 
-            clearInterval(AWS.G.loading_timer);
+            clearInterval(MOX.G.loading_timer);
         }
     },
 
     ajax_request: function(url, params)
     {
-        AWS.loading('show');
+        MOX.loading('show');
 
         if (params)
         {
@@ -95,7 +95,7 @@ var AWS =
 
         function _callback (result)
         {
-            AWS.loading('hide');
+            MOX.loading('hide');
 
             if (!result)
             {
@@ -104,7 +104,7 @@ var AWS =
 
             if (result.err)
             {
-                AWS.alert(result.err);
+                MOX.alert(result.err);
             }
             else if (result.rsm && result.rsm.url)
             {
@@ -118,7 +118,7 @@ var AWS =
 
         function _error (error)
         {
-            AWS.loading('hide');
+            MOX.loading('hide');
 
             if ($.trim(error.responseText) != '')
             {
@@ -142,8 +142,8 @@ var AWS =
         
         if (typeof (processer) != 'function')
         {
-            var processer = AWS.ajax_processer;
-            AWS.loading('show');
+            var processer = MOX.ajax_processer;
+            MOX.loading('show');
         }
         
         if (!type)
@@ -167,7 +167,7 @@ var AWS =
             {
                 if ($.trim(error.responseText) != '')
                 {
-                    AWS.loading('hide');
+                    MOX.loading('hide');
                     alert(_t('发生错误, 返回的信息:') + ' ' + error.responseText);
                 }
             }
@@ -179,7 +179,7 @@ var AWS =
     {
         if (type == 'default')
         {
-            AWS.loading('hide');
+            MOX.loading('hide');
         }
         
         if (typeof (result.errno) == 'undefined')
@@ -193,7 +193,7 @@ var AWS =
             {
                 case 'default':
                 case 'comments_form':
-                    AWS.alert(result.err);
+                    MOX.alert(result.err);
                 break;
                 case 'ajax_post_alert':
                 case 'ajax_post_modal':
@@ -212,7 +212,7 @@ var AWS =
                     }
                     if ($('.error_message').css('display') != 'none')
                     {
-                        AWS.shake($('.error_message'));
+                        MOX.shake($('.error_message'));
                     }
                     else
                     {
@@ -229,7 +229,7 @@ var AWS =
         {
             if (type == 'comments_form')
             {
-                AWS.reload_comments_list(result.rsm.item_id, result.rsm.item_id, result.rsm.type_name);
+                MOX.reload_comments_list(result.rsm.item_id, result.rsm.item_id, result.rsm.type_name);
                 $('#aw-comment-box-' + result.rsm.type_name + '-' + result.rsm.item_id + ' form input').val('');
                 $('#aw-comment-box-' + result.rsm.type_name + '-' + result.rsm.item_id + ' form textarea').val('');
                 $('.aw-comment-box-btn .btn-success').removeClass('disabled');
@@ -365,7 +365,7 @@ var AWS =
             switch (type)
             {
                 case 'redirect' :
-                    AWS.Dropdown.bind_dropdown_list($('.aw-question-redirect-box #question-input'), 'redirect');
+                    MOX.Dropdown.bind_dropdown_list($('.aw-question-redirect-box #question-input'), 'redirect');
                 break;
                 case 'ajaxData':
                     $.get(data.url, function (result) {
@@ -387,7 +387,7 @@ var AWS =
                 break;
                 // 后台微信群发消息
                 case 'adminWechatSendMsg':
-                    AWS.Dropdown.bind_dropdown_list($('.aw-wechat-send-message .search-input'), data.type);
+                    MOX.Dropdown.bind_dropdown_list($('.aw-wechat-send-message .search-input'), data.type);
                 break;
             }
             $(".alert-box").modal('show');
@@ -452,7 +452,7 @@ var AWS =
 }
 
 // 全局变量
-AWS.G =
+MOX.G =
 {
     cashUserData: [],
     cashTopicData: [],
@@ -466,7 +466,7 @@ AWS.G =
 }
 
 
-AWS.Dropdown =
+MOX.Dropdown =
 {
     // 下拉菜单功能绑定
     bind_dropdown_list: function(selector, type)
@@ -488,7 +488,7 @@ AWS.Dropdown =
             {
                 if (e.which != 38 && e.which != 40 && e.which != 188 && e.which != 13)
                 {
-                    AWS.Dropdown.get_dropdown_list($(this), type, $(selector).val());
+                    MOX.Dropdown.get_dropdown_list($(this), type, $(selector).val());
                 }
             }
             else
@@ -614,9 +614,9 @@ AWS.Dropdown =
     */
     get_dropdown_list: function(selector, type, data)
     {
-        if (AWS.G.dropdown_list_xhr != '')
+        if (MOX.G.dropdown_list_xhr != '')
         {
-            AWS.G.dropdown_list_xhr.abort(); // 中止上一次ajax请求
+            MOX.G.dropdown_list_xhr.abort(); // 中止上一次ajax请求
         }
         var url;
         switch (type)
@@ -661,9 +661,9 @@ AWS.Dropdown =
 
         }
 
-        AWS.G.dropdown_list_xhr = $.get(url, function (result)
+        MOX.G.dropdown_list_xhr = $.get(url, function (result)
         {
-            if (result.length != 0 && AWS.G.dropdown_list_xhr != undefined)
+            if (result.length != 0 && MOX.G.dropdown_list_xhr != undefined)
             {
                 $(selector).parent().find('.aw-dropdown-list').html(''); // 清空内容
                 switch (type)
@@ -938,11 +938,11 @@ AWS.Dropdown =
 
 function _t(string, replace)
 {
-    if (typeof (aws_lang) != 'undefined')
+    if (typeof (mox_lang) != 'undefined')
     {
-        if (typeof (aws_lang[string]) != 'undefined')
+        if (typeof (mox_lang[string]) != 'undefined')
         {
-            string = aws_lang[string];
+            string = mox_lang[string];
         }
     }
     

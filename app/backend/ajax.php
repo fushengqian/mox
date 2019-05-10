@@ -31,7 +31,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         {
             $this->model('admin')->set_admin_login($user_info['id']);
             H::ajax_json_output(MOX_APP::RSM(array(
-                'url' => $_POST['url'] ? base64_decode($_POST['url']) : get_js_url('/admin/')
+                'url' => $_POST['url'] ? base64_decode($_POST['url']) : get_js_url('/backend/')
             ), 1, null));
         }
         else
@@ -346,7 +346,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         $this->model('category')->update_category_info($category_id, $_POST['title'], $_POST['parent_id'], $_POST['url_token']);
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/category/list/')
+            'url' => get_js_url('/backend/category/list/')
         ), 1, null));
     }
 
@@ -476,7 +476,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
             'is_image' => TRUE,
             'file_name' => intval($_GET['id']) . '.jpg',
             'encrypt_name' => FALSE
-        ))->do_upload('aws_upload_file');
+        ))->do_upload('mox_upload_file');
         
         if (MOX_APP::upload()->get_error())
         {
@@ -541,7 +541,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         $this->model('page')->add_page($_POST['title'], $_POST['keywords'], $_POST['description'], $_POST['contents'], $_POST['url_token']);
         
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/page/')
+            'url' => get_js_url('/backend/page/')
         ), 1, null));
     }
     
@@ -590,7 +590,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         $this->model('page')->update_page($_POST['page_id'], $_POST['title'], $_POST['keywords'], $_POST['description'], $_POST['contents'], $_POST['url_token']);
         
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/page/')
+            'url' => get_js_url('/backend/page/')
         ), 1, null));
     }
 
@@ -765,7 +765,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         if ($group_new OR $group_ids)
         {
             $rsm = array(
-                'url' => get_js_url('/admin/user/group_list/r-' . rand(1, 999) . '#custom')
+                'url' => get_js_url('/backend/user/group_list/r-' . rand(1, 999) . '#custom')
             );
         }
 
@@ -1009,7 +1009,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
             }
 
             H::ajax_json_output(MOX_APP::RSM(array(
-                'url' => get_js_url('/admin/user/list/')
+                'url' => get_js_url('/backend/user/list/')
             ), 1, null));
         }
     }
@@ -1063,7 +1063,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         $this->model('integral')->process($_POST['id'], 'AWARD', $_POST['integral'], $_POST['note']);
         
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/user/integral_log/id-' . $_POST['id'])
+            'url' => get_js_url('/backend/user/integral_log/id-' . $_POST['id'])
         ), 1, null));
     }
     
@@ -1118,7 +1118,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         }
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/user/verify_approval_list/')
+            'url' => get_js_url('/backend/user/verify_approval_list/')
         ), 1, null));
     }
 
@@ -1171,7 +1171,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         }
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/user/list/')
+            'url' => get_js_url('/backend/user/list/')
         ), 1, null));
     }
 
@@ -1208,22 +1208,22 @@ class ajax extends MOX_ADMIN_CONTROLLER
 
     public function topic_statistic_action()
     {
-    	$topic_statistic = array();
+        $topic_statistic = array();
 
-    	if ($topic_list = $this->model('topic')->get_hot_topics(null, $_GET['limit'], $_GET['tag']))
-    	{
-	    	foreach ($topic_list AS $key => $val)
-	    	{
-		    	$topic_statistic[] = array(
-		    		'title' => $val['topic_title'],
-		    		'week' => $val['discuss_count_last_week'],
-		    		'month' => $val['discuss_count_last_month'],
-		    		'all' => $val['discuss_count']
-		    	);
-	    	}
-    	}
+        if ($topic_list = $this->model('topic')->get_hot_topics(null, $_GET['limit'], $_GET['tag']))
+        {
+            foreach ($topic_list AS $key => $val)
+            {
+                $topic_statistic[] = array(
+                    'title' => $val['topic_title'],
+                    'week' => $val['discuss_count_last_week'],
+                    'month' => $val['discuss_count_last_month'],
+                    'all' => $val['discuss_count']
+                );
+            }
+        }
 
-	    echo json_encode($topic_statistic);
+        echo json_encode($topic_statistic);
     }
 
     public function statistic_action()
@@ -1557,7 +1557,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         }
 
         H::ajax_json_output(MOX_APP::RSM(array(
-            'url' => get_js_url('/admin/approval/list/')
+            'url' => get_js_url('/backend/approval/list/')
         ), 1, null));
     }
 
@@ -1636,7 +1636,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
             $config_id = $this->model('edm')->update_receiving_email_config(null, 'add', $receiving_email_config);
 
             H::ajax_json_output(MOX_APP::RSM(array(
-                'url' => get_js_url('/admin/edm/receiving/id-' . $config_id)
+                'url' => get_js_url('/backend/edm/receiving/id-' . $config_id)
             ), 1, null));
         }
     }
@@ -1691,13 +1691,13 @@ class ajax extends MOX_ADMIN_CONTROLLER
         'max_size' => get_setting('upload_size_limit')
         ));
         
-        if (isset($_GET['aws_upload_file']))
+        if (isset($_GET['mox_upload_file']))
         {
-            MOX_APP::upload()->do_upload($_GET['aws_upload_file'], file_get_contents('php://input'));
+            MOX_APP::upload()->do_upload($_GET['mox_upload_file'], file_get_contents('php://input'));
         }
-        else if (isset($_FILES['aws_upload_file']))
+        else if (isset($_FILES['mox_upload_file']))
         {
-            MOX_APP::upload()->do_upload('aws_upload_file');
+            MOX_APP::upload()->do_upload('mox_upload_file');
         }
         else
         {

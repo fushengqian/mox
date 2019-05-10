@@ -1,5 +1,5 @@
 <?php
-$config['avatar_thumbnail'] = array(
+$config['avatar_thumb'] = array(
     'min' => array(
         "w" => 50,
         "h" => 50

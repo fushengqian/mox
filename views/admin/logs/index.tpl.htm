@@ -6,7 +6,7 @@
             <span class="pull-left">日志列表</span>
         </div>
         <div class="tab-pane">
-             <form method="get" action="/admin/logs/index/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/logs/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-4 col-xs-4">
                             <input class="form-control" placeholder="关键字" type="text" value="<?php echo trim($_GET['keyword']); ?>" name="content"/>
@@ -54,17 +54,17 @@
         </div>
     </div>
 </div>
-<form method="post" action="/admin/logs/delete/" onsubmit="return false;" id="delete_form">
+<form method="post" action="/backend/logs/delete/" onsubmit="return false;" id="delete_form">
     <input id="id" name="id" type="hidden" value="0">
 </form>
 <script src="<?php echo G_STATIC; ?>/js/bootstrap.min.js"></script>
 <script type="text/javascript">
    $(".delete").bind('click', function(){
        var _this = this;
-       AWS.dialog('confirm',{'message': '<?php _e('确定要删除该日志吗？'); ?>'}, function(){
+       MOX.dialog('confirm',{'message': '<?php _e('确定要删除该日志吗？'); ?>'}, function(){
            var id = $(_this).attr('id');
            $("#id").val(id);
-           AWS.ajax_post($('#delete_form'),  AWS.ajax_processer, 'error_message');
+           MOX.ajax_post($('#delete_form'),  MOX.ajax_processer, 'error_message');
        });
    });
 </script>

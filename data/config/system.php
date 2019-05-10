@@ -1,4 +1,6 @@
 <?php
+$config['debug'] = false;
+
 // 定义 Cookies 作用域
 define('G_COOKIE_DOMAIN', '.moxquan.cn');
 
@@ -32,7 +34,7 @@ define('G_BASE_DEMAIN', '.moxquan.cn');
 $base_url = explode('.', $_SERVER['SERVER_NAME']);
 if ($base_url[0] == 'm')
 {
-   define('G_DEMAIN', 'http://m.moxquan.cn');
+    define('G_DEMAIN', 'http://m.moxquan.cn');
 }
 else
 {

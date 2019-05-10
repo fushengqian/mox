@@ -45,7 +45,7 @@ class category extends MOX_ADMIN_CONTROLLER
     {
         if (!$category_info = $this->model('system')->get_category_info($_GET['category_id']))
         {
-            H::redirect_msg(MOX_APP::lang()->_t('指定分类不存在'), '/admin/category/list/');
+            H::redirect_msg(MOX_APP::lang()->_t('指定分类不存在'), '/backend/category/list/');
         }
         
         TPL::assign('category', $category_info);

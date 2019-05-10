@@ -39,7 +39,7 @@
                                 <td><a target="_blank" href="http://<?php echo $val['url']; ?>"><?php echo $val['url'];?></a></td>
                                 <td><?php echo $val['keywords']; ?></td>
                                 <td>
-                                    <a onclick="AWS.dialog('confirm', {'message': '<?php _e('确认删除该页面?'); ?>'}, function(){window.location = G_BASE_URL + '/admin/page/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该页面?'); ?>'}, function(){window.location = G_BASE_URL + '/backend/page/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
                                     <a href="javascript:;" data-toggle="tooltip" id="http://<?php echo $val['url']; ?>" lang="<?php echo $val['keywords']; ?>" attr="<?php echo $val['description']; ?>" class="icon icon-plus md-tip recommend" title="推荐"></a>
                                 </td>
                             </tr>
@@ -108,7 +108,7 @@
        $('#myModal').modal();
    });
    $("#do-recommend").bind('click', function(){
-       AWS.ajax_post($('#recommend_form'),  AWS.ajax_processer, 'error_message');
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
    });
 </script>
 <?php TPL::output('admin/global/footer.tpl.htm'); ?>

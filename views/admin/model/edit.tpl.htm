@@ -5,16 +5,16 @@
         <div class="mod-head">
             <h3>
                 <ul class="nav nav-tabs">
-                    <li><a href="/admin/model/index/"><?php _e('模型列表'); ?></a></li>
-                    <li class="active"><a href="/admin/model/edit/"><?php _e('新增模型'); ?></a></li>
+                    <li><a href="/backend/model/index/"><?php _e('模型列表'); ?></a></li>
+                    <li class="active"><a href="/backend/model/edit/"><?php _e('新增模型'); ?></a></li>
                     <?php if ($this->info['id']):?>
-                    <li><a href="/admin/model/image_edit/id-<?php echo $this->info['id'];?>/"><?php _e('编辑相册'); ?></a></li>
+                    <li><a href="/backend/model/image_edit/id-<?php echo $this->info['id'];?>/"><?php _e('编辑相册'); ?></a></li>
                     <?php endif;?>
                 </ul>
             </h3>
         </div>
         <div class="tab-content mod-content">
-            <form action="/admin/model/save/" id="form" method="post" onsubmit="return false">
+            <form action="/backend/model/save/" id="form" method="post" onsubmit="return false">
                 <table class="table table-striped">
                     <?php if ($this->info) { ?>
                     <input type="hidden" name="id" value="<?php echo $this->info['id']; ?>" />
@@ -116,7 +116,7 @@
                     <tfoot>
                         <tr>
                             <td>
-                                <input type="button" value="<?php _e('保存数据'); ?>" class="btn btn-primary center-block" onclick="AWS.ajax_post($('#form'));" />
+                                <input type="button" value="<?php _e('保存数据'); ?>" class="btn btn-primary center-block" onclick="MOX.ajax_post($('#form'));" />
                             </td>
                         </tr>
                     </tfoot>

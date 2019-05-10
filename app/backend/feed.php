@@ -20,7 +20,7 @@ class feed extends MOX_ADMIN_CONTROLLER
         TPL::assign('list', $list);
 
         TPL::assign('pagination', MOX_APP::pagination()->initialize(array(
-            'base_url' => get_js_url('/admin/feed/index/'),
+            'base_url' => get_js_url('/backend/feed/index/'),
             'total_rows' => $this->model('feed')->found_rows(),
             'per_page' => 20
         ))->create_links());
@@ -36,7 +36,7 @@ class feed extends MOX_ADMIN_CONTROLLER
 
         $this->model('feed')->delete('feed', 'id = ' . trim($id));
 
-        HTTP::redirect('/admin/feed/index/');
+        HTTP::redirect('/backend/feed/index/');
 
         exit;
     }
@@ -47,7 +47,7 @@ class feed extends MOX_ADMIN_CONTROLLER
 
         $this->model('feed')->update('feed', array('is_home' => 1), 'id = ' . trim($id));
 
-        HTTP::redirect('/admin/feed/index/');
+        HTTP::redirect('/backend/feed/index/');
         exit;
     }
 }
