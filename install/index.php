@@ -16,14 +16,14 @@ require_once('../system/init.php');
 
 HTTP::no_cache_header();
 
-if (file_exists(MOX_PATH . 'config/install.lock'))
+if (file_exists(ROOT_PATH . 'data/install.lock'))
 {
-    H::redirect_msg(load_class('core_lang')->_t('您的程序已经安装, 要重新安装请删除 system/config/install.lock'));
+    H::redirect_msg(load_class('core_lang')->_t('您的程序已经安装, 要重新安装请删除 data/install.lock 文件！'));
 }
 
 @set_time_limit(0);
 
-TPL::assign('page_title', 'Mox安装...');
+TPL::assign('page_title', 'Mox程序安装...');
 TPL::assign('static_url', '../static');
 
 switch ($_POST['step'])
@@ -240,7 +240,7 @@ switch ($_POST['step'])
 
         if (number_format($db->getServerVersion(), 1) < 5)
         {
-            H::redirect_msg(load_class('core_lang')->_t('安装中止: WeCenter 要求使用 MySQL 5.0 以上版本的数据库支持, 您的服务器当前 MySQL 版本为: %s', $db->getServerVersion()), './');
+            H::redirect_msg(load_class('core_lang')->_t('安装中止: Mox 要求使用 MySQL 5.0 以上版本的数据库支持, 您的服务器当前 MySQL 版本为: %s', $db->getServerVersion()), './');
         }
 
         if (!$_POST['db_prefix'] AND count($tables) > 0)
@@ -318,30 +318,12 @@ switch ($_POST['step'])
             'password' => compile_password($_POST['password'], $salt),
             'email' => $_POST['email'],
             'salt' => $salt,
-            'group_id' => 1,
-            'reputation_group' => 5,
-            'valid_email' => 1,
-            'is_first_login' => 1,
             'reg_time' => time(),
             'reg_ip' => ip2long(fetch_ip()),
             'last_login' => time(),
-            'last_ip' => ip2long(fetch_ip()),
-            'last_active' => time(),
-            'invitation_available' => 10,
-            'integral' => 2000
-        );
+            'last_ip' => ip2long(fetch_ip()));
 
-        $db->insert($db_prefix . 'users', $data);
-        $db->insert($db_prefix . 'users_attrib', array('uid' => 1, 'signature' => ''));
-
-        $db->insert($db_prefix . 'integral_log', array(
-             'uid' => 1,
-             'action' => 'REGISTER',
-             'integral' => 2000,
-             'note' => load_class('core_lang')->_t('初始资本'),
-             'balance' => 2000,
-             'time' => time()
-        ));
+        $db->insert($db_prefix . 'user', $data);
 
         // 加载网站配置
         $base_dir = dirname(dirname($_SERVER['PHP_SELF']));

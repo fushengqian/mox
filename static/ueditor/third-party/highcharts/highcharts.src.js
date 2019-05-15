@@ -5971,146 +5971,146 @@ Tick.prototype = {
      */
     getLabelPosition: function (x, y, label, horiz, labelOptions, tickmarkOffset, index, step) {
         var axis = this.axis,
-        	transA = axis.transA,
-			reversed = axis.reversed,
-			staggerLines = axis.staggerLines,
-			baseline = axis.chart.renderer.fontMetrics(labelOptions.style.fontSize).b,
-			rotation = labelOptions.rotation;
-			
-		x = x + labelOptions.x - (tickmarkOffset && horiz ?
-			tickmarkOffset * transA * (reversed ? -1 : 1) : 0);
-		y = y + labelOptions.y - (tickmarkOffset && !horiz ?
-			tickmarkOffset * transA * (reversed ? 1 : -1) : 0);
+            transA = axis.transA,
+            reversed = axis.reversed,
+            staggerLines = axis.staggerLines,
+            baseline = axis.chart.renderer.fontMetrics(labelOptions.style.fontSize).b,
+            rotation = labelOptions.rotation;
 
-		// Correct for rotation (#1764)
-		if (rotation && axis.side === 2) {
-			y -= baseline - baseline * mathCos(rotation * deg2rad);
-		}
-		
-		// Vertically centered
-		if (!defined(labelOptions.y) && !rotation) { // #1951
-			y += baseline - label.getBBox().height / 2;
-		}
-		
-		// Correct for staggered labels
-		if (staggerLines) {
-			y += (index / (step || 1) % staggerLines) * (axis.labelOffset / staggerLines);
-		}
-		
-		return {
-			x: x,
-			y: y
-		};
-	},
-	
-	/**
-	 * Extendible method to return the path of the marker
-	 */
-	getMarkPath: function (x, y, tickLength, tickWidth, horiz, renderer) {
-		return renderer.crispLine([
-				M,
-				x,
-				y,
-				L,
-				x + (horiz ? 0 : -tickLength),
-				y + (horiz ? tickLength : 0)
-			], tickWidth);
-	},
+        x = x + labelOptions.x - (tickmarkOffset && horiz ?
+            tickmarkOffset * transA * (reversed ? -1 : 1) : 0);
+        y = y + labelOptions.y - (tickmarkOffset && !horiz ?
+            tickmarkOffset * transA * (reversed ? 1 : -1) : 0);
 
-	/**
-	 * Put everything in place
-	 *
-	 * @param index {Number}
-	 * @param old {Boolean} Use old coordinates to prepare an animation into new position
-	 */
-	render: function (index, old, opacity) {
-		var tick = this,
-			axis = tick.axis,
-			options = axis.options,
-			chart = axis.chart,
-			renderer = chart.renderer,
-			horiz = axis.horiz,
-			type = tick.type,
-			label = tick.label,
-			pos = tick.pos,
-			labelOptions = options.labels,
-			gridLine = tick.gridLine,
-			gridPrefix = type ? type + 'Grid' : 'grid',
-			tickPrefix = type ? type + 'Tick' : 'tick',
-			gridLineWidth = options[gridPrefix + 'LineWidth'],
-			gridLineColor = options[gridPrefix + 'LineColor'],
-			dashStyle = options[gridPrefix + 'LineDashStyle'],
-			tickLength = options[tickPrefix + 'Length'],
-			tickWidth = options[tickPrefix + 'Width'] || 0,
-			tickColor = options[tickPrefix + 'Color'],
-			tickPosition = options[tickPrefix + 'Position'],
-			gridLinePath,
-			mark = tick.mark,
-			markPath,
-			step = labelOptions.step,
-			attribs,
-			show = true,
-			tickmarkOffset = axis.tickmarkOffset,
-			xy = tick.getPosition(horiz, pos, tickmarkOffset, old),
-			x = xy.x,
-			y = xy.y,
-			reverseCrisp = ((horiz && x === axis.pos + axis.len) || (!horiz && y === axis.pos)) ? -1 : 1, // #1480, #1687
-			staggerLines = axis.staggerLines;
+        // Correct for rotation (#1764)
+        if (rotation && axis.side === 2) {
+            y -= baseline - baseline * mathCos(rotation * deg2rad);
+        }
 
-		this.isActive = true;
-		
-		// create the grid line
-		if (gridLineWidth) {
-			gridLinePath = axis.getPlotLinePath(pos + tickmarkOffset, gridLineWidth * reverseCrisp, old, true);
+        // Vertically centered
+        if (!defined(labelOptions.y) && !rotation) { // #1951
+            y += baseline - label.getBBox().height / 2;
+        }
 
-			if (gridLine === UNDEFINED) {
-				attribs = {
-					stroke: gridLineColor,
-					'stroke-width': gridLineWidth
-				};
-				if (dashStyle) {
-					attribs.dashstyle = dashStyle;
-				}
-				if (!type) {
-					attribs.zIndex = 1;
-				}
-				if (old) {
-					attribs.opacity = 0;
-				}
-				tick.gridLine = gridLine =
-					gridLineWidth ?
-						renderer.path(gridLinePath)
-							.attr(attribs).add(axis.gridGroup) :
-						null;
-			}
+        // Correct for staggered labels
+        if (staggerLines) {
+            y += (index / (step || 1) % staggerLines) * (axis.labelOffset / staggerLines);
+        }
 
-			// If the parameter 'old' is set, the current call will be followed
-			// by another call, therefore do not do any animations this time
-			if (!old && gridLine && gridLinePath) {
-				gridLine[tick.isNew ? 'attr' : 'animate']({
-					d: gridLinePath,
-					opacity: opacity
-				});
-			}
-		}
+        return {
+            x: x,
+            y: y
+        };
+    },
 
-		// create the tick mark
-		if (tickWidth && tickLength) {
+    /**
+     * Extendible method to return the path of the marker
+     */
+    getMarkPath: function (x, y, tickLength, tickWidth, horiz, renderer) {
+        return renderer.crispLine([
+                M,
+                x,
+                y,
+                L,
+                x + (horiz ? 0 : -tickLength),
+                y + (horiz ? tickLength : 0)
+            ], tickWidth);
+    },
 
-			// negate the length
-			if (tickPosition === 'inside') {
-				tickLength = -tickLength;
-			}
-			if (axis.opposite) {
-				tickLength = -tickLength;
-			}
+    /**
+     * Put everything in place
+     *
+     * @param index {Number}
+     * @param old {Boolean} Use old coordinates to prepare an animation into new position
+     */
+    render: function (index, old, opacity) {
+        var tick = this,
+            axis = tick.axis,
+            options = axis.options,
+            chart = axis.chart,
+            renderer = chart.renderer,
+            horiz = axis.horiz,
+            type = tick.type,
+            label = tick.label,
+            pos = tick.pos,
+            labelOptions = options.labels,
+            gridLine = tick.gridLine,
+            gridPrefix = type ? type + 'Grid' : 'grid',
+            tickPrefix = type ? type + 'Tick' : 'tick',
+            gridLineWidth = options[gridPrefix + 'LineWidth'],
+            gridLineColor = options[gridPrefix + 'LineColor'],
+            dashStyle = options[gridPrefix + 'LineDashStyle'],
+            tickLength = options[tickPrefix + 'Length'],
+            tickWidth = options[tickPrefix + 'Width'] || 0,
+            tickColor = options[tickPrefix + 'Color'],
+            tickPosition = options[tickPrefix + 'Position'],
+            gridLinePath,
+            mark = tick.mark,
+            markPath,
+            step = labelOptions.step,
+            attribs,
+            show = true,
+            tickmarkOffset = axis.tickmarkOffset,
+            xy = tick.getPosition(horiz, pos, tickmarkOffset, old),
+            x = xy.x,
+            y = xy.y,
+            reverseCrisp = ((horiz && x === axis.pos + axis.len) || (!horiz && y === axis.pos)) ? -1 : 1, // #1480, #1687
+            staggerLines = axis.staggerLines;
 
-			markPath = tick.getMarkPath(x, y, tickLength, tickWidth * reverseCrisp, horiz, renderer);
+        this.isActive = true;
 
-			if (mark) { // updating
-				mark.animate({
-					d: markPath,
-					opacity: opacity
+        // create the grid line
+        if (gridLineWidth) {
+            gridLinePath = axis.getPlotLinePath(pos + tickmarkOffset, gridLineWidth * reverseCrisp, old, true);
+
+            if (gridLine === UNDEFINED) {
+                attribs = {
+                    stroke: gridLineColor,
+                    'stroke-width': gridLineWidth
+                };
+                if (dashStyle) {
+                    attribs.dashstyle = dashStyle;
+                }
+                if (!type) {
+                    attribs.zIndex = 1;
+                }
+                if (old) {
+                    attribs.opacity = 0;
+                }
+                tick.gridLine = gridLine =
+                    gridLineWidth ?
+                        renderer.path(gridLinePath)
+                            .attr(attribs).add(axis.gridGroup) :
+                        null;
+            }
+
+            // If the parameter 'old' is set, the current call will be followed
+            // by another call, therefore do not do any animations this time
+            if (!old && gridLine && gridLinePath) {
+                gridLine[tick.isNew ? 'attr' : 'animate']({
+                    d: gridLinePath,
+                    opacity: opacity
+                });
+            }
+        }
+
+        // create the tick mark
+        if (tickWidth && tickLength) {
+
+            // negate the length
+            if (tickPosition === 'inside') {
+                tickLength = -tickLength;
+            }
+            if (axis.opposite) {
+                tickLength = -tickLength;
+            }
+
+            markPath = tick.getMarkPath(x, y, tickLength, tickWidth * reverseCrisp, horiz, renderer);
+
+            if (mark) { // updating
+                mark.animate({
+                    d: markPath,
+                    opacity: opacity
 				});
 			} else { // first time
 				tick.mark = renderer.path(
