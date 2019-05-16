@@ -1,0 +1,134 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="JavaScript:;">地区列表</a></li>
+                <li><a href="/backend/area/add/">新增地区</a></li>
+            </ul>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="/backend/area/index/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <select class="form-control" name="order">
+                                <option value="city_id asc">默认</option>
+                                <option value="id desc">最新</option>
+                                <option value="num desc" <?php if($this -> order){ echo 'selected';}?>>农家数量</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>城市</th>
+                                <th>名称</th>
+                                <th>uname</th>
+                                <th>商家数</th>
+                                <th>农家乐</th>
+                                <th>农庄</th>
+                                <th>垂钓场</th>
+                                <th>采摘园</th>
+                                <th>温泉</th>
+                                <th>度假村</th>
+                                <th>生态园</th>
+                                <th>状态</th>
+                                <th>修改</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><?php echo $val['id'];?></td>
+                                <td><a target="_blank" href="http://<?php echo $val['cuname'].G_BASE_DEMAIN;?>"><?php echo $val['cname'];?></a></td>
+                                <td><a target="_blank" href="http://<?php echo $val['uname'].G_BASE_DEMAIN;?>"><?php echo $val['name'];?></a></td>
+                                <td><a target="_blank" href="http://<?php echo $val['uname'].G_BASE_DEMAIN;?>"><?php echo $val['uname'];?></a></td>
+                                <td><?php echo $val['num'] ? $val['num'] : '0';?></td>
+                                <td><?php echo $val['num'] ? $val['njl_num'] : '0';?></td>
+                                <td><?php echo $val['nz_num'] ? $val['nz_num'] : '0';?></td>
+                                <td><?php echo $val['fishing_num'] ? $val['fishing_num'] : '0';?></td>
+                                <td><?php echo $val['caizhai_num'] ? $val['caizhai_num'] : '0';?></td>
+                                <td><?php echo $val['wenquan_num'] ? $val['wenquan_num'] : '0';?></td>
+                                <td><?php echo $val['holiday_num'] ? $val['holiday_num'] : '0';?></td>
+                                <td><?php echo $val['sty_num'] ? $val['sty_num'] : '0';?></td>
+                                <td><?php echo $val['status'] == '1' ? '<span style="color:#ff9d00;">已开通</span>' : '<span style="color:#f00;">未开通</span>';?></td>
+                                <td>
+                                    <a href="javascript:;" data-toggle="tooltip" id="<?php echo $val['id']; ?>" lang="<?php echo $val['uname']; ?>" attr="<?php echo $val['name']; ?>" class="icon icon-plus md-tip recommend" title="修改"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/60);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header" style="margin-bottom:15px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">修改数据</h4>
+               </div>
+               <form method="post" action="/backend/area/update/" onsubmit="return false;" id="recommend_form" class="form-horizontal" role="form">
+                    <input name="id" id="id" type="hidden" value="">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-6 control-label">名称:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <input class="form-control" type="text" name="name" id="name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-6 control-label">uname:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <input class="form-control" type="text" name="uname" id="uname"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">状态:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <select name="status" class="form-control">
+                                <option value="1">开通</option>
+                                <option value="0">关闭</option>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                     <button type="button" id="do-recommend" class="btn btn-primary">确定</button>
+                </div>
+          </div>
+    </div>
+</div>
+<script src="<?php echo G_STATIC_URL; ?>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   $(".recommend").bind('click', function(){
+       $("#id").val($(this).attr("id"));
+       $("#uname").val($(this).attr("lang"));
+       $("#name").val($(this).attr("attr"));
+       $('#myModal').modal();
+   });
+   $("#do-recommend").bind('click', function(){
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
+   });
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

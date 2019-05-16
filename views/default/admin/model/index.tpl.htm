@@ -1,0 +1,72 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <h3>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="/backend/model/index/"><?php _e('模型列表'); ?></a></li>
+                    <li><a href="/backend/model/edit/"><?php _e('新增模型'); ?></a></li>
+                </ul>
+            </h3>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="/backend/model/index/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>品牌</th>
+                                <th>名称</th>
+                                <th>比例</th>
+                                <th>货号</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/model/<?php echo $val['id'];?>.html"><?php echo $val['id']; ?></a></td>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/brand/<?php echo $val['brand_id'];?>.html"><?php echo $val['brand_name']; ?></a></td>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/model/<?php echo $val['id'];?>.html"><?php echo summary($val['name'], 45); ?></a></td>
+                                <td><?php echo $val['scale']; ?></td>
+                                <td><?php echo $val['code']; ?></td>
+                                <td>
+                                    <a href="<?php echo G_DEMAIN;?>/backend/model/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/model/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认推荐该模型?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/model/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/20);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<?php echo G_STATIC_URL; ?>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   $(".recommend").bind('click', function(){
+       $("#id").val($(this).attr("id"));
+   });
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

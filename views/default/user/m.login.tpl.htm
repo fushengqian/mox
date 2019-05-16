@@ -1,0 +1,29 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<div class="header-holder">
+    <div class="common-header">
+        <a class="back"><em class="sprite icon-back"></em></a>
+        <span class="title text-ellipsis1 ">登录</span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="login-form">
+            <div class="bc">
+                <form id="login_form" method="post" onsubmit="return false" action="<?php echo G_DEMAIN;?>/user/ajax/login_process/">
+                    <div class="form-group">
+                        <input name="phone" type="phone" class="form-control rounded-0" placeholder="手机号">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control rounded-0" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <button id="do_login" type="button" class="btn btn-fat btn-success btn-lg btn-block br0" onclick="FNC.ajax_post($('#login_form'), FNC.ajax_processer, 'error_message');">登录</button>
+                    </div>
+                </form>
+                <p><a class="be-new" href="<?php echo G_DEMAIN;?>/user/register/">注册新用户</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php TPL::output('global/footer.tpl.htm'); ?>

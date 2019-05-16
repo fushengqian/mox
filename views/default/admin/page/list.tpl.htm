@@ -1,0 +1,114 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <span class="pull-left">页面列表</span>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="admin/page/index/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="页面关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>标题</th>
+                                <th>URL</th>
+                                <th>关键字</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><?php echo $val['id']; ?></td>
+                                <td><a target="_blank" href="http://<?php echo $val['url']; ?>"><?php echo $val['title']; ?></a></td>
+                                <td><a target="_blank" href="http://<?php echo $val['url']; ?>"><?php echo $val['url'];?></a></td>
+                                <td><?php echo $val['keywords']; ?></td>
+                                <td>
+                                    <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该页面?'); ?>'}, function(){window.location = G_BASE_URL + '/backend/page/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
+                                    <a href="javascript:;" data-toggle="tooltip" id="http://<?php echo $val['url']; ?>" lang="<?php echo $val['keywords']; ?>" attr="<?php echo $val['description']; ?>" class="icon icon-plus md-tip recommend" title="推荐"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/20);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+     <div class="modal-dialog">
+          <div class="modal-content">
+               <div class="modal-header" style="margin-bottom:15px;">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">推荐该页面</h4>
+               </div>
+               <form method="post" action="admin/page/recommend/" onsubmit="return false;" id="recommend_form" class="form-horizontal" role="form">
+                    <input name="url" id="url" type="hidden" value="">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-6 control-label">标题:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <input class="form-control" type="text" name="title" id="title"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-6 control-label">图片:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <input class="form-control" type="text" name="image" id="image"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-6 control-label">描述:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <textarea class="form-control" name="brief" id="brief"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-xs-3 control-label">位置:</label>
+                        <div class="col-sm-8 col-xs-8">
+                            <select name="position" class="form-control">
+                                <?php foreach($this -> recommend as $position => $recommend):?>
+                                <option value="<?php echo $position;?>"><?php echo $recommend;?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                     <button type="button" id="do-recommend" class="btn btn-primary">确定</button>
+                </div>
+          </div>
+    </div>
+</div>
+<script src="<?php echo G_STATIC_URL; ?>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   $(".recommend").bind('click', function(){
+       $("#url").val($(this).attr("id"));
+       $("#title").val($(this).attr("lang"));
+       $("#brief").val($(this).attr("attr"));
+       $('#myModal').modal();
+   });
+   $("#do-recommend").bind('click', function(){
+       MOX.ajax_post($('#recommend_form'),  MOX.ajax_processer, 'error_message');
+   });
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

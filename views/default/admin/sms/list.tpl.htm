@@ -1,0 +1,57 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <span class="pull-left">已发短信</span>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="/backend/sms/list/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="手机" type="text" value="<?php echo rawurldecode($_GET['mobile']); ?>" name="mobile"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>类型</th>
+                                <th>手机</th>
+                                <th>内容</th>
+                                <th>时间</th>
+                                <th>平台</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><?php echo $val['id']; ?></td>
+                                <td><?php echo $val['type'] == 1 ? '登录验证' : '商家通知'; ?></td>
+                                <td><a href="/backend/sms/list/?mobile=<?php echo $val['mobile'];?>"><?php echo $val['mobile']; ?></a></td>
+                                <td><a title="<?php echo $val['content']; ?>" href="javascript:;"><?php echo summary($val['content'], 40); ?></a></td>
+                                <td><?php echo date("Y-m-d H:i:s", $val['create_time']);?></td>
+                                <td>阿里云</td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/20);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

@@ -1,0 +1,456 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
+    <title>Mox测试</title>
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/dist/foxui/css/foxui.min.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/views/default/static/css/style.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/css/foxui.diy.css?v=<?php echo G_VERSION_BUILD;?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/fonts/iconfont.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/dist/swiper/swiper.min.css?v=<?php echo G_VERSION_BUILD;?>">
+    <script src="<?php echo G_DEMAIN;?>/static/js/jquery.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/dist/foxui/js/foxui.min.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/js/require.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/js/myconfig-app.js"></script>
+    <script language="javascript">require(['core'],function(modal){modal.init({siteUrl: "http://www.moxquan.cn/",baseUrl: "/"})});</script>
+    <style type="text/css">
+        body {
+            position: absolute;;
+            max-width: 750px;  margin:auto;
+        }
+        .fui-navbar {
+            max-width:750px;
+        }
+        .fui-navbar,.fui-footer  {
+            max-width:750px;
+        }
+        .fui-page.fui-page-from-center-to-left,
+        .fui-page-group.fui-page-from-center-to-left,
+        .fui-page.fui-page-from-center-to-right,
+        .fui-page-group.fui-page-from-center-to-right,
+        .fui-page.fui-page-from-right-to-center,
+        .fui-page-group.fui-page-from-right-to-center,
+        .fui-page.fui-page-from-left-to-center,
+        .fui-page-group.fui-page-from-left-to-center {
+            -webkit-animation: pageFromCenterToRight 0ms forwards;
+            animation: pageFromCenterToRight 0ms forwards;
+        }
+    </style>
+    <style>.danmu {display: none;opacity: 0;}</style>
+</head>
+
+<body ontouchstart>
+<!-- fui-page-group start -->
+<div class='fui-page-group '>
+    <div class='fui-page  fui-page-current main-index-page ' style="top: 0; background-color: #f3f3f3; ">
+        <div class = "shareImgMask" style = "display: none;"></div>
+        <div class = "shareImgContent" style = "top: 5rem; display: none;">
+            <button type = "button"></button>
+            <img src="" style="width:12.3rem;" />
+        </div>
+        <div class="fui-header" style = "position: relative;">
+            <div class="fui-header-left">
+            </div>
+            <div class="title">Mox系统</div>
+            <div class="fui-header-right"></div>
+        </div>
+
+
+        <div class="fui-content navbar" id="container" style="background-color: #f3f3f3; padding-bottom: 0;">
+            <div class="fui-searchbar bar" id="newIndex">
+                <div class="city-select" id="citySelect">
+                    <em class="currentCity J-city-select">Mox商城</em>
+                </div>
+                <div class="searchbar" style="background: #ef7700;">
+                    <form action="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&merchid=0" method="post" style="position: relative;left:0;top:0;">
+                        <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top: 0; right: 0" />
+                        <div class="search-input round" style="background: #ef7700;">
+                            <i class="icon icon-search" style="color: #ffffff;"></i>
+                            <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords"
+                                   style="text-align: left; color: #ffffff; background: none;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="search-extra">
+                    <i id="btn_scan" class="icon icon-scan" ></i>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $('#btn_scan').click(function () {
+                        window.wx.scanQRCode({
+                            // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                            needResult: 0,
+                            desc: '扫描二维码',
+                            success: function (res) {
+                                console.log(res)
+                            },
+                            fail: function (e) {
+                                console.log(e)
+                            }
+                        })
+                    })
+                })
+            </script>
+            <!--weichengtech-->
+            <div id="newBaner">
+                <div class="fui-imgSlider imgSlider-M1528939745380">
+                    <div class='fui-swipe'>
+                        <div class='fui-swipe-wrapper'>
+                            <a class='fui-swipe-item' href="" data-nocache="true">
+                                <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/newBanner.jpg" style="display: block; width: 100%; height: auto;"/>
+                            </a>
+                        </div>
+                        <div class="fui-swipe-page left round" ></div>
+
+                        <style>
+                            .fui-swipe-page .fui-swipe-bullet {background: #ffffff; opacity: 0.5;}
+                            .fui-swipe-page .fui-swipe-bullet.active {opacity: 1;}
+                        </style>
+                    </div>
+                </div>
+            </div>
+            <!--weichengtech-->                                    <div id="newNav" class="fui-icon-group noborder col-5  icongroup-M1529031290054" style="background: #ffffff">
+            <a class="fui-icon-col external" href="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&cate=1316" data-nocache="true">
+                <div class="icon"><img src="http://img.qinxuan365.com/fc7f41960955c5d51dcc4e266c81590b.png"></div>
+                <div class="text" style="color: #333333;">美妆护肤</div>
+            </a>
+            <a class="fui-icon-col external" href="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&cate=1319" data-nocache="true">
+                <div class="icon"><img src="http://img.qinxuan365.com/76e3d73ddfdd5075056e5fc82200ba20.png"></div>
+                <div class="text" style="color: #333333;">母婴儿童</div>
+            </a>
+            <a class="fui-icon-col external" href="./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&cate=1320" data-nocache="true">
+                <div class="icon"><img src="http://img.qinxuan365.com/9107c4dd5fb55aeef939cdf5d3bca0a4.png"></div>
+                <div class="text" style="color: #333333;">食品保健</div>
+            </a>
+            <a class="fui-icon-col external" href="http://www.qinxuan365.cn/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&cate=1201" data-nocache="true">
+                <div class="icon"><img src="http://img.qinxuan365.com/f9e31312f0db86df57dd5c2d156e13f0.png"></div>
+                <div class="text" style="color: #333333;">生活用品</div>
+            </a>
+            <a class="fui-icon-col external" href="http://www.qinxuan365.cn/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=goods&cate=1209" data-nocache="true">
+                <div class="icon"><img src="http://img.qinxuan365.com/4d1c393c33112c0f38ad38098024bf1d.png"></div>
+                <div class="text" style="color: #333333;">服饰内衣</div>
+            </a>
+        </div>
+            <div class="newActivity" style="padding-bottom: 0.75rem;background: white">
+                <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/syhd.png" style="display: block; width: 100%; height: auto;"/>
+            </div>
+
+            <!--weichengtech-->                        <!--商户免税易购提示语展示 屏蔽其他商户by lianyuanfu-->
+            <!--weichengtech-->                                        <div id="newRecommend" class="fui-goods-group block one" style="background: #f3f3f3;">
+            <h4>精彩推荐</h4>
+            <div class="fui-goods-item" data-goodsid="" data-nocache="true" style="width: 50%; float: left;">
+                <div data-materialurl="item.jd.com/12393396643.html" class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+                    <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+                </div>
+                <div class="detail">
+                    <div class="name">
+                        <em style = "position: relative;">京东</em>
+                        玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+                    <p class="productprice noheight">
+                    </p>
+                    <div class="price">
+                         <span class="text" style="color: #ff5555;">
+                               <p class="minprice"><span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                               <p class="minprice newVolume">券 &yen; 5.00</p>
+                         </span>
+                    </div>
+                </div>
+                <div class="salez" style="background-image: url(''); "></div>
+              </div>
+            <div class="fui-goods-item" data-goodsid="" data-nocache="true" style="width: 50%; float: left;">
+                <div data-materialurl="item.jd.com/12393396643.html" class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+                    <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+                </div>
+                <div class="detail">
+                    <div class="name">
+                        <em style = "position: relative;">京东</em>
+                        玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+                    <p class="productprice noheight">
+                    </p>
+                    <div class="price">
+                         <span class="text" style="color: #ff5555;">
+                               <p class="minprice"><span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                               <p class="minprice newVolume">券 &yen; 5.00</p>
+                         </span>
+                    </div>
+                </div>
+                <div class="salez" style="background-image: url(''); "></div>
+            </div>
+        </div>
+            <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
+            <!--weichengtech54mI5p2D5omA5pyJ-->
+            <!--weichengtech54mI5p2D5omA5pyJ-->    </div>
+
+        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=ZQiFErjQB7inrGpx27M1GR5w3TxZ64k7&s=1"></script>
+        <script language="javascript">
+            require(['../addons/ewei_shopv2/plugin/diypage/static/js/mobile.js'], function(modal){
+                modal.init();
+            });
+        </script>
+        <script type="text/html" id="tpl_goods_list">
+            <%each list as g%>
+            <div class="fui-goods-item" data-goodsid="<%g.goods_id%>" data-nocache="true" style="width: 50%; float: left;">
+                <div class="buybtn-1 image auto echelon" data-materialurl="<%g.goods_url%>" data-text="限时卖" style="z-index: 100; background:none; min-height: 50px;">
+                    <img class="exclude" src="" data-lazy="<%g.thumb%>" />
+                </div>
+                <div class="detail">
+                    <div class="name">
+                        <em style = "position: relative;">京东</em>
+                        <%g.goods_name%>
+                    </div>
+                    <p class="productprice noheight"></p>
+                    <div class="price">
+            	<span class="text" style="color: #f55;">
+                	<p class="minprice">
+						<span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;<%g.discountPrice%></span>
+						<del style="font-size: 0.55rem;color: #999">&yen;<%g.price%></del>
+					</p>
+					<p class="minprice newExtension">推广赚 &yen; <%g.commission%></p>
+				</span>
+                        <span data-materialurl="<%g.goods_url%>" data-price = "<%g.goods_price%>" data-discountprice = "<%g.discountPrice%>" data-goodsid = "<%g.goods_id%>" data-goodsimg = "<%g.thumb%>" data-goodsname = "<%g.goods_name%>" data-coupon = "<%g.couponAmount%>" class="buy shareImgBtn newShare">马上分享</span>
+                    </div>
+                </div>
+            </div>
+            <%/each%>
+        </script>
+    </div>
+    <link href="../addons/ewei_shopv2/plugin/diypage/static/css/foxui.diy.css?v=201705261600"rel="stylesheet"type="text/css"/>
+    <style type="text/css">
+        .diymenu .item .inner {background: #ffffff;}
+        .diymenu .item .inner:before,
+        .diymenu .item .inner:after {border-color: #ffffff;}
+        .diymenu .item .inner .text {color: #999999;}
+        .diymenu .item .inner .icon {color: #999999;}
+        .diymenu .item.on .inner {background: #ffffff;}
+        .diymenu .item.on .inner .text {color: #f39700;}
+        .diymenu .item.on .inner .icon {color: #f39700;}
+        .diymenu .item .child {border-color: #eeeeee; background-color: #f4f4f4;}
+        .diymenu .item .child a {color: #666666;}
+        .diymenu .item .child a:after {border-color: #eeeeee; color: #666666;}
+        .diymenu .item .child .arrow:before {background: #eeeeee;}
+        .diymenu .item .child .arrow:after {background: #f4f4f4;}
+        .diymenu .item .inner .badge {background: ;}
+    </style>
+    <div class="diymenu" style=" position: absolute;max-width: 750px;">
+        <div class="item item-col-4 on"
+             onclick="location.href = './index.php?i=2&c=entry&m=ewei_shopv2&do=mobile'"
+
+        >
+            <div class="inner  top">
+
+                <span class="icon icon-home3 top"></span>
+                <span class="text top" >首页</span>
+
+            </div>
+        </div>
+        <div class="item item-col-4
+             "
+             onclick="location.href = './index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=commission'"
+
+        >
+            <div class="inner  top">
+
+                <span class="icon icon-shangcheng1 top"></span>
+                <span class="text top" >商城</span>
+
+            </div>
+        </div>
+        <div class="item item-col-4
+             "
+             onclick="location.href = './index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=commission'"
+
+        >
+            <div class="inner top">
+
+                <span class="icon icon-people top"></span>
+                <span class="text top" >社区</span>
+
+            </div>
+        </div>
+        <div class="item item-col-4
+             "
+             onclick="location.href = './index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=member'"
+
+        >
+            <div class="inner  top">
+
+                <span class="icon icon-my top"></span>
+                <span class="text top" >我的</span>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        function showSubMenu(obj) {
+            $(obj).toggleClass('on').siblings().removeClass('on');
+            $(obj).find('.child').toggleClass('in');
+            $(obj).siblings().find('.child').removeClass('in')
+        }
+        $(function () {
+            var len = $(".diymenu .child").length;
+            setTimeout(function () {
+                $(".diymenu .child").each(function (i) {
+                    var width = $(this).outerWidth();
+                    var margin = -(width / 2);
+                    var left = '50%';
+                    var pleft = $(this).position().left - width / 2;
+                    if(i==0 && pleft<2){
+                        left = 2;
+                        margin = 0;
+                        var pwidth = $(this).closest('.item').width();
+                        var arrowleft = pwidth / 2;
+                        var oldleft = parseFloat( $(this).find('.arrow').css('left').replace('px','') );
+                        $(this).find('.arrow').css({'left': arrowleft-10, 'margin-left': 0});
+                    }
+                    else if(i+1==len) {
+                        var thisleft = parseFloat( $(this).offset().left.toString().replace('px',''));
+                        if((thisleft+width)>$(document).width()){
+                            var pleft = $(this).closest('.item').offset().left;
+                            left =  $(document).width() - width - 2 - pleft;
+                            margin = 0;
+                            var pwidth = $(this).closest('.item').width();
+                            var itemleft = (pwidth / 2) + pleft;
+                            var childleft = $(document).width() - width - 2;
+                            var arrowleft = itemleft - childleft;
+                            $(this).find('.arrow').css({'left': arrowleft-10, 'margin-left': 0});
+                        }
+                    }
+                    $(this).css({'position': 'absolute', 'left': left, 'margin-left': margin, 'z-index': 0});
+                })
+            }, 500);
+        })
+    </script>
+    <!--weichengtech-->
+
+    <script language="javascript">
+        clearTimeout(window.interval);
+        window.interval = setTimeout(function () {
+            window.shareData = {"title":"\u7c73\u7c92\u4e4b\u5149","imgUrl":"","desc":"\u7c73\u7c92\u4e4b\u5149","link":"http:\/\/www.qinxuan365.cn\/app\/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=diypage&id=53"};
+            console.log('shareData output:');
+            console.log(shareData.valueOf());
+
+            jssdkconfig = null || { jsApiList:[] };
+            jssdkconfig.debug = false;
+            jssdkconfig.jsApiList = ['checkJsApi','onMenuShareTimeline','onMenuShareAppMessage','onMenuShareQQ','onMenuShareWeibo','showOptionMenu', 'hideMenuItems', 'onMenuShareQZone', 'scanQRCode','openLocation'];
+            wx.config(jssdkconfig);
+            wx.ready(function () {
+                wx.showOptionMenu();
+
+
+                window.shareData.success = "";
+                if(window.shareData.success){
+                    var success = window.shareData.success;
+                    window.shareData.success = function(){
+                        eval(success)
+                    };
+                }
+
+
+                wx.onMenuShareAppMessage(window.shareData);
+                wx.onMenuShareTimeline(window.shareData);
+                wx.onMenuShareQQ(window.shareData);
+                wx.onMenuShareWeibo(window.shareData);
+                wx.onMenuShareQZone(window.shareData);
+            });
+        },500);
+
+
+
+        //	Share to qq
+        require(['//qzonestyle.gtimg.cn/qzone/qzact/common/share/share.js'], function(setShareInfo) {
+            setShareInfo({
+                title: "米粒之光",
+                summary: "米粒之光",
+                pic: "",
+                url: "http://www.qinxuan365.cn/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=diypage&id=53"
+            });
+        });
+    </script>
+    <!--weichengtech--></div>
+
+<script language='javascript'>
+    $(function(){
+        $.getJSON("./index.php?i=2&c=entry&m=ewei_shopv2&do=mobile&r=util.task");
+    })
+
+    $(document.body).on("click", ".shareImgBtn", function(){
+        var that = $(this);
+        $.ajax({
+            url: core.getUrl('goods/getShareImg', {
+                materialUrl: $(this).data('materialurl'),
+                goodsId: $(this).data('goodsid'),
+                goodsImg: $(this).data('goodsimg'),
+                goodsName: $(this).data('goodsname'),
+                price: $(this).data('price'),
+                discountPrice: $(this).data('discountprice'),
+                coupon: $(this).data('coupon'),
+            }),
+            cache: true,
+            success: function(data) {
+                data = window.JSON.parse(data);
+
+                $('.shareImgMask').show();
+                $('.shareImgContent').show()
+                    .find('img').css({width: '12.3rem', height: '20.4rem'}).attr('src', data.result.shareImg);
+            }
+        });
+    });
+
+    $(document.body).on("click", ".buybtn-1", function(){
+        $.ajax({
+            url: core.getUrl('goods/getClickUrl', {
+                materialUrl: $(this).data('materialurl')
+            }),
+            cache: true,
+            success: function(data) {
+                data = window.JSON.parse(data);
+                location.href = data.result.clickUrl;
+            }
+        });
+    });
+
+    $(document.body).on("click", ".shareImgContent button", function(){
+        $('.shareImgMask').hide();
+        $('.shareImgContent').hide();
+    });
+
+
+</script>
+
+<script language="javascript">
+    require(['init']);
+
+    setTimeout(function () {
+        if($(".danmu").length>0){
+            $(".danmu").remove();
+        }
+    }, 500);
+</script>
+
+
+
+
+
+
+<div class="wap-qrcode-container">
+    <p class="example1">米粒之光</p>
+    <div class="wap-qrcode-image" id="wap-qrcode"></div>
+    <p class="example1">微信“扫一扫”浏览</p>
+</div>
+<script language="javascript">
+    $(function(){
+        setTimeout(function(){
+            require(['jquery.qrcode'],function(q){
+                $('#wap-qrcode').html('');
+                $('#wap-qrcode').qrcode("http://www.qinxuan365.cn/app/index.php?i=2&c=entry&m=ewei_shopv2&do=mobile");
+            });
+        },500);
+
+    })
+</script>
+</body>
+</html>

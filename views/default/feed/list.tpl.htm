@@ -1,0 +1,64 @@
+
+<div class="card">
+    <div class="card-header new-feed">圈友最新动态</div>
+    <div class="card-body">
+        <?php if($this -> feed_list):?>
+        <div class="feed-list clearfix">
+            <?php foreach($this -> feed_list as $feed):?>
+            <div class="feed-item clearfix">
+                <div class="user-info">
+                    <a target="_blank" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
+                    <a target="_blank" class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>"><?php echo $feed['user_info']['user_name'];?></a>
+                    <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
+                </div>
+                <div class="feed-content clearfix">
+                    <div class="text">
+                        <a target="_blank" href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>.html"><?php echo $feed['content'];?></a>
+                    </div>
+                    <div class="pics clearfix">
+                        <?php foreach($feed['pics'] as $key => $pic):?>
+                        <a target="_blank" href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>.html">
+                            <?php if($key < 3):?>
+                            <img src="<?php echo $pic;?>"/>
+                            <?php endif;?>
+                        </a>
+                        <?php endforeach;?>
+                    </div>
+                </div>
+                <div class="user-attr">
+                    <span attr="<?php echo $feed['id'];?>" class="icon-good">赞 <span class="num"><?php echo $feed['like_num'];?></span></span>
+                    <span style="color:#ccc;"> | </span>
+                    <span attr="<?php echo $feed['id'];?>" class="icon-comment">评论 <span class="num"><?php echo $feed['comment_num'];?></span></span>
+                </div>
+                <div id="comment_<?php echo $feed['id'];?>" class="comment-list hide">
+                    <div class="comment-title">共 <?php echo $feed['comment_num'];?> 条评论</div>
+                    <div class="comments">
+                        <?php foreach($feed['comment_list'] as $comment):?>
+                        <div class="comment-item">
+                            <div class="user-info">
+                                <img src="<?php echo G_DEMAIN.$comment['user_info']['avatar'];?>"/>
+                                <span class="nick"><?php echo $comment['user_info']['user_name'];?></span>
+                                <span class="time"><?php echo date_friendly($comment['create_time']);?></span>
+                            </div>
+                            <div class="comment-desc"><?php echo $comment['content'];?></div>
+                        </div>
+                        <?php endforeach;?>
+                    </div>
+                    <div class="do-comment clearfix">
+                        <div class="clearfix">
+                             <div id="comment_area_<?php echo $feed['id'];?>" name="comment" class="comment-area" contenteditable="true">发表你的评论...</div>
+                             <button attr="<?php echo $feed['id'];?>" class="btn btn-danger send-comment">发表</button>
+                        </div>
+                        <button id="comment_btn_<?php echo $feed['id'];?>" attr="<?php echo $feed['id'];?>" title="插入表情" class="edui-my-default comment-face"></button>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach;?>
+        </div>
+        <?php else:?>
+        <div class="no-data">
+             额，暂无数据哦~
+        </div>
+        <?php endif;?>
+    </div>
+</div>

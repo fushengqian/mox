@@ -1,0 +1,71 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <span class="pull-left">日志列表</span>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="/backend/logs/index/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-4 col-xs-4">
+                            <input class="form-control" placeholder="关键字" type="text" value="<?php echo trim($_GET['keyword']); ?>" name="content"/>
+                        </div>
+                        <div class="col-sm-4 col-xs-4">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>内容</th>
+                                <th>级别</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><?php echo $val['id']; ?></td>
+                                <td><?php echo $val['content']; ?></td>
+                                <td><?php echo $val['level']; ?></td>
+                                <td><?php echo date_friendly($val['create_time']);?></td>
+                                <td>
+                                    <a style="margin:2px;" href="javascript:;" id="<?php echo $val['id']; ?>" data-toggle="tooltip" class="icon icon-trash md-tip delete" title="<?php _e('删除'); ?>"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/20);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<form method="post" action="/backend/logs/delete/" onsubmit="return false;" id="delete_form">
+    <input id="id" name="id" type="hidden" value="0">
+</form>
+<script src="<?php echo G_STATIC; ?>/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+   $(".delete").bind('click', function(){
+       var _this = this;
+       MOX.dialog('confirm',{'message': '<?php _e('确定要删除该日志吗？'); ?>'}, function(){
+           var id = $(_this).attr('id');
+           $("#id").val(id);
+           MOX.ajax_post($('#delete_form'),  MOX.ajax_processer, 'error_message');
+       });
+   });
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

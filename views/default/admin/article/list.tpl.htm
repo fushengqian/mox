@@ -1,0 +1,137 @@
+<?php TPL::output('admin/global/header.tpl.htm'); ?>
+<?php TPL::output('admin/global/nav_menu.tpl.htm'); ?>
+
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <h3>
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="javascript:;">文章列表</a></li>
+                    <li><a target="_blank" href="/article/publish/">发布文章</a></li>
+                </ul>
+            </h3>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active">
+                <div class="tab-pane">
+                <form method="post" action="/backend/article/list/" onsubmit="return false;" id="search_form" class="form-horizontal" role="form">
+                    <input name="action" type="hidden" value="search" />
+                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <select name="status" class="form-control">
+                                <option value="0">全部</option>
+                                <option value="1" <?php if($this -> status == '1'){echo 'selected="selected"';}?>>已审核</option>
+                                <option value="2" <?php if($this -> status == '2'){echo 'selected="selected"';}?>>未审核</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <select name="cate" class="form-control">
+                                <option value="">类别</option>
+                                <option value="focus" <?php if($this -> cate == 'focus'){echo 'selected="selected"';}?>>头条</option>
+                                <option value="product" <?php if($this -> cate == 'product'){echo 'selected="selected"';}?>>测评</option>
+                                <option value="teach" <?php if($this -> cate == 'teach'){echo 'selected="selected"';}?>>教程</option>
+                                <option value="work" <?php if($this -> cate == 'work'){echo 'selected="selected"';}?>>新品</option>
+                                <option value="activity" <?php if($this -> cate == 'activity'){echo 'selected="selected"';}?>>活动</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="MOX.ajax_post($('#search_form'));" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+                </form>
+                </div>
+                <form id="batchs_form" action="admin/ajax/article_manage/" method="post">
+                <input type="hidden" id="action" name="action" value="del" />
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th><?php _e('标题'); ?></th>
+                                <th><?php _e('类别'); ?></th>
+                                <th><?php _e('浏览'); ?></th>
+                                <th><?php _e('用户'); ?></th>
+                                <th><?php _e('发布时间'); ?></th>
+                                <th><?php _e('状态'); ?></th>
+                                <th><?php _e('操作'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <tr>
+                                <td><a href="/article/<?php echo $val['id']; ?>.html" target="_blank"><?php echo $val['title']; ?></a></td>
+                                <td><?php echo $val['cate']; ?></td>
+                                <td><?php echo $val['read']; ?></td>
+                                <td><?php echo $val['user_info']['user_name']; ?></td>
+                                <td><?php echo date_friendly($val['create_time']); ?></td>
+                                <td>
+                                <?php if($val['status'] == '1') {?>
+                                    <span style="color:green;">已审核</span>
+                                <?php  } else { ?>
+                                    <span style="color:red;">未审核</span>
+                                <?php } ?>
+                                </td>
+                                <td>
+                                    <a href="/article/publish/id-<?php echo $val['id']; ?>/" target="_blank" class="icon icon-edit md-tip" title="编辑"></a>
+                                    <a href="javascript:;" lang="<?php echo $val['id']; ?>" class="icon icon-plus md-tip recommend" title="推到banner"></a>
+                                    <a href="javascript:;" lang="<?php echo $val['id']; ?>" class="icon icon-inviteask md-tip very" title="审核"></a>
+                                    <a target="_blank" href="/backend/article/delete/?id=<?php echo $val['id']; ?>" lang="<?php echo $val['id']; ?>" class="icon icon-delete md-tip" title="删除"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                </form>
+                <div class="mod-table-foot">
+                    <?php echo $this->pagination;?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(".recommend").bind('click', function(){
+        var id = $(this).attr("lang");
+        $.ajax({
+            type: 'POST',
+            url:  "<?php echo G_DEMAIN;?>/backend/article/update/",
+            data: {id: id},
+            dataType: 'json',
+            success: function(data){
+                if (data.errno == '1') {
+                    alert('设置成功');
+                    window.location.reload();
+                }
+                else
+                {
+                    alert('设置失败');
+                }
+            }
+        });
+    });
+    $(".very").bind('click', function(){
+        var id = $(this).attr("lang");
+        $.ajax({
+            type: 'POST',
+            url:  "<?php echo G_DEMAIN;?>/backend/article/update/",
+            data: {id: id, type: 1},
+            dataType: 'json',
+            success: function(data){
+                if (data.errno == '1') {
+                    alert('审核成功');
+                    window.location.reload();
+                }
+                else
+                {
+                    alert('审核失败');
+                }
+            }
+        });
+    });
+</script>
+<?php TPL::output('admin/global/footer.tpl.htm'); ?>

@@ -1,0 +1,54 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<div class="container">
+
+
+<div class="row">
+
+<?php TPL::output('user/sidebar.tpl.htm');?>
+
+<div class="col-md-9">
+
+
+    <div class="card my-right">
+        <div class="card-body user-setting">
+
+<div class="row">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+
+
+    <form id="form" method="post" onsubmit="return false" action="<?php echo G_DEMAIN;?>/user/ajax/saveinfo/">
+
+  <div class="form-group">
+    <label>昵称：</label>
+    <input type="text" class="form-control" name="user_name" placeholder="给自己取一个响亮的名号吧！" value="<?php echo $this->user['user_name'];?>"/>
+  </div>
+  
+  <div class="form-group">
+    <label>性别：</label>
+    <div class="fl text-left">
+      <input <?php if ($this->user['sex']=='0'): ?>checked="select"<?php endif;?> name="sex" type="radio" value="0"/>保密
+      <input <?php if ($this->user['sex']=='1'): ?>checked="select"<?php endif;?> name="sex" type="radio" value="1"/>男
+      <input <?php if ($this->user['sex']=='2'): ?>checked="select"<?php endif;?> name="sex" type="radio" value="2"/>女
+    </div>
+
+  </div>
+
+  <div class="form-group">
+    <label>一句话介绍：</label>
+    <textarea class="form-control" rows="3" name="intro" placeholder=""><?php echo $this->user['intro'];?></textarea>
+  </div>
+  
+
+<button class="btn btn-sm btn-info" onclick="FNC.ajax_post($('#form'), FNC.ajax_processer, 'error_message'); return false;" type="button">修改设置</button>
+</form>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<?php TPL::output('global/footer.tpl.htm'); ?>

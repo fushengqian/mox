@@ -1,0 +1,36 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<div class="header-holder">
+    <div class="common-header">
+        <a class="back"><em class="sprite icon-back"></em></a>
+        <span class="title text-ellipsis1 ">注册</span>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="login-form">
+            <div class="bc">
+                <form id="login_form" method="post" onsubmit="return false" action="<?php echo G_DEMAIN;?>/user/ajax/login_process/">
+                    <div class="form-group">
+                        <input name="phone" type="phone" class="form-control rounded-0" placeholder="手机号">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" class="form-control rounded-0" placeholder="密码">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password1" class="form-control rounded-0" placeholder="确认密码">
+                    </div>
+                    <div class="form-group">
+                        <input name="vcode" type="text" class="form-control vcode" placeholder="验证码">
+                        <img id="captcha" onclick="javascript:this.src='<?php echo G_DEMAIN;?>/user/captcha/?v='+Math.floor(Math.random()*10000)+'/';" src="<?php echo G_DEMAIN;?>/user/captcha/?v=<?php echo time();?>/">
+                    </div>
+                    <div class="form-group">
+                        <button id="do_login" type="button" class="btn btn-fat btn-success btn-lg btn-block br0" onclick="FNC.ajax_post($('#login_form'), FNC.ajax_processer, 'error_message');">注册</button>
+                    </div>
+                </form>
+                <p><a class="be-new" href="<?php echo G_DEMAIN;?>/user/login/">已有账号？</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php TPL::output('global/footer.tpl.htm'); ?>

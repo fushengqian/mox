@@ -1,0 +1,41 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+
+<div class="my-info">
+    <img class="avatar" src="<?php echo G_DEMAIN.$this->user['avatar'];?>"/>
+    <div class="info">
+         <span class="nick"><?php echo $this->user['user_name'];?></span>
+         <span class="honor"><?php echo $this->honor;?></span>
+    </div>
+    <em class="sprite icon-go"></em>
+</div>
+<div class="my-list my-friends">
+    <span>关注 <b>108</b></span>
+    <span>粉丝 <b>199</b></span>
+    <span>积分 <b>1249</b></span>
+</div>
+<div class="my-list my-feed">
+    <a href="/"><em class="icon-mytopic"></em>Ta的动态</a>
+    <em class="sprite icon-go"></em>
+</div>
+<div class="app-tab">
+    <div class="app-item">
+        <a href="/"><img class="t-icon" src="/static/mobile/image/tab_0_off.png"/></a>
+        <div class="the"><a href="/">首页</a></div>
+    </div>
+    <div class="app-item">
+        <a href="/home/"><img class="t-icon" src="/static/mobile/image/tab_1_off.png"/></a>
+        <div class="the"><a href="/home/">动态</a></div>
+    </div>
+    <div class="app-item">
+        <div class="the icon-publish">+</div>
+    </div>
+    <div class="app-item">
+        <a href="/message/index/"><img class="t-icon" src="/static/mobile/image/tab_2_off.png"/></a>
+        <div class="the"><a href="/message/index/">消息</a></div>
+    </div>
+    <div class="app-item">
+        <a href="/user/home/"><img class="t-icon" src="/static/mobile/image/tab_3_on.png"/></a>
+        <div class="the"><a href="/user/home/">我的</a></div>
+    </div>
+</div>
+<?php TPL::output('global/footer.tpl.htm'); ?>

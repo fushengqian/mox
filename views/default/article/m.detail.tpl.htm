@@ -1,0 +1,40 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<div class="m-article">
+    <div class="crumbs">
+        <a href="<?php echo G_DEMAIN;?>">模型圈</a> <i>&nbsp;&nbsp;</i> <?php if($this -> city) {?><a href="<?php echo 'http://'.$this -> city['uname'].'.moxquan.com';?>">模型圈</a> <i>&nbsp;&nbsp;</i><?php } ?> 正文
+    </div>
+    <div class="m-article-title">
+       <h1><?php echo $this->info['title'];?></h1>
+    </div>
+    <div class="m-article-info">
+       <span>来源:<?php echo $this -> info['from'];?></span>
+       <span>阅读数:<?php echo $this -> info['read'];?></span>
+       <span>时间:<?php echo date("Y-m-d", $this->info['create_time']);?></span>
+    </div>
+    <div class="m-article-content">
+       <?php echo $this->info['content'];?>
+    </div>
+    <div class="article-list">
+         <div class="a-title">相关资讯</div>
+         <?php foreach($this -> article_list as $article):?>
+             <a title="<?php echo $article['title'];?>" target="_blank" href="<?php echo $article['url'];?>"><i></i><?php echo summary($article['title'], 20);?></a>
+         <?php endforeach;?>
+         <div class="auto-height"></div>
+     </div>
+     <?php if($this -> recommend_list):?>
+     <div class="recommend-list">
+         <div class="a-title">好玩推荐</div>
+         <?php foreach($this -> recommend_list as $newk => $new):?>
+            <div class="jd-item <?php if($newk == 4){echo 'noborder';}?>">
+                 <a target="_blank" href="<?php echo $new['url'];?>">
+                    <img alt="<?php echo $new['name'];?>" src="<?php echo $new['preview'];?>"/>
+                    <span class="item-info">
+                         <span><?php echo summary($new['name'], 15);?></span>
+                    </span>
+                 </a>
+            </div>
+         <?php endforeach;?>
+      </div>
+      <?php endif; ?>
+</div>
+<?php TPL::output('global/footer.tpl.htm'); ?>

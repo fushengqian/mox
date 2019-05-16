@@ -1,0 +1,36 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+
+
+<div class="container clearfix">
+    <?php TPL::output('user/sidebar.tpl.htm');?>
+    <div class="col-md-9 mod-message">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="mb-3">
+                    <a class="btn btn-sm text-secondary" href="<?php echo G_DEMAIN;?>/message/index/">最新消息</a>
+                </div>
+
+                <hr>
+                <div class="message-list">
+                    <ul>
+                        <?php foreach($this->msg_list as $msg):?>
+                        <li>
+                            <span class="time"><?php echo date_friendly($msg['create_time']);?></span>
+                            <?php if($msg['url']):?>
+                            <p><a target="_blank" href="<?php echo $msg['url'];?>"><?php echo $msg['content'];?></a></p>
+                            <?php else :?>
+                            <p><?php echo $msg['content'];?></p>
+                            <?php endif;?>
+                        </li>
+                        <?php endforeach;?>
+                    </ul>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php TPL::output('global/footer.tpl.htm'); ?>

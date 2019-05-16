@@ -1,0 +1,178 @@
+<?php TPL::output('global/header.tpl.htm');?>
+<!--模型圈导航-->
+<!--
+<div class="w960" style="width:960px;">
+    <div class="huati">
+        <div class="huati01"><h2>主题模型</h2></div>
+        <div class="left huati02">
+            <a href='<?php echo G_DEMAIN;?>/topic/22838933.html' target="_blank">坦克装甲</a><span>|</span>
+            <a href='<?php echo G_DEMAIN;?>/topic/45345343.html' target="_blank">飞机战机</a><span>|</span>
+            <a href='<?php echo G_DEMAIN;?>/topic/45345345.html' target="_blank">海上舰船</a><span>|</span>
+            <a href='<?php echo G_DEMAIN;?>/topic/22838936.html' target="_blank">汽车模型</a><span>|</span>
+            <a href='<?php echo G_DEMAIN;?>/topic/27936756.html' target="_blank">高达模型</a><span>|</span>
+            <a href='<?php echo G_DEMAIN;?>/topic/42342334.html' target="_blank">变形金刚</a>
+        </div>
+    </div>
+</div>-->
+<!--主体部分-->
+<div class="tgb_m w960">
+    <div class="left tgb_ml index-main">
+        <div class="tgb_ml01"><h2>热门话题</h2></div>
+        <?php foreach($this->hot_topic_list as $hot_topic):?>
+        <div class="tgb_ml02 focus">
+            <a href='<?php echo G_DEMAIN;?>/topic/<?php echo $hot_topic['id'];?>.html' target="_blank"><img class="preview" src='<?php echo G_DEMAIN.$hot_topic['preview'];?>'/></a>
+            <h2>
+                <a class="title" target="_blank" href='<?php echo G_DEMAIN;?>/topic/<?php echo $hot_topic['id'];?>.html'>
+                   <?php echo $hot_topic['title'];?>
+                </a>
+            </h2>
+            <p class="text"><?php echo $hot_topic['words'];?></p>
+            <p class="tgb_ml_div">
+                <span class="left">
+                      <img class="avatar" src="<?php echo G_DEMAIN;?>/static/upload/01/6.png" alt="不羁的心"/>
+                      <a href="<?php echo G_DEMAIN;?>/user/2838404" target="_blank">不羁的心999</a>
+                      <span class="time"><?php echo date_friendly($hot_topic['create_time']);?></span>
+                </span>
+                <span class="right">
+                      <span class="like icon-good">100赞</span>
+                      <span class="comment icon-comment">98评论</span>
+                </span>
+            <p>
+        </div>
+        <?php endforeach;?>
+    </div>
+    <div class="right tgb_mr" style="font-size:13px;">
+        <div class="tgb_mr01" style="margin-top:15px;">
+            <div class="left tgb_mrtel"><img src="<?php echo G_DEMAIN;?>/static/avatar/default.jpg" width="50" height="50" /></div>
+            <div class="left tgb_mrtel_wenz">
+                <h2>模型圈移动客户端</h2>
+                <div class="tgb_m_tubiao">
+                    <ul>
+                        <li class="apple01"><a href="javascript:;">IOS</a></li>
+                        <li class="apple02"><a target="_blank" href="<?php echo G_DEMAIN;?>/static/moxquan-v1.apk">Android</a></li>
+                        <li class="apple03"><a href="javascript:;">微信</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mox-star">
+            <h2>模型圈推荐</h2>
+            <div class="mox-star clearfix">
+                 <?php foreach($this->user_list as $uinfo):?>
+                 <div class="star clearfix">
+                     <a target="_blank" href="<?php echo G_DEMAIN;?>/user/<?php echo $uinfo['id'];?>/">
+                        <img class="avatar" src="<?php echo G_DEMAIN;?><?php echo $uinfo['avatar'];?>"/>
+                     </a>
+                     <div class="info">
+                          <div class="user-info">
+                               <span class="nick"><a target="_blank" href="<?php echo G_DEMAIN;?>/user/<?php echo $uinfo['id'];?>/"><?php echo $uinfo['user_name'];?></a></span>
+                               <span class="icon-plus">关注</span>
+                          </div>
+                          <div class="intro"><?php echo $uinfo['intro'];?></div>
+                     </div>
+                 </div>
+                 <?php endforeach;?>
+            </div>
+        </div>
+    </div>
+</div>
+<!--模型圈最新动态 start-->
+<div class="w960 tgb_pos">
+    <div class="left tgb_pos_l clearfix">
+         <?php TPL::output('feed/list.tpl.htm');?>
+    </div>
+    <div class="left tgb_pos_r clearfix">
+        <div class="mox-point mox-mode">
+            <h2 class="title">积分动向</h2>
+            <div class="pc_tr_bot">
+                <?php foreach($this->point_list as $point):?>
+                <div class="pc_ttwo">
+                    <div class="pc_ttwo_l left">
+                        <a  href="<?php echo G_DEMAIN;?>/user/<?php echo $point['user_info']['id'];?>/" target="_blank">
+                            <img class="avatar" src="<?php echo G_DEMAIN.$point['user_info']['avatar'];?>" />
+                        </a>
+                        <p><a title="<?php echo $point['user_info']['user_name'];?>" href="<?php echo G_DEMAIN;?>/user/<?php echo $point['user_info']['id'];?>/" target="_blank"><?php echo summary($point['user_info']['user_name'], 6);?></a></p>
+                    </div>
+                    <div class="pc_ttwo_r">
+                        <p>
+                            <span><?php echo $point[marks]; ?>：</span>
+                        </p>
+                        <div>获得了<span class="point-num"><?php echo $point[point]; ?></span>积分！</div>
+                    </div>
+                </div>
+                <?php endforeach;?>
+            </div>
+        </div>
+        <div class="mox-hot-feed mox-mode">
+            <h2 class="title">本周社区热帖</h2>
+            <div class="luntan_t">
+                <ul>
+                    <?php foreach($this->hot_feed as $feed):?>
+                    <li><a href='<?php echo G_DEMAIN;?>/feed/<?php echo $feed['id'];?>.html' target="_blank"><?php echo summary($feed['content'], 30);?></a></li>
+                    <?php endforeach;?>
+                </ul>
+            </div>
+        </div>
+        <div class="mox-people mox-mode">
+            <h2 class="title">模型圈新人</h2>
+            <div class="tgb_mr05">
+                <?php foreach($this->new_user_list as $new_u):?>
+                <a href='<?php echo G_DEMAIN;?>/user/<?php echo $new_u['id'];?>/' target="_blank"><?php echo $new_u['user_name'];?></a>
+                <?php endforeach;?>
+            </div>
+        </div>
+        <div class="hot-mox mox-mode">
+            <h2 class="title">热门模型</h2>
+            <ul class="clearfix">
+                <li>
+                    <a href='' target="_blank">
+                        <img src="https://www.tamiya.com/english/products/14133/top.jpg"/>
+                    </a>
+                    <p><a href='' target="_blank" title="">机车男最爱</a></p>
+                </li>
+                <li>
+                    <a href='' target="_blank" title="">
+                        <img alt='' src="https://www.tamiya.com/english/products/18713/top.jpg"/>
+                    </a>
+                    <p><a href='https://life.moxquan.com/bagua_10962_1' target="_blank" title="">赛道噪音</a></p>
+                </li>
+                <li>
+                    <a href='' target="_blank" title="">
+                        <img alt='' src="https://www.tamiya.com/english/products/70232/top.jpg"/>
+                    </a>
+                    <p><a href='' target="_blank" title="">机器人模型</a></p>
+                </li>
+                <li>
+                    <a href='' target="_blank" title="">
+                        <img alt=''  src="https://www.tamiya.com/english/products/58661/top.jpg"/>
+                    </a>
+                    <p><a href='' target="_blank" title="">卡车老司机</a></p>
+                </li>
+                <li>
+                    <a href='' target="_blank" title="">
+                        <img alt=''  src="https://www.tamiya.com/english/products/47381/top.jpg"/>
+                    </a>
+                    <p><a href='' target="_blank" title="">伴随我们童年记忆</a></p>
+                </li>
+                <li>
+                    <a href='' target="_blank" title="">
+                        <img alt='' src="https://www.tamiya.com/english/products/56357/top.jpg"/>
+                    </a>
+                    <p><a href='' target="_blank" title="">巨无霸模型</a></p>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="yqlj">
+    <div class="yqljTitle">友情链接</div>
+    <div class="yqljItems">
+        <span class="yqljItem"><a target="_blank" href="http://tieba.baidu.com/f?kw=%D7%B0%BC%D7%C4%A3%D0%CD&fr=home">装甲模型</a></span>
+        <span class="yqljItem"><a target="_blank" href="http://tieba.baidu.com/f?kw=%E6%A8%A1%E5%9E%8B&ie=utf-8">模型吧</a></span>
+        <span class="yqljItem"><a target="_blank" href="http://tieba.baidu.com/f?ie=utf-8&kw=%E8%88%AA%E6%A8%A1&fr=search">航模吧</a></span>
+    </div>
+</div>
+<div class="xc_panel"></div>
+<!--帖子列表、帖子右边块-->
+<!--主体部分-->
+<?php TPL::output('global/footer.tpl.htm');?>
