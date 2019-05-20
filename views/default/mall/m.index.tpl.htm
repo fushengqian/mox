@@ -1,0 +1,161 @@
+<?php TPL::output('global/header.tpl.htm'); ?>
+<div class='fui-page-group'>
+    <div class='fui-page fui-page-current main-index-page'>
+        <div class="fui-header">
+            <div class="fui-header-left"></div>
+            <div class="title">Mox系统</div>
+            <div class="fui-header-right"></div>
+        </div>
+        <div class="fui-content navbar" id="container">
+            <div class="fui-searchbar bar" id="newIndex">
+                <div class="city-select" id="citySelect">
+                    <em class="currentCity J-city-select">Mox商店</em>
+                </div>
+                <div class="searchbar" style="background: #ef7700;">
+                    <form action="" method="post" style="position: relative;left:0;top:0;">
+                        <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
+                        <div class="search-input round" style="background: #ef7700;">
+                            <i class="icon icon-search" style="color: #ffffff;"></i>
+                            <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="search-extra">
+                    <i id="btn_scan" class="icon icon-scan"></i>
+                </div>
+            </div>
+            <script>
+                $(function () {
+                    $('#btn_scan').click(function () {
+                        window.wx.scanQRCode({
+                            // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                            needResult: 0,
+                            desc: '扫描二维码',
+                            success: function (res) {
+                                console.log(res)
+                            },
+                            fail: function (e) {
+                                console.log(e)
+                            }
+                        })
+                    })
+                })
+            </script>
+    <div id="newBaner">
+        <div class="fui-imgSlider">
+            <div class='fui-swipe'>
+                <div class='fui-swipe-wrapper'>
+                    <a class='fui-swipe-item' href="" data-nocache="true">
+                        <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/newBanner.jpg" style="display: block; width: 100%; height: auto;"/>
+                    </a>
+                </div>
+                <div class="fui-swipe-page left round"></div>
+            </div>
+        </div>
+    </div>
+    <div class="fui-icon-group noborder col-5">
+        <a class="fui-icon-col external" href="" data-nocache="true">
+            <div class="icon"><img src="http://img.qinxuan365.com/fc7f41960955c5d51dcc4e266c81590b.png"></div>
+            <div class="text" style="color: #333333;">小号手</div>
+        </a>
+        <a class="fui-icon-col external" href="" data-nocache="true">
+            <div class="icon"><img src="http://img.qinxuan365.com/76e3d73ddfdd5075056e5fc82200ba20.png"></div>
+            <div class="text" style="color: #333333;">田宫</div>
+        </a>
+        <a class="fui-icon-col external" href="" data-nocache="true">
+            <div class="icon"><img src="http://img.qinxuan365.com/9107c4dd5fb55aeef939cdf5d3bca0a4.png"></div>
+            <div class="text" style="color: #333333;">米高</div>
+        </a>
+        <a class="fui-icon-col external" href="" data-nocache="true">
+            <div class="icon"><img src="http://img.qinxuan365.com/f9e31312f0db86df57dd5c2d156e13f0.png"></div>
+            <div class="text" style="color:#333333;">军事模型</div>
+        </a>
+        <a class="fui-icon-col external" href="" data-nocache="true">
+            <div class="icon"><img src="http://img.qinxuan365.com/4d1c393c33112c0f38ad38098024bf1d.png"></div>
+            <div class="text" style="color:#333333;">民用模型</div>
+        </a>
+    </div>
+    <div class="newActivity" style="padding-bottom: 0.75rem;background: white">
+         <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/syhd.png" style="display: block; width: 100%; height: auto;"/>
+    </div>
+    <div id="newRecommend" class="fui-goods-group block one" style="background: #f3f3f3;">
+        <h4>精彩推荐</h4>
+        <div class="fui-goods-item" onclick="location.href='/goods/23232'" data-nocache="true" style="width:50%;float:left;">
+            <div data-materialurl="item.jd.com/12393396643.html" class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+                <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+            </div>
+            <div class="detail">
+                <div class="name">
+                    <em style = "position: relative;">京东</em>
+                    玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+                <p class="productprice noheight">
+                </p>
+                <div class="price">
+                     <span class="text" style="color: #ff5555;">
+                           <p class="minprice"><span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                           <p class="minprice newVolume">券 &yen; 5.00</p>
+                     </span>
+                </div>
+            </div>
+            <div class="salez" style="background-image: url(''); "></div>
+          </div>
+        <div class="fui-goods-item" onclick="location.href='/goods/23232'" data-nocache="true" style="width:50%;float:left;">
+            <div data-materialurl="item.jd.com/12393396643.html" class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+                <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+            </div>
+            <div class="detail">
+                <div class="name">
+                    <em style = "position: relative;">京东</em>
+                    玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+                <p class="productprice noheight">
+                </p>
+                <div class="price">
+                     <span class="text" style="color: #ff5555;">
+                           <p class="minprice"><span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                           <p class="minprice newVolume">券 &yen; 5.00</p>
+                     </span>
+                </div>
+            </div>
+            <div class="salez" style="background-image: url(''); "></div>
+        </div>
+        <div class="fui-goods-item" onclick="location.href='/goods/23232'" data-nocache="true" style="width:50%;float:left;">
+            <div class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+                <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+            </div>
+            <div class="detail">
+                <div class="name">
+                    <em style = "position: relative;">京东</em>
+                    玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+                <p class="productprice noheight">
+                </p>
+                <div class="price">
+                     <span class="text" style="color: #ff5555;">
+                           <p class="minprice"><span style="font-size: 0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                           <p class="minprice newVolume">券 &yen; 5.00</p>
+                     </span>
+                </div>
+            </div>
+            <div class="salez" style="background-image: url(''); "></div>
+        </div>
+        <div class="fui-goods-item" onclick="location.href='/goods/23232'" data-nocache="true" style="width:50%;float:left;">
+        <div data-materialurl="item.jd.com/12393396643.html" class="buybtn-1 image auto  echelon" data-text="限时卖" style="background:none; min-height: 50px;z-index:100;">
+            <img class="exclude" src="" data-lazy="http://img14.360buyimg.com/ads/jfs/t1/17425/35/7519/178151/5c6ccf0bEdbd91bb7/11e6d3d4de6d61f3.jpg" />
+        </div>
+        <div class="detail">
+            <div class="name">
+                <em style = "position: relative;">京东</em>
+                玻璃贴纸隔热膜窗户防晒膜贴纸玻璃贴膜阳台玻璃门贴纸遮阳单向防爆贴膜 高清蓝银（单向透视） 40cm宽*100cm长                                </div>
+            <p class="productprice noheight">
+            </p>
+            <div class="price">
+                 <span class="text" style="color: #ff5555;">
+                      <p class="minprice"><span style="font-size:0.7rem;color: #FF002A;margin-right: 0.25rem;font-weight: bold">&yen;7.8</span><del style="font-size: 0.55rem;color: #999">&yen;12.80</del></p>
+                      <p class="minprice newVolume">券 &yen;5.00</p>
+                 </span>
+            </div>
+        </div>
+        <div class="salez" style="background-image: url(''); "></div>
+    </div>
+    </div>
+    <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
+<?php TPL::output('global/footer.tpl.htm'); ?>

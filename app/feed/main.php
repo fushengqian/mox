@@ -17,7 +17,7 @@ class main extends MOX_CONTROLLER
     /**
      * 动态详情
      * */
-    public function detail_action()
+    public function index_action()
     {
         $user_id = MOX_APP::session()->info['uid'];
 
@@ -36,7 +36,7 @@ class main extends MOX_CONTROLLER
         $this->model('points')->send($user_id, 'visit_feed_detail');
 
         $seo = array('title' => array(summary($feed['content'], 40)),
-                     'keywords' => array('模型动态'),
+                     'keywords' => array('动态'),
                      'description' => array(summary(strip_tags($feed['content'], 100))));
         TPL::assign('seo', get_seo('feed-detail', $seo));
 

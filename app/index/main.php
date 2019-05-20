@@ -38,7 +38,7 @@ class main extends MOX_CONTROLLER
         $point_list = $this->model('points')-> get_data_list(array('point > 50'), 1, 5, 'create_time desc');
         TPL::assign('point_list', $point_list);
 
-        // 模型圈新人
+        // 新注册人
         $user_list = $this->model('user')-> get_data_list(array('is_us = 0'), 1, 10, 'reg_time desc');
         TPL::assign('new_user_list', $user_list);
 

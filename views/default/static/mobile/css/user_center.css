@@ -1,0 +1,129 @@
+body {
+	overflow: auto;
+	font-family: PingFang-SC-Regular;
+}
+
+.clearfix {
+	overflow: auto;
+	_height: 1%;
+}
+
+.setting_btn {
+	width: 1.05rem;
+	height: 1.1rem;
+	background: url('../images/icon_setting.png') no-repeat;
+	margin-top: 0.5rem !important;
+}
+
+.user_info {
+	margin: 2.7rem 0.5rem 0.5rem 0.5rem;
+	/*width: 17.75rem;*/
+	height: 4.5rem;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.user_info img {
+	width: 3rem;
+	height: 3rem;
+	margin: 0.75rem 0.5rem 0.75rem 0.75rem;
+	float: left;
+	border-radius: 2.0rem;
+}
+
+.user_info h2 {
+	position: absolute;
+	left: 4.75rem;
+	top: 3.95rem;
+	height: 1.1rem;
+	line-height: 1.1rem;
+	font-weight: bold;
+	font-size: 0.8rem;
+	color: #1F1F1F;
+	margin-bottom: 0.25rem;
+}
+
+.user_info p {
+	position: absolute;
+	left: 4.75rem;
+	top: 5.3rem;
+	height: 0.8rem;
+	line-height: 0.8rem;
+	font-weight: 400;
+	font-size: 0.55rem;
+	color: #999;
+}
+
+.user_operation_area {
+	margin: 0 0.5rem;
+	/*width: 17.75rem;*/
+	height: 11.2rem;
+	border-radius: 8px;
+	background: #fff;
+}
+
+.user_operation_area li {
+	position: relative;
+	height: 2.8rem;
+	margin: 0 0.5rem;
+	border-bottom: 1px solid #E5E5E5;
+	list-style: none;
+}
+
+.user_operation_area li.no_border {
+	border-bottom: none;
+}
+
+.user_operation_area li strong {
+	margin-left: 1.6rem;
+	height: 1rem;
+	line-height: 1rem;
+	font-weight: 400;
+	font-size: 0.7rem;
+	color: #1F1F1F;
+	float: left;
+	margin-top: 0.9rem;
+}
+
+.user_operation_area li em {
+	position: absolute;
+	right: 1.7rem;
+	margin-top: 0.9rem;
+	font-style: normal;
+	font-size: 0.7rem;
+	font-weight: 400;
+	height: 1rem;
+	line-height: 1rem;
+}
+
+.user_operation_area li button {
+	background: url('../images/right_arrow.png') no-repeat left center;
+	width: 1.2rem;
+	height: 1.2rem;
+	float: right;
+	margin-top: 0.8rem;
+	border: none;
+}
+
+.user_operation_area img{
+	height: 1.2rem;
+	width: auto;
+	position: absolute;
+	left: 0;
+	top: 0.9rem;
+}
+.logout {
+	display: block;
+	width: 8.25rem;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	border-radius: 8px;
+	border: 1px solid #999;
+	text-align: center;
+	/*margin: 2.5rem 5.25rem;*/
+	margin: 2.5rem auto;
+	background: #F0F1F5;
+	color: #666;
+	font-size: 0.7rem;
+}
+

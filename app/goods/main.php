@@ -16,6 +16,6 @@ class main extends MOX_CONTROLLER
 {
     public function index_action()
     {
-        TPL::output('mall/index');
+        TPL::output('goods/detail');
     }
 }
