@@ -20,7 +20,7 @@ class category extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
-        $this->crumb(MOX_APP::lang()->_t('分类管理'), "admin/category/list/");
+        $this->crumb(MOX_APP::lang()->_t('分类管理'), "backend/category/list/");
         
         if (!$this->user_info['permission']['is_administortar'])
         {
@@ -38,7 +38,7 @@ class category extends MOX_ADMIN_CONTROLLER
         
         TPL::assign('target_category', $this->model('system')->build_category_html(0, null));
         
-        TPL::output('admin/category/list');
+        TPL::output('backend/category/list');
     }
     
     public function edit_action()
@@ -51,6 +51,6 @@ class category extends MOX_ADMIN_CONTROLLER
         TPL::assign('category', $category_info);
         TPL::assign('category_option', $this->model('system')->build_category_html(0, $category['parent_id'], null, false));
         
-        TPL::output('admin/category/edit');
+        TPL::output('backend/category/edit');
     }
 }

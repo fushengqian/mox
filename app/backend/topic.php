@@ -3,7 +3,7 @@ class topic extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('话题管理'), "admin/topic/index/");
+        $this->crumb(MOX_APP::lang()->_t('话题管理'), "backend/topic/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(804));
 
@@ -26,7 +26,7 @@ class topic extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('topic')->found_rows());
 
-        TPL::output('admin/topic/list');
+        TPL::output('backend/topic/list');
     }
 
     public function delete_action()

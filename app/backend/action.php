@@ -21,7 +21,7 @@ class action extends MOX_ADMIN_CONTROLLER
     // 日志列表
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('用户行为'), "admin/action/list/");
+        $this->crumb(MOX_APP::lang()->_t('用户行为'), "backend/action/list/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(701));
 
@@ -48,7 +48,7 @@ class action extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('action')->found_rows());
 
-        TPL::output('admin/action/index');
+        TPL::output('backend/action/index');
     }
 
     public function delete_action()

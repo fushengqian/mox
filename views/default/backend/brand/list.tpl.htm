@@ -1,0 +1,61 @@
+<?php TPL::output('backend/global/header.tpl.htm'); ?>
+<?php TPL::output('backend/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="/backend/brand/index/"><?php _e('品牌列表'); ?></a></li>
+                <li><a href="/backend/brand/edit/"><?php _e('新增品牌'); ?></a></li>
+            </ul>
+        </div>
+        <div class="tab-pane">
+             <form method="get" action="/backend/brand/index/" id="search_form" class="form-horizontal">
+                   <div class="form-group" style="margin-top:10px;padding-left:5px;">
+                        <div class="col-sm-2 col-xs-2">
+                            <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        </div>
+                        <div class="col-sm-2 col-xs-2">
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                        </div>
+                    </div>
+            </form>
+        </div>
+        <div class="mod-body tab-content">
+            <div class="tab-pane active" id="list">
+                <div class="table-responsive">
+                <?php if ($this->list) { ?>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>名称</th>
+                                <th>英文名</th>
+                                <th>国家</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($this->list AS $key => $val) { ?>
+                            <trs>
+                                <td><?php echo $val['id']; ?></td>
+                                <td><a target="_blank" href="<?php echo ($val['website']); ?>"><?php echo ($val['name']); ?></a></td>
+                                <td><?php echo($val['ename']);?></td>
+                                <td><?php echo($val['area']);?></td>
+                                <td>
+                                    <a href="<?php echo G_DEMAIN;?>/backend/brand/edit/id-<?php echo $val['id']; ?>/" class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
+                                </td>
+                            </tr>
+                            <?php } ?>
+                        </tbody>
+                    </table>
+                <?php } ?>
+                </div>
+                <div class="mod-table-foot">
+                     <span><?php echo $this -> total_rows;?>条数据，共<?php echo ceil($this -> total_rows/20);?>页</span><span class="pull-right mod-page"><?php echo $this->pagination; ?></span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="<?php echo G_STATIC_URL; ?>/js/bootstrap.min.js"></script>
+<?php TPL::output('backend/global/footer.tpl.htm'); ?>

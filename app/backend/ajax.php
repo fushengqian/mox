@@ -1746,7 +1746,7 @@ class ajax extends MOX_ADMIN_CONTROLLER
         
         $upload_data['thumb'] = get_setting('upload_url') . '/' . $item_type . '/' . gmdate('Ymd') . '/'.MOX_APP::config()->get('image')->attachment_thumbnail[$size]['w'] . 'x' . MOX_APP::config()->get('image')->attachment_thumbnail[$size]['h'] . '_' . $upload_data['file_name'];
         
-        $upload_data['delete_url'] = 'admin/ajax/dinner/images_delete/?file_name='.$upload_data['file_name'];
+        $upload_data['delete_url'] = 'backend/ajax/dinner/images_delete/?file_name='.$upload_data['file_name'];
         
         exit(htmlspecialchars(json_encode($upload_data), ENT_NOQUOTES));
     }

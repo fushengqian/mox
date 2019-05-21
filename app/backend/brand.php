@@ -6,7 +6,7 @@ class brand extends MOX_ADMIN_CONTROLLER
      */
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('品牌管理'), "admin/brand/index/");
+        $this->crumb(MOX_APP::lang()->_t('品牌管理'), "backend/brand/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(100));
 
@@ -29,7 +29,7 @@ class brand extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('brand')->found_rows());
 
-        TPL::output('admin/brand/list');
+        TPL::output('backend/brand/list');
     }
 
     /**
@@ -37,7 +37,7 @@ class brand extends MOX_ADMIN_CONTROLLER
      */
     public function edit_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('编辑品牌'), "admin/brand/index/");
+        $this->crumb(MOX_APP::lang()->_t('编辑品牌'), "backend/brand/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -50,7 +50,7 @@ class brand extends MOX_ADMIN_CONTROLLER
             TPL::assign('info', $info);
         }
 
-        TPL::output('admin/brand/edit');
+        TPL::output('backend/brand/edit');
     }
 
     /**

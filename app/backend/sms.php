@@ -23,7 +23,7 @@ class sms extends MOX_ADMIN_CONTROLLER
     {
         $mobile = $_GET['mobile'] ? trim($_GET['mobile']) : '';
 
-        $this->crumb(MOX_APP::lang()->_t('已发短信'), "admin/sms/list/");
+        $this->crumb(MOX_APP::lang()->_t('已发短信'), "backend/sms/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(801));
         
@@ -46,6 +46,6 @@ class sms extends MOX_ADMIN_CONTROLLER
         
         TPL::assign('total_rows', $this->model('sms')->found_rows());
         
-        TPL::output('admin/sms/list');
+        TPL::output('backend/sms/list');
     }
 }

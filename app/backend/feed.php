@@ -4,7 +4,7 @@ class feed extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('动态管理'), "admin/feed/list/");
+        $this->crumb(MOX_APP::lang()->_t('动态管理'), "backend/feed/list/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(803));
 
@@ -27,7 +27,7 @@ class feed extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('feed')->found_rows());
 
-        TPL::output('admin/feed/list');
+        TPL::output('backend/feed/list');
     }
 
     public function delete_action()

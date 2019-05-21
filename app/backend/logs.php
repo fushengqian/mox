@@ -10,7 +10,7 @@ class logs extends MOX_ADMIN_CONTROLLER
     // 日志列表
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('日志列表'), "admin/logs/list/");
+        $this->crumb(MOX_APP::lang()->_t('日志列表'), "backend/logs/list/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(902));
 
@@ -32,7 +32,7 @@ class logs extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('logs')->found_rows());
 
-        TPL::output('admin/logs/index');
+        TPL::output('backend/logs/index');
     }
 
     public function delete_action()

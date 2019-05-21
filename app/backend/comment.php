@@ -8,7 +8,7 @@ class comment extends MOX_ADMIN_CONTROLLER
     
     public function list_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('点评列表'), "admin/comment/list/");
+        $this->crumb(MOX_APP::lang()->_t('点评列表'), "backend/comment/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(300));
         
@@ -48,7 +48,7 @@ class comment extends MOX_ADMIN_CONTROLLER
         TPL::assign('total_rows', $this->model('comment')->found_rows());
         
         
-        TPL::output('admin/comment/list');
+        TPL::output('backend/comment/list');
     }
     
     //删除点评

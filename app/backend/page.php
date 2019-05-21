@@ -3,7 +3,7 @@ class page extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('页面管理'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('页面管理'), "backend/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(803));
         
@@ -27,7 +27,7 @@ class page extends MOX_ADMIN_CONTROLLER
         
         TPL::assign('total_rows', $this->model('page')->found_rows());
         
-        TPL::output('admin/page/list');
+        TPL::output('backend/page/list');
     }
     
     public function delete_action()

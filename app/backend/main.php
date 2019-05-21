@@ -15,7 +15,7 @@ class main extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('概述'), 'admin/main/');
+        $this->crumb(MOX_APP::lang()->_t('概述'), 'backend/main/');
         
         TPL::assign('users_count', $this->model('system')->count('user'));
 
@@ -32,8 +32,7 @@ class main extends MOX_ADMIN_CONTROLLER
         $admin_menu[0]['select'] = true;
         
         TPL::assign('menu_list', $admin_menu);
-        
-        TPL::output('admin/index');
+        TPL::output('backend/index');
     }
     
     public function login_action()
@@ -43,9 +42,9 @@ class main extends MOX_ADMIN_CONTROLLER
             HTTP::redirect('/backend/');
         }
         
-        TPL::import_css('admin/css/login.css');
+        TPL::import_css('backend/css/login.css');
         
-        TPL::output('admin/login');
+        TPL::output('backend/login');
     }
     
     public function logout_action($return_url = '/')
@@ -57,7 +56,7 @@ class main extends MOX_ADMIN_CONTROLLER
     
     public function settings_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('系统设置'), 'admin/settings/');
+        $this->crumb(MOX_APP::lang()->_t('系统设置'), 'backend/settings/');
         
         if (!$this->user_info['permission']['is_administortar'])
         {
@@ -80,12 +79,12 @@ class main extends MOX_ADMIN_CONTROLLER
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list('SETTINGS_' . strtoupper($_GET['category'])));
         
-        TPL::output('admin/settings');
+        TPL::output('backend/settings');
     }
     
     public function nav_menu_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('导航设置'), 'admin/nav_menu/');
+        $this->crumb(MOX_APP::lang()->_t('导航设置'), 'backend/nav_menu/');
         
         if (!$this->user_info['permission']['is_administortar'])
         {
@@ -98,6 +97,6 @@ class main extends MOX_ADMIN_CONTROLLER
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(700));
         
-        TPL::output('admin/nav_menu');
+        TPL::output('backend/nav_menu');
     }
 }

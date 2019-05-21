@@ -72,7 +72,7 @@ class user extends MOX_ADMIN_CONTROLLER
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(MOX_APP::lang()->_t('用户列表'), "admin/user/list/");
+        $this->crumb(MOX_APP::lang()->_t('用户列表'), "backend/user/list/");
 
         TPL::assign('total_rows', $total_rows);
         TPL::assign('list', $user_list);
@@ -80,7 +80,7 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('orderby', $order);
         TPL::assign('is_us', $is_us);
 
-        TPL::output('admin/user/list');
+        TPL::output('backend/user/list');
     }
 
     /**
@@ -121,7 +121,7 @@ class user extends MOX_ADMIN_CONTROLLER
 
     public function group_list_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('用户组管理'), "admin/user/group_list/");
+        $this->crumb(MOX_APP::lang()->_t('用户组管理'), "backend/user/group_list/");
 
         if (!$this->user_info['permission']['is_administortar']) {
             H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
@@ -131,12 +131,12 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('system_group', $this->model('account')->get_user_group_list(0, 0));
         TPL::assign('custom_group', $this->model('account')->get_user_group_list(0, 1));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(501));
-        TPL::output('admin/user/group_list');
+        TPL::output('backend/user/group_list');
     }
 
     public function group_edit_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('修改用户组'), "admin/user/group_list/");
+        $this->crumb(MOX_APP::lang()->_t('修改用户组'), "backend/user/group_list/");
 
         if (!$this->user_info['permission']['is_administortar']) {
             H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
@@ -149,12 +149,12 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('group', $group);
         TPL::assign('group_pms', $group['permission']);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(501));
-        TPL::output('admin/user/group_edit');
+        TPL::output('backend/user/group_edit');
     }
 
     public function edit_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('编辑用户资料'), 'admin/user/edit/');
+        $this->crumb(MOX_APP::lang()->_t('编辑用户资料'), 'backend/user/edit/');
 
         if (!$user = $this->model('account')->get_user_info_by_uid($_GET['uid'], TRUE)) {
             H::redirect_msg(MOX_APP::lang()->_t('用户不存在'), '/backend/user/list/');
@@ -169,26 +169,26 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('user', $user);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(500));
 
-        TPL::output('admin/user/edit');
+        TPL::output('backend/user/edit');
     }
 
     public function user_add_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('添加用户'), "admin/user/list/user_add/");
+        $this->crumb(MOX_APP::lang()->_t('添加用户'), "backend/user/list/user_add/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(500));
 
         TPL::assign('system_group', $this->model('account')->get_user_group_list(0));
 
-        TPL::output('admin/user/add');
+        TPL::output('backend/user/add');
     }
 
     public function invites_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('批量邀请'), "admin/user/invites/");
+        $this->crumb(MOX_APP::lang()->_t('批量邀请'), "backend/user/invites/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(502));
-        TPL::output('admin/user/invites');
+        TPL::output('backend/user/invites');
     }
 
     public function verify_approval_list_action()
@@ -209,13 +209,13 @@ class user extends MOX_ADMIN_CONTROLLER
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(MOX_APP::lang()->_t('认证审核'), 'admin/user/verify_approval_list/');
+        $this->crumb(MOX_APP::lang()->_t('认证审核'), 'backend/user/verify_approval_list/');
 
         TPL::assign('users_info', $this->model('account')->get_user_info_by_uids($uids));
         TPL::assign('approval_list', $approval_list);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(501));
 
-        TPL::output('admin/user/verify_approval_list');
+        TPL::output('backend/user/verify_approval_list');
     }
 
     public function register_approval_list_action()
@@ -234,12 +234,12 @@ class user extends MOX_ADMIN_CONTROLLER
             'per_page' => $this->per_page
         ))->create_links());
 
-        $this->crumb(MOX_APP::lang()->_t('注册审核'), 'admin/user/register_approval_list/');
+        $this->crumb(MOX_APP::lang()->_t('注册审核'), 'backend/user/register_approval_list/');
 
         TPL::assign('list', $user_list);
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(601));
 
-        TPL::output('admin/user/register_approval_list');
+        TPL::output('backend/user/register_approval_list');
     }
 
     public function verify_approval_edit_action()
@@ -251,8 +251,8 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('verify_apply', $verify_apply);
         TPL::assign('user', $this->model('account')->get_user_info_by_uid($_GET['id']));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(601));
-        $this->crumb(MOX_APP::lang()->_t('编辑认证审核资料'), 'admin/user/verify_approval_list/');
-        TPL::output('admin/user/verify_approval_edit');
+        $this->crumb(MOX_APP::lang()->_t('编辑认证审核资料'), 'backend/user/verify_approval_list/');
+        TPL::output('backend/user/verify_approval_edit');
     }
 
     public function integral_log_action()
@@ -278,6 +278,6 @@ class user extends MOX_ADMIN_CONTROLLER
         TPL::assign('user', $this->model('account')->get_user_info_by_uid($_GET['uid']));
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(502));
         $this->crumb(MOX_APP::lang()->_t('积分日志'), '/backend/user/integral_log/uid-' . $_GET['uid']);
-        TPL::output('admin/user/integral_log');
+        TPL::output('backend/user/integral_log');
     }
 }

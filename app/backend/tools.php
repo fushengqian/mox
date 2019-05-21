@@ -30,11 +30,11 @@ class tools extends MOX_ADMIN_CONTROLLER
     
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('系统维护'), 'admin/tools/');
+        $this->crumb(MOX_APP::lang()->_t('系统维护'), 'backend/tools/');
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(1000));
         
-        TPL::output('admin/tools');
+        TPL::output('backend/tools');
     }
     
     public function init_action()

@@ -77,11 +77,11 @@ class article extends MOX_ADMIN_CONTROLLER
             'per_page' => $this->per_page
         ))->create_links());
         
-        $this->crumb(MOX_APP::lang()->_t('文章管理'), 'admin/article/list/');
+        $this->crumb(MOX_APP::lang()->_t('文章管理'), 'backend/article/list/');
         TPL::assign('articles_count', $search_articles_total);
         TPL::assign('list', $articles_list);
         TPL::assign('status', intval($_GET['status']));
-        TPL::output('admin/article/list');
+        TPL::output('backend/article/list');
     }
 
     public function update_action()

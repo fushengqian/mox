@@ -20,7 +20,7 @@ class help extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
-        $this->crumb(MOX_APP::lang()->_t('帮助中心'), "admin/help/list/");
+        $this->crumb(MOX_APP::lang()->_t('帮助中心'), "backend/help/list/");
 
         if (!$this->user_info['permission']['is_administortar'])
         {
@@ -34,7 +34,7 @@ class help extends MOX_ADMIN_CONTROLLER
     {
         TPL::assign('chapter_list', $this->model('help')->get_chapter_list());
 
-        TPL::output('admin/help/list');
+        TPL::output('backend/help/list');
     }
 
     public function edit_action()
@@ -58,6 +58,6 @@ class help extends MOX_ADMIN_CONTROLLER
             }
         }
 
-        TPL::output('admin/help/edit');
+        TPL::output('backend/help/edit');
     }
 }

@@ -7,7 +7,7 @@ class model extends MOX_ADMIN_CONTROLLER
      */
     public function index_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('模型管理'), "admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t('模型管理'), "backend/model/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -39,7 +39,7 @@ class model extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $this->model('model')->found_rows());
 
-        TPL::output('admin/model/index');
+        TPL::output('backend/model/index');
     }
 
     /**
@@ -61,7 +61,7 @@ class model extends MOX_ADMIN_CONTROLLER
     public function edit_action()
     {
         $model_id = $_GET['id'] ? trim($_GET['id']) : 0;
-        $this->crumb(MOX_APP::lang()->_t('编辑模型'), "admin/model/index/");
+        $this->crumb(MOX_APP::lang()->_t('编辑模型'), "backend/model/index/");
 
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(101));
 
@@ -77,7 +77,7 @@ class model extends MOX_ADMIN_CONTROLLER
             TPL::assign('info', $info);
         }
 
-        TPL::output('admin/model/edit');
+        TPL::output('backend/model/edit');
     }
 
     /**
@@ -123,7 +123,7 @@ class model extends MOX_ADMIN_CONTROLLER
         $images_list = json_decode($info['pics'], $info['pics']);
         TPL::assign('images_list', $images_list);
 
-        TPL::import_js('admin/js/fileupload.js');
+        TPL::import_js('backend/js/fileupload.js');
 
         TPL::import_js('js/md5.js');
 
@@ -133,7 +133,7 @@ class model extends MOX_ADMIN_CONTROLLER
 
         $this->crumb(MOX_APP::lang()->_t($info['name'] . '图片'), "/backend/model/index/");
 
-        TPL::output('admin/model/images_edit');
+        TPL::output('backend/model/images_edit');
     }
 
     /**

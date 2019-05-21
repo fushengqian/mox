@@ -6,7 +6,7 @@ class city extends MOX_ADMIN_CONTROLLER
         $page = $_GET['aid'] ? $_GET['aid'] : 1;
         $order = $_GET['order'] ? $_GET['order'] : 'provid asc';
         
-        $this->crumb(MOX_APP::lang()->_t('城市管理'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('城市管理'), "backend/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(400));
         
@@ -59,7 +59,7 @@ class city extends MOX_ADMIN_CONTROLLER
         TPL::assign('total_rows', $this->model('system')->found_rows());
         TPL::assign('order', $order);
         
-        TPL::output('admin/city/list');
+        TPL::output('backend/city/list');
     }
     
     public function update_action()

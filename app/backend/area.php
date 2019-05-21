@@ -8,7 +8,7 @@ class area extends MOX_ADMIN_CONTROLLER
         $page = $_GET['aid'] ? $_GET['aid'] : 1;
         $order = $_GET['order'] ? $_GET['order'] : 'num desc';
         
-        $this->crumb(MOX_APP::lang()->_t('地区管理'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('地区管理'), "backend/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(401));
         
@@ -62,17 +62,17 @@ class area extends MOX_ADMIN_CONTROLLER
         TPL::assign('total_rows', $this->model('system')->found_rows());
         TPL::assign('order', $order);
         
-        TPL::output('admin/area/list');
+        TPL::output('backend/area/list');
     }
     
     //添加地区页面
     public function add_action()
     {
-        $this->crumb(MOX_APP::lang()->_t('新增地区'), "admin/hot/list/");
+        $this->crumb(MOX_APP::lang()->_t('新增地区'), "backend/hot/list/");
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(401));
         
-        TPL::output('admin/area/add');
+        TPL::output('backend/area/add');
     }
     
     //更新
