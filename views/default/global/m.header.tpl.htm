@@ -3,16 +3,18 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
     <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no" />
     <title><?php echo $this->seo['title'];?></title>
-    <meta name="keywords" content="<?php echo $this->seo['keywords'];?>"/>
-    <meta name="description" content="<?php echo $this->seo['description'];?>"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css?v=<?php echo G_VERSION_BUILD;?>" media="screen">
-    <link rel="stylesheet" type="text/css" href="/static/css/icon.css?v=<?php echo G_VERSION_BUILD;?>" media="screen">
-    <link rel="stylesheet" type="text/css" href="/static/mobile/css/base.css?v=<?php echo G_VERSION_BUILD;?>" media="screen">
-    <script type="text/javascript" src="/static/js/jquery.js?v=<?php echo G_VERSION_BUILD; ?>"></script>
-    <script type="text/javascript" src="/static/js/jquery.form.js?v=<?php echo G_VERSION_BUILD; ?>"></script>
-    <script type="text/javascript" src="/static/js/template.js?v=<?php echo G_VERSION_BUILD; ?>"></script>
-    <script type="text/javascript" src="/static/mobile/js/common.js?v=<?php echo G_VERSION_BUILD; ?>"></script>
-    <script type="text/javascript" src="/static/mobile/js/fnc.js?v=<?php echo G_VERSION_BUILD; ?>"></script>
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/dist/foxui/css/foxui.min.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/views/default/static/mobile/css/style.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/css/foxui.diy.css?v=<?php echo G_VERSION_BUILD;?>"/>
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/fonts/iconfont.css?v=<?php echo G_VERSION_BUILD;?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo G_DEMAIN;?>/static/dist/swiper/swiper.min.css?v=<?php echo G_VERSION_BUILD;?>">
+    <script src="<?php echo G_DEMAIN;?>/static/js/jquery.js"></script>
+    <script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/dist/foxui/js/foxui.min.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/js/require.js"></script>
+    <script src="<?php echo G_DEMAIN;?>/static/js/myconfig-app.js"></script>
+    <script language="javascript">require(['core'],function(modal){modal.init({siteUrl: "http://www.moxquan.cn/",baseUrl: "/"})});</script>
 </head>
 <body>

@@ -4925,8 +4925,8 @@ font-size:0.6rem;line-height: 0.8rem;}
 }
 .banner-ul li img{
     margin: .4rem 0 .35rem;
-    width: 1.05rem;
-    height: 1.05rem;
+    width: 6.0rem;
+    height: 5.0rem;
     vertical-align: middle;
 }
 .banner-ul li p{
@@ -4939,10 +4939,10 @@ font-size:0.6rem;line-height: 0.8rem;}
     padding-bottom: .4rem;
 }
 .banner-ul .banner-li-blue{
-    border:2px solid #68bfe7;
+    border:2px solid #cccccc;
 }
 .banner-ul .banner-li-blue div{
-    background:#68bfe7 ;
+    background:#ff9d00 ;
 }
 .fui-icon-group::-webkit-scrollbar {
     display:none
