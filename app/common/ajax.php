@@ -139,7 +139,7 @@ class ajax extends MOX_CONTROLLER
         $type      = $_POST['type'] ? intval($_POST['type']) : 1;
         $point     = str_replace('star', '', $_POST['point']);
         
-        if (MOX_APP::session()->info['user_name'] !== '18976679980')
+        if (!MOX_APP::session()->info['user_name'])
         {
             H::ajax_json_output(MOX_APP::RSM(null, -1, '请先登录'));
         }

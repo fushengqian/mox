@@ -14,6 +14,64 @@
 
 class user_class extends MOX_MODEL
 {
+    public function get_user_group($group_id, $reputation_group = 0)
+    {
+        if ($group_id == 4 AND $reputation_group)
+        {
+            if ($user_group = $this->model('user')->get_user_group_by_id($reputation_group))
+            {
+                return $user_group;
+            }
+        }
+
+        return $this->model('user')->get_user_group_by_id($group_id);
+    }
+
+    public function get_user_group_by_id($group_id, $field = null)
+    {
+        if (!$group_id)
+        {
+            return false;
+        }
+
+        static $user_groups;
+
+        if (isset($user_groups[$group_id]))
+        {
+            if ($field)
+            {
+                return $user_groups[$group_id][$field];
+            }
+            else
+            {
+                return $user_groups[$group_id];
+            }
+        }
+
+        if (!$user_group = MOX_APP::cache()->get('user_group_' . intval($group_id)))
+        {
+            $user_group = $this->fetch_row('user_group', 'group_id = ' . intval($group_id));
+
+            if ($user_group['permission'])
+            {
+                $user_group['permission'] = unserialize($user_group['permission']);
+            }
+
+            MOX_APP::cache()->set('user_group_' . intval($group_id), $user_group, get_setting('cache_level_normal'), 'users_group');
+        }
+
+        $user_groups[$group_id] = $user_group;
+
+        if ($field)
+        {
+            return $user_group[$field];
+        }
+        else
+        {
+            return $user_group;
+        }
+    }
+
     /**
      * 获取列表
      */

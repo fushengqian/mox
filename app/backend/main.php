@@ -30,7 +30,7 @@ class main extends MOX_ADMIN_CONTROLLER
         $admin_menu = (array)MOX_APP::config()->get('admin_menu');
         
         $admin_menu[0]['select'] = true;
-        
+
         TPL::assign('menu_list', $admin_menu);
         TPL::output('backend/index');
     }
