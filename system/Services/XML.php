@@ -22,7 +22,7 @@
 *    <title>Baked Beans</title>
 *    <room store="1">103</room>
 *   </product>
-*	 <product id="2.0">
+*     <product id="2.0">
 *    <description>This is another descrption</description>
 *    <title>Green Beans</title>
 *    <room store="2">104</room>
@@ -39,19 +39,19 @@
 * /* Add a child.... * /
 * $xml->add_element('productgroup', 'productlist', array('name' => 'thisgroup'));
 * $xml->add_element_as_record('productgroup',
-* 									array('product', array('id' => '1.0')),
-* 											array('description' => array('This is a description'),
-* 												   'title'		 => array('Baked Beans'),
-* 												   'room'		 => array('103', array('store' => 1))
-* 												)
-* 						);
+*                                     array('product', array('id' => '1.0')),
+*                                             array('description' => array('This is a description'),
+*                                                    'title'         => array('Baked Beans'),
+*                                                    'room'         => array('103', array('store' => 1))
+*                                                 )
+*                         );
 * $xml->add_element_as_record('productgroup',
-* 									array('product', array('id' => '2.0')),
-* 											array('description' => array('This is another description'),
-* 												   'title'		 => array('Green Beans'),
-* 												   'room'		 => array('104', array('store' => 2))
-* 												)
-* 						);
+*                                     array('product', array('id' => '2.0')),
+*                                             array('description' => array('This is another description'),
+*                                                    'title'         => array('Green Beans'),
+*                                                    'room'         => array('104', array('store' => 2))
+*                                                 )
+*                         );
 *
 * $xml_data = $xml->fetch_document();
 *
@@ -61,7 +61,7 @@
 * /* Grabbing specific data values from all 'products'... * /
 * foreach($xml->fetch_elements('product') as $products)
 * {
-* 	print $xml->fetch_item($products, 'title') . "\\";
+*     print $xml->fetch_item($products, 'title') . "\\";
 * }
 *
 * /* Prints... * /
@@ -149,36 +149,36 @@ class Services_XML
     /**
      * XML 文档编码
      *
-     * @var		string
+     * @var        string
      */
     protected $_xml_char_set = 'utf-8';
 
     /**
      * 当前 XML 文档对象
      *
-     * @var		object
+     * @var        object
      */
     protected $_dom;
 
     /**
      * 当前 XML 文档对象数组
      *
-     * @var		array
+     * @var        array
      */
     protected $_dom_objects = array();
 
     /**
      * XML 数组
      *
-     * @var		array
+     * @var        array
      */
     protected $_xml_array = array();
 
     /**
      * 构建
      *
-     * @param	string
-     * @return	@e void
+     * @param    string
+     * @return    @e void
      */
     public function __construct($char_set)
     {
@@ -188,7 +188,7 @@ class Services_XML
     /**
      * 建立新文档
      *
-     * @return	@e void
+     * @return    @e void
      */
     public function new_document()
     {
@@ -198,7 +198,7 @@ class Services_XML
     /**
      * 载入文档
      *
-     * @return	@e string
+     * @return    @e string
      */
     public function fetch_document()
     {
@@ -209,11 +209,11 @@ class Services_XML
     /**
      * 添加元素至文档
      *
-     * @param	string
-     * @param	string
-     * @param	array
-     * @param	string
-     * @return	@e void
+     * @param    string
+     * @param    string
+     * @param    array
+     * @param    string
+     * @return    @e void
      */
     public function add_element($tag, $parent_tag = '', $attributes = array(), $namespace_uri = '')
     {
@@ -229,11 +229,11 @@ class Services_XML
      * $xml->add_element_as_record('parentTag', 'myTag', $data);
      * $xml->add_element_as_record('parentTag', array('myTag', array('attr' => 'value')), $data);
      *
-     * @param	string
-     * @param	mixed
-     * @param	array
-     * @param	string
-     * @return	@e void
+     * @param    string
+     * @param    mixed
+     * @param    array
+     * @param    string
+     * @return    @e void
      */
     public function add_element_as_record($parent_tag, $tag, $data, $namespace_uri = '')
     {
@@ -294,9 +294,9 @@ class Services_XML
     /**
      * 将属性添加到一个节点
      *
-     * @param	string
-     * @param	array
-     * @return	@e void
+     * @param    string
+     * @param    array
+     * @return    @e void
      */
     public function add_attributes($tag, $data)
     {
@@ -312,8 +312,8 @@ class Services_XML
     /**
      * 从文件中加载文档
      *
-     * @param	string
-     * @return	@e void
+     * @param    string
+     * @return    @e void
      */
     public function load($filename)
     {
@@ -324,8 +324,8 @@ class Services_XML
     /**
      * 从字符串中加载文档
      *
-     * @param	string
-     * @return	@e bool
+     * @param    string
+     * @return    @e bool
      */
     public function load_xml($xml_data)
     {
@@ -344,13 +344,13 @@ class Services_XML
     /**
      * 从标签名获取元素
      *
-     * @param	string
-     * @param	object
-     * @return	@e array
+     * @param    string
+     * @param    object
+     * @return    @e array
      */
     public function fetch_elements($tag, $node = null)
     {
-        $start		= $node ? $node : $this->_dom;
+        $start        = $node ? $node : $this->_dom;
         $_elements = $start->getElementsByTagName($tag);
 
         return ($_elements->length) ? $_elements : array();
@@ -359,9 +359,9 @@ class Services_XML
     /**
      * 从父标签获取所有元素
      *
-     * @param	object
-     * @param	array
-     * @return	@e array
+     * @param    object
+     * @param    array
+     * @return    @e array
      */
     public function fetch_elements_from_record($dom, $skip=array())
     {
@@ -389,9 +389,9 @@ class Services_XML
     /**
      * 从元素节点获取条目
      *
-     * @param	object
-     * @param	string
-     * @return	@e string
+     * @param    object
+     * @param    string
+     * @return    @e string
      */
     public function fetch_item($dom, $tag = '')
     {
@@ -409,10 +409,10 @@ class Services_XML
     /**
      * 从元素节点获取属性项
      *
-     * @param	object
-     * @param	string
-     * @param	string
-     * @return	@e string
+     * @param    object
+     * @param    string
+     * @param    string
+     * @return    @e string
      */
     public function fetch_attribute($dom, $attribute, $tag = '')
     {
@@ -430,9 +430,9 @@ class Services_XML
     /**
      * 从元素节点获取所有属性项
      *
-     * @param	object
-     * @param	string
-     * @return	@e array
+     * @param    object
+     * @param    string
+     * @return    @e array
      */
     public function fetch_attributes_as_array($dom, $tag)
     {
@@ -451,7 +451,7 @@ class Services_XML
     /**
      * 将 DOM Tree 转换为数组
      *
-     * @return	@e array
+     * @return    @e array
      */
     public function fetch_xml_as_array()
     {
@@ -461,8 +461,8 @@ class Services_XML
     /**
      * 将 DOM Tree 转换为数组
      *
-     * @param	DOM object
-     * @return	@e array
+     * @param    DOM object
+     * @return    @e array
      */
     protected function _fetch_xml_as_array($node)
     {
@@ -500,7 +500,7 @@ class Services_XML
                 {
                     if ($nc->nodeName != '#text' AND $nc->nodeName != '#cdata-section')
                     {
-                        $occurance[$nc->nodeName]	= isset($occurance[$nc->nodeName]) ? $occurance[$nc->nodeName] + 1 : 1;
+                        $occurance[$nc->nodeName]    = isset($occurance[$nc->nodeName]) ? $occurance[$nc->nodeName] + 1 : 1;
                     }
                 }
 
@@ -532,8 +532,8 @@ class Services_XML
     /**
      * 编码 CDATA XML 属性
      *
-     * @param	string
-     * @return	@e string
+     * @param    string
+     * @return    @e string
      */
     protected function _xml_convert_safecdata($v)
     {
@@ -546,8 +546,8 @@ class Services_XML
     /**
      * 解码 CDATA XML 属性
      *
-     * @param	string
-     * @return	@e string
+     * @param    string
+     * @return    @e string
      */
     protected function _xml_unconvert_safe_cdata($v)
     {
@@ -560,8 +560,8 @@ class Services_XML
     /**
      * 返回标签对象
      *
-     * @param	string
-     * @return	@e object
+     * @param    string
+     * @return    @e object
      */
     protected function _node($tag)
     {
@@ -578,8 +578,8 @@ class Services_XML
     /**
      * 将输入数据转换为 XML
      *
-     * @param	string
-     * @return	@e string
+     * @param    string
+     * @return    @e string
      */
     protected function _input_to_xml($text)
     {
@@ -608,8 +608,8 @@ class Services_XML
     /**
      * 将 XML 转换为输出数据
      *
-     * @param	string
-     * @return	@e string
+     * @param    string
+     * @return    @e string
      */
     protected function _xml_to_output($text)
     {

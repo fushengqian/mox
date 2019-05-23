@@ -59,8 +59,8 @@
         $outputCode .= "\n\n".$anotherCode."\n\n";
     }
     
-	$versionDataEx = explode("\n", file_get_contents($versionFile));
-	
+    $versionDataEx = explode("\n", file_get_contents($versionFile));
+
     $outputContents = file_get_contents($headerFile);
     $outputContents .= "\n\n/*\n * Version: ".trim($versionDataEx[0])."\n * Build: ".trim($versionDataEx[1])."\n */\n\n";
     $outputContents .= $outputCode;

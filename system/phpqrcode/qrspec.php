@@ -335,11 +335,11 @@
 
         // Version information pattern -----------------------------------------
 
-		// Version information pattern (BCH coded).
+        // Version information pattern (BCH coded).
         // See Table 1 in Appendix D (pp.68) of JIS X0510:2004.
         
-		// size: [QRSPEC_VERSION_MAX - 6]
-		
+        // size: [QRSPEC_VERSION_MAX - 6]
+
         public static $versionPattern = array(
             0x07c94, 0x085bc, 0x09a99, 0x0a4d3, 0x0bbf6, 0x0c762, 0x0d847, 0x0e60d,
             0x0f928, 0x10b78, 0x1145d, 0x12a17, 0x13532, 0x149a6, 0x15683, 0x168c9,

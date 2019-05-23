@@ -29,39 +29,39 @@
 */
 
 abstract class Savant3_Plugin {
-	
-	/**
-	* 
-	* Reference to the calling Savant object.
-	* 
-	* @access protected
-	* 
-	* @var object
-	* 
-	*/
-	
-	protected $Savant = null;
-	
-	
-	/**
-	* 
-	* Constructor.
-	* 
-	* @access public
-	* 
-	* @param array $conf An array of configuration keys and values for
-	* this plugin.
-	* 
-	* @return void
-	* 
-	*/
-	
-	public function __construct($conf = null)
-	{
-		settype($conf, 'array');
-		foreach ($conf as $key => $val) {
-			$this->$key = $val;
-		}
-	}
+
+    /**
+    *
+    * Reference to the calling Savant object.
+    *
+    * @access protected
+    *
+    * @var object
+    *
+    */
+
+    protected $Savant = null;
+
+
+    /**
+    *
+    * Constructor.
+    *
+    * @access public
+    *
+    * @param array $conf An array of configuration keys and values for
+    * this plugin.
+    *
+    * @return void
+    *
+    */
+
+    public function __construct($conf = null)
+    {
+        settype($conf, 'array');
+        foreach ($conf as $key => $val) {
+            $this->$key = $val;
+        }
+    }
 }
 ?>

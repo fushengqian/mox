@@ -27,23 +27,23 @@
 ##
 
 
-ArgumentSeparator	= ;
+ArgumentSeparator    = ;
 
 
 ##
-##	(For future use)
+##    (For future use)
 ##
-currencySymbol	= лв
+currencySymbol    = лв
 
 
 ##
-##	Excel Error Codes	(For future use)
+##    Excel Error Codes    (For future use)
 
 ##
-NULL	= #ПРАЗНО!
-DIV0	= #ДЕЛ/0!
-VALUE	= #СТОЙНОСТ!
-REF	= #РЕФ!
-NAME	= #ИМЕ?
-NUM	= #ЧИСЛО!
-NA	= #Н/Д
+NULL    = #ПРАЗНО!
+DIV0    = #ДЕЛ/0!
+VALUE    = #СТОЙНОСТ!
+REF    = #РЕФ!
+NAME    = #ИМЕ?
+NUM    = #ЧИСЛО!
+NA    = #Н/Д

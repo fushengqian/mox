@@ -2,94 +2,94 @@
 
 class Services_BBCode
 {
-	protected $bbcode_table = array();
+    protected $bbcode_table = array();
 
-	private function _code_callback($match)
-	{
-		return "<pre>" . str_replace('[', '<span>[</span>', $match[1]) . "</pre>";
-	}
+    private function _code_callback($match)
+    {
+        return "<pre>" . str_replace('[', '<span>[</span>', $match[1]) . "</pre>";
+    }
 
-	private function _b_callback($match)
-	{
-		return "<strong>$match[1]</strong>";
-	}
+    private function _b_callback($match)
+    {
+        return "<strong>$match[1]</strong>";
+    }
 
-	private function _i_callback($match)
-	{
-		return "<em>$match[1]</em>";
-	}
+    private function _i_callback($match)
+    {
+        return "<em>$match[1]</em>";
+    }
 
-	private function _quote_callback($match)
-	{
-		return "<blockquote><p>$match[1]</p></blockquote>";
-	}
+    private function _quote_callback($match)
+    {
+        return "<blockquote><p>$match[1]</p></blockquote>";
+    }
 
-	private function _size_callback($match)
-	{
-		return "<span style=\"font-size:$match[1]px\">$match[2]</span>";
-	}
+    private function _size_callback($match)
+    {
+        return "<span style=\"font-size:$match[1]px\">$match[2]</span>";
+    }
 
-	private function _s_callback($match)
-	{
-		return "<del>$match[1]</del>";
-	}
+    private function _s_callback($match)
+    {
+        return "<del>$match[1]</del>";
+    }
 
-	private function _u_callback($match)
-	{
-		return '<span style="text-decoration:underline;">' . $match[1] . '</span>';
-	}
+    private function _u_callback($match)
+    {
+        return '<span style="text-decoration:underline;">' . $match[1] . '</span>';
+    }
 
-	private function _url_callback($match)
-	{
-		return "<a href=\"$match[1]\" rel=\"nofollow\" target=\"_blank\">$match[1]</a>";
-	}
+    private function _url_callback($match)
+    {
+        return "<a href=\"$match[1]\" rel=\"nofollow\" target=\"_blank\">$match[1]</a>";
+    }
 
-	private function _link_callback($match)
-	{
-		return "<a href=\"$match[1]\" rel=\"nofollow\" target=\"_blank\">$match[2]</a>";
-	}
+    private function _link_callback($match)
+    {
+        return "<a href=\"$match[1]\" rel=\"nofollow\" target=\"_blank\">$match[2]</a>";
+    }
 
-	private function _img_callback($match)
-	{
-		return "<img src=\"$match[1]\" />";
-	}
+    private function _img_callback($match)
+    {
+        return "<img src=\"$match[1]\" />";
+    }
 
-	private function _list_callback($match)
-	{
-		$match[1] = preg_replace_callback("/\[\*\](.*?)\[\/\*\]/is", array(&$this, '_list_element_callback'), $match[1]);
+    private function _list_callback($match)
+    {
+        $match[1] = preg_replace_callback("/\[\*\](.*?)\[\/\*\]/is", array(&$this, '_list_element_callback'), $match[1]);
 
         return "<ul>" . preg_replace("/[\n\r?]/", "", $match[1]) . "</ul>";
-	}
+    }
 
-	private function _list_element_callback($match)
-	{
-		return "<li>" . preg_replace("/[\n\r?]$/", "", $match[1]) . "</li>";
-	}
+    private function _list_element_callback($match)
+    {
+        return "<li>" . preg_replace("/[\n\r?]$/", "", $match[1]) . "</li>";
+    }
 
-	private function _video_callback($match)
-	{
-		return load_class('Services_VideoUrlParser')->parse($match[1]);
-	}
+    private function _video_callback($match)
+    {
+        return load_class('Services_VideoUrlParser')->parse($match[1]);
+    }
 
-	private function _list_advance_callback($match)
-	{
-		if ($match[1] == '1')
+    private function _list_advance_callback($match)
+    {
+        if ($match[1] == '1')
         {
             $list_type = 'ol';
         }
         else
         {
-        	$list_type = 'ul';
+            $list_type = 'ul';
         }
 
         $match[2] = preg_replace_callback("/\[\*\](.*?)\[\/\*\]/is", array(&$this, '_list_element_callback'), $match[2]);
 
         return '<' . $list_type . '>' . preg_replace("/[\n\r?]/", "", $match[2]) . '</' . $list_type . '>';
-	}
+    }
 
     public function __construct()
     {
-	    // Replace [code]...[/code] with <pre><code>...</code></pre>
+        // Replace [code]...[/code] with <pre><code>...</code></pre>
         $this->bbcode_table["/\[code\](.*?)\[\/code\]/is"] = '_code_callback';
 
         // Replace [b]...[/b] with <strong>...</strong>

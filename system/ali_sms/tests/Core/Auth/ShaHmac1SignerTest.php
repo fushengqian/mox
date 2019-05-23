@@ -12,8 +12,8 @@ class ShaHmac1SignerTest extends TestCase
     }
 
     public function testShaHmac1Signer()
-	{
-		$signer = new ShaHmac1Signer();
-		$this->assertEquals("33nmIV5/p6kG/64eLXNljJ5vw84=",$signer->signString("this is a ShaHmac1 test.", "accessSecret"));
-	}
+    {
+        $signer = new ShaHmac1Signer();
+        $this->assertEquals("33nmIV5/p6kG/64eLXNljJ5vw84=",$signer->signString("this is a ShaHmac1 test.", "accessSecret"));
+    }
 }

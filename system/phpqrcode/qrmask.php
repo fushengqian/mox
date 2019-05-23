@@ -25,17 +25,17 @@
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
  */
  
-	define('N1', 3);
-	define('N2', 3);
-	define('N3', 40);
-	define('N4', 10);
+    define('N1', 3);
+    define('N2', 3);
+    define('N3', 40);
+    define('N4', 10);
 
-	class QRmask {
-	
-		public $runLength = array();
-		
-		//----------------------------------------------------------------------
-		public function __construct() 
+    class QRmask {
+
+        public $runLength = array();
+
+        //----------------------------------------------------------------------
+        public function __construct()
         {
             $this->runLength = array_fill(0, QRSPEC_WIDTH_MAX + 1, 0);
         }

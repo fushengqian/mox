@@ -1,6 +1,7 @@
 ##
 ## PHPExcel
-##
+##
+
 ## Copyright (c) 2006 - 2013 PHPExcel
 ##
 ## This library is free software; you can redistribute it and/or
@@ -20,28 +21,29 @@
 ## @category   PHPExcel
 ## @package    PHPExcel_Settings
 ## @copyright  Copyright (c) 2006 - 2013 PHPExcel (http://www.codeplex.com/PHPExcel)
-## @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt	LGPL
+## @license    http://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt    LGPL
 ## @version    ##VERSION##, ##DATE##
 ##
 ##
 
 
-ArgumentSeparator	= ;
+ArgumentSeparator    = ;
 
 
 ##
-##	(For future use)
+##    (For future use)
 ##
-currencySymbol	= zł
+currencySymbol    = zł
 
 
 ##
-##	Excel Error Codes	(For future use)
+##    Excel Error Codes    (For future use)
+
 ##
-NULL	= #ZERO!
-DIV0	= #DZIEL/0!
-VALUE	= #ARG!
-REF	= #ADR!
-NAME	= #NAZWA?
-NUM	= #LICZBA!
-NA	= #N/D!
+NULL    = #ZERO!
+DIV0    = #DZIEL/0!
+VALUE    = #ARG!
+REF    = #ADR!
+NAME    = #NAZWA?
+NUM    = #LICZBA!
+NA    = #N/D!

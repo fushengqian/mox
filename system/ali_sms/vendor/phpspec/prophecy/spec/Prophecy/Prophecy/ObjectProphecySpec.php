@@ -268,7 +268,7 @@ class ObjectProphecySpec extends ObjectBehavior
 
 class ObjectProphecySpecFixtureA
 {
-	public $errors;
+    public $errors;
 }
 
 class ObjectProphecySpecFixtureB extends ObjectProphecySpecFixtureA

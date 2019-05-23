@@ -78,23 +78,23 @@
         //----------------------------------------------------------------------
         public static function buildCache()
         {
-			QRtools::markTime('before_build_cache');
-			
-			$mask = new QRmask();
+            QRtools::markTime('before_build_cache');
+
+            $mask = new QRmask();
             for ($a=1; $a <= QRSPEC_VERSION_MAX; $a++) {
                 $frame = QRspec::newFrame($a);
                 if (QR_IMAGE) {
                     $fileName = QR_CACHE_DIR.'frame_'.$a.'.png';
                     QRimage::png(self::binarize($frame), $fileName, 1, 0);
                 }
-				
-				$width = count($frame);
-				$bitMask = array_fill(0, $width, array_fill(0, $width, 0));
-				for ($maskNo=0; $maskNo<8; $maskNo++)
-					$mask->makeMaskNo($maskNo, $width, $frame, $bitMask, true);
+
+                $width = count($frame);
+                $bitMask = array_fill(0, $width, array_fill(0, $width, 0));
+                for ($maskNo=0; $maskNo<8; $maskNo++)
+                    $mask->makeMaskNo($maskNo, $width, $frame, $bitMask, true);
             }
-			
-			QRtools::markTime('after_build_cache');
+
+            QRtools::markTime('after_build_cache');
         }
 
         //----------------------------------------------------------------------

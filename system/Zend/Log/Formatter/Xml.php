@@ -63,7 +63,7 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
             $args = func_get_args();
 
             $options = array(
-            	'rootElement' => array_shift($args)
+                'rootElement' => array_shift($args)
             );
 
             if (count($args)) {
@@ -92,10 +92,10 @@ class Zend_Log_Formatter_Xml extends Zend_Log_Formatter_Abstract
     }
 
     /**
-	 * Factory for Zend_Log_Formatter_Xml classe
-	 *
-	 * @param array|Zend_Config $options
-	 * @return Zend_Log_Formatter_Xml
+     * Factory for Zend_Log_Formatter_Xml classe
+     *
+     * @param array|Zend_Config $options
+     * @return Zend_Log_Formatter_Xml
      */
     public static function factory($options)
     {

@@ -14,19 +14,19 @@ class DefaultAcsClientTest extends TestCase {
         Config::load();
     }
 
-	public function testDoActionRPC() {
+    public function testDoActionRPC() {
         echo "\nWARNING: setup accessKeyId and accessSecret of DefaultAcsClientTest";
         $iClientProfile = DefaultProfile::getProfile(
             "cn-hangzhou",
             "yourAccessKeyId",
             "yourAccessKeySecret"
         );
-		$request = new DescribeRegionsRequest();
+        $request = new DescribeRegionsRequest();
         $client = new DefaultAcsClient($iClientProfile);
         $response = $client->getAcsResponse($request);
-		
-		$this->assertNotNull($response->RequestId);
-		$this->assertNotNull($response->Regions->Region[0]->LocalName);
-		$this->assertNotNull($response->Regions->Region[0]->RegionId);
-	}
+        
+        $this->assertNotNull($response->RequestId);
+        $this->assertNotNull($response->Regions->Region[0]->LocalName);
+        $this->assertNotNull($response->Regions->Region[0]->RegionId);
+    }
 }

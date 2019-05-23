@@ -11,9 +11,9 @@ class EndpointProviderTest extends TestCase
         Config::load();
     }
 
-	public function testFindProductDomain()
-	{
-		$this->assertEquals("ecs-cn-hangzhou.aliyuncs.com",EndpointProvider::findProductDomain("cn-hangzhou", "Ecs"));
-	}
-	
+    public function testFindProductDomain()
+    {
+        $this->assertEquals("ecs-cn-hangzhou.aliyuncs.com",EndpointProvider::findProductDomain("cn-hangzhou", "Ecs"));
+    }
+    
 }
