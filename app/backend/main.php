@@ -74,8 +74,10 @@ class main extends MOX_ADMIN_CONTROLLER
                 TPL::assign('styles', $this->model('setting')->get_ui_styles());
             break;
         }
-        
-        TPL::assign('setting', get_setting(null, false));
+
+        $settings = get_setting(null, false);
+
+        TPL::assign('setting', $settings);
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list('SETTINGS_' . strtoupper($_GET['category'])));
         

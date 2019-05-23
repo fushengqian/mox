@@ -36,7 +36,7 @@ class action extends MOX_ADMIN_CONTROLLER
             $where .= " AND user_id = '" . $user_id . "'";
         }
 
-        $list = $this->model('action')->get_data_list($where, $_GET['aid'], 20, 'id desc', true);
+        $list = $this->model('action')->get_data_list($where, $_GET['page'], 20, 'id desc', true);
 
         TPL::assign('list', $list);
 

@@ -34,7 +34,7 @@ class sms extends MOX_ADMIN_CONTROLLER
             $where .= ' AND `mobile` = "'.$mobile.'"';
         }
 
-        $list = $this->model('sms')->get_data_list($where, $_GET['aid'], 20, 'id desc');
+        $list = $this->model('sms')->get_data_list($where, $_GET['page'], 20, 'id desc');
         
         TPL::assign('list', $list);
         

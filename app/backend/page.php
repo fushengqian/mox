@@ -15,7 +15,7 @@ class page extends MOX_ADMIN_CONTROLLER
             $where .= ' AND (`title` like "%'.$keyword.'%" OR `keywords` like "'.$keyword.'")';
         }
         
-        $list = $this->model('page')->get_data_list($where, $_GET['aid'], 20);
+        $list = $this->model('page')->get_data_list($where, $_GET['page'], 20);
         
         TPL::assign('list', $list);
         

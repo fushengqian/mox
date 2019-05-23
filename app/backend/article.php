@@ -20,7 +20,7 @@ class article extends MOX_ADMIN_CONTROLLER
 {
     public function setup()
     {
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(802));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(102));
     }
 
     public function list_action()
@@ -58,7 +58,7 @@ class article extends MOX_ADMIN_CONTROLLER
             $where[] = "(`cate` = '".trim($_GET['status'])."')";
         }
         
-        if ($articles_list = $this->model('article')->fetch_page('article', implode(' AND ', $where), 'id DESC', $_GET['aid'], $this->per_page))
+        if ($articles_list = $this->model('article')->fetch_page('article', implode(' AND ', $where), 'id DESC', $_GET['page'], $this->per_page))
         {
             $search_articles_total = $this->model('article')->found_rows();
         }

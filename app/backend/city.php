@@ -3,7 +3,7 @@ class city extends MOX_ADMIN_CONTROLLER
 {
     public function index_action()
     {
-        $page = $_GET['aid'] ? $_GET['aid'] : 1;
+        $page = $_GET['page'] ? $_GET['page'] : 1;
         $order = $_GET['order'] ? $_GET['order'] : 'provid asc';
         
         $this->crumb(MOX_APP::lang()->_t('城市管理'), "backend/hot/list/");

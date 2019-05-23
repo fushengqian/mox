@@ -5,7 +5,7 @@ class topic extends MOX_ADMIN_CONTROLLER
     {
         $this->crumb(MOX_APP::lang()->_t('话题管理'), "backend/topic/index/");
 
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(804));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(202));
 
         $keyword = $_GET['keyword'] ? trim($_GET['keyword']) : '';
 
@@ -14,7 +14,7 @@ class topic extends MOX_ADMIN_CONTROLLER
             $where .= ' AND (`content` like "%' . $keyword . '%" )';
         }
 
-        $list = $this->model('topic')->get_data_list($where, $_GET['aid'], 20);
+        $list = $this->model('topic')->get_data_list($where, $_GET['page'], 20);
 
         TPL::assign('list', $list);
 

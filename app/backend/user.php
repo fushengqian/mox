@@ -54,7 +54,7 @@ class user extends MOX_ADMIN_CONTROLLER
 
         $order = !empty($_GET['order']) ? trim($_GET['order']) : 'id';
 
-        $user_list = $this->model('user')->fetch_page('user', implode(' AND ', $where), $order . ' DESC', $_GET['aid'], $this->per_page);
+        $user_list = $this->model('user')->fetch_page('user', implode(' AND ', $where), $order . ' DESC', $_GET['page'], $this->per_page);
 
         $total_rows = $this->model('user')->found_rows();
 

@@ -20,7 +20,7 @@ class logs extends MOX_ADMIN_CONTROLLER
             $where .= " AND content like '%" . $title . "%'";
         }
 
-        $list = $this->model('logs')->get_data_list($where, $_GET['aid'], 20, 'id desc', true);
+        $list = $this->model('logs')->get_data_list($where, $_GET['page'], 20, 'id desc', true);
 
         TPL::assign('list', $list);
 

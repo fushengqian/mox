@@ -26,7 +26,7 @@ class comment extends MOX_ADMIN_CONTROLLER
             $where .= ' AND `is_default` = 1';
         }
         
-        $list = $this->model('comment')->get_data_list($where, $_GET['aid'], 20, 'id desc');
+        $list = $this->model('comment')->get_data_list($where, $_GET['page'], 20, 'id desc');
         
         foreach($list as $k => $v)
         {

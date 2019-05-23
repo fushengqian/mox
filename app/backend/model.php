@@ -18,7 +18,7 @@ class model extends MOX_ADMIN_CONTROLLER
             $where .= ' AND (`name` like "%' . $keyword . '%" )';
         }
 
-        $list = $this->model('model')->get_data_list($where, $_GET['aid'], 20);
+        $list = $this->model('model')->get_data_list($where, $_GET['page'], 20);
         $brand_list = $this->model('brand')->fetch_all('brand');
 
         foreach ($list as $key => $val) {

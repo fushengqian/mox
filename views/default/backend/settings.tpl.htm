@@ -27,9 +27,9 @@
                 <tr>
                     <td>
                         <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站简介'); ?>:</span>
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站域名'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" rows="4" name="description"  ><?php echo $this->setting['description']; ?></textarea>
+                                <input type="text" class="form-control" name="domain" value="<?php echo $this->setting['domain']; ?>">
                             </div>
                         </div>
                     </td>
@@ -37,9 +37,9 @@
                 <tr>
                     <td>
                         <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站关键词'); ?>:</span>
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站简介'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" rows="4" name="keywords"  ><?php echo $this->setting['keywords']; ?></textarea>
+                                <textarea class="form-control textarea" rows="4" name="description"><?php echo $this->setting['description']; ?></textarea>
                             </div>
                         </div>
                     </td>
@@ -50,41 +50,6 @@
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站 ICP 备案号'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
                                 <input name="icp_beian" class="form-control" type="text" value="<?php echo $this->setting['icp_beian']; ?>"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('上传目录外部访问 URL 地址'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="upload_url" class="form-control" type="text" value="<?php echo $this->setting['upload_url']; ?>"/>
-                                <span class="help-block"><?php _e('末尾不带 / 或 \\'); ?></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('上传文件存放绝对路径'); ?></span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="upload_dir" class="form-control" type="text" value="<?php echo $this->setting['upload_dir']; ?>"/>
-
-                                <span class="help-block"><?php _e('末尾不带 / 或 \，目前网站根目录绝对路径：'); echo ROOT_PATH; ?></span>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('static 目录资源 URL 地址'); ?></span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="img_url" class="form-control" type="text" value="<?php echo $this->setting['img_url']; ?>"/>
-
-                                <span class="help-block"><?php _e('末尾不带 / 或 \，留空使用根目录下的 static 资源'); ?></span>
                             </div>
                         </div>
                     </td>

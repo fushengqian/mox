@@ -5,7 +5,7 @@ class area extends MOX_ADMIN_CONTROLLER
     //地区（包括市、区、县、镇、乡、村）列表
     public function index_action()
     {
-        $page = $_GET['aid'] ? $_GET['aid'] : 1;
+        $page = $_GET['page'] ? $_GET['page'] : 1;
         $order = $_GET['order'] ? $_GET['order'] : 'num desc';
         
         $this->crumb(MOX_APP::lang()->_t('地区管理'), "backend/hot/list/");

@@ -6,7 +6,7 @@ class feed extends MOX_ADMIN_CONTROLLER
     {
         $this->crumb(MOX_APP::lang()->_t('动态管理'), "backend/feed/list/");
 
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(803));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(203));
 
         $keyword = $_GET['keyword'] ? trim($_GET['keyword']) : '';
 
@@ -15,7 +15,7 @@ class feed extends MOX_ADMIN_CONTROLLER
             $where .= ' AND (`content` like "%' . $keyword . '%" )';
         }
 
-        $list = $this->model('feed')->get_data_list($where, $_GET['aid'], 20);
+        $list = $this->model('feed')->get_data_list($where, $_GET['page'], 20);
 
         TPL::assign('list', $list);
 
