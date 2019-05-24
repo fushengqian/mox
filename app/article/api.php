@@ -91,7 +91,7 @@ class api extends MOX_CONTROLLER
                            'content' => summary(strip_tags($value['content']), 120),
                            'url' => $value['url'],
                            'pubDate' => date_friendly($value['create_time']),
-                           'source' => '模型圈',
+                           'source' => 'Mox',
                            'softwareLogo' => '',
                            'imgs' => $images,
                            'iTags' => array(array('oscId' => 1, 'name' => '模型', 'tagId' => '1')),
@@ -187,7 +187,7 @@ class api extends MOX_CONTROLLER
         $content  = $_POST['content'];
         $keywords = implode(',', analysis_keyword($title));
         $summary  = summary(strip_tags($_POST['content']), 200);
-        $from     = $_POST['from'] ? $_POST['from'] : '模型圈';
+        $from     = $_POST['from'] ? $_POST['from'] : 'Mox';
         $status   = 2;
         $cate     = $_POST['cate'] ? $_POST['cate'] : 'focus';
 

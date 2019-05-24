@@ -44,7 +44,7 @@ class ajax extends MOX_CONTROLLER
         $content  = $_POST['content'];
         $keywords = $_POST['keywords'];
         $summary  = $_POST['summary'];
-        $from     = $_POST['from'] ? $_POST['from'] : '模型圈';
+        $from     = $_POST['from'] ? $_POST['from'] : 'Mox';
         $status   = intval($_POST['status']);
         $user_id  = intval(MOX_APP::session()->info['uid']);
         $cate  = $_POST['cate'];

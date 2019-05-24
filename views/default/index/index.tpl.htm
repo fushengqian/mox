@@ -1,5 +1,5 @@
 <?php TPL::output('global/header.tpl.htm');?>
-<!--模型圈导航-->
+<!--Mox导航-->
 <!--
 <div class="w960" style="width:960px;">
     <div class="huati">
@@ -45,7 +45,7 @@
         <div class="tgb_mr01" style="margin-top:15px;">
             <div class="left tgb_mrtel"><img src="<?php echo G_DEMAIN;?>/static/avatar/default.jpg" width="50" height="50" /></div>
             <div class="left tgb_mrtel_wenz">
-                <h2>模型圈移动客户端</h2>
+                <h2>Mox移动客户端</h2>
                 <div class="tgb_m_tubiao">
                     <ul>
                         <li class="apple01"><a href="javascript:;">IOS</a></li>
@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="mox-star">
-            <h2>模型圈推荐</h2>
+            <h2>Mox推荐</h2>
             <div class="mox-star clearfix">
                  <?php foreach($this->user_list as $uinfo):?>
                  <div class="star clearfix">
@@ -76,7 +76,7 @@
         </div>
     </div>
 </div>
-<!--模型圈最新动态 start-->
+<!--Mox最新动态 start-->
 <div class="w960 tgb_pos">
     <div class="left tgb_pos_l clearfix">
          <?php TPL::output('feed/list.tpl.htm');?>
@@ -114,7 +114,7 @@
             </div>
         </div>
         <div class="mox-people mox-mode">
-            <h2 class="title">模型圈新人</h2>
+            <h2 class="title">Mox新人</h2>
             <div class="tgb_mr05">
                 <?php foreach($this->new_user_list as $new_u):?>
                 <a href='<?php echo G_DEMAIN;?>/user/<?php echo $new_u['id'];?>/' target="_blank"><?php echo $new_u['user_name'];?></a>

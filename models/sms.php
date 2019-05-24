@@ -105,7 +105,7 @@ class sms_class extends MOX_MODEL
         $request->setPhoneNumbers($mobile);
 
         // 必填，设置签名名称，应严格按"签名名称"
-        $request->setSignName("模型圈");
+        $request->setSignName("Mox");
 
         //验证码
         $content = '暂无短信内容';

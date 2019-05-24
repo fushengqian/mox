@@ -82,7 +82,7 @@ class ajax extends MOX_CONTROLLER
             $this->model('user')->setcookie_login($uid, $_POST['user_name'], $_POST['password'], $user_info['salt'], null);
 
             // 发送消息
-            $this->model('message')->send($uid, 0, '亲爱的 '.trim($_POST['user_name']).' ：欢迎您加入我们模型圈的大家族！在遵守本站的规定的同时，享受您的愉快之旅吧！');
+            $this->model('message')->send($uid, 0, '亲爱的 '.trim($_POST['user_name']).' ：欢迎您加入我们Mox的大家族！在遵守本站的规定的同时，享受您的愉快之旅吧！');
 
             MOX_APP::model('points')->send($uid, 'register');
 

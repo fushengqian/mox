@@ -24,7 +24,7 @@ class points_class extends MOX_MODEL
             'create_feed' => array(100, '发布动态'),
             'create_topic' => array(100, '发布话题'),
             'login' => array(100, '每天登录'),
-            'register' => array(500, '注册模型圈'),
+            'register' => array(500, '注册Mox'),
             'visit_home' => array(5, '访问社区主页'),
             'upload_avatar' => array(200, '上传头像'),
             'update_user_info' => array(100, '完善个人信息'),

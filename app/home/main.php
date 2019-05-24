@@ -31,7 +31,7 @@ class main extends MOX_CONTROLLER
         $feed_list = $this->model('feed')-> get_data_list(array('user_id' => $user_id));
         TPL::assign('feed_list', $feed_list);
 
-        // 模型圈推荐用户
+        // Mox推荐用户
         $user_list = $this->model('user')-> get_data_list(array('is_us = 1'), 1, 6, 'point desc');
         TPL::assign('user_list', $user_list);
 

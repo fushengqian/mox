@@ -35,7 +35,7 @@ class main extends MOX_CONTROLLER
 
         TPL::assign('topic_id', $topic_id);
 
-        // 模型圈推荐用户
+        // Mox推荐用户
         $user_list = $this->model('user')-> get_data_list(array('is_us = 1'), 1, 6, 'point desc');
         TPL::assign('user_list', $user_list);
 

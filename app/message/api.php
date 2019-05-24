@@ -102,7 +102,7 @@ class api extends MOX_CONTROLLER
         $arr = array();
         foreach ($list as $k => $v) {
             $author = array('id' => 100,
-                            'name' => '模型圈',
+                            'name' => 'Mox',
                             'portrait' => 'http://www.moxquan.com/static/avatar/default.jpg',
                             'relation' => 4,
                             'gender' => 1,

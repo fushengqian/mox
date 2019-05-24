@@ -1,30 +1,14 @@
 ﻿</div>
 </div>
 <div class="diymenu">
-    <div class="item item-col-4" onclick="location.href = '/'">
+    <?php foreach($this->mobile_nav as $nav){?>
+    <div class="item item-col-<?php echo count($this->mobile_nav)?>" onclick="location.href = '<?php echo $nav[2];?>'">
         <div class="inner top">
-            <span class="icon icon-home top"></span>
-            <span class="text top" >首页</span>
+            <span class="icon icon-<?php echo $nav[1];?> top"></span>
+            <span class="text top"><?php echo $nav[0];?></span>
         </div>
     </div>
-    <div class="item item-col-4" onclick="location.href='/mall/'">
-        <div class="inner top">
-            <span class="icon icon-shangcheng1 top"></span>
-            <span class="text top" >商店</span>
-        </div>
-    </div>
-    <div class="item item-col-4" onclick="location.href='/home/'">
-        <div class="inner top">
-            <span class="icon icon-people2 top"></span>
-            <span class="text top">社区</span>
-        </div>
-    </div>
-    <div class="item item-col-4" onclick="location.href='/user/'">
-        <div class="inner top">
-            <span class="icon icon-my top"></span>
-            <span class="text top" >我的</span>
-        </div>
-    </div>
+    <?php } ?>
 </div>
 </div>
 <script language="javascript">

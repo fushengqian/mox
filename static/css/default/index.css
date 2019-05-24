@@ -68,7 +68,7 @@
 .tgb_ml_div span em a:hover{ color:#ff7e00; text-decoration:underline;}
 .t_bor{ border-bottom:1px dashed #cbcbcb;}
 
-/*模型圈客户端*/
+/*Mox客户端*/
 .tgb_mr01{ height:60px; width:280px; background:url(/static/images/tgb_tel01.png) no-repeat;}
 .tgb_mrtel{ width:66px; height:55px; text-align:center; padding-top:5px;}
 .tgb_mrtel_wenz h2{ height:24px; line-height:24px; font-family:微软雅黑; margin-top:5px; font-size:14px; width:200px; border-bottom:1px dashed #cbcbcb;}

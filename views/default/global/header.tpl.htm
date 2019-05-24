@@ -26,13 +26,13 @@
     <link rel="Shortcut Icon" href="<?php echo G_DEMAIN;?>/static/favicon.ico">
 </head>
 <body>
-<!--模型圈导航-->
+<!--Mox导航-->
 <!-- 顶部横栏 -->
 <div class="top-nav">
     <div class="NewH">
         <div class="NewH_top">
             <div class="NewH_top_left left">
-                <img src="<?php echo G_DEMAIN;?>/static/images/logo.png" alt="模型圈">
+                <img src="<?php echo G_DEMAIN;?>/static/images/logo.png" alt="Mox">
             </div>
             <div class="NewH_top_right right noLogin">
                 <?php if(empty($this->user_info['uid'])):?>
@@ -92,26 +92,13 @@
             <div class="NewH_bot_items">
                 <!-- 导航栏2logo -->
                 <div class="newH2logo left"></div>
+                <?php foreach($this->pc_nav as $nav){?>
                 <div class="NewH_bot_Item left">
                     <div class="NewH_bot_title1">
-                        <a href="<?php echo G_DEMAIN;?>">首页</a>
+                        <a href="<?php echo $nav[1];?>"><?php echo $nav[0];?></a>
                     </div>
                 </div>
-                <div class="NewH_bot_Item left" >
-                    <div class="NewH_bot_title1">
-                        <span class="chooseItem"><a href="<?php echo G_DEMAIN;?>/home/">模友社区</a></span>
-                    </div>
-                </div>
-                <div class="NewH_bot_Item left" >
-                    <div class="NewH_bot_title1">
-                         <a href="javascript:;">我的关注</a>
-                    </div>
-                </div>
-                <div class="NewH_bot_Item left">
-                    <div class="NewH_bot_title1">
-                        <a target="_blank" href="<?php echo G_DEMAIN;?>/static/moxquan-v1.apk">App下载</a>
-                    </div>
-                </div>
+                <?php } ?>
                 <a class="dlappBox dlapp1 right" href="<?php echo G_DEMAIN;?>/home/">
                     <div class="dlapp dlapp1 right">
                         <span class="icon icon-ask"></span>

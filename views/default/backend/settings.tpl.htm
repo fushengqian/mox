@@ -37,6 +37,16 @@
                 <tr>
                     <td>
                         <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站一句话介绍'); ?>:</span>
+                            <div class="col-sm-5 col-xs-8">
+                                <input type="text" class="form-control" name="site_words" value="<?php echo $this->setting['site_words']; ?>">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站简介'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
                                 <textarea class="form-control textarea" rows="4" name="description"><?php echo $this->setting['description']; ?></textarea>
@@ -50,6 +60,24 @@
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站 ICP 备案号'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
                                 <input name="icp_beian" class="form-control" type="text" value="<?php echo $this->setting['icp_beian']; ?>"/>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('站点关闭'); ?>:</span>
+                            <div class="col-sm-5 col-xs-8">
+                                <div class="btn-group mod-btn">
+                                    <label type="button" class="btn mod-btn-color">
+                                        <input type="radio" name="site_close" value="Y"<?php if ($this->setting['site_close'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('是'); ?>
+                                    </label>
+
+                                    <label type="button" class="btn mod-btn-color">
+                                        <input type="radio" name="site_close" value="N"<?php if ($this->setting['site_close'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('否'); ?>
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -89,107 +117,6 @@
                 </tr>
             </table>
         </div>
-        <?php } else if ($_GET['category'] == 'mox') { ?>
-        <div class="mod-head">
-            <h3>
-                <span class="pull-left"><?php _e('农庄信息'); ?></span>
-                <span class="pull-right"><a href="javascript:;" onclick="MOX.ajax_post($('#settings_form'));" class="btn btn-xs btn-primary mod-site-save"><?php _e('快速保存'); ?></a></span>
-            </h3>
-        </div>
-        <div class="tab-content mod-content">
-            <table class="table table-striped">
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('中文名称'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input type="text" class="form-control" name="mox_name_cn" value="<?php echo $this->setting['mox_name_cn']; ?>">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('英文名称'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input type="text" class="form-control" name="mox_name_en" value="<?php echo $this->setting['mox_name_en']; ?>">
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('座机电话'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                               <input name="mox_tell" class="form-control" type="text" value="<?php echo $this->setting['mox_tel']; ?>"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('负责人姓名'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="mox_manager" class="form-control" type="text" value="<?php echo $this->setting['mox_manager']; ?>"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('负责人手机'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="mox_manager_mobile" class="form-control" type="text" value="<?php echo $this->setting['mox_manager_mobile']; ?>"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('农庄简介'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" rows="6" name="mox_description"  ><?php echo $this->setting['mox_description']; ?></textarea>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('农庄地址'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="mox_address" class="form-control" type="text" value="<?php echo $this->setting['mox_address']; ?>"/>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('自驾线路'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" rows="6" name="mox_drive_route"  ><?php echo $this->setting['mox_drive_route']; ?></textarea>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('公交线路'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" rows="6" name="mox_transit_route"  ><?php echo $this->setting['mox_transit_route']; ?></textarea>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
         <?php } else if ($_GET['category'] == 'functions') { ?>
         <div class="mod-head">
             <h3>
@@ -204,88 +131,7 @@
                         <div class="form-group">
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站公告'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" name="site_announce"  ><?php echo htmlspecialchars($this->setting['site_announce']); ?></textarea>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('开启 Rewrite 伪静态'); ?>:</span>
-                            <div class="col-sm-6 col-xs-8">
-                                <div class="btn-group mod-btn">
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="url_rewrite_enable" value="Y"<?php if ($this->setting['url_rewrite_enable'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('是'); ?>
-                                    </label>
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="url_rewrite_enable" value="N"<?php if ($this->setting['url_rewrite_enable'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('否'); ?>
-                                    </label>
-                                    <span class="help-block"><?php _e('Rewrite 开启方法请见 ReadMe 说明文件'); ?></span>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-2 col-xs-3 control-label"><?php _e('URL 链接显示样式'); ?>:</span>
-                            <div class="col-sm-10 col-xs-12">
-                                <ul class="mod-site-url">
-                                    <li>
-                                        <span class="pull-left"><a href="javascript:;" onclick='$("#request_route_custom").val("/account/login/===/login/\n/account/logout/===/logout/\n/account/setting/(:any)/===/setting/(:any)/")'>[ <?php _e('获取规则'); ?> ]</a></span>
-                                        <p class="pull-left">
-                                            <?php echo base_url(); ?>/question/123<br /><?php echo base_url(); ?>/topic/123<br /><?php echo base_url(); ?>/people/anwsion<br /><?php echo base_url(); ?>/category/123
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <span class="pull-left"><a href="javascript:;" onclick='$("#request_route_custom").val("/question/(:any)===/q_(:any)\n/topic/(:any)===/t_(:any).html\n/people/(:any)===/p_(:any).html\n/account/login/===/login/\n/account/logout/===/logout/\n/account/setting/(:any)/===/setting/(:any)/");'>[ <?php _e('获取规则'); ?> ]</a></span>
-                                        <p class="pull-left">
-                                            <?php echo base_url(); ?>/q_123.html
-                                            <br />
-                                            <?php echo base_url(); ?>/t_话题.html
-                                            <br />
-                                            <?php echo base_url(); ?>/p_admin.html
-                                            <br />
-                                            <?php echo base_url(); ?>/c_123.html
-                                        </p>
-                                    </li>
-                                    <li class="mod-site-rule">
-                                        <span class="pull-left"><?php _e('自定义路由'); ?></span>
-                                        <div class="pull-left col-sm-8">
-                                            <textarea class="form-control textarea" name="request_route_custom" id="request_route_custom" rows="4" cols="63"><?php echo $this->setting['request_route_custom']; ?></textarea>
-                                        </div>
-                                        <div class="help-block">
-                                            <?php _e('此模式只有开启 Rewrite 后有效, 请填写简略正则表达式, 每行一条规则, 中间使用 === 隔开, 左边为站点默认 URL 模式, 右边为替换后的 URL 模式, 链接以 / 开头, (:num) 代表数字, (:any) 代表任意字符<br />如替换问题规则：<br />/question/(:any)===/q_(:any)<br />(!) 警告: 使用此功能之前请确定你对替换有所把握, 错误的规则将导致站点不能运行'); ?>
-                                        </div>
-
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('通知未读数刷新间隔时间'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="unread_flush_interval" class="form-control" type="text" value="<?php echo $this->setting['unread_flush_interval']; ?>"/>
-
-                                <div class="help-block"><?php _e('单位'); ?>: <?php _e('秒'); ?></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('问题自动锁定时间'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="auto_question_lock_day" class="form-control" type="text" value="<?php echo $this->setting['auto_question_lock_day']; ?>"/>
-
-                                <div class="help-block"><?php _e('单位'); ?>: <?php _e('天'); ?>, <?php _e('问题超过设定天数没有动作,系统则会自动锁定该问题, 设置为 0 则关闭自动锁定'); ?></div>
+                                <textarea class="form-control textarea" name="site_announce"><?php echo htmlspecialchars($this->setting['site_announce']); ?></textarea>
                             </div>
                         </div>
                     </td>
@@ -296,41 +142,6 @@
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('网站统计代码'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
                                 <textarea class="form-control textarea" name="statistic_code" rows="9"><?php echo $this->setting['statistic_code']; ?></textarea>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('问题举报理由选项'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" name="report_reason" rows="5" ><?php echo get_setting('report_reason'); ?></textarea>
-
-                                <div class="help-block"><?php _e('每行填写一个举报理由'); ?></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('有新举报与认证申请私信提醒用户 ID'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="report_message_uid" class="form-control" type="text" value="<?php echo $this->setting['report_message_uid']; ?>"/>
-
-                                <div class="help-block"><?php _e('留空则发送到 ID 为 1 的用户'); ?></div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('系统时间显示格式'); ?>:</span>
-                            <div class="col-sm-6 col-xs-8">
-                                <label><input type="radio" name="time_style" value="Y"<?php if ($this->setting['time_style'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('xx 分钟前形式'); ?></label>
-                                <label class="col-md-offset-1"><input type="radio" name="time_style" value="N"<?php if ($this->setting['time_style'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('完整日期形式'); ?></label>
                             </div>
                         </div>
                     </td>
@@ -353,32 +164,13 @@
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('发送诊断数据帮助改善产品'); ?>:</span>
-                            <div class="col-sm-6 col-xs-8">
-                                <div class="btn-group mod-btn">
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="report_diagnostics" value="Y"<?php if ($this->setting['report_diagnostics'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('是'); ?>
-                                    </label>
-
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="report_diagnostics" value="N"<?php if ($this->setting['report_diagnostics'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('否'); ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
             </table>
         </div>
 
-        <?php } else if ($_GET['category'] == 'contents') { ?>
+        <?php } else if ($_GET['category'] == 'nav') { ?>
         <div class="mod-head">
             <h3>
-                <span class="pull-left"><?php _e('内容设置'); ?></span>
-
+                <span class="pull-left"><?php _e('导航菜单'); ?></span>
                 <span class="pull-right"><a href="javascript:;" onclick="MOX.ajax_post($('#settings_form'));" class="btn btn-xs btn-primary mod-site-save"><?php _e('快速保存'); ?></a></span>
             </h3>
         </div>
@@ -387,38 +179,10 @@
                 <tr>
                     <td>
                         <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('编辑器设置'); ?>:</span>
-                            <div class="col-sm-6 col-xs-8">
-                                <label><input type="radio" name="advanced_editor_enable" value="Y"<?php if ($this->setting['advanced_editor_enable'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('CKEditor 编辑器'); ?></label>
-                                <label class="col-md-offset-1"><input type="radio" name="advanced_editor_enable" value="N"<?php if ($this->setting['advanced_editor_enable'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('纯文本编辑器'); ?></label>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('允许上传附件'); ?>:</span>
-                            <div class="col-sm-6 col-xs-8">
-                                <div class="btn-group mod-btn">
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="upload_enable" value="Y"<?php if ($this->setting['upload_enable'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('是'); ?>
-                                    </label>
-
-                                    <label type="button" class="btn mod-btn-color">
-                                        <input type="radio" name="upload_enable" value="N"<?php if ($this->setting['upload_enable'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('否'); ?>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('允许的附件文件类型'); ?>:</span>
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('PC端导航栏菜单'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
-                                <input name="allowed_upload_types" class="form-control" type="text" value="<?php echo $this->setting['allowed_upload_types']; ?>"/>
+                                <textarea class="form-control textarea" name="pc_nav" rows="6"><?php echo $this->setting['pc_nav']; ?></textarea>
+                                <div class="help-block">格式：菜单名称_链接，一行一个菜单。</div>
                             </div>
                         </div>
                     </td>
@@ -426,22 +190,10 @@
                 <tr>
                     <td>
                         <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('允许上传最大附件大小'); ?>:</span>
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('移动端底部菜单'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
-                                <input name="upload_size_limit" class="form-control" type="text" value="<?php echo $this->setting['upload_size_limit']; ?>"/>
-
-                                <div class="help-block"><?php _e('单位'); ?>: KB</div>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="form-group">
-                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('允许上传最大头像图片大小'); ?>:</span>
-                            <div class="col-sm-5 col-xs-8">
-                                <input name="upload_avatar_size_limit" type="text" class="form-control" value="<?php echo $this->setting['upload_avatar_size_limit']; ?>"/>
-                                <div class="help-block"><?php _e('单位'); ?>: KB</div>
+                                <textarea class="form-control textarea" name="mobile_nav" rows="6"><?php echo $this->setting['mobile_nav']; ?></textarea>
+                                <div class="help-block">格式：菜单名称_icon_链接，一行一个菜单。</div>
                             </div>
                         </div>
                     </td>
