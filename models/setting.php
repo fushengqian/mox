@@ -10,7 +10,7 @@
 |   Support: 540335306@qq.com
 |   Author: FSQ
 +---------------------------------------------------------------------------
- */
+*/
 
 class setting_class extends MOX_MODEL
 {
