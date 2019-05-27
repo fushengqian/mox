@@ -1363,6 +1363,10 @@
 #newIndex .city-select{
     font-size: 0.85rem;
     flex:0 0 4.4rem;
+    background-image: url('/static/images/logom.png');
+    background-repeat: no-repeat;
+    background-size:100% 100%;
+    -moz-background-size:100% 100%;
 }
 #newIndex .searchbar{
     padding: 0;

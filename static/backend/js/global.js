@@ -131,6 +131,83 @@ $(function () {
         weiboPost($(this));
     });
 
+    $(document).on('click', '.add-mall-nav', function()
+    {
+        var lenght = $('.mall-nav').children().length;
+        if (lenght > 10) {
+            MOX.alert('导航菜单不能超过10个！');
+            return false;
+        }
+        var nav = '<div class="nav">'+
+                        '<div class="img">'+
+                                '<img class="preview" src="/static/images/nopic.png"/>'+
+                                '<span class="btn btn-xs btn-primary add-img">选择图片</span>'+
+                        '</div>'+
+                        '<div class="text">'+
+                                '<div class="form-group name">'+
+                                '<span class="control-label">名称:</span>'+
+                            '<input name="mall_nav['+lenght+'][name]" type="text" class="form-control" value=""/>'+
+                        '</div>'+
+                        '<div class="form-group link">'+
+                                '<span class="control-label">链接:</span>'+
+                                '<input name="mall_nav['+lenght+'][link]" type="text" class="form-control" value=""/>'+
+                        '</div>'+
+                    '</div>'+
+                    '</div>';
+
+        $('.mall-nav').append(nav);
+    });
+
+    $(document).on('click', '.add-pc-nav', function()
+    {
+        var lenght = $('.pc-nav').children().length;
+        if (lenght > 10) {
+            MOX.alert('导航菜单不能超过10个！');
+            return false;
+        }
+        var nav = '<div class="nav">'+
+            '<div class="text">'+
+            '<div class="form-group name">'+
+            '<span class="control-label">名称:</span>'+
+            '<input name="pc_nav['+lenght+'][name]" type="text" class="form-control" value=""/>'+
+            '</div>'+
+            '<div class="form-group link">'+
+            '<span class="control-label">链接:</span>'+
+            '<input name="pc_nav['+lenght+'][link]" type="text" class="form-control" value=""/>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
+
+        $('.pc-nav').append(nav);
+    });
+
+    $(document).on('click', '.add-mobile-nav', function()
+    {
+        var lenght = $('.mobile-nav').children().length;
+        if (lenght > 10) {
+            MOX.alert('导航菜单不能超过5个！');
+            return false;
+        }
+
+        var nav = '<div class="nav">'+
+            '<div class="img">'+
+            '<img class="preview" src="/static/images/nopic.png"/>'+
+            '<span class="btn btn-xs btn-primary add-img">选择图片</span>'+
+            '</div>'+
+            '<div class="text">'+
+            '<div class="form-group name">'+
+            '<span class="control-label">名称:</span>'+
+            '<input name="mobile_nav['+lenght+'][name]" type="text" class="form-control" value=""/>'+
+            '</div>'+
+            '<div class="form-group link">'+
+            '<span class="control-label">链接:</span>'+
+            '<input name="mobile_nav['+lenght+'][link]" type="text" class="form-control" value=""/>'+
+            '</div>'+
+            '</div>'+
+            '</div>';
+
+        $('.mobile-nav').append(nav);
+    });
 
     // 概述页面，新增话题数，点击排序
     $('#sorttable thead').delegate("td","click",function()

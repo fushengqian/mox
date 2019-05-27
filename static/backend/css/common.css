@@ -395,3 +395,19 @@ label,.aw-content-wrap .mod-title,.aw-article-list b,.aw-question-list b{font-we
 
 /* HiDPI support */
 @media (-o-min-device-pixel-ratio: 5/4), (-webkit-min-device-pixel-ratio: 1.25), (min-resolution: 120dpi) {.icheckbox_square-blue,.iradio_square-blue { background-image: url(../img/blue-2x.png);-webkit-background-size: 240px 24px; background-size: 240px 24px;}}
+
+
+.mall-nav .nav{
+   border: solid 1px #ccc;
+   margin-bottom: 5px;
+   padding:10px;
+}
+.mall-nav .nav .preview{
+   border: solid 1px #ccc;
+   max-width: 100px;
+   max-height: 100px;
+   margin-right:10px;
+}
+.mall-nav .nav .name,.link{
+    margin:8px 0px 8px 0px;
+}
