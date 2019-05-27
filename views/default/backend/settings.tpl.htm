@@ -166,7 +166,59 @@
                 </tr>
             </table>
         </div>
-
+        <?php } else if ($_GET['category'] == 'mall') { ?>
+        <div class="mod-head">
+            <h3>
+                <span class="pull-left"><?php _e('商城设置'); ?></span>
+                <span class="pull-right"><a href="javascript:;" onclick="MOX.ajax_post($('#settings_form'));" class="btn btn-xs btn-primary mod-site-save"><?php _e('快速保存'); ?></a></span>
+            </h3>
+        </div>
+        <div class="tab-content mod-content">
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('商城别称'); ?>:</span>
+                            <div class="col-sm-4 col-xs-8">
+                                <input name="mall_alias" type="text" class="form-control" value="<?php echo $this->setting['mall_alias']; ?>"/>
+                                <div class="help-block">如：商店、集市、店铺等等</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('商城首页导航'); ?>:</span>
+                            <span class="pull-right"><a href="javascript:;" class="btn btn-xs btn-primary add-mall-nav"><?php _e('新增导航'); ?></a></span>
+                            <div class="col-sm-6 col-xs-8">
+                                 <div class="mall-nav">
+                                      <?php foreach($this->setting['mall_nav'] as $nkey => $mall_nav){?>
+                                      <div class="nav">
+                                            <div class="img">
+                                                 <img class="preview" src="<?php echo $mall_nav['img'] ? $mall_nav['img'] : '/static/images/nopic.png'; ?>"/>
+                                                 <input type="hidden" name="mall_nav[<?php echo $nkey;?>][img]" value="<?php echo $mall_nav['img']; ?>"/>
+                                                 <span class="btn btn-xs btn-primary add-img">选择图片</span>
+                                            </div>
+                                           <div class="text">
+                                                <div class="form-group name">
+                                                     <span class="control-label"><?php _e('名称'); ?>:</span>
+                                                     <input name="mall_nav[<?php echo $nkey;?>][name]" type="text" class="form-control" value="<?php echo $mall_nav['name']; ?>"/>
+                                                </div>
+                                                <div class="form-group link">
+                                                     <span class="control-label"><?php _e('链接'); ?>:</span>
+                                                     <input name="mall_nav[<?php echo $nkey;?>][link]" type="text" class="form-control" value="<?php echo $mall_nav['link']; ?>"/>
+                                                </div>
+                                           </div>
+                                      </div>
+                                     <?php } ?>
+                                   </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <?php } else if ($_GET['category'] == 'nav') { ?>
         <div class="mod-head">
             <h3>
@@ -180,9 +232,24 @@
                     <td>
                         <div class="form-group">
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('PC端导航栏菜单'); ?>:</span>
+                            <span class="pull-right"><a href="javascript:;" class="btn btn-xs btn-primary add-pc-nav"><?php _e('新增导航菜单'); ?></a></span>
                             <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" name="pc_nav" rows="6"><?php echo $this->setting['pc_nav']; ?></textarea>
-                                <div class="help-block">格式：菜单名称_链接，一行一个菜单。</div>
+                                <div class="mall-nav pc-nav">
+                                    <?php foreach($this->setting['pc_nav'] as $pckey => $pc_nav){?>
+                                    <div class="nav">
+                                        <div class="text">
+                                            <div class="form-group name">
+                                                <span class="control-label"><?php _e('名称'); ?>:</span>
+                                                <input name="pc_nav[<?php echo $pckey;?>][name]" type="text" class="form-control" value="<?php echo $pc_nav['name']; ?>"/>
+                                            </div>
+                                            <div class="form-group link">
+                                                <span class="control-label"><?php _e('链接'); ?>:</span>
+                                                <input name="pc_nav[<?php echo $pckey;?>][link]" type="text" class="form-control" value="<?php echo $pc_nav['link']; ?>"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </td>
@@ -191,9 +258,29 @@
                     <td>
                         <div class="form-group">
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('移动端底部菜单'); ?>:</span>
+                            <span class="pull-right"><a href="javascript:;" class="btn btn-xs btn-primary add-mobile-nav"><?php _e('新增导航菜单'); ?></a></span>
                             <div class="col-sm-5 col-xs-8">
-                                <textarea class="form-control textarea" name="mobile_nav" rows="6"><?php echo $this->setting['mobile_nav']; ?></textarea>
-                                <div class="help-block">格式：菜单名称_icon_链接，一行一个菜单。</div>
+                                <div class="mall-nav mobile-nav">
+                                    <?php foreach($this->setting['mobile_nav'] as $nkey => $mobile_nav){?>
+                                    <div class="nav">
+                                        <div class="img">
+                                            <img class="preview" src="<?php echo $mobile_nav['img'] ? $mobile_nav['img'] : '/static/images/nopic.png'; ?>"/>
+                                            <input type="hidden" name="mobile_nav[<?php echo $nkey;?>][icon]" value="<?php echo $mobile_nav['icon'] ? $mobile_nav['icon'] : 'home'; ?>"/>
+                                            <span class="btn btn-xs btn-primary add-img">选择图片</span>
+                                        </div>
+                                        <div class="text">
+                                            <div class="form-group name">
+                                                <span class="control-label"><?php _e('名称'); ?>:</span>
+                                                <input name="mobile_nav[<?php echo $nkey;?>][name]" type="text" class="form-control" value="<?php echo $mobile_nav['name']; ?>"/>
+                                            </div>
+                                            <div class="form-group link">
+                                                <span class="control-label"><?php _e('链接'); ?>:</span>
+                                                <input name="mobile_nav[<?php echo $nkey;?>][link]" type="text" class="form-control" value="<?php echo $mobile_nav['link']; ?>"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
                             </div>
                         </div>
                     </td>

@@ -2,10 +2,10 @@
 </div>
 <div class="diymenu">
     <?php foreach($this->mobile_nav as $nav){?>
-    <div class="item item-col-<?php echo count($this->mobile_nav)?>" onclick="location.href = '<?php echo $nav[2];?>'">
+    <div class="item item-col-<?php echo count($this->mobile_nav)?>" onclick="location.href = '<?php echo $nav['link'];?>'">
         <div class="inner top">
-            <span class="icon icon-<?php echo $nav[1];?> top"></span>
-            <span class="text top"><?php echo $nav[0];?></span>
+            <span class="icon icon-<?php echo $nav['icon'];?> top"></span>
+            <span class="text top"><?php echo $nav['name'];?></span>
         </div>
     </div>
     <?php } ?>
