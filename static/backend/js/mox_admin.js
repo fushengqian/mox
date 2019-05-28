@@ -346,9 +346,9 @@ var MOX =
                     'from_id':data.from_id
                 });
             break;
-            // 后台微信群发消息
-            case 'adminWechatSendMsg':
-                var template = Hogan.compile(AW_TEMPLATE.adminWechatSendMsg).render(
+            // 后台选择图标
+            case 'backendSelectNavIcon':
+                var template = Hogan.compile(AW_TEMPLATE.backendSelectNavIcon).render(
                 {
                     items : data
                 });

@@ -141,7 +141,7 @@ $(function () {
         var nav = '<div class="nav">'+
                         '<div class="img">'+
                                 '<img class="preview" src="/static/images/nopic.png"/>'+
-                                '<span class="btn btn-xs btn-primary add-img">选择图片</span>'+
+                                '<span class="btn btn-xs btn-primary add-nav-img">选择图片</span>'+
                         '</div>'+
                         '<div class="text">'+
                                 '<div class="form-group name">'+
@@ -207,6 +207,36 @@ $(function () {
             '</div>';
 
         $('.mobile-nav').append(nav);
+    });
+
+    $(document).on('click', '.add-nav-img', function()
+    {
+        $(this).parent().find(".preview").addClass("on");
+        $("#uploadImg").click();
+    });
+
+    //导航上传图片
+    $('#uploadImg').fileupload({
+        dataType: 'json',
+        url: '/backend/images/upload/',
+        done: function (e,data) {
+            $('.nav').find('.on').attr("src", data.result.rsm.url);
+            $('.nav').find('.on').removeClass("on");
+        }
+    });
+
+    // 弹出导航图标
+    $(document).on('click', '.add-nav-icon', function()
+    {
+        $(this).parent().find("input").addClass("on");
+        MOX.dialog('backendSelectNavIcon');
+    });
+
+    // 选择导航图标
+    $(document).on('click', '.icon-all-list .icon-backend', function()
+    {
+        var icon = $(this).attr("attr");
+        $('.nav').find('.on').val(icon);
     });
 
     // 概述页面，新增话题数，点击排序
