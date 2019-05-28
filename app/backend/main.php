@@ -79,7 +79,6 @@ class main extends MOX_ADMIN_CONTROLLER
         TPL::assign('setting', $settings);
         
         TPL::assign('menu_list', $this->model('admin')->fetch_menu_list('SETTINGS_' . strtoupper($_GET['category'])));
-        
         TPL::output('backend/settings');
     }
     
