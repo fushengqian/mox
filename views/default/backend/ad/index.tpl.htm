@@ -12,8 +12,8 @@
                            <input class="form-control" placeholder="广告位代码" type="text" value="<?php echo trim($_GET['position_code']); ?>" name="position_code"/>
                        </div>
                         <div class="col-sm-4 col-xs-4">
-                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><?php _e('搜索'); ?></button>
-                            <a class="btn btn-success"><i class="icon-plus"></i><?php _e('新增'); ?></a>
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><i class="icon-search"></i><?php _e('搜索'); ?></button>
+                            <a href="/backend/ad/edit/" class="btn btn-success"><i class="icon-plus"></i><?php _e('新增'); ?></a>
                         </div>
                     </div>
             </form>
@@ -48,8 +48,8 @@
                                 <td><?php echo date("Y-m-d H:i", $val['update_time']); ?></td>
                                 <td><?php echo ($val['status'] == 1) ? '启用' : '禁用';?></td>
                                 <td>
-                                    <a href="javascript:;" id="edit_<?php echo $val['id']; ?>" data-toggle="tooltip" class="icon icon-edit edit" title="<?php _e('编辑'); ?>"></a>
-                                    <a href="javascript:;" id="delete_<?php echo $val['id']; ?>" data-toggle="tooltip" class="icon icon-trash md-tip delete" title="<?php _e('删除'); ?>"></a>
+                                    <a href="/backend/ad/edit/id-<?php echo $val['id']; ?>" data-toggle="tooltip" class="icon icon-edit edit" title="<?php _e('编辑'); ?>"></a>
+                                    <a href="javascript:;" id="<?php echo $val['id']; ?>" data-toggle="tooltip" class="icon icon-trash md-tip delete" title="<?php _e('删除'); ?>"></a>
                                 </td>
                             </tr>
                             <?php } ?>

@@ -9,10 +9,10 @@
              <form method="get" action="/backend/sms/list/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
-                            <input class="form-control" placeholder="手机" type="text" value="<?php echo rawurldecode($_GET['mobile']); ?>" name="mobile"/>
+                            <input class="form-control" placeholder="手机号码" type="text" value="<?php echo rawurldecode($_GET['mobile']); ?>" name="mobile"/>
                         </div>
                         <div class="col-sm-2 col-xs-2">
-                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><i class="icon-search"></i><?php _e('搜索'); ?></button>
                         </div>
                     </div>
             </form>

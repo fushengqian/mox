@@ -17,35 +17,12 @@ class ad_class extends MOX_MODEL
     /**
      * 获取广告位
      */
-    public function getPosition()
+    public function get_position()
     {
-        $position = [['position_code' => 'mobile_slide', 'name' => '移动首页轮播'],
-                     ['position_code' => 'mobile_nav', 'name' => '移动首页导航栏']];
+        $position = [['position_code' => 'mobile_slide', 'name' => '移动首页轮播', "width" => 200, "height" => 200],
+                     ['position_code' => 'mobile_nav', 'name' => '移动首页导航栏', "width" => 200, "height" => 100]];
 
         return $position;
-    }
-
-    /**
-     * 添加广告
-     * @param int $user_id
-     * @param int $uuid
-     * @param string $content
-     * @param string $client
-     * @param string $ip
-     * @return int
-     */
-    public function add($user_id = 0, $uuid = 0, $content = '', $client = '', $ip = '')
-    {
-        $ad_id = $this -> insert('action', array(
-                                        'content' => $content,
-                                        'user_id' => $user_id,
-                                        'uuid' => $uuid,
-                                        'client' => $client,
-                                        'ip' => $ip,
-                                        'create_time' => time(),
-                                        'status' => 1));
-
-        return $ad_id;
     }
 
     public function get_data_list($where, $page = 1, $per_page = 10, $order_by = 'id desc')
@@ -55,7 +32,7 @@ class ad_class extends MOX_MODEL
         }
         
         $list = $this->fetch_page('ad', $where, $order_by, $page, $per_page);
-        $position = $this -> getPosition();
+        $position = $this -> get_position();
 
         foreach($list as $key => $value) {
             foreach($position as $v) {
