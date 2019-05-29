@@ -185,14 +185,15 @@ $(function () {
     {
         var lenght = $('.mobile-nav').children().length;
         if (lenght > 10) {
-            MOX.alert('导航菜单不能超过5个！');
+            MOX.alert('导航菜单不能超过10个！');
             return false;
         }
 
         var nav = '<div class="nav">'+
             '<div class="img">'+
-            '<img class="preview" src="/static/images/nopic.png"/>'+
-            '<span class="btn btn-xs btn-primary add-img">选择图片</span>'+
+            '<span class="icon icon-backend icon-backend-home f-icon"></span>&nbsp;'+
+            '<input type="hidden" name="mobile_nav['+lenght+'][icon]" value="home">'+
+            '<span class="btn btn-xs btn-success add-nav-icon">选择图标</span>'+
             '</div>'+
             '<div class="text">'+
             '<div class="form-group name">'+
@@ -237,6 +238,10 @@ $(function () {
     {
         var icon = $(this).attr("attr");
         $('.nav').find('.on').val(icon);
+        $('.nav').find('.on').parent().find('.icon').remove();
+        $('.nav').find('.on').parent().prepend('<span class="icon icon-backend icon-backend-'+icon+' f-icon"></span>');
+        $('.nav').find('.on').removeClass("on");
+        $(".alert-box").modal('hide');
     });
 
     // 概述页面，新增话题数，点击排序
