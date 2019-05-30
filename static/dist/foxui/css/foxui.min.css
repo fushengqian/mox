@@ -3089,12 +3089,13 @@ position: relative;
 .fui-message .button {
 	text-align: center;
 }
-
+.fui-mall-nav {
+	padding-top:0.6rem;
+}
 /* 图标组 */
 .fui-icon-group {
 	position:relative;
 	overflow:hidden;
-	/*border-top: 1px solid #ebebeb;*/
 	background: #fff;
 }
 .fui-icon-group:brfore{
@@ -3146,7 +3147,15 @@ position: relative;
 .fui-icon-group.col-5 .fui-icon-col.radius img {
 	border-radius:20%;
 }
-
+.fui-new-feed{
+	padding-left:0.6rem;
+	background: #fff;
+	padding-bottom: 0.5rem;
+}
+.fui-new-feed .fui-cell-text{
+	font-size: 0.7rem;
+	font-weight: bold;
+}
 .fui-icon-group  .fui-icon-col .text {
 	font-size: 0.7rem;
 	text-align: center;

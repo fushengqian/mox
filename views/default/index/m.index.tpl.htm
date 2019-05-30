@@ -37,7 +37,7 @@
             </div>
         </div>
 
-        <div class="fui-icon-group noborder col-5">
+        <div class="fui-icon-group noborder col-5 fui-mall-nav">
             <?php foreach($this->mall_nav as $nav){?>
             <a class="fui-icon-col external full-nav-item" href="<?php echo $nav['link'];?>" data-nocache="true">
                 <div class="icon"><img src="<?php echo $nav['img'];?>"></div>
@@ -58,6 +58,7 @@
                         <a href="javascript:;">
                             <img src="<?php echo $topic['preview'];?>" alt="<?php echo $topic['title'];?>">
                             <p><?php echo $topic['title'];?></p>
+                            <p class="follow-topic"><i class="icon icon-comment"></i>1093 跟帖</p>
                         </a>
                     </li>
                     <?php } ?>
@@ -69,7 +70,12 @@
             <img src="<?php echo $activity['image'];?>" style="display:block;width:100%;height:auto;"/>
             <?php } ?>
         </div>
+
         <div class="feed-list">
+            <div class="fui-cell external fui-new-feed">
+                <span class="fui-cell-icon"><i class="icon icon-list"></i></span>
+                <span class="fui-cell-text">最新动态</span>
+            </div>
             <?php foreach($this -> feed_list as $feed):?>
             <div class="feed-item">
                 <div class="user-info">
@@ -96,9 +102,8 @@
             </div>
             <?php endforeach;?>
         </div>
-        <div class='infinite-loading'>
-            <span class='fui-preloader'></span>
-            <span class='text'>正在加载...</span>
+        <div style="height:5rem;" class='infinite-loading'>
+            <div class='text'><span class='fui-preloader'></span>正在加载...</div>
         </div>
     </div>
 </div>
