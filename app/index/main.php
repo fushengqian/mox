@@ -42,6 +42,18 @@ class main extends MOX_CONTROLLER
         $user_list = $this->model('user')-> get_data_list(array('is_us = 0'), 1, 10, 'reg_time desc');
         TPL::assign('new_user_list', $user_list);
 
+        // banner 图
+        $banner_list = $this->model('ad')-> get_banner(6);
+        TPL::assign('banner_list', $banner_list);
+
+        // activity 图
+        $activity_list = $this->model('ad')-> get_activity(1);
+        TPL::assign('activity_list', $activity_list);
+
+        // 商城分类
+        $mall_nav = MOX_APP::$settings['mall_nav'];
+        TPL::assign('mall_nav', $mall_nav);
+
         TPL::assign('seo', get_seo('index'));
 
         TPL::output('index/index');

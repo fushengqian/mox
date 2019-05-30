@@ -221,6 +221,7 @@ $(function () {
         dataType: 'json',
         url: '/backend/images/upload/',
         done: function (e,data) {
+            $('.nav').find('.on').parent().find("input").val(data.result.rsm.url);
             $('.nav').find('.on').attr("src", data.result.rsm.url);
             $('.nav').find('.on').removeClass("on");
         }

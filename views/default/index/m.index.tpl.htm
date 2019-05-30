@@ -2,7 +2,7 @@
 <div class="fui-page">
     <div class="fui-header">
         <div class="fui-header-left"></div>
-        <div class="title">Mox系统</div>
+        <div class="title"><?php echo MOX_APP::$settings['site_name'];?></div>
         <div class="fui-header-right"></div>
     </div>
     <div class="fui-content">
@@ -10,7 +10,7 @@
             <div class="city-select" id="citySelect"></div>
             <div class="searchbar" style="background: #ef7700;">
                 <form action="" method="post" style="position: relative;left:0;top:0;">
-                    <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top: 0; right: 0" />
+                    <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
                     <div class="search-input round" style="background: #ef7700;">
                         <i class="icon icon-search" style="color: #ffffff;"></i>
                         <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
@@ -26,9 +26,9 @@
             <div class="fui-imgSlider">
                 <div class='fui-swipe'>
                     <div class='fui-swipe-wrapper'>
-                        <?php foreach($this->hot_topic_list as $key => $hot_topic):?>
-                        <a class='fui-swipe-item' href="" data-nocache="true">
-                            <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/newBanner.jpg" style="display:block;width:100%; height:auto;"/>
+                        <?php foreach($this->banner_list as $banner):?>
+                        <a class='fui-swipe-item' href="<?php echo $banner['link'];?>" data-nocache="true">
+                            <img src="<?php echo $banner['image'];?>"/>
                         </a>
                         <?php endforeach;?>
                     </div>
@@ -38,59 +38,36 @@
         </div>
 
         <div class="fui-icon-group noborder col-5">
-            <a class="fui-icon-col external" href="" data-nocache="true">
-                <div class="icon"><img src="http://img.qinxuan365.com/fc7f41960955c5d51dcc4e266c81590b.png"></div>
-                <div class="text" style="color: #333333;">小号手</div>
+            <?php foreach($this->mall_nav as $nav){?>
+            <a class="fui-icon-col external full-nav-item" href="<?php echo $nav['link'];?>" data-nocache="true">
+                <div class="icon"><img src="<?php echo $nav['img'];?>"></div>
+                <div class="text"><?php echo $nav['name'];?></div>
             </a>
-            <a class="fui-icon-col external" href="" data-nocache="true">
-                <div class="icon"><img src="http://img.qinxuan365.com/76e3d73ddfdd5075056e5fc82200ba20.png"></div>
-                <div class="text" style="color: #333333;">田宫</div>
-            </a>
-            <a class="fui-icon-col external" href="" data-nocache="true">
-                <div class="icon"><img src="http://img.qinxuan365.com/9107c4dd5fb55aeef939cdf5d3bca0a4.png"></div>
-                <div class="text" style="color: #333333;">米高</div>
-            </a>
-            <a class="fui-icon-col external" href="" data-nocache="true">
-                <div class="icon"><img src="http://img.qinxuan365.com/f9e31312f0db86df57dd5c2d156e13f0.png"></div>
-                <div class="text" style="color:#333333;">军事模型</div>
-            </a>
-            <a class="fui-icon-col external" href="" data-nocache="true">
-                <div class="icon"><img src="http://img.qinxuan365.com/4d1c393c33112c0f38ad38098024bf1d.png"></div>
-                <div class="text" style="color:#333333;">民用模型</div>
-            </a>
+            <?php } ?>
         </div>
 
         <div class="fui-cell-group fui-cell-click">
-            <a class="fui-cell external" href="">
+            <a class="fui-cell external" href="javascript:;">
                 <div class="fui-cell-icon"><i class="icon icon-list"></i></div>
-                <div class="fui-cell-text">热门话题</div>
-                <div class="fui-cell-remark" style="font-size:0.5rem;"></div>
+                <div class="fui-cell-text hot-topic">热门话题</div>
             </a>
             <div class="fui-icon-group selecter" style="overflow: scroll;">
                 <ul class="banner-ul">
+                    <?php foreach($this->hot_topic_list as $topic){?>
                     <li class="banner-li-blue">
-                        <a href="javascript:;" onclick="/">
-                            <img src="https://www.tamiya.com/english/products/70232/top.jpg" alt="">
-                            <p>	重型坦克哪家好？</p>
+                        <a href="javascript:;">
+                            <img src="<?php echo $topic['preview'];?>" alt="<?php echo $topic['title'];?>">
+                            <p><?php echo $topic['title'];?></p>
                         </a>
                     </li>
-                    <li class="banner-li-blue">
-                        <a href="javascript:;" onclick="/">
-                            <img src="https://www.tamiya.com/english/products/58661/top.jpg" alt="">
-                            <p>	小号手哪些值得购买？</p>
-                        </a>
-                    </li>
-                    <li class="banner-li-blue">
-                        <a href="javascript:;" onclick="/">
-                            <img src="http://www.moxquan.com/static/upload/01/16-1.png" alt="">
-                            <p>	2019年年终总结</p>
-                        </a>
-                    </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
         <div class="newActivity" style="padding-bottom: 0.75rem;background: white">
-            <img src="http://www.qinxuan365.cn/addons/ewei_shopv2/template/mobile/default/static/images/syhd.png" style="display: block; width: 100%; height: auto;"/>
+            <?php foreach($this->activity_list as $activity){?>
+            <img src="<?php echo $activity['image'];?>" style="display:block;width:100%;height:auto;"/>
+            <?php } ?>
         </div>
         <div class="feed-list">
             <?php foreach($this -> feed_list as $feed):?>

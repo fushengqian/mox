@@ -3148,7 +3148,7 @@ position: relative;
 }
 
 .fui-icon-group  .fui-icon-col .text {
-	font-size: 0.6rem;
+	font-size: 0.7rem;
 	text-align: center;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -3959,12 +3959,13 @@ position: relative;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	-webkit-align-items: center;
-
 }
 
 .fui-swipe-wrapper .fui-swipe-item img {
 	width:100%;
 	display: block;
+	border-radius: 0.2rem;
+	max-height: 10rem;
 }
 
 .fui-swipe-page {

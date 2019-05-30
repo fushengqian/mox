@@ -96,7 +96,14 @@ a {
 .content-info .btn {
     margin-top: 1rem;
 }
-
+.full-nav-item{
+    color:#333333;
+    font-size: 5.0rem;
+}
+.full-nav-item img{
+    border-radius: 10rem;
+    border: solid 1px #ccc;
+}
 /* 商品组*/
 .fui-goods-group {
     height: auto;
@@ -5648,7 +5655,7 @@ font-size:0.6rem;line-height: 0.8rem;}
 }
 .feed-item .user-info .nick{
     font-weight: bold;
-    font-size:0.8rem;
+    font-size:0.7rem;
 }
 .feed-item .user-info .time{
     font-size:0.5rem;
@@ -5803,4 +5810,9 @@ font-size:0.6rem;line-height: 0.8rem;}
 .do-comment .send-comment{
     height:32px;
     margin-left:5px;
+}
+.hot-topic{
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #333333;
 }

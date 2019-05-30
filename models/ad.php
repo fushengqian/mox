@@ -15,12 +15,42 @@
 class ad_class extends MOX_MODEL
 {
     /**
+     * 获取activity图
+     * @param int $size
+     * @return array
+     */
+    public function get_activity($size = 1)
+    {
+        $code = "mobile_activity";
+        if (!is_mobile()) {
+            $code = "pc_activity";
+        }
+
+        return $this->fetch_page('ad', 'position_code = "'.$code.'" AND status = 1', 'id desc', 1, $size);
+    }
+
+    /**
+     * 获取banner图
+     * @param int $size
+     * @return array
+     */
+    public function get_banner($size = 5)
+    {
+        $code = "mobile_slide";
+        if (!is_mobile()) {
+            $code = "pc_slide";
+        }
+
+        return $this->fetch_page('ad', 'position_code = "'.$code.'" AND status = 1', 'id desc', 1, $size);
+    }
+
+    /**
      * 获取广告位
      */
     public function get_position()
     {
         $position = [['position_code' => 'mobile_slide', 'name' => '移动首页轮播', "width" => 200, "height" => 200],
-                     ['position_code' => 'mobile_nav', 'name' => '移动首页导航栏', "width" => 200, "height" => 100]];
+                     ['position_code' => 'mobile_activity', 'name' => '移动首页导航栏', "width" => 200, "height" => 100]];
 
         return $position;
     }
