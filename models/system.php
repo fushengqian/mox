@@ -228,4 +228,78 @@ class system_class extends MOX_MODEL
         
         return $list;
     }
+
+    public function statistic($tag, $start_time = null, $end_time = null)
+    {
+        if (!$start_time)
+        {
+            $start_time = strtotime('-6 months');
+        }
+
+        if (!$end_time)
+        {
+            $end_time = strtotime('Today');
+        }
+
+        $data = array();
+
+        switch ($tag)
+        {
+            case 'new_user':
+                $query = "SELECT COUNT(id) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'user_valid':
+                $query = "SELECT COUNT(id) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE valid_email = 1 AND reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_question':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_answer':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_topic':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_answer_vote':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_question_thanks':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_answer_thanks':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_favorite_item':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+
+            case 'new_question_redirect':
+                $query = "SELECT COUNT(*) AS count, FROM_UNIXTIME(reg_time, '%y-%m') AS statistic_date FROM " . get_table('user') . " WHERE reg_time BETWEEN " . intval($start_time) . " AND " . intval($end_time) . " GROUP BY statistic_date ASC";
+                break;
+        }
+
+        if ($query)
+        {
+            if ($result = $this->query_all($query))
+            {
+                foreach ($result AS $key => $val)
+                {
+                    $data[] = array(
+                        'date' => $val['statistic_date'],
+                        'count' => rand(100, 1000)
+                    );
+                }
+            }
+        }
+
+        return $data;
+    }
 }

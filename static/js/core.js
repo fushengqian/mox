@@ -49,8 +49,10 @@ define(['jquery', 'foxui', 'tpl'], function ($, FoxUI, tpl) {
         return ret.join('&')
     };
     core.getUrl = function (routes, params, full) {
-        routes = routes.replace(/\//ig, ".");
-        var url = this.options.baseUrl.replace('ROUTES', routes);
+        //routes = routes.replace(/\//ig, ".");
+        //var url = this.options.baseUrl.replace('ROUTES', routes);
+        routes = routes.replace(/\./ig, "/");
+        var url = routes;
         if (params) {
             if (typeof(params) == 'object') {
                 url += "&" + this.toQueryString(params)

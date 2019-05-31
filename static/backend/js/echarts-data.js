@@ -16,9 +16,9 @@ $(function () {
 
 
     //图表数据接入
-    var echart = new Echarts('#main', 'line', G_BASE_URL + '/backend/ajax/statistic/?tag=new_user,user_valid&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
-    var echart2 = new Echarts('#main2', 'line', G_BASE_URL + '/backend/ajax/statistic/?tag=new_question,new_answer,new_topic,new_favorite_item,new_question_redirect&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
-    var echart3 = new Echarts('#main3', 'line', G_BASE_URL + '/backend/ajax/statistic/?tag=new_answer_vote,new_answer_thanks,new_question_thanks&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
+    var echart = new Echarts('#main', 'line', '/backend/ajax/statistic/?tag=new_user,user_valid&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
+    var echart2 = new Echarts('#main2', 'line', '/backend/ajax/statistic/?tag=new_question,new_answer,new_topic,new_favorite_item,new_question_redirect&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
+    var echart3 = new Echarts('#main3', 'line', '/backend/ajax/statistic/?tag=new_answer_vote,new_answer_thanks,new_question_thanks&start_date=' + dateArr[3] + '&end_date=' + dateArr[2]);
 
 
     // 左侧菜单收缩重新渲染图表
@@ -32,7 +32,6 @@ $(function () {
 
     window.addEventListener("orientationchange", function ()
     {
-
         echart.render();
         echart2.render();
         echart3.render();
@@ -254,11 +253,11 @@ Echarts.prototype = {
         for (var i = 0; i < param.length; i++) {
             switch (param[i]) {
             case 'new_answer':
-                arr.push('新增答案');
+                arr.push('新增回复');
                 break;
 
             case 'new_question':
-                arr.push('新增问题');
+                arr.push('新增动态');
                 break;
 
             case 'new_user':
@@ -266,7 +265,7 @@ Echarts.prototype = {
                 break;
 
             case 'user_valid':
-                arr.push('新激活用户');
+                arr.push('用户活跃数');
                 break;
 
             case 'new_topic':
@@ -274,11 +273,11 @@ Echarts.prototype = {
                 break;
 
             case 'new_answer_vote':
-                arr.push('新增回复投票');
+                arr.push('新增订单');
                 break;
 
             case 'new_answer_thanks':
-                arr.push('新增回复感谢');
+                arr.push('新增退款');
                 break;
 
             case 'new_favorite_item':
@@ -286,11 +285,11 @@ Echarts.prototype = {
                 break;
 
             case 'new_question_thanks':
-                arr.push('新增问题感谢');
+                arr.push('新增商品评价');
                 break;
 
             case 'new_question_redirect':
-                arr.push('新增问题重定向');
+                arr.push('新增关注');
                 break;
             }
         }

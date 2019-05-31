@@ -1,73 +1,33 @@
-var view = 0;
-$("#view_by_1").bind('click', function(){
-     if (view == 1)
-     {
-         $("#view_1").css("display", "none");
-         $("#view_2").css("display", "none");
-         $("#view_3").css("display", "none");
-         $(this).find("span", 0).addClass("current");
-         $("#view_by_2").find("span", 0).removeClass("current");
-         $("#view_by_3").find("span", 0).removeClass("current");
-         $(".filter-cond").css("display", "none");
-         view = 0;
-     }
-     else
-     {
-         $("#view_1").css("display", "block");
-         $("#view_2").css("display", "none");
-         $("#view_3").css("display", "none");
-         $(this).find("span", 0).addClass("current");
-         $("#view_by_2").find("span", 0).removeClass("current");
-         $("#view_by_3").find("span", 0).removeClass("current");
-         $(".filter-cond").css("display", "block");
-         view = 1;
-     }
-});
-$("#view_by_2").bind('click', function(){
-    if (view == 2)
-    {
-        $("#view_1").css("display", "none");
-        $("#view_2").css("display", "none");
-        $("#view_3").css("display", "none");
-        $(this).find("span", 0).addClass("current");
-        $("#view_by_2").find("span", 0).removeClass("current");
-        $("#view_by_3").find("span", 0).removeClass("current");
-        $(".filter-cond").css("display", "none");
-        view = 0;
+define(['core', 'tpl'], function (core, tpl) {
+    var modal = {
+        page: 2,
+    };
+
+    modal.init = function () {
+        $('.fui-content').infinite({
+            onLoading: function() {
+                modal.getList();
+            }
+        });
+
+        if (modal.page == 1) {
+            modal.getList();
+        }
     }
-    else
-    {
-        $("#view_2").css("display", "block");
-        $("#view_1").css("display", "none");
-        $("#view_3").css("display", "none");
-        $(this).find("span", 0).addClass("current");
-        $("#view_by_1").find("span", 0).removeClass("current");
-        $("#view_by_3").find("span", 0).removeClass("current");
-        $(".filter-cond").css("display", "block");
-        view = 2;
-    }
-});
-$("#view_by_3").bind('click', function(){
-    if (view == 3)
-    {
-        $("#view_1").css("display", "none");
-        $("#view_2").css("display", "none");
-        $("#view_3").css("display", "none");
-        $(this).find("span", 0).addClass("current");
-        $("#view_by_2").find("span", 0).removeClass("current");
-        $("#view_by_3").find("span", 0).removeClass("current");
-        $(".filter-cond").css("display", "none");
-        view = 0;
-    }
-    else
-    {
-        $("#view_3").css("display", "block");
-        $("#view_1").css("display", "none");
-        $("#view_2").css("display", "none");
-        $(this).find("span", 0).addClass("current");
-        $("#view_by_1").find("span", 0).removeClass("current");
-        $("#view_by_2").find("span", 0).removeClass("current");
-        $(".filter-cond").css("display", "block");
-        view = 3;
-    }
+
+    modal.loading = function () {
+        modal.page++;
+    };
+
+    modal.getList = function () {
+        core.json('feed/api/list/', {
+            page: modal.page
+        }, function(ret) {
+            modal.page++;
+            var data = ret.result;
+            core.tpl('.feed-list', 'tpl_feed_list', data, modal.page > 1);
+            $('.fui-content').infinite('init');
+        });
+    };
+    return modal;
 });

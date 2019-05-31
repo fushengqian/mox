@@ -120,7 +120,6 @@ ul,ol{padding:0;list-style:none;}
 #main,#main2,#main3{height: 240px;border: 2px solid #fff; background: #fff!important;}
 #main:hover,#main2:hover,#main3:hover{border: 2px solid #ff9d00;}
 #main3{margin-top: 20px;height: 300px;}
-.mod-echat-info .col-md-6{margin-bottom: 40px;}
 #sorttable thead td:first-child{cursor: inherit;}
 #sorttable thead td{cursor: pointer;}
 #sorttable .fa {width:inherit; height: inherit;border-radius: inherit;background: transparent; color: #000;text-align: inherit;line-height: inherit; }

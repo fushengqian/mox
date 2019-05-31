@@ -13,7 +13,7 @@ $config[] = array(
         array(
             'id' => 101,
             'title' => MOX_APP::lang()->_t('广告管理'),
-            'url' => '/backend/article/list/'
+            'url' => '/backend/ad/list/'
         ),
         array(
             'id' => 102,
@@ -35,7 +35,7 @@ $config[] = array(
         array(
             'id' => 201,
             'title' => MOX_APP::lang()->_t('社区设置'),
-            'url' => '/backend/topic/setting/'
+            'url' => '/backend/main/settings/category-sns'
         ),
         array(
             'id' => 202,
@@ -93,8 +93,8 @@ $config[] = array(
         ),
         array(
             'id' => 402,
-            'title' => MOX_APP::lang()->_t('用户日志'),
-            'url' => '/backend/action/index/'
+            'title' => MOX_APP::lang()->_t('用户分组'),
+            'url' => '/backend/user/group/'
         ),
         array(
             'id' => 403,

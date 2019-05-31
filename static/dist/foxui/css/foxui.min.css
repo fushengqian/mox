@@ -4193,14 +4193,11 @@ position: relative;
 
 
 .infinite-loading {
-	position: relative;
 	text-align: center;
-	height:2.2rem;
+	height:5.0rem;
 	line-height:2.2rem;
+	padding-top:0.2rem;
 }
-.infinite-loading .text {position: relative;display:inline-block;padding-left:1.1rem;}
-.infinite-loading .fui-preloader { position: absolute;top:50%; margin-top:-.45rem; }
-
 
 .fui-menu-group {
 	height: auto;

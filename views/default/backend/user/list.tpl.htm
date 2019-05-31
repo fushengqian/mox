@@ -29,15 +29,8 @@
                                 <option value="login_num" <?php if($this->orderby == 'login_num'):?>selected<?php endif;?>>登录次数排序</option>
                             </select>
                         </div>
-                       <div class="col-sm-2 col-xs-2">
-                           <select name="is_us" class="form-control">
-                               <option value="0" <?php if($this->is_us == '0'):?>selected<?php endif;?>>全部</option>
-                               <option value="1" <?php if($this->is_us == '1'):?>selected<?php endif;?>>玩家</option>
-                               <option value="2" <?php if($this->is_us == '2'):?>selected<?php endif;?>>自己</option>
-                           </select>
-                       </div>
                         <div class="col-sm-2 col-xs-2">
-                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><i class="icon-search"></i><?php _e('搜索'); ?></button>
                         </div>
                     </div>
             </form>
@@ -61,7 +54,6 @@
                                 <th><?php _e('注册时间'); ?></th>
                                 <th><?php _e('最后活跃'); ?></th>
                                 <th><?php _e('登录次数'); ?></th>
-                                <th>玩家</th>
                                 <th><?php _e('操作'); ?></th>
                             </tr>
                         </thead>
@@ -69,13 +61,12 @@
                             <?php foreach ($this->list AS $key => $val) { ?>
                             <tr>
                                 <td><?php echo $val['id']; ?></td>
-                                <td style="color:<?php if($val['is_us']){ echo "#80b028;";}else{ echo '#ff8a00;';}?>"><?php echo $val['user_name']; ?><?php if ($val['forbidden']) { ?><span class="text-color-999">[ <?php _e('封禁'); ?> ]</span><?php } ?></td>
+                                <td><?php echo $val['user_name']; ?><?php if ($val['forbidden']) { ?><span class="text-color-999">[ <?php _e('封禁'); ?> ]</span><?php } ?></td>
                                 <td><?php echo $val['phone']; ?></td>
                                 <td><?php echo $val['email'] ? $val['email'] : '未填写'; ?></td>
                                 <td><?php echo date_friendly($val['reg_time']); ?></td>
                                 <td><?php if ($val['last_login']) { ?><?php echo date_friendly($val['last_login']); ?><?php } else { ?> - <?php } ?></td>
                                 <td><?php echo $val['login_num']; ?></td>
-                                <td><?php echo ($val['is_us'] == '1') ? '否': '是'; ?></td>
                                 <td class="nowrap">
                                     <a target="_blank" href="/backend/user/isus/?id=<?php echo $val['id'];?>" class="icon icon-edit md-tip" title="设置为自己"></a>
                                     <a target="_blank" href="/backend/user/delete/?id=<?php echo $val['id'];?>" class="icon icon-delete md-tip" title="删除用户"></a>

@@ -13,7 +13,7 @@
                     <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
                     <div class="search-input round" style="background: #ef7700;">
                         <i class="icon icon-search" style="color: #ffffff;"></i>
-                        <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
+                        <input type="search" placeholder="搜索关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
                     </div>
                 </form>
             </div>
@@ -102,9 +102,40 @@
             </div>
             <?php endforeach;?>
         </div>
-        <div style="height:5rem;" class='infinite-loading'>
-            <div class='text'><span class='fui-preloader'></span>正在加载...</div>
+        <div class="infinite-loading">
+            <span class="fui-preloader"></span>
+            <span class="text"> 正在加载...</span>
         </div>
     </div>
 </div>
 <?php TPL::output('global/footer.tpl.htm'); ?>
+
+<script id='tpl_feed_list' type='text/html'>
+    <%each list as feed%>
+    <div class="feed-item">
+        <div class="user-info">
+            <a href="<?php echo G_DEMAIN;?>/user/<%feed.author.id%>/"><img class="avatar" src="<%feed.author.portrait%>"></a>
+            <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><%feed.author.name%></a>
+            <span class="time"><%feed.pubDate%></span>
+        </div>
+        <div class="feed-content">
+            <div class="text">
+                <a href="<?php echo G_DEMAIN;?>/feed/<%feed.id%>"><%feed.content%></a>
+            </div>
+            <div class="pics">
+                <%each feed.images as pic%>
+                <img src="<%pic.thumb%>"/>
+                <%/each%>
+            </div>
+        </div>
+        <div class="user-attr">
+            <span class="icon icon-like">赞 <%feed.likeCount%></span>
+            <span class="icon icon-comment">评论 <%feed.commentCount%></span>
+        </div>
+    </div>
+    <%/each%>
+</script>
+
+<script language='javascript'>require(['/static/js/list.js'], function (modal) {
+    modal.init();
+});</script>

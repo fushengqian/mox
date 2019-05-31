@@ -76,7 +76,7 @@ class user extends MOX_ADMIN_CONTROLLER
 
         TPL::assign('total_rows', $total_rows);
         TPL::assign('list', $user_list);
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(700));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(401));
         TPL::assign('orderby', $order);
         TPL::assign('is_us', $is_us);
 

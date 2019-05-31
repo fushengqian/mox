@@ -55,9 +55,6 @@ class api extends MOX_CONTROLLER
             $where[] = "is_home = 1";
         }
 
-        // 跟踪用户行为
-        $this->model('action')->add($my_user_id, 0, '查看动态列表：'.implode(',', $where), get_client(), fetch_ip());
-
         $feed_list = $this->model('feed')-> get_data_list($where, $page, $page_size);
 
         $feed_arr = array();
@@ -72,7 +69,7 @@ class api extends MOX_CONTROLLER
                             'images' => $v['images'],
                             'likeCount' => $v['like_num'],
                             'liked' => false,
-                            'pubDate' => date_friendly($v['update_time']).'更新',
+                            'pubDate' => date_friendly($v['update_time']),
                             'statistics' => array('comment' => $v['comment_num'], 'favCount' => 0, 'like' => $v['like_num'], 'transmit' => rand(100, 1000), 'view' => rand(1000, 9999)));
             $feed_arr[] = $arr;
         }
@@ -81,12 +78,9 @@ class api extends MOX_CONTROLLER
 
         $time = date("Y-m-d H:i:s", time());
 
-        $result['items'] = $feed_arr;
-        $result['nextPageToken'] = ($page+1);
-        $result['prevPageToken'] = ($page-1) > 0 ? ($page-1) : 1;
-        $result['requestCount'] = $page_size;
-        $result['responseCount'] = count($feed_arr);
-        $result['totalResults'] = 1000;
+        $result['list'] = $feed_arr;
+        $result['pagesize'] = $page_size;
+        $result['total'] = 1000;
 
         // 更新最后一次刷新时间
         $this->model('user')->update_user_last_feed_time($my_user_id);
