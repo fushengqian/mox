@@ -33,7 +33,7 @@ $config[] = array(
     'cname'    => 'activity',
     'children' => array(
         array(
-            'id' => 201,
+            'id' => 'SETTINGS_SNS',
             'title' => MOX_APP::lang()->_t('社区设置'),
             'url' => '/backend/main/settings/category-sns'
         ),
@@ -93,13 +93,8 @@ $config[] = array(
         ),
         array(
             'id' => 402,
-            'title' => MOX_APP::lang()->_t('用户分组'),
-            'url' => '/backend/user/group/'
-        ),
-        array(
-            'id' => 403,
-            'title' => MOX_APP::lang()->_t('用户组管理'),
-            'url' => '/backend/user/group/'
+            'title' => MOX_APP::lang()->_t('用户组列表'),
+            'url' => '/backend/user/group_list/'
         ),
     )
 );
