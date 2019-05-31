@@ -8,11 +8,11 @@
         <div class="tab-pane">
              <form method="get" action="/backend/topic/index/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
-                        <div class="col-sm-2 col-xs-2">
-                            <input class="form-control" placeholder="关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                        <div class="col-sm-3 col-xs-3">
+                            <input class="form-control" placeholder="请输入关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
                         </div>
                         <div class="col-sm-2 col-xs-2">
-                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><i class="icon-search"></i><?php _e('搜索'); ?></button>
                         </div>
                     </div>
             </form>
@@ -25,22 +25,31 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
+                                <th>封面</th>
                                 <th>标题</th>
-                                <th>推荐</th>
-                                <th></th>
+                                <th>推荐首页</th>
+                                <th>跟帖数</th>
+                                <th>创建时间</th>
+                                <th>最新回复时间</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($this->list AS $key => $val) { ?>
                             <tr>
                                 <td><?php echo $val['id']; ?></td>
-                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/topic/<?php echo $val['id'];?>.html"><?php echo summary($val['title'], 45); ?></a></td>
+                                <td><img style="width: 50px;height: 50px;border: solid 1px #ccc;" src="<?php echo $val['preview']; ?>"/></td>
+                                <td><a target="_blank" href="<?php echo G_DEMAIN; ?>/topic/<?php echo $val['id'];?>"><?php echo summary($val['title'], 45); ?></a></td>
                                 <?php if($val['is_home']) :?>
                                 <td style="color:red;">是</td>
                                 <?php else:?>
                                 <td>否</td>
                                 <?php endif;?>
+                                <td><?php echo intval($val['feed_num']); ?></td>
+                                <td><?php echo date("Y-m-d H:i", $val['create_time']); ?></td>
+                                <td><?php echo date_friendly($val['reply_time']); ?></td>
                                 <td>
+                                    <a  href='<?php echo G_DEMAIN;?>/backend/topic/edit/id-<?php echo $val['id']; ?>' class="icon icon-edit md-tip" title="<?php _e('编辑'); ?>"></a>
                                     <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认删除该话题?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/topic/delete/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-trash md-tip" title="<?php _e('删除'); ?>"></a>
                                     <a onclick="MOX.dialog('confirm', {'message': '<?php _e('确认推荐该话题?'); ?>'}, function(){window.location = '<?php echo G_DEMAIN;?>/backend/topic/recommend/id-<?php echo $val['id']; ?>/'}); return false;" class="icon icon-good md-tip" title="<?php _e('推荐'); ?>"></a>
                                 </td>

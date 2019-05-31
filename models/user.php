@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -25,6 +25,26 @@ class user_class extends MOX_MODEL
         }
 
         return $this->model('user')->get_user_group_by_id($group_id);
+    }
+
+    public function get_user_group_list($type = 0, $custom = null)
+    {
+        $where[] = 'type = ' . intval($type);
+
+        if (isset($custom))
+        {
+            $where[] = 'custom = ' . intval($custom);
+        }
+
+        if ($users_groups = $this->fetch_all('user_group', implode(' AND ', $where)))
+        {
+            foreach ($users_groups as $key => $val)
+            {
+                $group[$val['group_id']] = $val;
+            }
+        }
+
+        return $group;
     }
 
     public function get_user_group_by_id($group_id, $field = null)

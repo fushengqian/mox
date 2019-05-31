@@ -10,7 +10,7 @@ class comment extends MOX_ADMIN_CONTROLLER
     {
         $this->crumb(MOX_APP::lang()->_t('点评列表'), "backend/comment/list/");
         
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(300));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(501));
         
         $keyword = $_GET['keyword'] ? trim($_GET['keyword']) : '';
         $is_default = $_GET['is_default'] ? intval($_GET['is_default']) : '';

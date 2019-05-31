@@ -4,11 +4,7 @@
 <div class="aw-content-wrap" id="user_list">
     <div class="mod">
         <div class="mod-head">
-            <h3>
-                <ul class="nav nav-tabs">
-                    <li<?php if (!$_GET['type']) { ?> class="active"<?php } ?>><a href="<?php if ($_GET['type']) { ?>/backend/user/list/<?php } else { ?>#list<?php } ?>"<?php if (!$_GET['type']) { ?> data-toggle="tab"<?php } ?>><?php _e('用户列表'); ?></a></li>
-                </ul>
-            </h3>
+            <span class="pull-left"><?php _e('用户列表'); ?></span>
         </div>
         <div class="tab-pane">
              <form method="get" action="/backend/user/list/" id="search_form" class="form-horizontal">
@@ -62,8 +58,8 @@
                             <tr>
                                 <td><?php echo $val['id']; ?></td>
                                 <td><?php echo $val['user_name']; ?><?php if ($val['forbidden']) { ?><span class="text-color-999">[ <?php _e('封禁'); ?> ]</span><?php } ?></td>
-                                <td><?php echo $val['phone']; ?></td>
-                                <td><?php echo $val['email'] ? $val['email'] : '未填写'; ?></td>
+                                <td><?php echo $val['phone'] ? $val['phone'] : '-'; ?></td>
+                                <td><?php echo $val['email'] ? $val['email'] : '-'; ?></td>
                                 <td><?php echo date_friendly($val['reg_time']); ?></td>
                                 <td><?php if ($val['last_login']) { ?><?php echo date_friendly($val['last_login']); ?><?php } else { ?> - <?php } ?></td>
                                 <td><?php echo $val['login_num']; ?></td>

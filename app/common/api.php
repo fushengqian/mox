@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -41,7 +41,7 @@ class api extends MOX_CONTROLLER
                          'name' => '版本更新',
                          'release' => '修复线上的bug',
                          'message' => '哈，我们有新版本发布啦！',
-                         'downloadUrl' => 'http://www.moxquan.com/download/moxquan-latest.apk',
+                         'downloadUrl' => 'http://www.mox365.com/download/moxquan-latest.apk',
                          'publishDate' => '2019-02-14');
             $ret[] = $arr;
         }

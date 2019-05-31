@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -103,7 +103,7 @@ class api extends MOX_CONTROLLER
         foreach ($list as $k => $v) {
             $author = array('id' => 100,
                             'name' => 'Mox',
-                            'portrait' => 'http://www.moxquan.com/static/avatar/default.jpg',
+                            'portrait' => 'http://www.mox365.com/static/avatar/default.jpg',
                             'relation' => 4,
                             'gender' => 1,
                             'identity' => array('officialMember' => false, 'tenthAnniversary' => false, 'softwareAuthor' => false));

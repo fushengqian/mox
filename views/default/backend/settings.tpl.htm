@@ -165,6 +165,43 @@
                 </tr>
             </table>
         </div>
+        <?php } else if ($_GET['category'] == 'sns') { ?>
+        <div class="mod-head">
+            <h3>
+                <span class="pull-left"><?php _e('社区设置'); ?></span>
+                <span class="pull-right"><a href="javascript:;" onclick="MOX.ajax_post($('#settings_form'));" class="btn btn-xs btn-primary mod-site-save"><i class="icon-undo"></i><?php _e('快速保存'); ?></a></span>
+            </h3>
+        </div>
+        <div class="tab-content mod-content">
+            <table class="table table-striped">
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('社区别称'); ?>:</span>
+                            <div class="col-sm-4 col-xs-8">
+                                <input name="sns_alias" type="text" class="form-control" value="<?php echo $this->setting['sns_alias']; ?>"/>
+                                <div class="help-block">如：xx社区、xx圈子等等</div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="form-group">
+                            <span class="col-sm-4 col-xs-3 control-label"><?php _e('是否关闭社区'); ?>:</span>
+                            <div class="col-sm-4 col-xs-8">
+                                <label type="button" class="btn mod-btn-color">
+                                    <input type="radio" name="close_sns" value="Y"<?php if ($this->setting['close_sns'] == 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('是'); ?>
+                                </label>
+                                <label type="button" class="btn mod-btn-color">
+                                    <input type="radio" name="close_sns" value="N"<?php if ($this->setting['close_sns'] != 'Y') { ?> checked="checked"<?php } ?> /> <?php _e('否'); ?>
+                                </label>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
         <?php } else if ($_GET['category'] == 'mall') { ?>
         <div class="mod-head">
             <h3>
@@ -602,7 +639,6 @@
                             <span class="col-sm-4 col-xs-3 control-label"><?php _e('微信公众平台接口 Token'); ?>:</span>
                             <div class="col-sm-5 col-xs-8">
                                 <input name="weixin_mp_token" type="text" class="form-control" value="<?php echo $this->setting['weixin_mp_token']; ?>"/>
-
                                 <span class="help-block"><?php _e('请与微信公众平台后台设置一致，URL 为 <code>%s</code>', get_js_url('/weixin/api/')); ?></span>
                             </div>
                         </div>
@@ -835,7 +871,7 @@
         <?php } ?>
         <div class="tab-content mod-content mod-one-btn">
             <div class="center-block">
-                <input type="button" value="<?php _e('保存设置'); ?>" class="btn btn-primary" onclick="MOX.ajax_post($('#settings_form'));" />
+                <bottom type="button" class="btn btn-success" onclick="MOX.ajax_post($('#settings_form'));"><?php _e('保存设置'); ?></bottom>
             </div>
         </div>
     </div>

@@ -29,6 +29,43 @@ class topic extends MOX_ADMIN_CONTROLLER
         TPL::output('backend/topic/list');
     }
 
+    public function edit_action()
+    {
+        $this->crumb(MOX_APP::lang()->_t('编辑话题'), "backend/topic/index/");
+
+        $id = trim($_GET['id']);
+        if ($id) {
+            $info = $this->model('model')->fetch_row('topic', 'id = '.($id));
+            TPL::assign('info', $info);
+        }
+
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(202));
+        TPL::output('backend/topic/edit');
+    }
+
+    public function save_action()
+    {
+        $id = trim($_POST['id']);
+
+        if (empty($id)) {
+            H::ajax_json_output('ID不能为空！');
+        }
+
+        if (empty($_POST['title'])) {
+            H::ajax_json_output('标题不能为空！');
+        }
+
+        $arr = array('title' => trim($_POST['title']),
+                     'preview' => trim($_POST['image']),
+                     'update_time' => time());
+
+        $this->model('topic')->update('topic', $arr, 'id = "'.$id.'"');
+
+        H::ajax_json_output(MOX_APP::RSM(array(
+            'url' => get_js_url('/backend/topic/edit/id-' .$id)
+        ), 1, null));
+    }
+
     public function delete_action()
     {
         $id = $_GET['id'];

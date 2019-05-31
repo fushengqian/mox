@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -42,7 +42,7 @@ class article_class extends MOX_MODEL
             $arr[] = array(
                     'name' => $v['title'],
                     'detail' => $v['summary'],
-                    'img' =>  $v['img'] ?  $v['img'] :'http://www.moxquan.com/static/upload/01/14-1.png',
+                    'img' =>  $v['img'] ?  $v['img'] :'http://www.mox365.com/static/upload/01/14-1.png',
                     'href' => G_DEMAIN.'/article/'.$v['id'].'.html',
                     'pubDate' => date("Y-m-d H:i:s", $v['create_time']),
                     'type' => 6,

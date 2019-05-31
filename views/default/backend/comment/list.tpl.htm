@@ -3,22 +3,22 @@
 <div class="aw-content-wrap">
     <div class="mod">
         <div class="mod-head">
-            <span class="pull-left">点评列表</span>
+             <span class="pull-left">评论列表</span>
         </div>
         <div class="tab-pane">
-             <form method="get" action="backend/comment/list/" id="search_form" class="form-horizontal">
+             <form method="get" action="/backend/comment/list/" id="search_form" class="form-horizontal">
                    <div class="form-group" style="margin-top:10px;padding-left:5px;">
                         <div class="col-sm-2 col-xs-2">
-                            <input class="form-control" placeholder="点评关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
+                            <input class="form-control" placeholder="输入关键词" type="text" value="<?php echo rawurldecode($_GET['keyword']); ?>" name="keyword"/>
                         </div>
                         <div class="col-sm-2 col-xs-2">
                             <select name="is_default" class="form-control">
-                                <option value="0">全部点评</option>
-                                <option value="1" <?php if($this -> is_default){echo 'selected="selected"';}?>>默认点评</option>
+                                <option value="0">全部</option>
+                                <option value="1" <?php if($this -> is_default){echo 'selected="selected"';}?>>默认评论</option>
                             </select>
                         </div>
                         <div class="col-sm-2 col-xs-2">
-                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-primary"><?php _e('搜索'); ?></button>
+                            <button type="button" onclick="javascript:$('#search_form').submit();" class="btn btn-success"><i class="icon-search"></i><?php _e('搜索'); ?></button>
                         </div>
                     </div>
             </form>

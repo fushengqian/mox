@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -64,7 +64,7 @@ class api extends MOX_CONTROLLER
                             'name' => $v['user_info']['user_name'], 'portrait' => G_DEMAIN.$v['user_info']['avatar'], 'relation' => 4),
                             'commentCount' => $v['comment_num'],
                             'content' => strip_tags($v['content']),
-                            'href' => G_DEMAIN.'/feed/'.$v['id'].'.html',
+                            'href' => G_DEMAIN.'/feed/'.$v['id'],
                             'id' => $v['id'],
                             'images' => $v['images'],
                             'likeCount' => $v['like_num'],
@@ -154,7 +154,7 @@ class api extends MOX_CONTROLLER
                  'title' => '大爱野猫',
                  'content' => '莫名其妙地开始喜欢肥猫。老田的老板件，配了牛魔王座舱蚀刻片，一天完成的练习作。旧化还可以更狠一些 建议喷后置 掉漆也狠一些 比如机翼上部的飞行员踩踏部位。',
                  'type' => 1,
-                 'href' => 'http://www.moxquan.com',
+                 'href' => 'http://www.mox365.com',
                  'viewCount' => 100232,
                  'commentCount' => 1023,
                  'transmitCount' => 1923,

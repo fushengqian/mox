@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -17,13 +17,9 @@ class main extends MOX_CONTROLLER
     /**
      * 话题详情
      * */
-    public function detail_action()
+    public function index_action()
     {
         TPL::import_css('css/base.css');
-
-        TPL::assign('seo', get_seo('usercenter'));
-
-        $user_id = MOX_APP::session()->info['uid'];
 
         $topic_id = trim($_GET['id']);
 
@@ -43,7 +39,7 @@ class main extends MOX_CONTROLLER
         $hot_feed = $this->model('feed')-> get_data_list(array('is_home <> 1'), 1, 15, 'read_num desc');
         TPL::assign('hot_feed', $hot_feed);
 
-        $seo = array('title'      => array(strip_tags($topic['title'])),
+        $seo = array('title' => array(strip_tags($topic['title'])),
                      'description' => array($topic['words']));
         TPL::assign('seo', get_seo('topic', $seo));
 

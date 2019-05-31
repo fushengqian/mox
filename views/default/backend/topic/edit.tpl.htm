@@ -1,0 +1,72 @@
+<?php TPL::output('backend/global/header.tpl.htm'); ?>
+<?php TPL::output('backend/global/nav_menu.tpl.htm'); ?>
+<div class="aw-content-wrap">
+    <div class="mod">
+        <div class="mod-head">
+            <h3>
+                <ul class="nav nav-tabs">
+                    <li><a href="/backend/topic/index/"><?php _e('话题列表'); ?></a></li>
+                    <li class="active"><a href="javascript:;"><?php _e('编辑话题'); ?></a></li>
+                </ul>
+            </h3>
+        </div>
+        <div class="tab-content mod-content">
+            <form action="/backend/topic/save/" id="form" method="post" onsubmit="return false">
+                <table class="table table-striped">
+                    <?php if ($this->info) { ?>
+                    <input type="hidden" name="id" value="<?php echo $this->info['id']; ?>" />
+                    <?php } ?>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <span class="col-sm-4 col-xs-3 control-label">标题：</span>
+                                <div class="col-sm-5 col-xs-8">
+                                    <input class="form-control" type="text" name="title" value="<?php if ($this->info) echo trim($this->info['title']); ?>" />
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="form-group">
+                                <span class="col-sm-4 col-xs-3 control-label"><?php _e('封面'); ?>:</span>
+                                <div class="col-sm-5 col-xs-8">
+                                     <input id="uploadImg" type="file" name="mox_upload_file" multiple="" style="display:none">
+                                     <img id="image" style="border: solid 1px #ccc;" width="100" height="100" src="<?php echo $this -> info['preview'] ? $this -> info['preview'] : '/static/images/nopic.png' ?>"/>
+                                     <input name="image" id="image_value" type="hidden" value="<?php echo trim($this -> info['preview']);?>"/>
+                                     <div style="margin-top:5px;"><button class="add-image btn btn-xs btn-success">上传图片</button></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tfoot>
+                        <tr>
+                            <td>
+                                <button type="button" class="btn btn-success center-block" onclick="MOX.ajax_post($('#form'));"><i class="icon-log"></i><?php _e('保存数据'); ?></button>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<?php TPL::output('backend/global/footer.tpl.htm'); ?>
+<script type="text/javascript">
+    $(function () {
+        $(document).on('click', '.add-image', function()
+        {
+            $("#uploadImg").click();
+        });
+
+        //导航上传图片
+        $('#uploadImg').fileupload({
+            dataType: 'json',
+            url: '/backend/images/upload/',
+            done: function (e,data) {
+                $('#image').attr("src", data.result.rsm.url);
+                $('#image_value').val(data.result.rsm.url);
+            }
+        });
+    });
+</script>

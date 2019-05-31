@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 +---------------------------------------------------------------------------
@@ -127,10 +127,10 @@ class user extends MOX_ADMIN_CONTROLLER
             H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
 
-        TPL::assign('mem_group', $this->model('account')->get_user_group_list(1));
-        TPL::assign('system_group', $this->model('account')->get_user_group_list(0, 0));
-        TPL::assign('custom_group', $this->model('account')->get_user_group_list(0, 1));
-        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(501));
+        TPL::assign('system_group', $this->model('user')->get_user_group_list(1, 0));
+        TPL::assign('custom_group', $this->model('user')->get_user_group_list(0, 1));
+        TPL::assign('menu_list', $this->model('admin')->fetch_menu_list(402));
+
         TPL::output('backend/user/group_list');
     }
 
@@ -142,7 +142,7 @@ class user extends MOX_ADMIN_CONTROLLER
             H::redirect_msg(MOX_APP::lang()->_t('你没有访问权限, 请重新登录'), '/');
         }
 
-        if (!$group = $this->model('account')->get_user_group_by_id($_GET['group_id'])) {
+        if (!$group = $this->model('user')->get_user_group_by_id($_GET['group_id'])) {
             H::redirect_msg(MOX_APP::lang()->_t('用户组不存在'), '/backend/user/group_list/');
         }
 
