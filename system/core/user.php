@@ -1,14 +1,14 @@
 <?php
-/*
+/**
 +--------------------------------------------------------------------------
-|   Mox
+|   Mox 1.0.1
 |   ========================================
 |   by Mox Software
-|   © 2015 - 2016 WeCenter. All Rights Reserved
-|   http://www.moxquan.com
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
 |   ========================================
-|   Support: Mox@qq.com
-|
+|   Support: 540335306@qq.com
+|   Author: FSQ
 +---------------------------------------------------------------------------
 */
 
@@ -48,7 +48,16 @@ class core_user
     {
         if($key)
         {
-           return MOX_APP::session()->info[$key];
+           if (!empty(MOX_APP::session()->info[$key])) {
+               return MOX_APP::session()->info[$key];
+           }
+
+           $admin_info = H::decode_hash(MOX_APP::session()->admin_login);
+           if (!empty($admin_info[$key])) {
+               return $admin_info[$key];
+           }
+
+           return '';
         }
         
         return MOX_APP::session()->info;

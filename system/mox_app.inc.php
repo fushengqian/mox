@@ -1,14 +1,17 @@
 <?php
 /**
- * Mox 系统初始化文件
- *
- * 处理基本类库与请求
- *
- * @package     Mox
- * @subpackage  System
- * @category    Front-controller
- * @author      Mox Dev Team
- */
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
+
 class MOX_APP
 {
     private static $config;
@@ -23,7 +26,6 @@ class MOX_APP
     private static $captcha;
     private static $mail;
     private static $user;
-    private static $city_id;
     
     public static $session_type = 'file';
     
@@ -39,57 +41,26 @@ class MOX_APP
     public static function run()
     {
         self::init();
-        
+
         load_class('core_uri')->set_rewrite();
-        
+
         // 传入应用目录, 返回控制器对象
         $handle_controller = self::create_controller(load_class('core_uri')->controller, load_class('core_uri')->app_dir);
-        
+
         $action_method = load_class('core_uri')->action . '_action';
-        
-        //结尾必须以“/”结束
-        if (substr($_SERVER['REQUEST_URI'], 0-strlen('/')) !== '/' AND !stripos(load_class('core_uri')->request_main, 'dmin') AND load_class('core_uri')->request_main !== '/' AND !stripos(load_class('core_uri')->request_main, '.html'))
-        {
-            $path = pathinfo(load_class('core_uri') -> request_main);
-            $re = true;
-            if (in_array($path['extension'], array('png', 'jpg', 'jpeg', 'gif')))
-            {
-                $re = false;
-            }
-            else if($path['extension'])
-            {
-                HTTP::error_404();
-                exit;
-            }
-            
-            header('HTTP/1.1 301 Moved Permanently');
-            
-            $url = G_DEMAIN.'/'.load_class('core_uri')->request_main;
-            
-            if (substr($url, 0-strlen('/')) !== '/')
-            {
-                $url .= '/';
-            }
-            
-            if ($re)
-            {
-                HTTP :: redirect($url);
-                exit;
-            }
-        }
-        
+
         //echo "<pre>";
         //print_r(load_class('core_uri'));die;
-        
+
         // 判断
         if (! is_object($handle_controller) OR ! method_exists($handle_controller, $action_method))
         {
             HTTP::error_404();
         }
-        
+
         $handle_controller->$action_method();
     }
-    
+
     /**
      * 系统初始化
      */
@@ -100,6 +71,8 @@ class MOX_APP
         
         self::$db = load_class('core_db');
         self::$plugins = load_class('core_plugins');
+
+        self::$settings = self::model('setting')->get_settings();
         
         if ((!defined('G_SESSION_SAVE') OR G_SESSION_SAVE == 'db'))
         {
@@ -167,6 +140,9 @@ class MOX_APP
         {
             require_once ($class_file);
         }
+
+        // 解析路由查询参数
+        load_class('core_uri')->parse_args();
         
         if (class_exists($controller_class, false))
         {

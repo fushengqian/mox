@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |

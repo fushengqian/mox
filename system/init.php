@@ -1,4 +1,17 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
+
 define('IN_MOX', TRUE);
 define('ENVIRONMENT_PHP_VERSION', '5.4.0');
 
@@ -86,9 +99,9 @@ if (@ini_get('register_globals'))
     }
 }
 
-if (file_exists(MOX_PATH . 'config.inc.php'))
+if (file_exists(ROOT_PATH . 'data/config/system.php'))
 {
-    require_once(MOX_PATH . 'config.inc.php');
+    require_once(ROOT_PATH . 'data/config/system.php');
 }
 
 load_class('core_autoload');

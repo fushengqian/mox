@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: 540335306@qq.com
 |   Author: FSQ
@@ -44,6 +44,6 @@ if ($base_url[0] == 'm') {
     define('G_DEMAIN', 'http://www.moxquan.cn');
 }
 
-define('SITE_NAME', '模型圈');
+define('SITE_NAME', 'Mox');
 
 define('G_STATIC', G_DEMAIN.'/static');

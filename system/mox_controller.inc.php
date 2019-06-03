@@ -1,4 +1,17 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
+
 class MOX_CONTROLLER
 {
     public $user_id;
@@ -18,6 +31,67 @@ class MOX_CONTROLLER
     
     public function __construct($process_setup = true)
     {
+        // 获取当前用户 User ID
+        $this->user_id = MOX_APP::user()->get_info('uid');
+
+        if ($this->user_info = $this->model('user')->get_user_info_by_id($this->user_id))
+        {
+            $user_group = $this->model('user')->get_user_group($this->user_info['group_id'], $this->user_info['reputation_group']);
+
+            if ($this->user_info['default_timezone'])
+            {
+                date_default_timezone_set($this->user_info['default_timezone']);
+            }
+        }
+        else if ($this->user_id)
+        {
+            $this->model('user')->logout();
+        }
+        else
+        {
+            $user_group = $this->model('user')->get_user_group_by_id(99);
+
+            if ($_GET['fromuid'])
+            {
+                HTTP::set_cookie('fromuid', $_GET['fromuid']);
+            }
+        }
+
+        $this->user_info['group_name'] = $user_group['group_name'];
+        $this->user_info['permission'] = $user_group['permission'];
+
+        MOX_APP::session()->permission = $this->user_info['permission'];
+
+        if ($this->user_info['forbidden'] == 1)
+        {
+            $this->model('account')->logout();
+            H::redirect_msg(MOX_APP::lang()->_t('抱歉, 你的账号已经被禁止登录'), '/');
+        }
+        else
+        {
+            TPL::assign('user_id', $this->user_id);
+            TPL::assign('user_info', $this->user_info);
+        }
+
+        if ($this->user_id and ! $this->user_info['permission']['human_valid'])
+        {
+            unset(MOX_APP::session()->human_valid);
+        }
+        else if ($this->user_info['permission']['human_valid'] and ! is_array(MOX_APP::session()->human_valid))
+        {
+            MOX_APP::session()->human_valid = array();
+        }
+
+        //PC端导航菜单
+        if (MOX_APP::$settings['pc_nav']) {
+            TPL::assign('pc_nav', MOX_APP::$settings['pc_nav']);
+        }
+
+        //移动端导航菜单
+        if (MOX_APP::$settings['mobile_nav']) {
+            TPL::assign('mobile_nav', MOX_APP::$settings['mobile_nav']);
+        }
+
         //引入系统CSS文件
         TPL::import_css(array(
             'css/common.css',
@@ -36,38 +110,14 @@ class MOX_CONTROLLER
             'js/common.js',
         ));
 
-        // 封IP
-        $ip = fetch_ip();
-        $fidden_ip = array('218.18.78.95');
-        if (in_array($ip, $fidden_ip) && !is_bot() && !empty($ip)) {
-            exit();
-        }
-
-        if (0)
-        {
-            $http_type = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https' : 'http';
-            if ($http_type == 'http') {
-                $https = "https://".$_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-                header('HTTP/1.1 301 Moved Permanently');
-                header("Location: ".$https);
-                exit();
-            }
-        }
-
-        $user_info = MOX_APP::user()->get_info();
-
         $unread_msg_count = 0;
-        if (!empty($user_info['uid']))
+        if (!empty($this->user_id))
         {
-            $user_info = MOX_APP::model("user") -> get_user_info_by_id($user_info['uid']);
-            $user_info['uid'] = $user_info['id'];
-            $unread_msg_count = MOX_APP::model("message") -> count('message', 'user_id = '.intval($user_info['uid']).' AND is_read = 0');
+            $unread_msg_count = MOX_APP::model("message") -> count('message', 'user_id = '.intval($this->user_id).' AND is_read = 0');
         }
         TPL::assign('unread_msg', intval($unread_msg_count));
-        TPL::assign('user_info', $user_info);
+        TPL::assign('user_info', $this->user_info);
 
-        $this->user_info = $user_info;
-        
         define('G_URL', G_DEMAIN);
         
         $this -> setup();
@@ -183,7 +233,7 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
     {
         parent::__construct(false);
         
-        if ($_GET['app'] != 'admin')
+        if ($_GET['app'] != 'backend')
         {
             return false;
         }
@@ -191,16 +241,20 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
         TPL::import_clean();
         
         TPL::import_js(array(
-            'js/jquery.js',
-            'admin/js/aws_admin.js',
-            'admin/js/aws_admin_template.js',
+            'js/jquery.min.js',
+            'dist/jquery/fileupload/jquery.ui.widget.js',
+            'dist/jquery/fileupload/jquery.iframe-transport.js',
+            'dist/jquery/fileupload/jquery.fileupload.js',
+            'backend/js/mox_admin.js',
+            'backend/js/mox_admin_template.js',
             'js/jquery.form.js',
-            'admin/js/framework.js',
-            'admin/js/global.js',
+            'backend/js/framework.js',
+            'backend/js/global.js',
         ));
-        
+
         TPL::import_css(array(
-            'admin/css/common.css'
+            'fonts/iconfont-backend.css',
+            'backend/css/common.css'
         ));
         
         if (in_array($_GET['act'], array(
@@ -223,7 +277,7 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
                 }
                 else
                 {
-                    H::redirect_msg(MOX_APP::lang()->_t('会话超时, 请重新登录'), '/admin/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
+                    H::redirect_msg(MOX_APP::lang()->_t('会话超时, 请重新登录'), '/backend/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
                 }
             }
         }
@@ -235,7 +289,7 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
             }
             else
             {
-                HTTP::redirect('/admin/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
+                HTTP::redirect('/backend/login/url-' . base64_encode($_SERVER['REQUEST_URI']));
             }
         }
         
@@ -255,7 +309,7 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
             {
                 $this->crumb($key, $value);
             }
-            	
+
             return $this;
         }
         
@@ -280,7 +334,7 @@ class MOX_ADMIN_CONTROLLER extends MOX_CONTROLLER
         
         foreach ($this->crumb as $key => $crumb)
         {
-            $title = $crumb['name'] . ' - ' . '模型圈运营平台';
+            $title = $crumb['name'] . ' - ' . MOX_APP::$settings['site_name'].'管理后台';
         }
         
         TPL::assign('page_title', htmlspecialchars(rtrim($title, ' - ')));

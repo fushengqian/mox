@@ -1,12 +1,17 @@
 <?php
 /**
- * Mox 数据库操作类
- *
- * @package     MOX
- * @subpackage  System
- * @category    Libraries
- * @author      Mox Dev Team
- */
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
+
 class MOX_MODEL
 {
     public $prefix;

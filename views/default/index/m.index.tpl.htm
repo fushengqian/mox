@@ -1,5 +1,5 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
-<div class="fui-page">
+<div class="fui-page sns-board-page">
     <div class="fui-header">
         <div class="fui-header-left"></div>
         <div class="title"><?php echo MOX_APP::$settings['site_name'];?></div>
@@ -106,6 +106,9 @@
             <span class="fui-preloader"></span>
             <span class="text"> 正在加载...</span>
         </div>
+    </div>
+    <div>
+        <a class="btn btn-primary btn-add-post external" href=""><i class="icon icon-edit2"></i></a>
     </div>
 </div>
 <?php TPL::output('global/footer.tpl.htm'); ?>

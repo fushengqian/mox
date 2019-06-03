@@ -1,14 +1,14 @@
 <?php
-/*
+/**
 +--------------------------------------------------------------------------
-|   Mox
+|   Mox 1.0.1
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
-|   Support: Mox@qq.com
-|
+|   Support: 540335306@qq.com
+|   Author: FSQ
 +---------------------------------------------------------------------------
 */
 
@@ -74,20 +74,20 @@ class core_plugins
 
                 if (file_exists($config_file))
                 {
-                    $aws_plugin = false;
+                    $mox_plugin = false;
 
                     require_once($config_file);
 
-                    if (is_array($aws_plugin) AND G_VERSION_BUILD >= $aws_plugin['requirements'])
+                    if (is_array($mox_plugin) AND G_VERSION_BUILD >= $mox_plugin['requirements'])
                     {
-                        if ($aws_plugin['contents']['model'])
+                        if ($mox_plugin['contents']['model'])
                         {
-                            $this->plugins_model[$aws_plugin['contents']['model']['class_name']] = $this->plugins_path . $file . '/' . $aws_plugin['contents']['model']['include'];
+                            $this->plugins_model[$mox_plugin['contents']['model']['class_name']] = $this->plugins_path . $file . '/' . $mox_plugin['contents']['model']['include'];
                         }
 
-                        if ($aws_plugin['contents']['setups'])
+                        if ($mox_plugin['contents']['setups'])
                         {
-                            foreach ($aws_plugin['contents']['setups'] AS $key => $data)
+                            foreach ($mox_plugin['contents']['setups'] AS $key => $data)
                             {
                                 if ($data['app'] AND $data['controller'] AND $data['include'])
                                 {
@@ -98,9 +98,9 @@ class core_plugins
                             }
                         }
 
-                        if ($aws_plugin['contents']['actions'])
+                        if ($mox_plugin['contents']['actions'])
                         {
-                            foreach ($aws_plugin['contents']['actions'] AS $key => $data)
+                            foreach ($mox_plugin['contents']['actions'] AS $key => $data)
                             {
                                 if ($data['app'] AND $data['controller'] AND $data['include'])
                                 {
@@ -112,7 +112,7 @@ class core_plugins
                             }
                         }
 
-                        $this->plugins[$file] = $aws_plugin;
+                        $this->plugins[$file] = $mox_plugin;
                     }
                 }
             }

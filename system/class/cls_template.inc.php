@@ -5,7 +5,7 @@
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
 |   Support: Mox@qq.com
 +---------------------------------------------------------------------------
@@ -35,7 +35,7 @@ class TPL
                 )
             );
             
-            if (file_exists(MOX_PATH . 'config.inc.php') AND class_exists('MOX_APP', false))
+            if (file_exists(ROOT_PATH . 'data/config/system.php') AND class_exists('MOX_APP', false))
             {
                 self::$in_app = true;
             }
@@ -50,24 +50,17 @@ class TPL
         {
             $template_filename .= self::$template_ext;
         }
-        
-        $display_template_filename = $template_filename;
+
+        $display_template_filename = 'default/' . $template_filename;
         
         //移动端，模板名称自动加m
-        $base_url = explode('.', $_SERVER['SERVER_NAME']);
-        if ($base_url[0] == 'm')
+        if (is_mobile())
         {
             $tmp_arr = explode('/', $display_template_filename);
             
             $tmp_arr[(count($tmp_arr)-1)] = 'm.'.$tmp_arr[(count($tmp_arr)-1)];
             
             $display_template_filename = implode('/', $tmp_arr);
-            
-            self::assign('m_url', str_replace('m', 'www', G_DEMAIN).($_SERVER['REQUEST_URI'] == '/' ? '': $_SERVER['REQUEST_URI']));
-        }
-        else if ($base_url[0] == 'www')
-        {
-            self::assign('m_url', str_replace('www', 'm', G_DEMAIN).($_SERVER['REQUEST_URI'] == '/' ? '': $_SERVER['REQUEST_URI']));
         }
         else 
         {
@@ -133,7 +126,6 @@ class TPL
             
             if (get_setting('url_rewrite_enable') != 'Y' OR $template_dirs[0] == 'admin')
             {
-                //$output = preg_replace('/(href|action)=([\"|\'])(?!http)(?!mailto)(?!file)(?!ftp)(?!javascript)(?![\/|\#])(?!\.\/)([^\"\']+)([\"|\'])/is', '\1=\2' . base_url() . '/' . G_INDEX_SCRIPT . '\3\4', $output);
                 $output = preg_replace('/<([^>]*?)(href|action)=([\"|\'])(?!http)(?!mailto)(?!file)(?!tel)(?!sms)(?!ftp)(?!javascript)(?![\/|\#])(?!\.\/)([^\"\']+)([\"|\'])([^>]*?)>/is', '<\1\2=\3' . base_url() . '/' . G_INDEX_SCRIPT . '\4\5\6>', $output);
             }
             
@@ -148,11 +140,9 @@ class TPL
             
             if (get_setting('url_rewrite_enable') == 'Y' AND $template_dirs[0] != 'admin')
             {
-                //$output = preg_replace('/(href|action)=([\"|\'])(?!mailto)(?!file)(?!ftp)(?!http)(?!javascript)(?![\/|\#])(?!\.\/)([^\"\']+)([\"|\'])/is', '\1=\2' . base_url() . '/' . '\3\4', $output);
                 $output = preg_replace('/<([^>]*?)(href|action)=([\"|\'])(?!mailto)(?!file)(?!ftp)(?!tel)(?!sms)(?!http)(?!javascript)(?![\/|\#])(?!\.\/)([^\"\']{0,})([\"|\'])([^>]*?)>/is', '<\1\2=\3' . base_url() . '/' . '\4\5\6>', $output);
             }
-            
-            //$output = preg_replace("/([a-zA-Z0-9]+_?[a-zA-Z0-9]+)-__|(__[a-zA-Z0-9]+_?[a-zA-Z0-9]+)-$/i", '', $output);
+
             $output = preg_replace('/[a-zA-Z0-9]+_?[a-zA-Z0-9]*\-__/', '', $output);
             $output = preg_replace('/(__)?[a-zA-Z0-9]+_?[a-zA-Z0-9]*\-([\'|"])/', '\2', $output);
             
@@ -194,7 +184,7 @@ class TPL
         {
             foreach ($path AS $key => $val)
             {
-                if (substr($val, 0, 4) == 'css/' AND !strstr($val, '/admin/'))
+                if (substr($val, 0, 4) == 'css/' AND !strstr($val, '/backend/'))
                 {
                     $val = str_replace('css/', 'css/default/', $val);
                 }
@@ -209,7 +199,7 @@ class TPL
         }
         else
         {
-            if (substr($path, 0, 4) == 'css/' AND !strstr($path, '/admin/'))
+            if (substr($path, 0, 4) == 'css/' AND !strstr($path, '/backend/'))
             {
                 $path = str_replace('css/', 'css/default/', $path);
             }

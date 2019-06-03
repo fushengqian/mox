@@ -1,4 +1,16 @@
 <?php
+/**
++--------------------------------------------------------------------------
+|   Mox
+|   ========================================
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
+|   ========================================
+|   Support: 540335306@qq.com
+|   Author: FSQ
++---------------------------------------------------------------------------
+*/
 
 /**
  * 生成二维码
@@ -220,9 +232,9 @@ function get_seo_by_keyword($keyword)
 {
     $result = array('keyword' => $keyword);
 
-    $result['title'] = $keyword.' - 模型圈';
+    $result['title'] = $keyword.' - Mox';
 
-    $result['description'] = '模型圈欢迎您到梨木台来旅游，我们可以为您提供蓟县梨木台农家院_天津梨木台_梨木台塞北农家院等信息。';
+    $result['description'] = 'Mox欢迎您到梨木台来旅游，我们可以为您提供蓟县梨木台农家院_天津梨木台_梨木台塞北农家院等信息。';
 
     return $result;
 }
@@ -774,7 +786,7 @@ function deal_image($src, $width = null, $height = null, $filename = null)
  *         失败 -- -1:原文件不存在, -2:水印图片不存在, -3:原文件图像对象建立失败
  *         -4:水印文件图像对象建立失败 -5:加水印后的新图片保存失败
  */
-function img_water_mark($srcImg, $waterImg = 'http://www.moxquan.com/static/images/water.jpg', $savepath = 'D:\wamp\www\mox\static\deal_images', $savename = null, $positon = 5, $alpha = 100)
+function img_water_mark($srcImg, $waterImg = 'http://www.mox365.com/static/images/water.jpg', $savepath = 'D:\wamp\www\mox\static\deal_images', $savename = null, $positon = 5, $alpha = 100)
 {
     $temp = pathinfo($srcImg);
     

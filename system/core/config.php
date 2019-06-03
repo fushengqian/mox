@@ -1,14 +1,14 @@
 <?php
-/*
+/**
 +--------------------------------------------------------------------------
-|   Mox
+|   Mox 1.0.1
 |   ========================================
 |   by Mox Software
 |   © 2018 - 2019 Mox. All Rights Reserved
-|   http://www.moxquan.com
+|   http://www.mox365.com
 |   ========================================
-|   Support: Mox@qq.com
-|
+|   Support: 540335306@qq.com
+|   Author: FSQ
 +---------------------------------------------------------------------------
 */
 
@@ -18,32 +18,6 @@ class core_config
 
     function get($config_id)
     {
-        if (defined('IN_SAE'))
-        {
-            switch ($config_id)
-            {
-                case 'database':
-                    return (object)array(
-                        'charset' => 'utf8',
-                        'prefix' => 'fnc_',
-                        'driver' => 'PDO_MYSQL',
-                        'master' => array(
-                            'host' => SAE_MYSQL_HOST_M . ':' . SAE_MYSQL_PORT,
-                            'username' => SAE_MYSQL_USER,
-                            'password' => SAE_MYSQL_PASS,
-                            'dbname' => SAE_MYSQL_DB
-                        ),
-                        'slave' => array(
-                            'host' => SAE_MYSQL_HOST_S . ':' . SAE_MYSQL_PORT,
-                            'username' =>  SAE_MYSQL_USER,
-                            'password' => SAE_MYSQL_PASS,
-                            'dbname' => SAE_MYSQL_DB
-                        )
-                    );
-                break;
-            }
-        }
-        
         if (isset($this->config[$config_id]))
         {
             return $this->config[$config_id];
@@ -56,12 +30,13 @@ class core_config
 
     function load_config($config_id)
     {
-        if (substr($config_id, -10) == '.extension' OR !file_exists(MOX_PATH . 'config/' . $config_id . '.php'))
+        if (substr($config_id, -10) == '.extension' OR !file_exists(ROOT_PATH . 'data/config/' . $config_id . '.php'))
         {
-            throw new Zend_Exception('The configuration file config/' . $config_id . '.php does not exist.');
+            throw new Zend_Exception('The configuration file data/config/' . $config_id . '.php does not exist.');
         }
-        
-        include_once(MOX_PATH . 'config/' . $config_id . '.php');
+        $config = array();
+
+        include_once(ROOT_PATH . 'data/config/' . $config_id . '.php');
 
         if (!is_array($config))
         {
@@ -100,7 +75,7 @@ class core_config
             $content .= "\r\n";
         }
 
-        $config_path = MOX_PATH . 'config/' . $config_id . '.php';
+        $config_path = ROOT_PATH . 'data/config/' . $config_id . '.php';
 
         $fp = @fopen($config_path, "w");
 

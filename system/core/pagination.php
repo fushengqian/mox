@@ -1,16 +1,17 @@
 <?php
-/*
+/**
 +--------------------------------------------------------------------------
-|   Mox
+|   Mox 1.0.1
 |   ========================================
-|   by WeCenter Software
-|   © 2015 - 2016 WeCenter. All Rights Reserved
-|   http://www.moxquan.com
+|   by Mox Software
+|   © 2018 - 2019 Mox. All Rights Reserved
+|   http://www.mox365.com
 |   ========================================
-|   Support: Mox@qq.com
-|
+|   Support: 540335306@qq.com
+|   Author: FSQ
 +---------------------------------------------------------------------------
 */
+
 class core_pagination
 {
     var $base_url            = ''; // The page we are linking to
