@@ -108,9 +108,65 @@
         </div>
     </div>
     <div>
-        <a class="btn btn-primary btn-add-post external" href=""><i class="icon icon-edit2"></i></a>
+        <a class="btn btn-primary btn-add-post external" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
     </div>
 </div>
+
+
+<div id="sns-board-post-page" class='fui-page sns-board-post-page'>
+    <script type="text/javascript">
+        $(function () {
+            $(".btn-add-post").off('click').on('click',function () {
+                $(".fui-cell-info .post-input").val('');
+                $(".fui-cell-info .icon-pic").empty();
+            })
+        })
+    </script>
+    <div class="fui-header">
+        <div class="fui-header-left">
+            <a class="back">取消</a>
+        </div>
+        <div class="title">发布动态</div>
+        <div class="fui-header-right"></div>
+    </div>
+    <div class="fui-content navbar">
+        <div class="fui-cell-group" style="margin-top:0;">
+            <div class="fui-cell">
+                <div class="fui-cell-info">
+                    <input type="text" class="fui-input post-input" placeholder="标题 3-25个字" id="title" minlength="3" maxlength="25"/>
+                </div>
+            </div>
+            <div class="fui-cell">
+                <div class="fui-cell-info">
+                    <textarea placeholder="内容 10-1000个字" class="post-input" rows="8" id="content" minlength="10" maxlength="1000"></textarea>
+                </div>
+            </div>
+            <div class="fui-cell reply-func-cell">
+                <div class="fui-cell-info post-func">
+                    <i class="icon icon-emoji"></i>  <i class="icon icon-pic"></i>
+                </div>
+            </div>
+            <div class="post-face">
+                <?php for($i=1;$i<=75;$i++) {?>
+                <div class="item" data-face="{$i}"><img src="/static/images/face/{$i}.gif" /></div>
+                <?php } ?>
+            </div>
+            <div class='fui-cell post-image' id="cell-images">
+                <div class='fui-cell-info'>
+                    <ul class="fui-images fui-images-md"></ul>
+                    <div class="fui-uploader fui-uploader-md"
+                         data-max="{if $set['imagesnum']==0}5{else if $set['imagesnum'] > 0}{$set['imagesnum']}{/if}"
+                         data-count="0">
+                        <input type="file" multiple="multiple" aria-multiselectable="true" name="imgFile[]"  id="imgFile{$g['id']}" accept="image/*"  >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a href="javascript:void(0);" id="btnSend" class="btn btn-sns-submit">发表</a>
+    </div>
+</div>
+
+
 <?php TPL::output('global/footer.tpl.htm'); ?>
 
 <script id='tpl_feed_list' type='text/html'>
@@ -142,3 +198,14 @@
 <script language='javascript'>require(['/static/js/list.js'], function (modal) {
     modal.init();
 });</script>
+
+
+<script language='javascript'>
+    require(['/static/js/sns.js'], function (modal) {
+        modal.init({
+            bid: 1
+            ,followtip: ""
+            ,page:1
+    });
+    });
+</script>

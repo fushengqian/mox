@@ -131,6 +131,11 @@ $config[] = array(
             'url' => '/backend/main/settings/category-nav'
         ),
         array(
+            'id' => 'SETTINGS_ICON',
+            'title' => MOX_APP::lang()->_t('主页图标'),
+            'url' => '/backend/main/settings/category-icon'
+        ),
+        array(
             'id' => 601,
             'title' => MOX_APP::lang()->_t('清除缓存'),
             'url' => '/backend/cache/clear/'
