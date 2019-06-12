@@ -1,171 +1,169 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
-<div class="fui-page sns-board-page">
-    <div class="fui-header">
-        <div class="fui-header-left"></div>
-        <div class="title"><?php echo MOX_APP::$settings['site_name'];?></div>
-        <div class="fui-header-right"></div>
-    </div>
-    <div class="fui-content">
-        <div class="fui-searchbar bar" id="newIndex">
-            <div class="city-select" id="citySelect"></div>
-            <div class="searchbar" style="background: #ef7700;">
-                <form action="" method="post" style="position: relative;left:0;top:0;">
-                    <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
-                    <div class="search-input round" style="background: #ef7700;">
-                        <i class="icon icon-search" style="color: #ffffff;"></i>
-                        <input type="search" placeholder="搜索关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
-                    </div>
-                </form>
-            </div>
-            <div class="search-extra">
-                 <i id="btn_scan" class="icon icon-scan"></i>
-            </div>
-        </div>
 
-        <div id="newBaner">
-            <div class="fui-imgSlider">
-                <div class='fui-swipe'>
-                    <div class='fui-swipe-wrapper'>
-                        <?php foreach($this->banner_list as $banner):?>
-                        <a class='fui-swipe-item' href="<?php echo $banner['link'];?>" data-nocache="true">
-                            <img src="<?php echo $banner['image'];?>"/>
-                        </a>
-                        <?php endforeach;?>
-                    </div>
-                    <div class="fui-swipe-page left round"></div>
+<div class="fui-page-group">
+    <div class="fui-page fui-page-current fui-page-current sns-board-page">
+        <div class="fui-header">
+            <div class="fui-header-left"></div>
+            <div class="title"><?php echo MOX_APP::$settings['site_name'];?></div>
+            <div class="fui-header-right"></div>
+        </div>
+        <div class="fui-content">
+            <div class="fui-searchbar bar" id="newIndex">
+                <div class="city-select" id="citySelect"></div>
+                <div class="searchbar" style="background: #ef7700;">
+                    <form action="" method="post" style="position: relative;left:0;top:0;">
+                        <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
+                        <div class="search-input round" style="background: #ef7700;">
+                            <i class="icon icon-search" style="color: #ffffff;"></i>
+                            <input type="search" placeholder="搜索关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="search-extra">
+                    <i id="btn_scan" class="icon icon-scan"></i>
                 </div>
             </div>
-        </div>
 
-        <div class="fui-icon-group noborder col-5 fui-mall-nav">
-            <?php foreach($this->mall_nav as $nav){?>
-            <a class="fui-icon-col external full-nav-item" href="<?php echo $nav['link'];?>" data-nocache="true">
-                <div class="icon"><img src="<?php echo $nav['img'];?>"></div>
-                <div class="text"><?php echo $nav['name'];?></div>
-            </a>
-            <?php } ?>
-        </div>
-
-        <div class="fui-cell-group fui-cell-click">
-            <a class="fui-cell external" href="javascript:;">
-                <div class="fui-cell-icon"><i class="icon icon-list"></i></div>
-                <div class="fui-cell-text hot-topic">热门话题</div>
-            </a>
-            <div class="fui-icon-group selecter" style="overflow: scroll;">
-                <ul class="banner-ul">
-                    <?php foreach($this->hot_topic_list as $topic){?>
-                    <li class="banner-li-blue">
-                        <a href="javascript:;">
-                            <img src="<?php echo $topic['preview'];?>" alt="<?php echo $topic['title'];?>">
-                            <p><?php echo $topic['title'];?></p>
-                            <p class="follow-topic"><i class="icon icon-comment"></i>1093 跟帖</p>
-                        </a>
-                    </li>
-                    <?php } ?>
-                </ul>
-            </div>
-        </div>
-        <div class="newActivity" style="padding-bottom: 0.75rem;background: white">
-            <?php foreach($this->activity_list as $activity){?>
-            <img src="<?php echo $activity['image'];?>" style="display:block;width:100%;height:auto;"/>
-            <?php } ?>
-        </div>
-
-        <div class="feed-list">
-            <div class="fui-cell external fui-new-feed">
-                <span class="fui-cell-icon"><i class="icon icon-list"></i></span>
-                <span class="fui-cell-text">最新动态</span>
-            </div>
-            <?php foreach($this -> feed_list as $feed):?>
-            <div class="feed-item">
-                <div class="user-info">
-                    <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
-                    <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
-                    <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
-                </div>
-                <div class="feed-content">
-                    <div class="text">
-                        <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
-                    </div>
-                    <div class="pics">
-                        <?php foreach($feed['pics'] as $key => $pic):?>
-                        <?php if($key < 3):?>
-                        <img src="<?php echo $pic;?>"/>
-                        <?php endif;?>
-                        <?php endforeach;?>
+            <div id="newBaner">
+                <div class="fui-imgSlider">
+                    <div class='fui-swipe'>
+                        <div class='fui-swipe-wrapper'>
+                            <?php foreach($this->banner_list as $banner):?>
+                            <a class='fui-swipe-item' href="<?php echo $banner['link'];?>" data-nocache="true">
+                                <img src="<?php echo $banner['image'];?>"/>
+                            </a>
+                            <?php endforeach;?>
+                        </div>
+                        <div class="fui-swipe-page left round"></div>
                     </div>
                 </div>
-                <div class="user-attr">
-                    <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
-                    <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
-                </div>
             </div>
-            <?php endforeach;?>
-        </div>
-        <div class="infinite-loading">
-            <span class="fui-preloader"></span>
-            <span class="text"> 正在加载...</span>
-        </div>
-    </div>
-    <div>
-        <a class="btn btn-primary btn-add-post external" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
-    </div>
-</div>
 
-
-<div id="sns-board-post-page" class='fui-page sns-board-post-page'>
-    <script type="text/javascript">
-        $(function () {
-            $(".btn-add-post").off('click').on('click',function () {
-                $(".fui-cell-info .post-input").val('');
-                $(".fui-cell-info .icon-pic").empty();
-            })
-        })
-    </script>
-    <div class="fui-header">
-        <div class="fui-header-left">
-            <a class="back">取消</a>
-        </div>
-        <div class="title">发布动态</div>
-        <div class="fui-header-right"></div>
-    </div>
-    <div class="fui-content navbar">
-        <div class="fui-cell-group" style="margin-top:0;">
-            <div class="fui-cell">
-                <div class="fui-cell-info">
-                    <input type="text" class="fui-input post-input" placeholder="标题 3-25个字" id="title" minlength="3" maxlength="25"/>
-                </div>
-            </div>
-            <div class="fui-cell">
-                <div class="fui-cell-info">
-                    <textarea placeholder="内容 10-1000个字" class="post-input" rows="8" id="content" minlength="10" maxlength="1000"></textarea>
-                </div>
-            </div>
-            <div class="fui-cell reply-func-cell">
-                <div class="fui-cell-info post-func">
-                    <i class="icon icon-emoji"></i>  <i class="icon icon-pic"></i>
-                </div>
-            </div>
-            <div class="post-face">
-                <?php for($i=1;$i<=75;$i++) {?>
-                <div class="item" data-face="{$i}"><img src="/static/images/face/{$i}.gif" /></div>
+            <div class="fui-icon-group noborder col-5 fui-mall-nav">
+                <?php foreach($this->mall_nav as $nav){?>
+                <a class="fui-icon-col external full-nav-item" href="<?php echo $nav['link'];?>" data-nocache="true">
+                    <div class="icon"><img src="<?php echo $nav['img'];?>"></div>
+                    <div class="text"><?php echo $nav['name'];?></div>
+                </a>
                 <?php } ?>
             </div>
-            <div class='fui-cell post-image' id="cell-images">
-                <div class='fui-cell-info'>
-                    <ul class="fui-images fui-images-md"></ul>
-                    <div class="fui-uploader fui-uploader-md"
-                         data-max="{if $set['imagesnum']==0}5{else if $set['imagesnum'] > 0}{$set['imagesnum']}{/if}"
-                         data-count="0">
-                        <input type="file" multiple="multiple" aria-multiselectable="true" name="imgFile[]"  id="imgFile{$g['id']}" accept="image/*"  >
+
+            <div class="fui-cell-group fui-cell-click">
+                <a class="fui-cell external" href="javascript:;">
+                    <div class="fui-cell-icon"><i class="icon icon-list"></i></div>
+                    <div class="fui-cell-text hot-topic">热门话题</div>
+                </a>
+                <div class="fui-icon-group selecter" style="overflow: scroll;">
+                    <ul class="banner-ul">
+                        <?php foreach($this->hot_topic_list as $topic){?>
+                        <li class="banner-li-blue">
+                            <a href="javascript:;">
+                                <img src="<?php echo $topic['preview'];?>" alt="<?php echo $topic['title'];?>">
+                                <p><?php echo $topic['title'];?></p>
+                                <p class="follow-topic"><i class="icon icon-comment"></i>1093 跟帖</p>
+                            </a>
+                        </li>
+                        <?php } ?>
+                    </ul>
+                </div>
+            </div>
+            <div class="newActivity" style="padding-bottom: 0.75rem;background: white">
+                <?php foreach($this->activity_list as $activity){?>
+                <img src="<?php echo $activity['image'];?>" style="display:block;width:100%;height:auto;"/>
+                <?php } ?>
+            </div>
+
+            <div class="feed-list">
+                <div class="fui-cell external fui-new-feed">
+                    <span class="fui-cell-icon"><i class="icon icon-list"></i></span>
+                    <span class="fui-cell-text">最新动态</span>
+                </div>
+                <?php foreach($this -> feed_list as $feed):?>
+                <div class="feed-item">
+                    <div class="user-info">
+                        <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
+                        <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
+                        <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
+                    </div>
+                    <div class="feed-content">
+                        <div class="text">
+                            <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
+                        </div>
+                        <div class="pics">
+                            <?php foreach($feed['pics'] as $key => $pic):?>
+                            <?php if($key < 3):?>
+                            <img src="<?php echo $pic;?>"/>
+                            <?php endif;?>
+                            <?php endforeach;?>
+                        </div>
+                    </div>
+                    <div class="user-attr">
+                        <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
+                        <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
+                    </div>
+                </div>
+                <?php endforeach;?>
+            </div>
+            <div class="infinite-loading">
+                <span class="fui-preloader"></span>
+                <span class="text"> 正在加载...</span>
+            </div>
+        </div>
+        <a class="btn btn-primary btn-add-post" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
+    </div>
+    <div id="sns-board-post-page" class='fui-page sns-board-post-page'>
+        <script type="text/javascript">
+            $(function () {
+                $(".btn-add-post").off('click').on('click',function () {
+                    $(".fui-cell-info .post-input").val('');
+                    $(".fui-cell-info .icon-pic").empty();
+                })
+            })
+        </script>
+        <div class="fui-header">
+            <div class="fui-header-left">
+                <a class="back">取消</a>
+            </div>
+            <div class="title">发布动态</div>
+            <div class="fui-header-right"></div>
+        </div>
+        <div class="fui-content navbar">
+            <div class="fui-cell-group" style="margin-top:0;">
+                <div class="fui-cell">
+                    <div class="fui-cell-info">
+                        <input type="text" class="fui-input post-input" placeholder="标题 3-25个字" id="title" minlength="3" maxlength="25"/>
+                    </div>
+                </div>
+                <div class="fui-cell">
+                    <div class="fui-cell-info">
+                        <textarea placeholder="内容 10-1000个字" class="post-input" rows="8" id="content" minlength="10" maxlength="1000"></textarea>
+                    </div>
+                </div>
+                <div class="fui-cell reply-func-cell">
+                    <div class="fui-cell-info post-func">
+                        <i class="icon icon-emoji"></i>  <i class="icon icon-pic"></i>
+                    </div>
+                </div>
+                <div class="post-face">
+                    <?php for($i=1;$i<=75;$i++) {?>
+                    <div class="item" data-face="{$i}"><img src="/static/face/<?php echo $i;?>.gif" /></div>
+                    <?php } ?>
+                </div>
+                <div class='fui-cell post-image' id="cell-images">
+                    <div class='fui-cell-info'>
+                        <ul class="fui-images fui-images-md"></ul>
+                        <div class="fui-uploader fui-uploader-md"
+                             data-max="{if $set['imagesnum']==0}5{else if $set['imagesnum'] > 0}{$set['imagesnum']}{/if}"
+                             data-count="0">
+                            <input type="file" multiple="multiple" aria-multiselectable="true" name="imgFile[]"  id="imgFile{$g['id']}" accept="image/*"  >
+                        </div>
                     </div>
                 </div>
             </div>
+            <a href="javascript:void(0);" id="btnSend" class="btn btn-sns-submit">发表</a>
         </div>
-        <a href="javascript:void(0);" id="btnSend" class="btn btn-sns-submit">发表</a>
     </div>
 </div>
-
 
 <?php TPL::output('global/footer.tpl.htm'); ?>
 
@@ -205,7 +203,10 @@
         modal.init({
             bid: 1
             ,followtip: ""
-            ,page:1
+            ,page:1});
     });
+
+    require(['/static/js/post.js'], function (modal) {
+        modal.init({ bid: 1,pid: 1});
     });
 </script>
