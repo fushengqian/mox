@@ -1,62 +1,66 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
-<div class="fui-page">
-    <div class="fui-header">
-        <div class="fui-header-left"></div>
-        <div class="title">社区中心</div>
-        <div class="fui-header-right"></div>
-    </div>
-    <div class="fui-content">
-        <div class="fui-searchbar bar" id="newIndex">
-            <div class="city-select" id="citySelect">
-                <em class="currentCity J-city-select"></em>
-            </div>
-            <div class="searchbar" style="background: #ef7700;">
-                <form action="" method="post" style="position: relative;left:0;top:0;">
-                    <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
-                    <div class="search-input round" style="background: #ef7700;">
-                        <i class="icon icon-search" style="color: #ffffff;"></i>
-                        <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
-                    </div>
-                </form>
-            </div>
-            <div class="search-extra">
-                <i id="btn_scan" class="icon icon-scan"></i>
-            </div>
+<div class="fui-page-group">
+    <div class="fui-page fui-page-current fui-page-current sns-board-page">
+        <div class="fui-header">
+            <div class="fui-header-left"></div>
+            <div class="title">社区中心</div>
+            <div class="fui-header-right"></div>
         </div>
-        <div class="fui-tab fui-tab-danger">
-            <a class="active" href="javascript:void(0)">关注</a>
-            <a href="javascript:void(0)">热门</a>
-            <a href="javascript:void(0)">我的</a>
-        </div>
+        <div class="fui-content">
+            <div class="fui-searchbar bar" id="newIndex">
+                <div class="city-select" id="citySelect">
+                    <em class="currentCity J-city-select"></em>
+                </div>
+                <div class="searchbar" style="background: #ef7700;">
+                    <form action="" method="post" style="position: relative;left:0;top:0;">
+                        <input type="submit" class="searchbar-cancel searchbtn" value="搜索" style="top:0;right:0"/>
+                        <div class="search-input round" style="background: #ef7700;">
+                            <i class="icon icon-search" style="color: #ffffff;"></i>
+                            <input type="search" placeholder="搜索商品/关键词" class="search" name="keywords" style="text-align: left; color: #ffffff; background: none;" />
+                        </div>
+                    </form>
+                </div>
+                <div class="search-extra">
+                    <i id="btn_scan" class="icon icon-scan"></i>
+                </div>
+            </div>
+            <div class="fui-tab fui-tab-danger">
+                <a class="active" href="javascript:void(0)">关注</a>
+                <a href="javascript:void(0)">热门</a>
+                <a href="javascript:void(0)">我的</a>
+            </div>
 
-        <div class="feed-list">
-             <?php foreach($this -> feed_list as $feed):?>
-             <div class="feed-item">
-                 <div class="user-info">
-                      <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
-                      <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
-                      <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
+            <div class="feed-list">
+                 <?php foreach($this -> feed_list as $feed):?>
+                 <div class="feed-item">
+                     <div class="user-info">
+                          <a href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><img class="avatar" src="<?php echo G_DEMAIN.$feed['user_info']['avatar'];?>"></a>
+                          <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
+                          <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
+                     </div>
+                     <div class="feed-content">
+                          <div class="text">
+                               <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
+                          </div>
+                          <div class="pics">
+                              <?php foreach($feed['pics'] as $key => $pic):?>
+                                  <?php if($key < 3):?>
+                                  <img src="<?php echo $pic;?>"/>
+                                  <?php endif;?>
+                              <?php endforeach;?>
+                          </div>
+                     </div>
+                     <div class="user-attr">
+                          <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
+                          <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
+                     </div>
                  </div>
-                 <div class="feed-content">
-                      <div class="text">
-                           <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
-                      </div>
-                      <div class="pics">
-                          <?php foreach($feed['pics'] as $key => $pic):?>
-                              <?php if($key < 3):?>
-                              <img src="<?php echo $pic;?>"/>
-                              <?php endif;?>
-                          <?php endforeach;?>
-                      </div>
-                 </div>
-                 <div class="user-attr">
-                      <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
-                      <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
-                 </div>
-             </div>
-             <?php endforeach;?>
+                 <?php endforeach;?>
+            </div>
+            <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
         </div>
-        <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
+        <a class="btn btn-primary btn-add-post" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
     </div>
+    <?php TPL::output('feed/create.tpl.htm'); ?>
 </div>
 <?php TPL::output('global/footer.tpl.htm'); ?>
