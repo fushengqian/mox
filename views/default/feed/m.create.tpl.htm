@@ -23,7 +23,8 @@
             </div>
             <div class="fui-cell reply-func-cell">
                 <div class="fui-cell-info post-func">
-                    <i class="icon icon-emoji"></i>  <i class="icon icon-pic"></i>
+                    <i class="icon icon-emoji"></i>
+                    <i class="icon icon-pic"></i>
                 </div>
             </div>
             <div class="post-face">
@@ -34,10 +35,8 @@
             <div class='fui-cell post-image' id="cell-images">
                 <div class='fui-cell-info'>
                     <ul class="fui-images fui-images-md"></ul>
-                    <div class="fui-uploader fui-uploader-md"
-                         data-max="{if $set['imagesnum']==0}5{else if $set['imagesnum'] > 0}{$set['imagesnum']}{/if}"
-                         data-count="0">
-                        <input type="file" multiple="multiple" aria-multiselectable="true" name="imgFile[]"  id="imgFile{$g['id']}" accept="image/*"  >
+                    <div class="fui-uploader fui-uploader-md" data-max="5" data-count="0">
+                        <input type="file" multiple="multiple" aria-multiselectable="true" name="imgFile[]" id="imgFile" accept="image/*">
                     </div>
                 </div>
             </div>
