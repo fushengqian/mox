@@ -5737,30 +5737,23 @@ font-size:0.6rem;line-height: 0.8rem;}
     text-align:left;
     margin-bottom:2px;
 }
-.feed-detail .user-info .avatar{
-    width:60px;
-    height:60px;
-    border-radius: 30px;
-}
 .feed-detail .user-info .nick{
     font-weight: bold;
-    font-size: 20px;
 }
 .feed-detail .user-info .intro{
     margin-left:5px;
     margin-top:0px;
-    font-size:13px;
     color: #ccc;
 }
 .feed-detail .user-info .time{
     float:right;
     color:#ccc;
-    margin-top:20px;
-    margin-right:20px;
+    margin-top:0rem;
+    margin-right:0rem;
+    font-size: 0.6rem;
 }
 .feed-detail-content .text{
     text-align: left;
-    line-height:30px;
 }
 .feed-detail-content .pics img{
     border: solid 1px #ccc;
@@ -5778,33 +5771,37 @@ font-size:0.6rem;line-height: 0.8rem;}
 }
 .comment-list{
     text-align: left;
-    border: solid 1px #ccc;
-    padding:10px;
-    margin:10px;
+    border: solid 0.06rem #ccc;
+    padding:0.2rem;
+    margin:0.3rem;
     clear: both;
 }
 .comment-list .comments{
-    margin-top:10px;
+    margin-top:0.2rem;
 }
 .comment-list .comment-title{
     font-weight: bold;
-    font-size:15px;
+    font-size:0.8rem;
 }
 .comment-item{
-    margin-bottom:20px;
+    margin-bottom:0.2rem;
     border-bottom:dashed 1px #cccccc;
-    padding-bottom: 10px;
+    padding-bottom: 0.2rem;
 }
-.comment-item .user-info img{
-    width:30px;
-    height:30px;
+.comment-item .c-user-info img{
     border: solid 1px #CCCCCC;
+    width: 2.0rem;
+    height: 2.0rem;
+    border-radius: 1.0rem;
 }
-.comment-item .user-info .nick{
-    font-size:15px;
+.comment-item .c-user-info .nick{
+    font-size:0.8rem;
+    font-weight: bold;
+    display: block;
 }
 .comment-list .comment-desc{
-    margin-left:35px;
+    margin-left:2.0rem;
+    font-size:0.8rem;
 }
 .comment-list .comment-area{
     border: solid 1px #ccc;
@@ -5822,4 +5819,299 @@ font-size:0.6rem;line-height: 0.8rem;}
     font-size: 0.9rem;
     font-weight: bold;
     color: #333333;
+}
+
+.feed-detail{
+    background: #fff;
+}
+.feed-detail .user-info{
+    font-size: 1.2rem;
+    margin:0.2rem 1.0rem 0rem 0.2rem;
+    clear: both;
+    min-height: 4.0rem;
+}
+.feed-detail .user-info .avatar{
+    float:left;
+    width:3.0rem;
+    height:3.0rem;
+    border-radius: 1.5rem;
+}
+.feed-detail .user-info .nick{
+    font-size: 1.0rem;
+    float:left;
+    font-weight: bold;
+}
+.feed-detail .user-info .time{
+    display: block;
+    clear: right;
+    float:left;
+    color:#999;
+}
+.feed-detail .user-info .follow {
+    float: right;
+    color: #fff;
+    font-weight: bold;
+}
+.feed-detail-content{
+    padding-bottom: 10px;
+    font-size: 0.8rem;
+    padding-left:5px;
+    padding-right: 5px;
+    line-height: 2.0rem;
+}
+.feed-detail-content .pics img{
+    width:100%;
+    border: solid 1px #ccc;
+    margin-bottom:2px;
+}
+.feed-detail .comments{
+    padding:5px 0px 5px 0px;
+}
+.feed-detail .comments .title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    background: #f6f6f6;
+}
+.feed-detail .comments .num{
+    font-size:1.3rem;
+}
+.feed-detail .comment-item{
+    border-bottom:dashed 0.1rem #f6f6f6;
+    min-height: 3.0rem;
+}
+.feed-detail .comment-item:last-child{
+    border-bottom:none;
+}
+.comment-item .user-info .avatar{
+    width:2.0rem;
+    height:2.0rem;
+    float:left;
+}
+.comment-item .user-info .nick{
+    font-weight: bold;
+    display: block;
+    clear: both;
+    font-size: 0.6rem;
+    float:left;
+}
+.comment-item .comment-desc{
+    display: block;
+    clear: both;
+}
+.comment-item .time-dd{
+    font-size: 0.6rem;
+    color:#999;
+    margin-right:0.2rem;
+    text-align: right;
+}
+.feed-detail .user-op{
+    height: 45px;
+    position: fixed;
+    bottom:0px;
+    width: 100%;
+    padding:10px;
+    background: #f6f6f6;
+    border-top: solid 1px #ccc;
+}
+.feed-detail .user-op .op{
+    width: 50%;
+    float:left;
+    text-align: center;
+    cursor: pointer;
+}
+.my-info{
+    background: #fff;
+    margin-top:5px;
+    height:9.0rem;
+    padding-left:2.0rem;
+    padding-top:2.0rem;
+}
+.my-info .avatar{
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    height: 50px;
+    width: 50px;
+    float:left;
+}
+.my-info .nick{
+    font-weight: bold;
+    font-size:1.8rem;
+    margin-left:10px;
+    float: left;
+}
+.my-info .info{
+    float:left;
+}
+.my-info .honor{
+    font-size: 1.4rem;
+    display: block;
+    clear: left;
+    float: left;
+    margin-left:10px;
+}
+.my-list{
+    height: 6.0rem;
+    background: #fff;
+    font-size: 1.6rem;
+    text-align: left;
+    padding-left:2.0rem;
+    border-top: solid 1px #f6f6f6;
+    padding-top:1.9rem;
+    margin-top:0.5rem;
+    cursor: pointer;
+}
+.my-list em{
+    margin-right: 10px;
+}
+.my-list .icon-go{
+    margin-top:0.2rem;
+}
+.my-friends{
+    padding-left:0rem;
+}
+.my-friends span{
+    width: 33.333333%;
+    text-align: center;
+    display: block;
+    float:left;
+    font-size:1.6rem;
+}
+.login-form{
+    margin-top:5.0rem;
+    padding:1.0rem;
+    font-size:1.6rem;
+}
+.login-form input{
+    font-size:1.6rem;
+    height:4.5rem;
+    float:left;
+}
+.login-form i{
+    float:left;
+}
+.login-form .be-new{
+    font-size:1.4rem;
+    color:#ff9d00;
+}
+.login-form .vcode{
+    width:40%;
+}
+.login-form #captcha{
+    height: 4.5rem;
+    border: 1px solid #ccc;
+    margin-left: 5px;
+}
+.icon-publish{
+    width:40px;
+    height:40px;
+    text-align: center;
+    border-radius: 20px;
+    padding:9px 0px 6px 0px;
+    background: #ff8a00;
+    font-size: 1.8rem;
+    color: #fff;
+    display: block;
+    border: solid 1px #ff9d00;
+    margin:0px auto;
+}
+.topic-detail{
+    margin-top:2.2rem;
+    font-size:1.6rem;
+}
+.topic-detail .topic-header{
+    margin:5px;
+    background:#fff;
+    padding:5px;
+    border-radius:5px;
+}
+.topic-detail .topic-header .pic{
+    width:60px;
+    height:60px;
+    float:left;
+    border: solid 1px #ccc;
+}
+.topic-detail .topic-header .topic{
+    font-size:1.8rem;
+    margin-left:0.2rem;
+    height: 2.2rem;
+    margin-top:1.0rem;
+    font-weight: bold;
+}
+.topic-detail .topic-header .show-detail{
+    padding-left:0.8rem;
+}
+.topic-header .show-detail .topic-num{
+    font-size:1.4rem;
+    margin-top:1.0rem;
+}
+.topic-header .words{
+    font-size:1.8rem;
+    margin-top:0.8rem;
+}
+.topic-list{
+    padding:5px;
+}
+.topic-list .header,.feed-list .header{
+    height: 4.0rem;
+    border: solid 1px #ccc;
+    padding:0.6rem 0.5rem 0rem 1rem;
+    background: #f6f6f6;
+    font-weight: bold;
+}
+.topics .topic-item{
+    margin-top:1px;
+    height:12.0rem;
+    overflow: hidden;
+    position: relative;
+    background: #fff;
+    margin-top:0.5rem;
+    padding:2px;
+}
+.topics .topic-item:first-child{
+    margin-top:0.0rem;
+}
+.topics .preview{
+    float:left;
+    width: 10.0rem;
+    height: 8.0rem;
+}
+.topics .text{
+    float:left;
+    font-size:1.8rem;
+    width: 30.0rem;
+    padding-left:0.5rem;
+}
+.topics .text .title{
+    float:left;
+    font-weight: bold;
+}
+.topics .text .title i{
+    color:#ff9d00;
+    margin-right: 0.3rem;
+    font-weight: bold;
+    font-size: 1.8rem;
+}
+.topics .text .intro{
+    float:left;
+    font-size: 1.4rem;
+}
+.topics .info{
+    height: 2.5rem;
+    width: 100%;
+    clear: both;
+    position: absolute;
+    bottom: 0px;
+    font-size: 1.4rem;
+    text-align: center;
+    padding-top:0.2rem;
+    border-top: solid 1px #ccc;
+    border-bottom: solid 1px #ccc;
+}
+.topics .info span{
+    margin-left:3.0rem;
+}
+.topics .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
 }

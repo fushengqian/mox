@@ -98,23 +98,26 @@ class api extends MOX_CONTROLLER
             $this -> jsonReturn([], -1, '您的登录信息已过期！');
         }
 
-        $this->model('action')->add($user_id, 0, '发布动态', get_client(), fetch_ip());
-
         $content  = trim($_POST['content']);
         $topic_id = trim($_POST['topic_id']);
-        $token    = trim($_POST['images']);
+        $token    = trim($_POST['upload_token']);
+        $images   = $_POST['images'];
 
         $user_id = intval(MOX_APP::session()->info['uid']);
         $user_id = $this->model('user')->get_us($user_id);
+        $pics = array();
 
-        // 图片
+        // 上传token图片
         if ($token) {
             $pic_list = MOX_APP::model('system')->fetch_all('upload_token', 'token = "' . $token . '"');
-            $pics = array();
             empty($pic_list) && $pic_list = array();
             foreach ($pic_list as $k => $v) {
                 $pics[] = $v['url'];
             }
+        }
+
+        if (!empty($images) && empty($token)) {
+            $pics = $images;
         }
 
         $this->model('feed')->create($content, $pics, $user_id, $topic_id);

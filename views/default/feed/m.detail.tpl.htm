@@ -1,44 +1,54 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
-<?php TPL::output('global/back.tpl.htm'); ?>
-<div class="feed-detail">
-    <div class="user-info clearfix">
-        <img class="avatar" src="<?php echo G_DEMAIN.$this->feed['user_info']['avatar'];?>">
-        <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $this->feed['user_info']['id'];?>"><?php echo $this->feed['user_info']['user_name'];?></a>
-        <span class="follow btn btn-danger">关注</span>
-        <span class="time"><?php echo date_friendly($this->feed['create_time']);?></span>
-    </div>
-    <div class="feed-detail-content clearfix">
-        <div class="text">
-            <?php echo $this->feed['content'];?>
+<div class="fui-page-group">
+    <div class="fui-page">
+        <div class="fui-header">
+            <div class="fui-header-left"><a class="back"></a></div>
+            <div class="title">动态详情</div>
+            <div class="fui-header-right">&nbsp;</div>
         </div>
-        <div class="pics clearfix">
-            <?php foreach($this->feed['pics'] as $pic):?>
-            <img src="<?php echo $pic;?>"/>
-            <?php endforeach;?>
-        </div>
-    </div>
-    <div class="comments">
-        <div class="title">
-            <span class="icon-comment">评论</span>
-            <span class="num"><?php echo $this->feed['comment_num'];?></span>
-        </div>
-        <div class="comment-list">
-            <?php foreach($this->feed['comment_list'] as $comment):?>
-            <div class="comment-item">
-                <div class="user-info clearfix">
-                    <img class="avatar" src="<?php echo G_DEMAIN.$comment['user_info']['avatar'];?>"/>
-                    <div class="rrr">
-                         <span class="nick"><?php echo $comment['user_info']['user_name'];?></span>
-                         <span class="comment-desc"><?php echo $comment['content'];?></span>
-                    </div>
-                </div>
-                <div class="time-dd"><?php echo date_friendly($comment['create_time']);?></div>
+        <div class="fui-content feed-detail">
+            <div class="user-info clearfix">
+                <img class="avatar" src="<?php echo G_DEMAIN.$this->feed['user_info']['avatar'];?>">
+                <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $this->feed['user_info']['id'];?>"><?php echo $this->feed['user_info']['user_name'];?></a>
+                <span class="follow btn btn-sm btn-danger">关注</span>
             </div>
-            <?php endforeach;?>
-        </div>
-        <div class="user-op">
-            <div class="op"><span class="icon-good"></span>赞</div>
-            <div class="op"><span class="icon-comment"></span>评论</div>
+            <div class="feed-detail-content clearfix">
+                <div class="text">
+                    <?php echo $this->feed['content'];?>
+                </div>
+                <div class="pics clearfix">
+                    <?php foreach($this->feed['pics'] as $pic):?>
+                    <img src="<?php echo $pic;?>"/>
+                    <?php endforeach;?>
+                </div>
+                <div class="time">
+                    <?php echo date_friendly($this->feed['create_time']);?>
+                </div>
+            </div>
+            <div class="comments">
+                <div class="title">
+                    <span class="icon icon-comment">评论</span>
+                    <span class="num"><?php echo $this->feed['comment_num'];?></span>
+                </div>
+                <div class="comment-list">
+                    <?php foreach($this->feed['comment_list'] as $comment):?>
+                    <div class="comment-item">
+                        <div class="c-user-info">
+                            <img class="avatar" src="<?php echo G_DEMAIN.$comment['user_info']['avatar'];?>"/>
+                            <span class="nick"><?php echo $comment['user_info']['user_name'];?></span>
+                        </div>
+                        <div class="rrr">
+                             <span class="comment-desc"><?php echo $comment['content'];?></span>
+                             <div class="time-dd"><?php echo date_friendly($comment['create_time']);?></div>
+                        </div>
+                    </div>
+                    <?php endforeach;?>
+                </div>
+                <div class="user-op">
+                    <div class="op"><span class="icon-good"></span>赞</div>
+                    <div class="op"><span class="icon-comment"></span>评论</div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

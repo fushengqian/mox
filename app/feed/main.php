@@ -40,7 +40,6 @@ class main extends MOX_CONTROLLER
                      'description' => array(summary(strip_tags($feed['content'], 100))));
         TPL::assign('seo', get_seo('feed-detail', $seo));
 
-        TPL::import_css('css/base.css');
         TPL::output('feed/detail');
     }
 }

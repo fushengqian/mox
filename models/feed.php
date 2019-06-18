@@ -147,7 +147,7 @@ class feed_class extends MOX_MODEL
             // 不重复创建
             $topic = $this -> fetch_row('topic', 'title = "'.$topic_title.'"');
             if (empty($topic)) {
-                $topic_id = setId();
+                $topic_id = date("ymdhis").rand(100,999);
                 $preview = !empty($pics[0]) ? str_replace(G_DEMAIN, '', $pics[0]) : '/static/avatar/default.jpg';
                 $this->insert('topic', array('id'    => $topic_id,
                                                     'title' => $topic_title,
@@ -165,7 +165,7 @@ class feed_class extends MOX_MODEL
         }
 
         $feed_id = $this -> insert('feed', array(
-            'id'          => setId(),
+            'id'          => date("ymdhis").rand(100,999),
             'topic_id'    => $topic_id,
             'content'     => $content,
             'user_id'     => $user_id,
