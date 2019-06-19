@@ -5731,7 +5731,7 @@ font-size:0.6rem;line-height: 0.8rem;}
     margin-left:10px;
 }
 .feed-detail {
-    padding:10px;
+    background: #fff;
 }
 .feed-detail .user-info{
     text-align:left;
@@ -5771,7 +5771,6 @@ font-size:0.6rem;line-height: 0.8rem;}
 }
 .comment-list{
     text-align: left;
-    border: solid 0.06rem #ccc;
     padding:0.2rem;
     margin:0.3rem;
     clear: both;
@@ -5788,6 +5787,15 @@ font-size:0.6rem;line-height: 0.8rem;}
     border-bottom:dashed 1px #cccccc;
     padding-bottom: 0.2rem;
 }
+.comment-item .c-user-info{
+    width: 2.8rem;
+    float:left;
+    min-height: 5.0rem;
+}
+.comment-item .rrr{
+    margin-left:2.9rem;
+    min-height: 4.0rem;
+}
 .comment-item .c-user-info img{
     border: solid 1px #CCCCCC;
     width: 2.0rem;
@@ -5795,12 +5803,14 @@ font-size:0.6rem;line-height: 0.8rem;}
     border-radius: 1.0rem;
 }
 .comment-item .c-user-info .nick{
-    font-size:0.8rem;
+    font-size:0.6rem;
     font-weight: bold;
     display: block;
+    color:#ff6600;
+    text-align: left;
+    width: 2.5rem;
 }
 .comment-list .comment-desc{
-    margin-left:2.0rem;
     font-size:0.8rem;
 }
 .comment-list .comment-area{
@@ -5864,60 +5874,82 @@ font-size:0.6rem;line-height: 0.8rem;}
     border: solid 1px #ccc;
     margin-bottom:2px;
 }
+.feed-detail-content .time{
+    text-align: right;
+    color:#ccc;
+    padding-right: 0.5rem;
+    font-size:0.6rem;
+}
 .feed-detail .comments{
     padding:5px 0px 5px 0px;
+    margin-bottom: 2.4rem;
+}
+.feed-detail .comments .no-comment{
+    margin:0.5rem 0rem 0.5rem 0.3rem;
+    font-size: 0.6rem;
 }
 .feed-detail .comments .title{
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     font-weight: bold;
     background: #f6f6f6;
-}
-.feed-detail .comments .num{
-    font-size:1.3rem;
+    height: 1.6rem;
+    padding:0.2rem 0rem 0.5rem 0.2rem;
 }
 .feed-detail .comment-item{
     border-bottom:dashed 0.1rem #f6f6f6;
-    min-height: 3.0rem;
+    min-height: 5.0rem;
+    clear: both;
+    margin-top:0.8rem;
 }
 .feed-detail .comment-item:last-child{
     border-bottom:none;
 }
-.comment-item .user-info .avatar{
+.comment-item .c-user-info .avatar{
     width:2.0rem;
     height:2.0rem;
     float:left;
 }
-.comment-item .user-info .nick{
+.comment-item .c-user-info .nick{
     font-weight: bold;
     display: block;
     clear: both;
-    font-size: 0.6rem;
+    font-size: 0.8rem;
     float:left;
-}
-.comment-item .comment-desc{
-    display: block;
-    clear: both;
 }
 .comment-item .time-dd{
     font-size: 0.6rem;
     color:#999;
     margin-right:0.2rem;
     text-align: right;
+    margin-bottom: 0.5rem;
 }
 .feed-detail .user-op{
-    height: 45px;
+    height: 2.2rem;
     position: fixed;
     bottom:0px;
     width: 100%;
-    padding:10px;
+    padding:0.3rem;
     background: #f6f6f6;
-    border-top: solid 1px #ccc;
 }
-.feed-detail .user-op .op{
-    width: 50%;
+.feed-detail .user-op .op-like{
     float:left;
     text-align: center;
     cursor: pointer;
+    width:1.6rem;
+    height: 1.6rem;
+    padding-top: 0.2rem;
+    border: solid 1px #ff6600;
+    border-radius: 1.0rem;
+    font-weight: bold;
+    color:#ff6600;
+}
+.user-op .op-comment .fui-input{
+    height: 1.6rem;
+    width: 12rem;
+    margin-left:0.5rem;
+    border: solid 1px #ccc;
+    border-radius: 0.2rem;
+    padding:0.1rem;
 }
 .my-info{
     background: #fff;

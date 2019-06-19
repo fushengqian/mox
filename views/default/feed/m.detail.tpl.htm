@@ -2,7 +2,7 @@
 <div class="fui-page-group">
     <div class="fui-page">
         <div class="fui-header">
-            <div class="fui-header-left"><a class="back"></a></div>
+            <div class="fui-header-left"><a href="javascript:;" class="back"></a></div>
             <div class="title">动态详情</div>
             <div class="fui-header-right">&nbsp;</div>
         </div>
@@ -22,7 +22,7 @@
                     <?php endforeach;?>
                 </div>
                 <div class="time">
-                    <?php echo date_friendly($this->feed['create_time']);?>
+                    <?php echo date_friendly($this->feed['create_time']);?>更新
                 </div>
             </div>
             <div class="comments">
@@ -30,6 +30,7 @@
                     <span class="icon icon-comment">评论</span>
                     <span class="num"><?php echo $this->feed['comment_num'];?></span>
                 </div>
+                <?php if(!empty($this->feed['comment_list'])):?>
                 <div class="comment-list">
                     <?php foreach($this->feed['comment_list'] as $comment):?>
                     <div class="comment-item">
@@ -38,19 +39,23 @@
                             <span class="nick"><?php echo $comment['user_info']['user_name'];?></span>
                         </div>
                         <div class="rrr">
-                             <span class="comment-desc"><?php echo $comment['content'];?></span>
                              <div class="time-dd"><?php echo date_friendly($comment['create_time']);?></div>
+                             <span class="comment-desc"><?php echo $comment['content'];?></span>
                         </div>
                     </div>
                     <?php endforeach;?>
                 </div>
+                <?php else :?>
+                <div class="no-comment">暂时还没有评论哦...</div>
+                <?php endif;?>
                 <div class="user-op">
-                    <div class="op"><span class="icon-good"></span>赞</div>
-                    <div class="op"><span class="icon-comment"></span>评论</div>
+                    <div class="op-like"><span class="icon icon-like"></span></div>
+                    <div class="op-comment">
+                         <input class="fui-input" type="text" placeholder="有看法？直接评论吧..." name='comment' value=""/>
+                         <button class="btn btn-success btn-sm"><span class="icon icon-comment">评论</span></button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<?php TPL::output('global/footer.tpl.htm'); ?>
