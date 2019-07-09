@@ -1,29 +1,59 @@
 <?php TPL::output('global/header.tpl.htm'); ?>
-<div class="header-holder">
-    <div class="common-header">
-        <a class="back"><em class="sprite icon-back"></em></a>
-        <span class="title text-ellipsis1 ">登录</span>
+
+<style type="text/css">
+    .header {background-image: url("/static/images/login-bg.jpg"); background-repeat: no-repeat}
+    .btn {background:#fea119;}
+    .text a {color:#fea119;}
+    .header .logo {box-shadow:#fea119 0px 1px 8px;}
+</style>
+<div class="fui-page">
+    <div class="fui-header">
+        <div class="fui-header-left">
+            <a class="back"> </a>
+        </div>
+        <div class="title">用户登录</div>
+        <div class="fui-header-right" data-nomenu="true"></div>
     </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="login-form">
-            <div class="bc">
-                <form id="login_form" method="post" onsubmit="return false" action="<?php echo G_DEMAIN;?>/user/ajax/login_process/">
-                    <div class="form-group">
-                        <input name="phone" type="phone" class="form-control rounded-0" placeholder="手机号">
-                    </div>
-                    <div class="form-group">
-                        <input name="password" type="password" class="form-control rounded-0" placeholder="密码">
-                    </div>
-                    <div class="form-group">
-                        <button id="do_login" type="button" class="btn btn-fat btn-success btn-lg btn-block br0" onclick="FNC.ajax_post($('#login_form'), FNC.ajax_processer, 'error_message');">登录</button>
-                    </div>
-                </form>
-                <p><a class="be-new" href="<?php echo G_DEMAIN;?>/user/register/">注册新用户</a></p>
+    <div class="fui-content login-page">
+        <div class="header">
+            <div class="logo">
+                <img src="/static/images/logom.png" />
             </div>
         </div>
-    </div>
-</div>
+        <div class="acc-input-group">
+            <div class="acc-input">
+                <div class="title">11位手机号</div>
+                <div class="input">
+                    <input type="tel" class="input-inner" value="" placeholder="请输入手机号码" name="mobile" id="mobile" maxlength="11"/>
+                </div>
+            </div>
+            <div class="acc-input">
+                <div class="title">登录密码</div>
+                <div class="input">
+                    <input type="password" class="input-inner" value="" placeholder="请输入密码" name="pwd" id="pwd" maxlength="20"/>
+                    <a class="remark" href="">忘记密码</a>
+                </div>
+            </div>
+        </div>
 
-<?php TPL::output('global/footer.tpl.htm'); ?>
+        <div class="btn" id="btnSubmit">立即登录</div>
+        <div class="text">
+            <p>还没有帐号? <a href="">立即注册</a></p>
+        </div>
+        <div class="sns-login">
+            <div class="title">
+                <div class="text">第三方登录</div>
+            </div>
+            <div class="icons">
+                <div class="item green btn-sns" data-sns="wx" id="threeWX"><i class="icon icon-wechat1"></i></div>
+            <div class="item blue btn-sns" data-sns="qq"><i class="icon icon-qq" style="font-size: 1.5rem"></i></div>
+        </div>
+    </div>
+
+    <script language='javascript'>
+        require(['account'], function (modal) {
+            modal.initLogin({backurl:'/user/'});
+        });
+    </script>
+</div>
+</div>

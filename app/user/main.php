@@ -139,10 +139,7 @@ class main extends MOX_CONTROLLER
             }
         }
 
-        TPL::import_js('js/jquery.form.js');
-        TPL::import_js('js/template.js');
-        TPL::import_js('js/fnc.js');
-        TPL::import_css('css/base.css');
+        TPL::import_css('css/account.css');
 
         if ($_GET['url']) {
             $return_url = htmlspecialchars(base64_decode($_GET['url']));
@@ -151,7 +148,6 @@ class main extends MOX_CONTROLLER
         }
 
         TPL::assign('return_url', $return_url);
-
         TPL::assign('seo', get_seo('login'));
 
         TPL::output("user/login");
