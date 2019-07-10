@@ -5811,7 +5811,7 @@ font-size:0.6rem;line-height: 0.8rem;}
     width: 2.5rem;
 }
 .comment-list .comment-desc{
-    font-size:0.8rem;
+    font-size:0.6rem;
 }
 .comment-list .comment-area{
     border: solid 1px #ccc;
@@ -5830,7 +5830,6 @@ font-size:0.6rem;line-height: 0.8rem;}
     font-weight: bold;
     color: #333333;
 }
-
 .feed-detail{
     background: #fff;
 }
@@ -5867,7 +5866,7 @@ font-size:0.6rem;line-height: 0.8rem;}
     font-size: 0.8rem;
     padding-left:5px;
     padding-right: 5px;
-    line-height: 2.0rem;
+    line-height: 1.5rem;
 }
 .feed-detail-content .pics img{
     width:100%;
@@ -6147,9 +6146,6 @@ font-size:0.6rem;line-height: 0.8rem;}
     height: 30px;
     border-radius: 15px;
 }
-
-
-
 
 ::-webkit-input-placeholder {
     color: #ccc;

@@ -50,17 +50,22 @@
                               <?php endforeach;?>
                           </div>
                      </div>
-                     <div class="user-attr">
-                          <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
+                     <div id="<?php echo $feed['id'];?>" class="user-attr">
+                          <span class="icon icon-like">赞 <span class="num"><?php echo $feed['like_num'];?></span></span>
                           <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
                      </div>
                  </div>
                  <?php endforeach;?>
             </div>
-            <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'> 正在加载...</span></div>
+            <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'>正在加载...</span></div>
         </div>
+        <?php if(!empty($this->user_info['uid'])){?>
         <a class="btn btn-primary btn-add-post" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
+        <?php } else { ?>
+        <a class="btn btn-primary btn-add-post" href="/user/login/"><i class="icon icon-edit2"></i></a>
+        <?php } ?>
     </div>
     <?php TPL::output('feed/create.tpl.htm'); ?>
 </div>
 <?php TPL::output('global/footer.tpl.htm'); ?>
+<?php TPL::output('global/common_feed.tpl.htm'); ?>

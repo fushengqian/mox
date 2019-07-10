@@ -131,7 +131,7 @@ class main extends MOX_CONTROLLER
     {
         $url = base64_decode($_GET['url']);
         $user_info = MOX_APP::user()->get_info();
-        if ($user_info) {
+        if ($user_info['uid']) {
             if ($url) {
                 header('Location: ' . $url);
             } else {

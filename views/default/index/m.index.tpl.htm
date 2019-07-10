@@ -97,8 +97,8 @@
                             <?php endforeach;?>
                         </div>
                     </div>
-                    <div class="user-attr">
-                        <span class="icon icon-like">赞 <?php echo $feed['like_num'];?></span>
+                    <div id="<?php echo $feed['id'];?>" class="user-attr">
+                        <span class="icon icon-like">赞 <span class="num"><?php echo $feed['like_num'];?></span></span>
                         <span class="icon icon-comment">评论 <?php echo $feed['comment_num'];?></span>
                     </div>
                 </div>
@@ -109,46 +109,14 @@
                 <span class="text"> 正在加载...</span>
             </div>
         </div>
+        <?php if(!empty($this->user_info['uid'])){?>
         <a class="btn btn-primary btn-add-post" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
+        <?php } else { ?>
+        <a class="btn btn-primary btn-add-post" href="/user/login/"><i class="icon icon-edit2"></i></a>
+        <?php } ?>
     </div>
     <?php TPL::output('feed/create.tpl.htm'); ?>
 </div>
 
 <?php TPL::output('global/footer.tpl.htm'); ?>
-
-<script id='tpl_feed_list' type='text/html'>
-    <%each list as feed%>
-    <div class="feed-item">
-        <div class="user-info">
-            <a href="<?php echo G_DEMAIN;?>/user/<%feed.author.id%>/"><img class="avatar" src="<%feed.author.portrait%>"></a>
-            <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><%feed.author.name%></a>
-            <span class="time"><%feed.pubDate%></span>
-        </div>
-        <div class="feed-content">
-            <div class="text">
-                <a href="<?php echo G_DEMAIN;?>/feed/<%feed.id%>"><%feed.content%></a>
-            </div>
-            <div class="pics">
-                <%each feed.images as pic%>
-                <img src="<%pic.thumb%>"/>
-                <%/each%>
-            </div>
-        </div>
-        <div class="user-attr">
-            <span class="icon icon-like">赞 <%feed.likeCount%></span>
-            <span class="icon icon-comment">评论 <%feed.commentCount%></span>
-        </div>
-    </div>
-    <%/each%>
-</script>
-
-<script language='javascript'>require(['/static/js/list.js'], function (modal) {
-    modal.init();
-});</script>
-
-
-<script language='javascript'>
-    require(['/static/js/sns.js'], function (modal) {
-        modal.init();
-    });
-</script>
+<?php TPL::output('global/common_feed.tpl.htm'); ?>

@@ -16,6 +16,8 @@ define(['core', 'tpl', './face.js'], function(core, tpl, face) {
 			class: '.post-face .item',
 			input: $('#content')
 		});
+
+		// 发布动态
 		$('#btnSend').click(function() {
 			if ($(this).attr('stop')) {
 				return;
@@ -29,7 +31,7 @@ define(['core', 'tpl', './face.js'], function(core, tpl, face) {
 				images.push($(this).data('filename'));
 			});
 			$(this).attr('stop', 1);
-			core.json('feed/api/create/', {
+			core.json('/feed/api/create/', {
 				content: $('#content').val(),
 				images: images
 			}, function(ret) {
@@ -49,6 +51,7 @@ define(['core', 'tpl', './face.js'], function(core, tpl, face) {
 				});
 			}, true, true);
 		});
+
 		modal.bindPostEvents();
 	};
 

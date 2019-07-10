@@ -59,6 +59,7 @@ class MOX_CONTROLLER
 
         $this->user_info['group_name'] = $user_group['group_name'];
         $this->user_info['permission'] = $user_group['permission'];
+        $this->user_info['uid'] = $this->user_id;
 
         MOX_APP::session()->permission = $this->user_info['permission'];
 
