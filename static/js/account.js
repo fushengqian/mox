@@ -46,7 +46,7 @@ define(['core'], function (core, tpl, picker) {
                 modal.verifycode();
             }, 1000);
         } else {
-            $('#btnCode').html('获取验证码').removeClass('disabled').removeAttr('disabled')
+            $('#btnCode').html('获取验证码').removeClass('disabled').removeAttr('disabled');
         }
     };
     modal.initRf = function (params) {
@@ -89,7 +89,7 @@ define(['core'], function (core, tpl, picker) {
             }, false, true);
         });
         $("#btnCode2").click(function () {
-            $(this).prop('src', '../web/index.php?c=utility&a=code&r=' + Math.round(new Date().getTime()));
+            $(this).prop('src', '/user/captcha/?v=' + Math.round(new Date().getTime()));
             return false;
         });
         $('#btnSubmit').click(function () {
@@ -117,7 +117,7 @@ define(['core'], function (core, tpl, picker) {
                 return;
             }
             $('#btnSubmit').html('正在处理...').attr('stop', 1);
-            var url = !modal.type ? "account/register" : "account/forget";
+            var url = "/user/api/register/";
             core.json(url, {
                 mobile: $('#mobile').val(),
                 verifycode: $('#verifycode').val(),
@@ -244,7 +244,7 @@ define(['core'], function (core, tpl, picker) {
             }, true, true);
         });
         $("#btnCode2").click(function () {
-            $(this).prop('src', '../web/index.php?c=utility&a=code&r=' + Math.round(new Date().getTime()));
+            $(this).prop('src', '/user/captcha/?v=' + Math.round(new Date().getTime()));
             return false;
         });
     };
@@ -323,7 +323,7 @@ define(['core'], function (core, tpl, picker) {
             }, false, true);
         });
         $("#btnCode2").click(function () {
-            $(this).prop('src', '../web/index.php?c=utility&a=code&r=' + Math.round(new Date().getTime()));
+            $(this).prop('src', '/user/captcha/?v=' + Math.round(new Date().getTime()));
             return false;
         });
     };
