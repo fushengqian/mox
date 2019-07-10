@@ -64,7 +64,7 @@ class api extends MOX_CONTROLLER
         $this -> jsonReturn($info);
     }
 
-        /**
+    /**
      * 上传头像
      */
     public function avatar_action()
@@ -221,7 +221,7 @@ class api extends MOX_CONTROLLER
         // 返回用户信息
         $user_info = $this -> _getUserInfo($user_info['id'], $user_info['id']);
 
-        $this -> jsonReturn($user_info);
+        $this -> jsonReturn($user_info, 1, '登录成功！');
     }
 
     /**

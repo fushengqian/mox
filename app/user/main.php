@@ -22,7 +22,7 @@ class main extends MOX_CONTROLLER
     /**
      * 用户主页
      */
-    public function index_action()
+    public function home_action()
     {
         TPL::import_css('css/base.css');
 
@@ -62,13 +62,13 @@ class main extends MOX_CONTROLLER
 
         $this->model('points')->send($user_id, 'visit_user_index');
 
-        TPL::output('user/index');
+        TPL::output('user/home');
     }
 
     /**
      * 用户中心
      * */
-    public function home_action()
+    public function index_action()
     {
         TPL::import_css('css/base.css');
 
@@ -89,7 +89,7 @@ class main extends MOX_CONTROLLER
 
         TPL::assign('seo', get_seo('user-home'));
 
-        TPL::output('user/home');
+        TPL::output('user/index');
     }
 
     /**
@@ -135,7 +135,7 @@ class main extends MOX_CONTROLLER
             if ($url) {
                 header('Location: ' . $url);
             } else {
-                HTTP::redirect('/user/home');
+                HTTP::redirect('/user/');
             }
         }
 

@@ -6183,6 +6183,7 @@ font-size:0.6rem;line-height: 0.8rem;}
     border-radius: 5rem;
     background: #fff;
     box-shadow: #fe8b25 0px 1px 8px;
+    border: solid 1px #fff;
     margin: 4.2rem auto 0;
     overflow: hidden;
 }
