@@ -9,9 +9,16 @@ define(['core', 'tpl'], function (core, tpl) {
                 modal.getList();
             }
         });
+
         if (modal.page == 1) {
             modal.getList();
         }
+
+        // tab切换
+        $('.feed-tab').click(function(){
+            var tab = $(this).attr("attr");
+            FoxUI.toast.show(tab);
+        });
     }
 
     modal.loading = function () {
@@ -32,6 +39,7 @@ define(['core', 'tpl'], function (core, tpl) {
     };
 
     modal.bindEvents = function () {
+        // 点赞
         $(".icon-like").click(function () {
             if (isLogin != '1') {
                 FoxUI.alert('请先登录哦~', '提示', function(){
@@ -53,6 +61,18 @@ define(['core', 'tpl'], function (core, tpl) {
                     return;
                 }, true, true);
             }
+        });
+
+        // 评论
+        $(".icon-comment").click(function () {
+            var feed_id = $(this).parent().attr("id");
+            window.location.href = '/feed/'+feed_id+'?to_comment=1';
+        });
+
+        // 详情
+        $(".feed-content").click(function () {
+            var feed_id = $(this).attr("attr");
+            window.location.href = '/feed/'+feed_id;
         });
     };
 

@@ -3,7 +3,6 @@ require.config({
     urlArgs: 'v=' + version, 
     baseUrl: '/static/js',
     paths: {
-        'jquery': '/static/dist/jquery/jquery-1.11.1.min',
         'jquery.gcjs': '/static/dist/jquery/jquery.gcjs',
         'jquery.cookie': '/static/dist/jquery/jquery.cookie',
         'tpl':'/static/dist/tmodjs',

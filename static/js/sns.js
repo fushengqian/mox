@@ -55,6 +55,23 @@ define(['core', 'tpl', './face.js'], function(core, tpl, face) {
 		modal.bindPostEvents();
 	};
 
+	modal.detail = function() {
+        var to_comment = 0;
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i<vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == "to_comment") {
+                to_comment = pair[1];
+                break;
+            }
+        }
+        // 滚动到评论视角
+        if (to_comment == 1) {
+            document.getElementById("comment_list").scrollIntoView();
+        }
+	}
+
 	modal.bindPostEvents = function() {
 		$('.fui-uploader').uploader({
 			uploadUrl: core.getUrl('/common/upload/upload/'),
