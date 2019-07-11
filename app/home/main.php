@@ -19,16 +19,43 @@ class main extends MOX_CONTROLLER
      * */
     public function index_action()
     {
+        $tab = !empty($_GET['id']) ? trim($_GET['id']) : 'focus';
+
         TPL::import_css('css/base.css');
 
         TPL::assign('seo', get_seo('usercenter'));
 
-        $user_id = MOX_APP::session()->info['uid'];
+        $my_user_id = MOX_APP::session()->info['uid'];
+        if (!$my_user_id) {
+            $my_user_id = 0;
+        }
+
+        // 我的关注
+        if ($tab == 'focus') {
+            $my_follower_list =  $this -> model('system')->fetch_all('follow', "user_id = '".$my_user_id."'");
+            $my_follower = array($my_user_id);
+            if ($my_follower_list) {
+                foreach ($my_follower_list as $f){
+                    $my_follower[] = $f['follow_user_id'];
+                }
+            }
+            $where[] = 'user_id in ('.implode(',', array_unique($my_follower)).')';
+        }
+
+        // 我的
+        if ($tab == 'my') {
+            $where[] = 'user_id = "'.$my_user_id.'"';
+        }
+
+        // 热门动态
+        if ($tab == 'hot') {
+            $where[] = "is_home = 1";
+        }
 
         $honor = $this->model('points')->getHonor($this->user_info['point']);
         TPL::assign('honor', $honor);
 
-        $feed_list = $this->model('feed')-> get_data_list(array('user_id' => $user_id));
+        $feed_list = $this->model('feed')-> get_data_list($where);
         TPL::assign('feed_list', $feed_list);
 
         // Mox推荐用户
@@ -42,6 +69,7 @@ class main extends MOX_CONTROLLER
         $this->model('points')->send($user_id, 'visit_home');
 
         TPL::assign('seo', get_seo('home'));
+        TPL::assign('tab', $tab);
 
         TPL::output('home/index');
     }

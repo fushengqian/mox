@@ -25,11 +25,15 @@
                 </div>
             </div>
             <div class="fui-tab fui-tab-danger">
-                <a class="active" href="javascript:void(0)">关注</a>
-                <a href="javascript:void(0)">热门</a>
-                <a href="javascript:void(0)">我的</a>
+                 <a class="active feed-tab" attr="focus" href="javascript:void(0);">关注</a>
+                 <a class="feed-tab" attr="hot" href="javascript:void(0);">热门</a>
+                 <a class="feed-tab" attr="my" href="javascript:void(0);">我的</a>
             </div>
-
+            <?php if(empty($this -> feed_list)){?>
+            <div class='content-empty'>
+                <img src="/static/images/nolist.png" style="width:4rem;margin-bottom:0.5rem;"><br/><p style="font-size: 0.75rem">暂时没有数据哦！</p>
+            </div>
+            <?php } ?>
             <div class="feed-list">
                  <?php foreach($this -> feed_list as $feed):?>
                  <div class="feed-item">
@@ -38,14 +42,16 @@
                           <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
                           <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
                      </div>
-                     <div class="feed-content">
+                     <div attr="<?php echo $feed['id'];?>" class="feed-content">
                           <div class="text">
                                <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
                           </div>
                           <div class="pics">
                               <?php foreach($feed['pics'] as $key => $pic):?>
                                   <?php if($key < 3):?>
-                                  <img src="<?php echo $pic;?>"/>
+                                  <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>">
+                                     <img src="<?php echo $pic;?>"/>
+                                  </a>
                                   <?php endif;?>
                               <?php endforeach;?>
                           </div>
@@ -57,7 +63,7 @@
                  </div>
                  <?php endforeach;?>
             </div>
-            <div class='infinite-loading'><span class='fui-preloader'></span><span class='text'>正在加载...</span></div>
+            <div class='infinite-loading' style="display: none;"><span class='fui-preloader'></span><span class='text'>正在加载...</span></div>
         </div>
         <?php if(!empty($this->user_info['uid'])){?>
         <a class="btn btn-primary btn-add-post" href="#sns-board-post-page"><i class="icon icon-edit2"></i></a>
@@ -67,5 +73,5 @@
     </div>
     <?php TPL::output('feed/create.tpl.htm'); ?>
 </div>
-<?php TPL::output('global/footer.tpl.htm'); ?>
 <?php TPL::output('global/common_feed.tpl.htm'); ?>
+<?php TPL::output('global/footer.tpl.htm'); ?>

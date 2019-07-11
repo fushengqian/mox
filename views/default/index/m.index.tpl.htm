@@ -85,14 +85,16 @@
                         <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><?php echo $feed['user_info']['user_name'];?></a>
                         <span class="time"><?php echo date_friendly($feed['create_time']);?></span>
                     </div>
-                    <div class="feed-content">
+                    <div attr="<?php echo $feed['id'];?>" class="feed-content">
                         <div class="text">
                             <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>"><?php echo $feed['content'];?></a>
                         </div>
                         <div class="pics">
                             <?php foreach($feed['pics'] as $key => $pic):?>
                             <?php if($key < 3):?>
-                            <img src="<?php echo $pic;?>"/>
+                            <a href="<?php echo G_DEMAIN;?>/feed/<?php echo ($feed['id']);?>">
+                               <img src="<?php echo $pic;?>"/>
+                            </a>
                             <?php endif;?>
                             <?php endforeach;?>
                         </div>
@@ -117,6 +119,5 @@
     </div>
     <?php TPL::output('feed/create.tpl.htm'); ?>
 </div>
-
-<?php TPL::output('global/footer.tpl.htm'); ?>
 <?php TPL::output('global/common_feed.tpl.htm'); ?>
+<?php TPL::output('global/footer.tpl.htm'); ?>
