@@ -10,7 +10,11 @@
             <div class="user-info clearfix">
                 <img class="avatar" src="<?php echo G_DEMAIN.$this->feed['user_info']['avatar'];?>">
                 <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $this->feed['user_info']['id'];?>"><?php echo $this->feed['user_info']['user_name'];?></a>
-                <span class="follow btn btn-sm btn-danger">关注</span>
+                <?php if($this->follow):?>
+                <span id="follow" attr="<?php echo $this->feed['user_info']['id'];?>" class="follow btn btn-sm btn-danger disabled"><i class="icon icon-followed"></i>已关注</span>
+                <?php else:?>
+                <span id="follow" attr="<?php echo $this->feed['user_info']['id'];?>" class="follow btn btn-sm btn-danger"><i class="icon icon-followed"></i>关注</span>
+                <?php endif;?>
             </div>
             <div class="feed-detail-content clearfix">
                 <div class="text">
@@ -49,7 +53,7 @@
                 <div class="no-comment">暂时还没有评论哦...</div>
                 <?php endif;?>
                 <div class="user-op">
-                    <div class="op-like"><span class="icon icon-like"></span></div>
+                    <div id="like" attr="<?php echo $this->feed['id'];?>" class="op-like"><span class="icon <?php if($this->like):?>icon-likefill<?php else:?>icon-like<?php endif;?>"></span></div>
                     <div class="op-comment">
                          <input class="fui-input" type="text" placeholder="有看法？直接评论吧..." name='comment' value=""/>
                          <button class="btn btn-success btn-sm"><span class="icon icon-comment">评论</span></button>

@@ -27,16 +27,16 @@ class api extends MOX_CONTROLLER
         }
 
         // 当前页
-        $page = !empty($_POST['page']) ? $_POST['page'] : 1;
-        $user_id = $_POST['userId'] ? trim($_POST['userId']) : 0;
-        $tab = $_POST['tab'] ? $_POST['tab'] : 0;//0：最新; 1：关注; 2：热门
+        $page = !empty($_REQUEST['page']) ? $_REQUEST['page'] : 1;
+        $user_id = $_REQUEST['userId'] ? trim($_REQUEST['userId']) : 0;
+        $tab = $_REQUEST['tab'] ? $_REQUEST['tab'] : 'focus';//focus：关注; hot：热门; my：我的
 
         $where = array();
 
         // 我的关注
-        if ($my_user_id && $user_id && ($my_user_id == $user_id)) {
+        if ($tab == 'focus') {
             $my_follower_list =  $this -> model('system')->fetch_all('follow', "user_id = '".$my_user_id."'");
-            $my_follower = array($my_user_id);
+            $my_follower = array(0);
             if ($my_follower_list) {
                 foreach ($my_follower_list as $f){
                     $my_follower[] = $f['follow_user_id'];
@@ -46,13 +46,18 @@ class api extends MOX_CONTROLLER
         }
 
         // 某个人的动态
-        if($user_id && ($my_user_id != $user_id)) {
+        if ($user_id && ($my_user_id != $user_id)) {
             $where[] = 'user_id = "'.$user_id.'"';
         }
 
         // 热门动态
-        if ($tab == '2') {
+        if ($tab == 'hot') {
             $where[] = "is_home = 1";
+        }
+
+        // 我的动态
+        if ($tab == 'my') {
+            $where[] = 'user_id = "'.$my_user_id.'"';
         }
 
         $feed_list = $this->model('feed')-> get_data_list($where, $page, $page_size);
@@ -80,7 +85,7 @@ class api extends MOX_CONTROLLER
 
         $result['list'] = $feed_arr;
         $result['pagesize'] = $page_size;
-        $result['total'] = 1000;
+        $result['total'] = $this->model('feed')->count('feed', implode(' AND ', $where));
 
         // 更新最后一次刷新时间
         $this->model('user')->update_user_last_feed_time($my_user_id);

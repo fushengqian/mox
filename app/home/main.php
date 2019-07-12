@@ -66,7 +66,7 @@ class main extends MOX_CONTROLLER
         $hot_feed = $this->model('feed')-> get_data_list(array('is_home <> 1'), 1, 15, 'read_num desc');
         TPL::assign('hot_feed', $hot_feed);
 
-        $this->model('points')->send($user_id, 'visit_home');
+        $this->model('points')->send(0, 'visit_home');
 
         TPL::assign('seo', get_seo('home'));
         TPL::assign('tab', $tab);

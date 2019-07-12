@@ -27,18 +27,15 @@ class api extends MOX_CONTROLLER
 
         $target_id = trim($_POST['targetId']);
         if (empty($target_id)) {
-            $this -> jsonReturn([], -1, '系统参数有误！');
+            $this -> jsonReturn([], -1, '系统参数有误');
         }
 
         $user_id = $this->model('user')->get_us($user_id);
 
         $result = $this->model('like')->dolike($target_id, 'feed', $user_id);
         if (!$result) {
-            $this -> jsonReturn([], -1, '抱歉，点赞失败！');
+            $this -> jsonReturn([], -1, '点赞失败');
         }
-
-        // 跟踪用户行为
-        $this->model('action')->add($user_id, 0, '点赞：'.$target_id, get_client(), fetch_ip());
 
         //发送消息
         $feed = $this->model('feed')->fetch_row('feed', "id = '".$target_id."'");

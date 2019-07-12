@@ -199,7 +199,7 @@ a {
 .btn.btn-danger.disabled {
 	background: #c13e3e;
 	color: #d2848b;
-	border: 1px solid #ae3838;
+	border: 1px solid #fff;
 }
 
 .btn.btn-default-o {

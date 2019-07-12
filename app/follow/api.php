@@ -15,7 +15,7 @@
 class api extends MOX_CONTROLLER
 {
     /**
-     * 关注
+     * 关注用户
      */
     public function do_action()
     {

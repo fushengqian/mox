@@ -70,6 +70,46 @@ define(['core', 'tpl', './face.js'], function(core, tpl, face) {
         if (to_comment == 1) {
             document.getElementById("comment_list").scrollIntoView();
         }
+
+        $('#follow').click(function() {
+            var follow_user_id = $(this).attr("attr");
+
+            core.json('/follow/api/do/', {
+                id: follow_user_id
+            }, function(ret) {
+                $('#btnSend').removeAttr('stop');
+                if (ret.code == -1) {
+                    FoxUI.toast.show(ret.message);
+                    return;
+                }
+
+                if (ret.result.relation == 1 || ret.result.relation == 2) {
+                    $('#follow').text("已关注").addClass("disabled");
+                } else {
+                    $('#follow').text("关注").removeClass("disabled");
+                }
+            }, true, true);
+       });
+
+        $('#like').click(function() {
+            var follow_user_id = $(this).attr("attr");
+
+            core.json('/like/api/do/', {
+                targetId: follow_user_id
+            }, function(ret) {
+                $('#btnSend').removeAttr('stop');
+                if (ret.code == -1) {
+                    FoxUI.toast.show(ret.message);
+                    return;
+                }
+
+                if (ret.result.liked == true) {
+                    $('#like').find("span").removeClass("icon-like").addClass("icon-likefill");
+                }
+            }, true, true);
+        });
+
+
 	}
 
 	modal.bindPostEvents = function() {

@@ -111,6 +111,8 @@ class user_class extends MOX_MODEL
      */
     public function get_us($user_id)
     {
+        return $user_id;
+
         $user_info = $this -> get_user_info_by_id($user_id);
         if (!empty($user_info)) {
             if ($user_info['is_us']) {

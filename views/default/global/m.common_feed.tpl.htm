@@ -1,0 +1,35 @@
+﻿<script id='tpl_feed_list' type='text/html'>
+    <%each list as feed%>
+    <div class="feed-item">
+        <div class="user-info">
+            <a href="<?php echo G_DEMAIN;?>/user/<%feed.author.id%>/"><img class="avatar" src="<%feed.author.portrait%>"></a>
+            <a class="nick" href="<?php echo G_DEMAIN;?>/user/<?php echo $feed['user_info']['id'];?>/"><%feed.author.name%></a>
+            <span class="time"><%feed.pubDate%></span>
+        </div>
+        <div attr="<%feed.id%>" class="feed-content">
+            <div class="text">
+                <a href="<?php echo G_DEMAIN;?>/feed/<%feed.id%>"><%feed.content%></a>
+            </div>
+            <div class="pics">
+                <%each feed.images as pic%>
+                <img src="<%pic.thumb%>"/>
+                <%/each%>
+            </div>
+        </div>
+        <div id="<%feed.id%>" class="user-attr">
+            <span class="icon icon-like">赞 <span class="num"><%feed.likeCount%></span></span>
+            <span class="icon icon-comment">评论 <%feed.commentCount%></span>
+        </div>
+    </div>
+    <%/each%>
+</script>
+
+<script language='javascript'>require(['/static/js/feed_list.js'], function (modal) {
+    modal.init();
+});</script>
+
+<script language='javascript'>
+    require(['/static/js/sns.js'], function (modal) {
+        modal.init();
+    });
+</script>

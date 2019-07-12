@@ -55,7 +55,7 @@ define(['jquery', 'foxui', 'tpl'], function ($, FoxUI, tpl) {
         var url = routes;
         if (params) {
             if (typeof(params) == 'object') {
-                url += "&" + this.toQueryString(params)
+                url += "?" + this.toQueryString(params)
             } else if (typeof(params) == 'string') {
                 url += "&" + params
             }

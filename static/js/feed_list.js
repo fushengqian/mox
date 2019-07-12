@@ -1,6 +1,7 @@
 define(['core', 'tpl'], function (core, tpl) {
     var modal = {
         page: 2,
+        tab: "hot"
     };
 
     modal.init = function () {
@@ -17,7 +18,31 @@ define(['core', 'tpl'], function (core, tpl) {
         // tab切换
         $('.feed-tab').click(function(){
             var tab = $(this).attr("attr");
-            FoxUI.toast.show(tab);
+
+            modal.tab = tab;
+
+            $(this).siblings().removeClass("active");
+            $(this).addClass("active");
+
+            core.json('/feed/api/list/', {
+                page: 1,
+                tab: modal.tab
+            }, function(ret) {
+                modal.page = 2;
+                var data = ret.result;
+
+                if (data.list == "") {
+                    $('.content-empty').css("display", "block");
+                } else {
+                    $('.content-empty').css("display", "none");
+                }
+
+                core.tpl('.feed-list', 'tpl_feed_list', data, false);
+                $('.fui-content').infinite('init');
+                $('.infinite-loading').hide();
+
+                modal.bindEvents();
+            });
         });
     }
 
@@ -27,10 +52,23 @@ define(['core', 'tpl'], function (core, tpl) {
 
     modal.getList = function () {
         core.json('/feed/api/list/', {
-            page: modal.page
+            page: modal.page,
+            tab: modal.tab
         }, function(ret) {
             modal.page++;
             var data = ret.result;
+
+            if (data.total <= 0) {
+                $('.content-empty').show();
+                $('.fui-content').infinite('stop');
+            } else {
+                $('.content-empty').hide();
+                $('.fui-content').infinite('init');
+                if (data.list.length <= 0 || data.list.length < data.pagesize) {
+                    $('.fui-content').infinite('stop');
+                }
+            }
+
             core.tpl('.feed-list', 'tpl_feed_list', data, modal.page > 1);
             $('.fui-content').infinite('init');
 

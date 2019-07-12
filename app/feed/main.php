@@ -25,6 +25,14 @@ class main extends MOX_CONTROLLER
         $feed = $this->model('feed')->get_detail($feed_id);
         TPL::assign('feed', $feed);
 
+        // 是否关注
+        $follow = $this -> model('system')->fetch_row('follow', "user_id = '".$user_id."' and follow_user_id = '".$feed['user_id']."'");
+        TPL::assign('follow', $follow);
+
+        // 是否点赞
+        $like = $this -> model('system')->fetch_row('like', "user_id = '".$user_id."' and target_id = '".$feed['id']."'");
+        TPL::assign('like', $like);
+
         // Mox推荐用户
         $user_list = $this->model('user')-> get_data_list(array('is_us = 1'), 1, 6, 'point desc');
         TPL::assign('user_list', $user_list);
