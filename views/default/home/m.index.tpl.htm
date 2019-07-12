@@ -29,11 +29,9 @@
                  <a class="feed-tab" attr="hot" href="javascript:void(0);">热门</a>
                  <a class="feed-tab" attr="my" href="javascript:void(0);">我的</a>
             </div>
-            <?php if(empty($this -> feed_list)){?>
-            <div class='content-empty'>
+            <div style="display:none;" class='content-empty'>
                 <img src="/static/images/nolist.png" style="width:4rem;margin-bottom:0.5rem;"><br/><p style="font-size: 0.75rem">暂时没有数据哦！</p>
             </div>
-            <?php } ?>
             <div class="feed-list">
                  <?php foreach($this -> feed_list as $feed):?>
                  <div class="feed-item">

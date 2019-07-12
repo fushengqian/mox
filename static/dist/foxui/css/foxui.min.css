@@ -2025,7 +2025,7 @@ position: relative;
 
 	color: #FF9B23;
 	border-color: #FF9B23;
-	z-index: 100;
+	z-index: 0;
 }
 
 .fui-tab-o.fui-tab-default a {
@@ -3928,7 +3928,7 @@ position: relative;
 	margin: 0 auto;
 	position: relative;
 	overflow: hidden;
-	z-index: 1;
+	z-index: 0;
 }
 .fui-swipe-wrapper {
 	box-sizing: content-box;
@@ -3938,7 +3938,7 @@ position: relative;
 	transform-style: preserve-3d;
 	transition-property: transform;
 	width: 100%;
-	z-index: 1;
+	z-index: 0;
 }
 .fui-swipe-item {
 

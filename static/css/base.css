@@ -1393,7 +1393,6 @@ border-radius: 0.4rem;
 #newBaner{
     position: relative;
     margin-top: -1px;
-    z-index: 1;
     padding-top: 0.35rem;
 }
 #newBaner .fui-imgSlider{

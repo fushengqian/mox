@@ -4895,6 +4895,8 @@ font-size:0.6rem;line-height: 0.8rem;}
     width: 570px;
     padding:0rem 0.5rem 1rem 0.5rem;
     overflow: hidden;
+    overflow: scroll;
+    z-index: 0;
 }
 .banner-ul li{
     border:2px solid #77cd44;

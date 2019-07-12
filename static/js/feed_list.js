@@ -31,7 +31,7 @@ define(['core', 'tpl'], function (core, tpl) {
                 modal.page = 2;
                 var data = ret.result;
 
-                if (data.list == "") {
+                if (parseInt(data.list.length) < 1) {
                     $('.content-empty').css("display", "block");
                 } else {
                     $('.content-empty').css("display", "none");
