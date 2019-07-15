@@ -21,7 +21,7 @@ class api extends MOX_CONTROLLER
     {
         $user_id = MOX_APP::session()->info['uid'];
         if (empty($user_id)) {
-            $this -> jsonReturn([], -1, '您的登录信息已过期！');
+            $this -> jsonReturn([], -1, '请先登录');
         }
 
         $follow_user_id = trim($_POST['id']);

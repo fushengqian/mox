@@ -11,33 +11,33 @@
 	<div class='fui-content member-page navbar'>
 		<div style="overflow: hidden;height: 7.5rem;position: relative;background: #fff">
 			<div class="headinfo" style="z-index:100;border: none;">
-				<a class="setbtn" href="{php echo mobileUrl('member/info')}" data-nocache='true'><i class="icon icon-shezhi"></i></a>
+				<a class="setbtn" href="/user/setting/info/" data-nocache='true'><i class="icon icon-shezhi"></i></a>
 				<div class="child">
 					<div class="title">余额</div>
-					<div class="num">￥1090</div>
-					<a href="{php echo mobileUrl('member/recharge')}"><div class="btn">充值</div></a>
+					<div class="num">￥<?php echo $this->user_info['balance'];?></div>
+					<a href="/recharge/"><div class="btn">充值</div></a>
 				</div>
 				<div class="child userinfo">
-					<a href="{php echo mobileUrl('member/info/face')}" data-nocache="true" style="color: white;">
-						<div class="face"><img src="http://www.moxquan.com/static/avatar/3.gif" onerror="this.src=''"/></div>
-						<div class="name">阿呆</div>
+					<a href="/user/setting/avatar/" data-nocache="true" style="color: white;">
+						<div class="face"><img src="<?php echo $this->user_info['avatar'];?>" onerror="this.src=''"/></div>
+						<div class="name"><?php echo $this->user_info['user_name'];?></div>
 					</a>
 					<div class="level">
-					[金甲会员]
+					[<?php echo $this->user_info['level'];?>会员]
 					<i class='icon icon-question1' style='font-size:0.65rem'></i>
 				</div>
 			</div>
 			<div class="child">
 				<div class="title">积分</div>
-				<div class="num">998009</div>
-				<a href="{php echo mobileUrl('creditshop')}" class="external"><div class="btn">兑换</div></a>
+				<div class="num"><?php echo $this->user_info['point'];?></div>
+				<a href="/point/" class="external"><div class="btn">兑换</div></a>
 			</div>
 		</div>
 		<div class="member_header"></div>
 		</div>
 
 	<div class="fui-cell-group fui-cell-click" style="margin-top: 0">
-		<a class="fui-cell external" href="{php echo mobileUrl('order')}">
+		<a class="fui-cell external" href="/user/order/">
 			<div class="fui-cell-icon"><i class="icon icon-dingdan1"></i></div>
 			<div class="fui-cell-text">我的订单</div>
 			<div class="fui-cell-remark" style="font-size: 0.65rem;">查看全部订单</div>

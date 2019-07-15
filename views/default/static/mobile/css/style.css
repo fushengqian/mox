@@ -5652,6 +5652,9 @@ font-size:0.6rem;line-height: 0.8rem;}
     height:16.0rem;
     position: relative;
 }
+.feed-list .feed-item:last-child{
+    margin-bottom:2.0rem;
+}
 .feed-list .feed-item .user-info{
     text-align:left;
     height:3.5rem;
